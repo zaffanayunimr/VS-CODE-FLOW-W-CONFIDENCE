@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (PEMBAIKAN UTAMA)
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
@@ -328,8 +328,10 @@ document.addEventListener("DOMContentLoaded", () => {
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            normalLawanVideo.onloadedmetadata = () => {
+            // Tunggu elemen sedia diputar (Mengelakkan isu video blank)
+            normalLawanVideo.oncanplay = () => {
                 safePlayVideo(normalLawanVideo);
+                normalLawanVideo.oncanplay = null;
             };
         }
     }
@@ -395,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s) - BAIKI FORWARD UNTUK SEMUA VIDEO
+    // BUTANG FORWARD (+10s)
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
