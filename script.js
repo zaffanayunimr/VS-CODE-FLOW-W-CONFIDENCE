@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (FORWARD DIBAIKE)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (FORWARD FIX)
     // ==========================================
     function loadChapterVideo(startTime = 0) {
         const video = normalLawanVideo;
@@ -336,15 +336,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }).catch(error => console.log('Press Play to start video:', error));
     }
 
+    // FUNGSI SEEK DIBAIKI UNTUK FORWARD (+10s)
     function seekChapterVideo(secondsToAdd) {
         const video = normalLawanVideo;
         if (!video) return;
 
+        if (video.readyState === 0) return;
+
         let newTime = video.currentTime + secondsToAdd;
 
+        // Kunci nilai supaya tidak melebihi atau menyamai duration (elak auto exit)
         if (Number.isFinite(video.duration) && video.duration > 0) {
             if (newTime >= video.duration - 1) {
-                newTime = video.duration - 1; // Elak video tamat terkejut
+                newTime = video.duration - 1;
             }
         }
         if (newTime < 0) newTime = 0;
@@ -352,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             video.currentTime = newTime;
         } catch (e) {
-            console.log("Seek error:", e);
+            console.error("Seek error:", e);
         }
     }
 
@@ -402,19 +406,37 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
-    if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
+    // PENGENDALI EVENT BUTTON VIDEO (DIBAIKI UNTUK MENYESUAIKAN KLIK)
+    if (vbtnPlay && normalLawanVideo) {
+        vbtnPlay.onclick = (e) => {
+            e.stopPropagation();
+            normalLawanVideo.play();
+        };
+    }
+    if (vbtnPause && normalLawanVideo) {
+        vbtnPause.onclick = (e) => {
+            e.stopPropagation();
+            normalLawanVideo.pause();
+        };
+    }
     if (vbtnRestart && normalLawanVideo) {
-        vbtnRestart.addEventListener("click", () => {
+        vbtnRestart.onclick = (e) => {
+            e.stopPropagation();
             normalLawanVideo.currentTime = 0;
             normalLawanVideo.play();
-        });
+        };
     }
     if (vbtnRewind && normalLawanVideo) {
-        vbtnRewind.addEventListener("click", () => seekChapterVideo(-10));
+        vbtnRewind.onclick = (e) => {
+            e.stopPropagation();
+            seekChapterVideo(-10);
+        };
     }
     if (vbtnForward && normalLawanVideo) {
-        vbtnForward.addEventListener("click", () => seekChapterVideo(10));
+        vbtnForward.onclick = (e) => {
+            e.stopPropagation();
+            seekChapterVideo(10);
+        };
     }
 
     if (normalLawanBackBtn) {
