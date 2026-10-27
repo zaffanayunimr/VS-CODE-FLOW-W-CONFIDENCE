@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (KALIS BLANK & ABORT ERROR)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (SAFE PROMISE & FORWARD FIX)
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
@@ -330,13 +330,13 @@ document.addEventListener("DOMContentLoaded", () => {
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            // Tunggu metadata bersedia sebelum memainkan video
             normalLawanVideo.onloadedmetadata = () => {
                 safePlayVideo(normalLawanVideo);
             };
         }
     }
 
+    // MAP FAIL SEPADAN DENGAN FOLDER ASSETS
     const videoButtonsMap = [
         { btnId: "btn-apa-haid", videoName: "Apa-itu-haid", parentScene: "scene7" },
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
@@ -398,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s) - DIBAIKI AGAR TIADA LAGI BLANK / ERROR
+    // BUTANG FORWARD (+10s) - BERFUNGSI UNTUK SEMUA VIDEO
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let curTime = normalLawanVideo.currentTime || 0;
             let duration = normalLawanVideo.duration;
 
-            if (!isNaN(duration) && duration > 0) {
+            if (duration && !isNaN(duration) && duration > 0) {
                 if (curTime + 10 >= duration) {
                     normalLawanVideo.currentTime = Math.max(0, duration - 0.2);
                     safePauseVideo(normalLawanVideo);
@@ -603,7 +603,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BACK BUTTON FROM SETTINGS (SAFE & SMOOTH)
+    // BACK BUTTON FROM SETTINGS
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
