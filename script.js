@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER (DIBAIKI)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -371,17 +371,19 @@ document.addEventListener("DOMContentLoaded", () => {
         vbtnRewind.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            normalLawanVideo.currentTime = Math.max(0, normalLawanVideo.currentTime - 10);
+            if (normalLawanVideo.currentTime) {
+                normalLawanVideo.currentTime = Math.max(0, normalLawanVideo.currentTime - 10);
+            }
         });
     }
 
-    // MEMBAIKI PENGIRAAN FORWARD SUPAYA TIDAK MEMAKSA VIDEO KE SAAT 0
+    // PENGIRAAN FORWARD DIBAIKI SUPAYA TIDAK JADI 0 ATAU NAN
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
-            if (normalLawanVideo.duration && isFinite(normalLawanVideo.duration) && normalLawanVideo.duration > 0) {
+
+            if (normalLawanVideo.duration && !isNaN(normalLawanVideo.duration) && normalLawanVideo.duration > 0) {
                 let maxTime = normalLawanVideo.duration - 0.5;
                 let targetTime = normalLawanVideo.currentTime + 10;
                 normalLawanVideo.currentTime = Math.min(maxTime, targetTime);
