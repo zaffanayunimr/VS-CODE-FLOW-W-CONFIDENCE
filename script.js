@@ -154,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
-    // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
 
@@ -249,7 +248,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stopIntroAudio();
 
-        const audioFile = (selectedLang === "en") ? "assets/intro eng.mp3" : "assets/intro.mp3";
+        // MENYESUAIKAN NAMA FAIL AUDIO INTRO DENGAN EXTENSION .MP3 HURUF BESAR
+        const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
         if (video2) {
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // PENGIRAAN FORWARD DIBAIKI SUPAYA TIDAK JADI 0 ATAU NAN
+    // MEMBAIKI PENGIRAAN FORWARD SUPAYA SENTIASA LOMPAT 10 SAAT
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -927,7 +927,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
-                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
+                    { text: { ms: "B) Mengabaikan perasaan mekeram.", en: "B) Ignoring their feelings." }, isCorrect: false },
                     { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
