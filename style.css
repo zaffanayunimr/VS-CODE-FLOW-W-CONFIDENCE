@@ -1797,26 +1797,3 @@ body {
         margin-bottom: 25px;
     }
 }
-
-
-/* CHAPTER PAGE — PHONE PORTRAIT ONLY */
-@media screen and (max-width: 768px) and (orientation: portrait) {
-
-    /* Button ASAS */
-    .card-left {
-        top: 28px;
-        left: 25px;
-    }
-
-    /* Button PENJAGAAN */
-    .card-right {
-        top: 200px;
-        right: 25px;
-    }
-
-    /* Button KESIHATAN */
-    .card-center {
-        bottom: 150px;
-    }
-
-}
