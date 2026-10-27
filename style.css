@@ -315,46 +315,39 @@ body {
     background-color: #FFCCFF;
 }
 
-/* GEAR / SETTINGS BUTTON STYLING (PERBAIKAN BENTUK & KEDUDUKAN) */
-.gear-btn,
-#normal-lawan-settings-btn {
-    position: absolute !important;
-    top: 30px !important;
-    right: 35px !important;
-    width: 52px !important;
-    height: 52px !important;
-    background-color: #FFFFFF !important;
-    border: none !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
-    transition: transform 0.2s ease !important;
-    z-index: 99999 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
+/* GEAR / SETTINGS BUTTON */
+.gear-btn {
+    position: absolute;
+    top: 28px;
+    right: 42px;
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+    z-index: 210;
+    padding: 0;
 }
 
-.gear-btn .gear-icon,
-#normal-lawan-settings-btn .gear-icon {
-    width: 32px !important;
-    height: 32px !important;
-    fill: #52B2EC !important;
-    display: block !important;
-    margin: auto !important;
+.gear-btn .gear-icon {
+    width: 42px;
+    height: 42px;
+    fill: #52B2EC;
     transition: fill 0.2s ease;
 }
 
-.gear-btn:hover,
-#normal-lawan-settings-btn:hover {
-    transform: translateY(-2px) rotate(15deg) !important;
+.gear-btn:hover {
+    transform: translateY(-4px) rotate(15deg);
 }
 
-.gear-btn:hover .gear-icon,
-#normal-lawan-settings-btn:hover .gear-icon {
-    fill: #B033FF !important;
+.gear-btn:hover .gear-icon {
+    fill: #B033FF;
 }
 
 /* SCENE 4: MAIN MENU STYLING */
@@ -431,7 +424,7 @@ body {
     background-color: #FFFFCC !important;
 }
 
-/* SCENE 5: SETTINGS OVERLAY SCREEN (PERBAIKAN BACKGROUND PAGE SETTING) */
+/* SCENE 5: SETTINGS OVERLAY SCREEN */
 #settings-overlay {
     display: none;
     position: fixed;
@@ -439,7 +432,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('assets/setting-page.png');
+    background-image: url('assets/setting page.png');
     background-size: cover;
     background-position: center;
     flex-direction: column;
@@ -900,7 +893,7 @@ body {
     right: 20px;
     width: 160px;
     height: 46px;
-    background-color: #FFFFCC;
+        background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #28A745;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
@@ -916,40 +909,43 @@ body {
     transform: translateY(-4px);
     background-color: #FFCCFF;
 }
-
-/* VIDEO PLAYER OVERLAY */
-/* Memaksa SEMUA video muat sempurna di dalam skrin tanpa terpotong */
-#normalLawanVideo,
-.video-layer {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important; /* Memastikan nisbah video kekal cantik */
-    display: block !important;
+/* ==========================================
+   NORMAL VS TIDAK NORMAL VIDEO PLAYER OVERLAY (FULLSCREEN)
+   ========================================== */
+#normal-lawan-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000; /* Latar belakang hitam untuk mod video penuh */
+    z-index: 250;
+    overflow: hidden;
 }
-/* Central Video Display Area */
-/* Memaksa bekas video mengikut saiz skrin */
+
+/* Central Video Display Area - Memenuhi Seluruh Skrin */
 .video-display-area {
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    overflow: hidden !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 .video-display-area video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Gunakan 'cover' untuk penuhi seluruh skrin tanpa margin putih */
     background-color: #000000;
 }
 
-/* Vertical Toolbar On Right */
+/* Vertical Toolbar On Right - Lapisan Atas Video */
 .video-controls-toolbar {
     position: absolute;
     right: 30px;
@@ -960,14 +956,13 @@ body {
     gap: 16px;
     align-items: center;
     justify-content: center;
-    z-index: 99999 !important;
-    pointer-events: auto !important;
+    z-index: 10;
 }
 
 .vcontrol-btn {
     width: 60px;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.75); /* Latar belakang hitam lutsinar */
     border: 2px solid #FFFFFF;
     border-radius: 50%;
     display: flex;
@@ -977,8 +972,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     transition: transform 0.15s ease, background-color 0.15s ease;
     padding: 0;
-    z-index: 100000 !important;
-    pointer-events: auto !important;
 }
 
 .vcontrol-btn svg {
@@ -989,7 +982,7 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #E70B90;
+    background-color: #E70B90; /* Warna penyerlah semasa hover */
     border-color: #E70B90;
 }
 
@@ -997,7 +990,11 @@ body {
     transform: scale(0.95);
 }
 
-/* Navigation Buttons Overlay */
+/* Pelapisan Butang Navigasi (Settings, Home & Kembali) di Atas Video */
+#normal-lawan-settings-btn {
+    z-index: 10;
+}
+
 #normal-lawan-home-btn {
     position: absolute;
     bottom: 25px;
@@ -1007,7 +1004,7 @@ body {
 
 #normal-lawan-back-btn {
     position: absolute;
-    background-color: #FFFFCC;
+        background-color: #FFFFCC;
     border: 4px solid #339933;
     bottom: 25px;
     right: 20px;
@@ -1201,7 +1198,7 @@ body {
     font-weight: bold;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 5px 18px;
+    padding: 5px 18x;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
@@ -1259,3 +1256,434 @@ body {
 #final-score-val {
     font-weight: bold;
 }
+
+/* Mobile layout: keep the existing desktop design */
+@media (max-width: 768px) {
+  html,
+  body,
+  #player-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  #player-container {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  #start-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: max(24px, env(safe-area-inset-top))
+      16px
+      max(24px, env(safe-area-inset-bottom));
+    justify-content: space-between;
+    background-position: center;
+  }
+
+  .first-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: clamp(24px, 9vh, 72px);
+    transform: none;
+  }
+
+  .first-title,
+  .menu-title {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+    letter-spacing: 2px;
+  }
+
+  .first-subtitle,
+  .menu-subtitle {
+    margin-top: 0;
+    font-size: clamp(3.5rem, 16vw, 6rem);
+  }
+
+  #start-app-btn {
+    width: min(100%, 340px);
+    min-height: 58px;
+    margin: auto 0 3vh;
+    padding: 12px 20px;
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  #fullscreen-btn {
+    top: max(12px, env(safe-area-inset-top));
+    left: 12px;
+    width: 46px;
+    height: 46px;
+  }
+
+  #fullscreen-btn svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  #language-overlay,
+  #scene4-overlay,
+  #settings-overlay,
+  #scene6-overlay,
+  #scene7-overlay,
+  #scene8-overlay,
+  #scene9-overlay,
+  #scene10-overlay,
+  #scene11-overlay,
+  #scene12-overlay,
+  #normal-lawan-overlay {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(90px, calc(70px + env(safe-area-inset-bottom)));
+  }
+
+  #scene4-overlay {
+    justify-content: center;
+    gap: 24px;
+    padding: 76px 18px 90px;
+  }
+
+  .menu-header {
+    margin: 0;
+  }
+
+  .menu-buttons-container {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .menu-btn {
+    width: min(100%, 340px);
+    min-height: 58px;
+    height: auto;
+    padding: 10px 18px;
+    font-size: 1.5rem;
+  }
+
+  .gear-btn {
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    width: 46px;
+    height: 46px;
+  }
+
+  #scene6-overlay,
+  #scene7-overlay,
+  #scene8-overlay,
+  #scene9-overlay,
+  #scene10-overlay {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: max(76px, calc(56px + env(safe-area-inset-top)))
+      16px
+      max(100px, calc(80px + env(safe-area-inset-bottom)));
+  }
+
+  #chapter-title,
+  #asas-title,
+  #penjagaan-title,
+  #kesihatan-title,
+  #quiz-title {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    line-height: 1.15;
+  }
+
+  .chapter-title-box {
+    width: 100%;
+  }
+
+  .chapter-buttons-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    margin: 0;
+  }
+
+  .chapter-card-btn,
+  .card-left,
+  .card-right,
+  .card-center {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 72px;
+    height: auto;
+    transform: none;
+  }
+
+  .card-center:hover {
+    transform: none;
+  }
+
+  .card-icon-circle {
+    left: -4px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .card-label {
+    padding: 10px 12px 10px 68px;
+    font-size: clamp(1.1rem, 4.8vw, 1.5rem);
+  }
+
+  .sub-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 520px;
+    margin: 0;
+  }
+
+  .sub-menu-btn {
+    min-height: 64px;
+    height: auto;
+    padding: 12px 16px;
+    font-size: clamp(1rem, 4.5vw, 1.35rem);
+  }
+
+  #home-btn,
+  .home-circle-btn {
+    position: fixed;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    left: 14px;
+    width: 46px;
+    height: 46px;
+  }
+
+  #home-btn svg,
+  .home-circle-btn svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  #back-btn,
+  .sub-back-btn,
+  #normal-lawan-back-btn {
+    position: fixed;
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    width: 132px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+
+  .footer-logo {
+    bottom: max(18px, env(safe-area-inset-bottom));
+  }
+
+  #settings-overlay {
+    padding: max(68px, calc(48px + env(safe-area-inset-top)))
+      16px
+      max(100px, calc(80px + env(safe-area-inset-bottom)));
+  }
+
+  #settings-title {
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .settings-grid {
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .settings-box {
+    width: 100%;
+    min-height: 190px;
+    padding: 38px 16px 20px;
+    border-radius: 26px;
+  }
+
+  .box-header-badge {
+    width: min(230px, 80%);
+    height: 52px;
+    top: -28px;
+    font-size: 1.8rem;
+  }
+
+  .audio-control-body {
+    gap: 20px;
+  }
+
+  .settings-action-btn,
+  .lang-option-btn {
+    width: min(100%, 290px);
+    min-height: 54px;
+    height: auto;
+    padding: 10px 14px;
+    font-size: 1.1rem;
+  }
+
+  .lang-btn {
+    width: min(100%, 420px);
+    height: 68px;
+    padding-left: 50px;
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+  }
+
+  #language-overlay .flag-icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  #skip-btn {
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    width: 112px;
+    height: 44px;
+    font-size: 1.05rem;
+  }
+
+  #scene11-overlay {
+    padding: max(76px, calc(56px + env(safe-area-inset-top)))
+      16px
+      max(100px, calc(80px + env(safe-area-inset-bottom)));
+  }
+
+  .score-board {
+    top: max(20px, env(safe-area-inset-top));
+    left: 72px;
+    font-size: 1.15rem;
+    padding: 6px 10px;
+  }
+
+  .question-container {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  #quiz-question-text {
+    font-size: clamp(1.25rem, 5.5vw, 1.8rem);
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    margin-top: 22px;
+  }
+
+  .option-btn {
+    min-height: 62px;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+
+  #scene12-overlay {
+    justify-content: center;
+    padding: 80px 16px 100px;
+  }
+
+  .result-box {
+    margin-bottom: 16px;
+  }
+
+  #result-congrats {
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  #result-motto,
+  .score-display-line {
+    margin-bottom: 20px;
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+  }
+
+  .video-controls-toolbar {
+    right: 10px;
+    gap: 10px;
+  }
+
+  .vcontrol-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .vcontrol-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* A browser may block the Fullscreen API on phones.
+   This fallback keeps the app fitted to the available viewport. */
+html.fullscreen-fallback,
+html.fullscreen-fallback body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+/* Mobile audio controls: keep the BGM slider and buttons tappable. */
+@media (max-width: 768px) {
+  .audio-control-body { flex-direction: column; gap: 16px; }
+  .volume-slider-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    width: min(100%, 280px);
+    height: auto;
+    margin: 0;
+  }
+  #volume-slider { position: relative; top: auto; left: auto; width: 100%; transform: none; }
+  .audio-btn-group { width: 100%; align-items: center; gap: 10px; }
+  .audio-btn-group .settings-action-btn {
+    width: min(100%, 290px);
+    min-height: 54px;
+    height: auto;
+    padding: 10px 14px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Landscape-shaped video on a portrait phone; keep the phone upright. */
+@media (max-width: 768px) {
+  #normal-lawan-overlay {
+    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 0;
+    overflow: hidden;
+    transform: none;
+  }
+
+  #normal-lawan-overlay .video-display-area {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #normal-lawan-overlay .video-display-area video {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+}
+@media (max-width: 768px) { #btn-mute.is-muted { background-color: #FFCCFF; } }
