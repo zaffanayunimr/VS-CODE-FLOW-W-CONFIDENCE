@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (DIRECT VIDEO SRC FIX)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (PENAMBAHAN PEMUATAN TEPAT)
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (normalLawanVideo) {
             safePauseVideo(normalLawanVideo);
             
-            // TUKAR SRC DIRECT PADA VIDEO ELEMEN (BUKAN SOURCE TAG)
+            // TUKAR SRC DIRECT PADA ELEMEN VIDEO (KALIS BLANK)
             normalLawanVideo.src = videoFile;
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // MAP FAIL TEPAT SEPADAN DENGAN HTML INDEX & FOLDER ASSETS
+    // NAMA-NAMA FAIL TEPAT SEPADAN DENGAN ID BUTTON INDEX.HTML
     const videoButtonsMap = [
         { btnId: "btn-apa-haid", videoName: "Apa-itu-haid", parentScene: "scene7" },
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s) - BERFUNGSI SEMPURNA UNTUK SEMUA VIDEO
+    // BUTANG FORWARD (+10s) - BERFUNGSI BAGI SEMUA VIDEO (ASAS, PENJAGAAN & KESIHATAN)
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -954,7 +954,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
-                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
+                    { text: { ms: "B) Mengabaikan perasaan meka.", en: "B) Ignoring their feelings." }, isCorrect: false },
                     { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
