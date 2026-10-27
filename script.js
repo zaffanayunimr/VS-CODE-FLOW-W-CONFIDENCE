@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (PEMBAIKAN UTAMA)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
@@ -328,10 +328,8 @@ document.addEventListener("DOMContentLoaded", () => {
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            // Tunggu elemen sedia diputar (Mengelakkan isu video blank)
-            normalLawanVideo.oncanplay = () => {
+            normalLawanVideo.onloadeddata = () => {
                 safePlayVideo(normalLawanVideo);
-                normalLawanVideo.oncanplay = null;
             };
         }
     }
