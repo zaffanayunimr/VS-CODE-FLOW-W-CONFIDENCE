@@ -1810,13 +1810,13 @@ body {
 
     /* Button PENJAGAAN */
     .card-right {
-        top: 28px;
+        top: 50px;
         right: 25px;
     }
 
     /* Button KESIHATAN */
     .card-center {
-        bottom: 50px;
+        bottom: 150px;
     }
 
 }
