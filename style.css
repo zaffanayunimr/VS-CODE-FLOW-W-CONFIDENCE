@@ -990,6 +990,71 @@ body {
     transform: scale(0.95);
 }
 
+/* ==========================================
+   VIDEO PLAYBACK SPEED CONTROL
+   ========================================== */
+
+.video-speed-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 76px;
+    margin-top: 2px;
+}
+
+/* Speed Label */
+#video-speed-label {
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Speed Dropdown */
+#videoSpeed {
+    width: 76px;
+    height: 38px;
+    padding: 0 5px;
+    background-color: #FFFFFF;
+    color: #990184;
+    border: 3px solid #CC3399;
+    border-radius: 14px;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease,
+                background-color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+/* Hover Effect */
+#videoSpeed:hover {
+    background-color: #FFCCFF;
+    border-color: #E70B90;
+    transform: scale(1.05);
+}
+
+/* Focus Effect */
+#videoSpeed:focus {
+    border-color: #E70B90;
+    box-shadow: 0 0 0 3px rgba(231, 11, 144, 0.25);
+}
+
+/* Dropdown Options */
+#videoSpeed option {
+    background-color: #FFFFFF;
+    color: #990184;
+    font-weight: bold;
+}
+
 /* Pelapisan Butang Navigasi (Settings, Home & Kembali) di Atas Video */
 #normal-lawan-settings-btn {
     z-index: 10;
