@@ -360,16 +360,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function seekVideo(seconds) {
-        if (!normalLawanVideo) return;
+   
+function seekVideo(seconds) {
+    const video = normalLawanVideo;
+    if (!video) return;
 
-        const video = normalLawanVideo;
-
-        // Pastikan video sudah mempunyai metadata
-        if (video.readyState < 1 || !Number.isFinite(video.duration)) {
-            video.addEventListener("loadedmetadata", () => {
-                seekVideo(seconds);
-            }, { once: true });
+    const doSeek = () => {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) {
+            console.log("Video belum sedia untuk seek.");
             return;
         }
 
@@ -378,8 +376,23 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.min(video.duration, video.currentTime + seconds)
         );
 
-        video.currentTime = targetTime;
+        try {
+            video.currentTime = targetTime;
+            console.log("Cuba seek ke:", targetTime);
+        } catch (error) {
+            console.error("Seek gagal:", error);
+        }
+    };
+
+    if (video.readyState >= 1) {
+        doSeek();
+    } else {
+        video.addEventListener("loadedmetadata", doSeek, {
+            once: true
+        });
     }
+}
+
 
     if (vbtnRewind) {
         vbtnRewind.addEventListener("click", () => {
