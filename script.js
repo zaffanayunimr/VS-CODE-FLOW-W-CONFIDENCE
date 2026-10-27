@@ -311,7 +311,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (normalLawanVideo) {
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
-            normalLawanVideo.play().catch(err => console.log("Video auto-play prevented:", err));
+            
+            // Memastikan video metadata telah dimuat sebelum bermula
+            normalLawanVideo.onloadedmetadata = () => {
+                normalLawanVideo.play().catch(err => console.log("Video auto-play prevented:", err));
+            };
         }
     }
 
@@ -366,28 +370,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // BUTANG REWIND (-10s)
     if (vbtnRewind && normalLawanVideo) {
         vbtnRewind.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (normalLawanVideo.currentTime) {
-                normalLawanVideo.currentTime = Math.max(0, normalLawanVideo.currentTime - 10);
-            }
+            let curTime = normalLawanVideo.currentTime || 0;
+            normalLawanVideo.currentTime = Math.max(0, curTime - 10);
         });
     }
 
-    // BUTANG FORWARD: DIBAIKI AGAR TIDAK ULANG KE SAAT 0
+    // BUTANG FORWARD (+10s) - DENGAN SEMAKAN PEMBANYAKAN MASA PETA
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            const targetTime = normalLawanVideo.currentTime + 10;
-            if (normalLawanVideo.duration && targetTime >= normalLawanVideo.duration) {
-                normalLawanVideo.currentTime = normalLawanVideo.duration - 0.5;
-                normalLawanVideo.pause();
+            let curTime = normalLawanVideo.currentTime || 0;
+            let duration = normalLawanVideo.duration;
+
+            if (!isNaN(duration) && duration > 0) {
+                if (curTime + 10 >= duration) {
+                    normalLawanVideo.currentTime = Math.max(0, duration - 0.5);
+                    normalLawanVideo.pause();
+                } else {
+                    normalLawanVideo.currentTime = curTime + 10;
+                }
             } else {
-                normalLawanVideo.currentTime = targetTime;
+                normalLawanVideo.currentTime = curTime + 10;
             }
         });
     }
@@ -927,7 +937,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
                     { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
-                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan meka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
+                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
