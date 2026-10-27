@@ -994,6 +994,10 @@ body {
    VIDEO PLAYBACK SPEED CONTROL
    ========================================== */
 
+/* ==========================================
+   VIDEO PLAYBACK SPEED CONTROL
+   ========================================== */
+
 .video-speed-control {
     display: flex;
     flex-direction: column;
@@ -1004,57 +1008,56 @@ body {
     margin-top: 2px;
 }
 
-/* Speed Label */
+/* Hide Speed Label */
 #video-speed-label {
+    display: none;
+}
+
+/* Speed Dropdown - Same Theme as Video Controls */
+#videoSpeed {
+    width: 60px;
+    height: 42px;
+    padding: 0 3px;
+
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #FFFFFF;
+
+    border: 2px solid #FFFFFF;
+    border-radius: 12px;
+
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-size: 13px;
     font-weight: bold;
-    color: #FFFFFF;
     text-align: center;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-}
 
-/* Speed Dropdown */
-#videoSpeed {
-    width: 76px;
-    height: 38px;
-    padding: 0 5px;
-    background-color: #FFFFFF;
-    color: #990184;
-    border: 3px solid #CC3399;
-    border-radius: 14px;
-    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
     cursor: pointer;
     outline: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease,
-                background-color 0.2s ease,
-                border-color 0.2s ease;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    transition: transform 0.15s ease,
+                background-color 0.15s ease;
 }
 
 /* Hover Effect */
 #videoSpeed:hover {
-    background-color: #FFCCFF;
-    border-color: #E70B90;
     transform: scale(1.05);
+    background-color: #E70B90;
+    border-color: #E70B90;
 }
 
 /* Focus Effect */
 #videoSpeed:focus {
-    border-color: #E70B90;
-    box-shadow: 0 0 0 3px rgba(231, 11, 144, 0.25);
+    border-color: #FFFFFF;
+    outline: none;
 }
 
 /* Dropdown Options */
 #videoSpeed option {
-    background-color: #FFFFFF;
-    color: #990184;
+    background-color: #222222;
+    color: #FFFFFF;
     font-weight: bold;
 }
-
 /* Pelapisan Butang Navigasi (Settings, Home & Kembali) di Atas Video */
 #normal-lawan-settings-btn {
     z-index: 10;
