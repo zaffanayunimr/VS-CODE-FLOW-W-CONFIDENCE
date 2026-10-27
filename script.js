@@ -365,6 +365,19 @@ function seekVideo(seconds) {
     const video = normalLawanVideo;
     if (!video) return;
 
+    console.log("Video:", video.currentSrc);
+console.log("Duration:", video.duration);
+console.log("Current time:", video.currentTime);
+console.log("Seekable:", video.seekable.length);
+
+for (let i = 0; i < video.seekable.length; i++) {
+    console.log(
+        "Seekable range:",
+        video.seekable.start(i),
+        video.seekable.end(i)
+    );
+}
+
     const doSeek = () => {
         if (!Number.isFinite(video.duration) || video.duration <= 0) {
             console.log("Video belum sedia untuk seek.");
