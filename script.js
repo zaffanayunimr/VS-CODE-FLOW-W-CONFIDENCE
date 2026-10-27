@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stopIntroAudio();
 
-        const audioFile = (selectedLang === "en") ? "assets/intro eng.mp3" : "assets/intro.mp3";
+        const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
         if (video2) {
@@ -257,17 +257,14 @@ document.addEventListener("DOMContentLoaded", () => {
             video2.classList.add("active");
         }
 
-        introAudio.addEventListener("canplaythrough", () => {
-            if (video2) video2.currentTime = 0;
-            introAudio.currentTime = 0;
-
-            Promise.all([
-                video2 ? video2.play() : Promise.resolve(),
-                introAudio.play()
-            ]).catch(err => console.error("Sync error:", err));
-        }, { once: true });
-
-        introAudio.load();
+        // Start both while the language-selection click still grants playback permission.
+        const playback = [];
+        if (video2) playback.push(video2.play());
+        playback.push(introAudio.play());
+        Promise.allSettled(playback).then(results => {
+            results.filter(result => result.status === "rejected")
+                .forEach(result => console.error("Intro playback error:", result.reason));
+        });
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
