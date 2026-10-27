@@ -155,30 +155,17 @@ document.addEventListener("DOMContentLoaded", () => {
     bgMusic.loop = true;
 
     // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
-    let lastNonZeroBgmVolume = Math.max(1, Number(volumeSlider?.value) || 100);
-    let isBgmMuted = false;
-
     function setBgmVolume(val) {
-        const clampedVal = Math.max(0, Math.min(100, Number(val) || 0));
-
-        if (clampedVal > 0) {
-            lastNonZeroBgmVolume = clampedVal;
-            isBgmMuted = false;
-        } else {
-            isBgmMuted = true;
-        }
+        let clampedVal = Math.max(0, Math.min(100, val));
 
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
-        if (bgMusic) bgMusic.volume = clampedVal / 100;
 
-        if (btnMute) {
-            btnMute.setAttribute("aria-pressed", String(isBgmMuted));
-            btnMute.classList.toggle("is-muted", isBgmMuted);
-            btnMute.setAttribute("aria-label", isBgmMuted ? "Unmute background music" : "Mute background music");
+        if (bgMusic) {
+            bgMusic.volume = clampedVal / 100;
         }
     }
 
@@ -189,43 +176,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnVolumeUp) btnVolumeUp.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) + 10));
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
-    if (btnMute) {
-        btnMute.addEventListener("click", () => {
-            setBgmVolume(isBgmMuted ? lastNonZeroBgmVolume : 0);
-        });
-    }
+    if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN: use the browser API when available; never rotate the phone.
-    function isFullscreenActive() {
-        return Boolean(document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("fullscreen-fallback"));
-    }
-
+    // FULLSCREEN & ORIENTATION LOCK
+    // ==========================================
     async function toggleFullscreen() {
-        const root = document.documentElement;
         try {
-            if (document.fullscreenElement && document.exitFullscreen) {
-                await document.exitFullscreen();
-            } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
-                await document.webkitExitFullscreen();
-            } else if (root.classList.contains("fullscreen-fallback")) {
-                root.classList.remove("fullscreen-fallback");
-            } else if (root.requestFullscreen) {
-                await root.requestFullscreen();
-            } else if (root.webkitRequestFullscreen) {
-                await root.webkitRequestFullscreen();
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) await elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+
+                if (screen.orientation && screen.orientation.lock) {
+                    await screen.orientation.lock("landscape").catch(err => console.log(err));
+                }
             } else {
-                root.classList.add("fullscreen-fallback");
+                if (document.exitFullscreen) await document.exitFullscreen();
+                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
             }
         } catch (err) {
-            root.classList.add("fullscreen-fallback");
-            console.error("Fullscreen fallback:", err);
+            console.error("Fullscreen error:", err);
         }
-        updateFullscreenIcon();
     }
 
     function updateFullscreenIcon() {
-        const isFullscreen = isFullscreenActive();
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (fullscreenIcon) {
             if (isFullscreen) {
                 fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
@@ -233,12 +213,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
             }
         }
-        if (fullscreenBtn) fullscreenBtn.setAttribute("aria-pressed", String(isFullscreen));
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", updateFullscreenIcon);
     document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
+
+    // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
@@ -326,17 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (startTime > 0) seekChapterVideo(startTime);
         };
         video.load();
-        video.play().then(() => {
-            // Keep BGM playing through chapter videos unless the user muted it.
-            if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
-                bgMusic.play().catch(error => console.error("BGM resume error:", error));
-            }
-            window.setTimeout(() => {
-                if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
-                    bgMusic.play().catch(error => console.error("BGM resume error:", error));
-                }
-            }, 250);
-        }).catch(error => console.log('Press Play to start video:', error));
+        video.play().catch(error => console.log('Press Play to start video:', error));
     }
 
     function seekChapterVideo(target) {
