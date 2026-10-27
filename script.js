@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stopIntroAudio();
 
-        // MENYESUAIKAN NAMA FAIL AUDIO INTRO DENGAN EXTENSION .MP3 HURUF BESAR
+        // PEMBETULAN KHUSUS: Nama fail mp3 dijadikan .MP3 huruf besar mengikut folder
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
@@ -377,19 +377,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // MEMBAIKI PENGIRAAN FORWARD SUPAYA SENTIASA LOMPAT 10 SAAT
+    // PEMBETULAN KHUSUS FORWARD: Tambah 10 saat terus secara terus
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-
-            if (normalLawanVideo.duration && !isNaN(normalLawanVideo.duration) && normalLawanVideo.duration > 0) {
-                let maxTime = normalLawanVideo.duration - 0.5;
-                let targetTime = normalLawanVideo.currentTime + 10;
-                normalLawanVideo.currentTime = Math.min(maxTime, targetTime);
-            } else {
-                normalLawanVideo.currentTime += 10;
-            }
+            normalLawanVideo.currentTime += 10;
         });
     }
 
@@ -927,7 +920,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
-                    { text: { ms: "B) Mengabaikan perasaan mekeram.", en: "B) Ignoring their feelings." }, isCorrect: false },
+                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
                     { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
@@ -1053,7 +1046,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
-        // Global Back Button updates
         if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
