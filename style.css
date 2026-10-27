@@ -315,38 +315,42 @@ body {
     background-color: #FFCCFF;
 }
 
-/* GEAR / SETTINGS BUTTON */
-.gear-btn {
-    position: absolute;
-    top: 28px;
-    right: 42px;
-    width: 50px;
-    height: 50px;
-    background-color: #FFFFFF;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
-    z-index: 210;
-    padding: 0;
+/* GEAR / SETTINGS BUTTON (DIBAIKI KEDUDUKAN & KELAS) */
+.gear-btn,
+#normal-lawan-settings-btn {
+    position: absolute !important;
+    top: 28px !important;
+    right: 42px !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: transform 0.2s ease !important;
+    z-index: 99999 !important;
+    padding: 0 !important;
 }
 
-.gear-btn .gear-icon {
+.gear-btn .gear-icon,
+#normal-lawan-settings-btn .gear-icon {
     width: 42px;
     height: 42px;
     fill: #52B2EC;
     transition: fill 0.2s ease;
 }
 
-.gear-btn:hover {
-    transform: translateY(-4px) rotate(15deg);
+.gear-btn:hover,
+#normal-lawan-settings-btn:hover {
+    transform: translateY(-4px) rotate(15deg) !important;
 }
 
-.gear-btn:hover .gear-icon {
+.gear-btn:hover .gear-icon,
+#normal-lawan-settings-btn:hover .gear-icon {
     fill: #B033FF;
 }
 
@@ -910,9 +914,7 @@ body {
     background-color: #FFCCFF;
 }
 
-/* ==========================================
-   NORMAL VS TIDAK NORMAL VIDEO PLAYER OVERLAY (FULLSCREEN)
-   ========================================== */
+/* VIDEO PLAYER OVERLAY */
 #normal-lawan-overlay {
     display: none;
     position: fixed;
@@ -957,7 +959,7 @@ body {
     gap: 16px;
     align-items: center;
     justify-content: center;
-    z-index: 9999 !important;
+    z-index: 99999 !important;
     pointer-events: auto !important;
 }
 
@@ -974,7 +976,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     transition: transform 0.15s ease, background-color 0.15s ease;
     padding: 0;
-    z-index: 10000 !important;
+    z-index: 100000 !important;
     pointer-events: auto !important;
 }
 
@@ -994,11 +996,7 @@ body {
     transform: scale(0.95);
 }
 
-/* Navigasi Buttons Overlay */
-#normal-lawan-settings-btn {
-    z-index: 10;
-}
-
+/* Navigation Buttons Overlay */
 #normal-lawan-home-btn {
     position: absolute;
     bottom: 25px;
