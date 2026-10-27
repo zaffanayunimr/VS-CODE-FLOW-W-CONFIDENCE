@@ -1257,433 +1257,198 @@ body {
     font-weight: bold;
 }
 
-/* Mobile layout: keep the existing desktop design */
-@media (max-width: 768px) {
-  html,
-  body,
-  #player-container {
+/* Phone layouts: fit controls to narrow screens and allow long scenes to scroll. */
+@media (max-width: 600px) {
+  html, body { width:100%; height:100%; min-height:100dvh; }
+  #player-container { width:100%; height:100dvh; }
+  #start-overlay, #language-overlay, #scene4-overlay, #settings-overlay,
+  #scene6-overlay, #scene7-overlay, #scene8-overlay, #scene9-overlay,
+  #scene10-overlay, #scene11-overlay, #scene12-overlay {
+    width:100%; height:100dvh; min-height:100dvh; overflow-x:hidden; overflow-y:auto;
+    overscroll-behavior:contain; padding-left:16px; padding-right:16px;
+    padding-bottom:calc(82px + env(safe-area-inset-bottom));
+  }
+  #fullscreen-btn { top:max(10px,env(safe-area-inset-top)); left:10px; width:42px; height:42px; }
+  #start-overlay { padding-top:18dvh; padding-bottom:12dvh; }
+  .first-header { top:14dvh; width:calc(100% - 32px); }
+  .first-title, .menu-title { font-size:clamp(2rem,10vw,3rem); letter-spacing:2px; }
+  .first-subtitle, .menu-subtitle { font-size:clamp(3.8rem,19vw,5.4rem); margin-top:-8px; }
+  #start-app-btn { max-width:90vw; padding:15px 28px; font-size:1.25rem; }
+  #language-overlay { gap:20px; }
+  .lang-btn { width:calc(100vw - 40px); height:68px; font-size:clamp(1rem,5vw,1.4rem); padding-left:58px; white-space:normal; }
+  #language-overlay .flag-icon { width:68px; height:68px; }
+  #scene4-overlay { justify-content:center; gap:24px; }
+  .menu-header { margin:0; }
+  .menu-btn { width:min(320px, calc(100vw - 48px)); height:58px; font-size:1.5rem; }
+  .gear-btn { top:max(14px,env(safe-area-inset-top)); right:14px; width:42px; height:42px; }
+  .chapter-title-box { width:100%; margin-top:48px; }
+  #chapter-title, #asas-title, #penjagaan-title, #quiz-title { font-size:clamp(2rem,9vw,2.8rem); line-height:1.05; }
+  #kesihatan-title { font-size:clamp(1.8rem,8vw,2.5rem); }
+  .chapter-buttons-container { display:flex; flex-direction:column; gap:18px; width:100%; height:auto; max-width:420px; margin:38px 0 24px; }
+  .chapter-card-btn, .card-left, .card-right, .card-center { position:relative; inset:auto; transform:none; width:calc(100% - 12px); min-height:76px; height:auto; margin-left:12px; }
+  .card-center:hover, .chapter-card-btn:hover { transform:translateY(-3px); }
+  .card-icon-circle { left:-12px; width:64px; height:64px; }
+  .card-emoji { font-size:2rem; }
+  .health-svg-icon { width:34px; height:34px; }
+  .card-label { padding-left:56px; padding-right:12px; font-size:1.2rem; }
+  .sub-menu-grid { grid-template-columns:1fr; gap:14px; width:100%; max-width:480px; margin:28px 0 20px; }
+  .sub-menu-btn { min-height:68px; height:auto; padding:13px 16px; font-size:1.15rem; }
+  #settings-overlay { padding-top:max(58px,calc(46px + env(safe-area-inset-top))); }
+  #settings-title { font-size:2.5rem; margin:0 0 22px; }
+  .settings-grid { flex-direction:column; gap:36px; width:100%; margin:24px 0; }
+  .settings-box { width:100%; min-height:180px; padding:34px 14px 18px; border-width:3px; border-radius:26px; }
+  .box-header-badge { top:-23px; width:min(220px,76%); height:46px; border-width:3px; font-size:1.6rem; }
+  .audio-control-body { gap:18px; }
+  .volume-slider-container { flex:0 0 52px; }
+  .audio-btn-group, .lang-btn-group { gap:12px; }
+  .settings-action-btn, .lang-option-btn { width:min(280px,calc(100vw - 118px)); min-height:50px; height:auto; padding:9px 12px; font-size:1rem; border-width:3px; }
+  .settings-action-btn { grid-template-columns:32px 1fr; }
+  .settings-action-btn span:not(.btn-icon) { padding-left:4px; }
+  .lang-option-btn { width:min(290px,calc(100vw - 90px)); padding-left:48px; padding-right:10px; }
+  .lang-option-btn .flag-icon { left:-12px; width:48px; height:48px; }
+  #back-btn, .sub-back-btn { position:fixed; bottom:max(14px,env(safe-area-inset-bottom)); right:14px; width:126px; height:44px; font-size:1.05rem; z-index:500; }
+  #home-btn, .home-circle-btn { position:fixed; bottom:max(14px,env(safe-area-inset-bottom)); left:14px; width:44px; height:44px; z-index:500; }
+  #home-btn svg, .home-circle-btn svg { width:34px; height:34px; }
+  #scene11-overlay { padding-top:max(64px,calc(52px + env(safe-area-inset-top))); }
+  .score-board { top:max(12px,env(safe-area-inset-top)); left:62px; font-size:1.05rem; padding:5px 10px; }
+  .question-container { width:100%; margin-top:14px; }
+  #quiz-question-text { font-size:clamp(1.3rem,6vw,1.8rem); }
+  .options-grid { grid-template-columns:1fr; gap:12px; width:100%; margin:26px 0 20px; }
+  .option-btn { min-height:64px; font-size:1.05rem; padding:12px; }
+  .result-box { width:100%; margin-bottom:18px; }
+  #result-congrats { font-size:clamp(2rem,10vw,3rem); margin-bottom:24px; }
+  #result-motto, .score-display-line { font-size:clamp(1.5rem,7vw,2.2rem); margin-bottom:22px; }
+  .footer-logo { transform:scale(.72); transform-origin:center; }
+  #settings-overlay .settings-footer { display:none; }
+  #normal-lawan-overlay, .video-display-area { width:100%; height:100dvh; }
+  .video-display-area video { object-fit:contain; }
+  .video-controls-toolbar { top:auto; right:50%; bottom:max(72px,calc(62px + env(safe-area-inset-bottom))); transform:translateX(50%); flex-direction:row; gap:8px; }
+  .vcontrol-btn { width:42px; height:42px; }
+  .vcontrol-btn svg { width:21px; height:21px; }
+}
+
+/* Fix the start screen on phones: the heading must not cover the start control. */
+@media (max-width: 600px) {
+  #start-overlay {
+    justify-content: flex-end;
+    padding-top: 0;
+    padding-bottom: max(12dvh, calc(48px + env(safe-area-inset-bottom)));
+  }
+  .first-header {
+    top: 14dvh;
+    z-index: 1;
+    pointer-events: none;
+  }
+  #start-app-btn {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    margin-bottom: 0;
+    min-height: 56px;
+    touch-action: manipulation;
+  }
+}
+
+/* Show the intro video with the same full-screen, uncropped fit as chapter videos. */
+@media (max-width: 600px) {
+  #videoPlayer2 {
+    width: 100%;
+    height: 100dvh;
+    object-fit: contain;
+    background-color: #000;
+  }
+}
+
+/* Position start screen elements to match the background tagline on phones. */
+@media (max-width: 600px) {
+  .first-header { top:19dvh; }
+  #start-app-btn {
+    position:absolute;
+    top:66dvh;
+    left:50%;
+    translate:-50% 0;
+    margin:0;
+  }
+}
+
+/* Keep the tagline visible above the start button and make the button tappable. */
+@media (max-width: 600px) {
+  #start-app-btn {
+    position:fixed;
+    top:77dvh;
+    left:50%;
+    z-index:100000;
+    translate:-50% 0;
+    margin:0;
+    pointer-events:auto;
+    touch-action:manipulation;
+  }
+  .first-header { z-index:2; pointer-events:none; }
+}
+
+/* Final phone start-screen order: logo, centered start button, then tagline. */
+@media (max-width: 600px) {
+  .first-header {
+    top:19dvh;
+    left:50%;
+    width:calc(100% - 32px);
+    z-index:2;
+    pointer-events:none;
+  }
+  #start-app-btn {
+    position:fixed;
+    top:40dvh;
+    left:50%;
+    z-index:100000;
+    translate:-50% 0;
+    margin:0;
+    pointer-events:auto;
+    touch-action:manipulation;
+  }
+}
+
+@media (max-width: 600px) { #start-overlay #start-app-btn { pointer-events: auto; cursor: pointer; } }
+
+/* Restore the tagline on wide screens where the portrait background is cropped. */
+#start-tagline {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: 16vh;
+    transform: translateX(-50%);
+    color: #A63488;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    font-style: italic;
+    font-weight: 600;
+    white-space: nowrap;
+    text-align: center;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+html.app-fullscreen,
+html.app-fullscreen body {
     width: 100%;
     height: 100%;
     min-height: 100%;
     overflow: hidden;
-  }
+}
 
-  #player-container {
-    height: 100vh;
-    height: 100dvh;
-  }
-
-  #start-overlay {
+html.app-fullscreen #player-container {
     position: fixed;
     inset: 0;
-    width: 100%;
-    height: 100vh;
+    width: 100vw;
     height: 100dvh;
-    padding: max(24px, env(safe-area-inset-top))
-      16px
-      max(24px, env(safe-area-inset-bottom));
-    justify-content: space-between;
-    background-position: center;
-  }
-
-  .first-header {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    margin-top: clamp(24px, 9vh, 72px);
-    transform: none;
-  }
-
-  .first-title,
-  .menu-title {
-    font-size: clamp(2rem, 9vw, 3.5rem);
-    letter-spacing: 2px;
-  }
-
-  .first-subtitle,
-  .menu-subtitle {
-    margin-top: 0;
-    font-size: clamp(3.5rem, 16vw, 6rem);
-  }
-
-  #start-app-btn {
-    width: min(100%, 340px);
-    min-height: 58px;
-    margin: auto 0 3vh;
-    padding: 12px 20px;
-    font-size: clamp(1.1rem, 5vw, 1.5rem);
-  }
-
-  #fullscreen-btn {
-    top: max(12px, env(safe-area-inset-top));
-    left: 12px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #fullscreen-btn svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  #language-overlay,
-  #scene4-overlay,
-  #settings-overlay,
-  #scene6-overlay,
-  #scene7-overlay,
-  #scene8-overlay,
-  #scene9-overlay,
-  #scene10-overlay,
-  #scene11-overlay,
-  #scene12-overlay,
-  #normal-lawan-overlay {
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding-bottom: max(90px, calc(70px + env(safe-area-inset-bottom)));
-  }
-
-  #scene4-overlay {
-    justify-content: center;
-    gap: 24px;
-    padding: 76px 18px 90px;
-  }
-
-  .menu-header {
-    margin: 0;
-  }
-
-  .menu-buttons-container {
-    width: 100%;
-    gap: 14px;
-  }
-
-  .menu-btn {
-    width: min(100%, 340px);
-    min-height: 58px;
-    height: auto;
-    padding: 10px 18px;
-    font-size: 1.5rem;
-  }
-
-  .gear-btn {
-    top: max(14px, env(safe-area-inset-top));
-    right: 14px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #scene6-overlay,
-  #scene7-overlay,
-  #scene8-overlay,
-  #scene9-overlay,
-  #scene10-overlay {
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    padding: max(76px, calc(56px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
-  }
-
-  #chapter-title,
-  #asas-title,
-  #penjagaan-title,
-  #kesihatan-title,
-  #quiz-title {
-    font-size: clamp(1.8rem, 7vw, 2.8rem);
-    line-height: 1.15;
-  }
-
-  .chapter-title-box {
-    width: 100%;
-  }
-
-  .chapter-buttons-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    margin: 0;
-  }
-
-  .chapter-card-btn,
-  .card-left,
-  .card-right,
-  .card-center {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    min-height: 72px;
-    height: auto;
-    transform: none;
-  }
-
-  .card-center:hover {
-    transform: none;
-  }
-
-  .card-icon-circle {
-    left: -4px;
-    width: 64px;
-    height: 64px;
-  }
-
-  .card-label {
-    padding: 10px 12px 10px 68px;
-    font-size: clamp(1.1rem, 4.8vw, 1.5rem);
-  }
-
-  .sub-menu-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-    max-width: 520px;
-    margin: 0;
-  }
-
-  .sub-menu-btn {
-    min-height: 64px;
-    height: auto;
-    padding: 12px 16px;
-    font-size: clamp(1rem, 4.5vw, 1.35rem);
-  }
-
-  #home-btn,
-  .home-circle-btn {
-    position: fixed;
-    bottom: max(14px, env(safe-area-inset-bottom));
-    left: 14px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #home-btn svg,
-  .home-circle-btn svg {
-    width: 34px;
-    height: 34px;
-  }
-
-  #back-btn,
-  .sub-back-btn,
-  #normal-lawan-back-btn {
-    position: fixed;
-    right: 14px;
-    bottom: max(14px, env(safe-area-inset-bottom));
-    width: 132px;
-    height: 46px;
-    font-size: 1.1rem;
-  }
-
-  .footer-logo {
-    bottom: max(18px, env(safe-area-inset-bottom));
-  }
-
-  #settings-overlay {
-    padding: max(68px, calc(48px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
-  }
-
-  #settings-title {
-    margin-bottom: 8px;
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-
-  .settings-grid {
-    flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    margin-top: 24px;
-  }
-
-  .settings-box {
-    width: 100%;
-    min-height: 190px;
-    padding: 38px 16px 20px;
-    border-radius: 26px;
-  }
-
-  .box-header-badge {
-    width: min(230px, 80%);
-    height: 52px;
-    top: -28px;
-    font-size: 1.8rem;
-  }
-
-  .audio-control-body {
-    gap: 20px;
-  }
-
-  .settings-action-btn,
-  .lang-option-btn {
-    width: min(100%, 290px);
-    min-height: 54px;
-    height: auto;
-    padding: 10px 14px;
-    font-size: 1.1rem;
-  }
-
-  .lang-btn {
-    width: min(100%, 420px);
-    height: 68px;
-    padding-left: 50px;
-    font-size: clamp(1.1rem, 5vw, 1.6rem);
-  }
-
-  #language-overlay .flag-icon {
-    width: 68px;
-    height: 68px;
-  }
-
-  #skip-btn {
-    top: max(14px, env(safe-area-inset-top));
-    right: 14px;
-    width: 112px;
-    height: 44px;
-    font-size: 1.05rem;
-  }
-
-  #scene11-overlay {
-    padding: max(76px, calc(56px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
-  }
-
-  .score-board {
-    top: max(20px, env(safe-area-inset-top));
-    left: 72px;
-    font-size: 1.15rem;
-    padding: 6px 10px;
-  }
-
-  .question-container {
-    width: 100%;
-    margin-top: 16px;
-  }
-
-  #quiz-question-text {
-    font-size: clamp(1.25rem, 5.5vw, 1.8rem);
-  }
-
-  .options-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-    margin-top: 22px;
-  }
-
-  .option-btn {
-    min-height: 62px;
-    padding: 12px;
-    font-size: 1.1rem;
-  }
-
-  #scene12-overlay {
-    justify-content: center;
-    padding: 80px 16px 100px;
-  }
-
-  .result-box {
-    margin-bottom: 16px;
-  }
-
-  #result-congrats {
-    margin-bottom: 20px;
-    font-size: clamp(2rem, 9vw, 3rem);
-  }
-
-  #result-motto,
-  .score-display-line {
-    margin-bottom: 20px;
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-  }
-
-  .video-controls-toolbar {
-    right: 10px;
-    gap: 10px;
-  }
-
-  .vcontrol-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  .vcontrol-btn svg {
-    width: 24px;
-    height: 24px;
-  }
+    z-index: 99998;
 }
 
-/* A browser may block the Fullscreen API on phones.
-   This fallback keeps the app fitted to the available viewport. */
-html.fullscreen-fallback,
-html.fullscreen-fallback body {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+html.app-fullscreen #fullscreen-btn {
+    z-index: 100001;
 }
 
-
-/* Mobile audio controls: keep the BGM slider and buttons tappable. */
-@media (max-width: 768px) {
-  .audio-control-body { flex-direction: column; gap: 16px; }
-  .volume-slider-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 12px;
-    width: min(100%, 280px);
-    height: auto;
-    margin: 0;
-  }
-  #volume-slider { position: relative; top: auto; left: auto; width: 100%; transform: none; }
-  .audio-btn-group { width: 100%; align-items: center; gap: 10px; }
-  .audio-btn-group .settings-action-btn {
-    width: min(100%, 290px);
-    min-height: 54px;
-    height: auto;
-    padding: 10px 14px;
-    font-size: 1.1rem;
-  }
+@media (max-width: 600px) {
+    #start-tagline { display: none; }
 }
 
-/* Landscape-shaped video on a portrait phone; keep the phone upright. */
-@media (max-width: 768px) {
-  #normal-lawan-overlay {
-    inset: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    padding: 0;
-    overflow: hidden;
-    transform: none;
-  }
-
-  #normal-lawan-overlay .video-display-area {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #normal-lawan-overlay .video-display-area video {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-  }
-}
-@media (max-width: 768px) { #btn-mute.is-muted { background-color: #FFCCFF; } }
+#fullscreen-btn { pointer-events:auto; touch-action:manipulation; cursor:pointer; }
