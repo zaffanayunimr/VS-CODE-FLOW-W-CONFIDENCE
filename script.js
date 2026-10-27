@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Video Player & Controls Elements
     const normalLawanVideo = document.getElementById("normalLawanVideo");
+    const normalLawanSource = document.getElementById("normalLawanSource");
 
     const vbtnRewind = document.getElementById("vbtn-rewind");
     const vbtnPause = document.getElementById("vbtn-pause");
@@ -153,17 +154,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
+    // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
+    let lastNonZeroBgmVolume = Math.max(1, Number(volumeSlider?.value) || 100);
+    let isBgmMuted = false;
+
     function setBgmVolume(val) {
-        let clampedVal = Math.max(0, Math.min(100, val));
+        const clampedVal = Math.max(0, Math.min(100, Number(val) || 0));
+
+        if (clampedVal > 0) {
+            lastNonZeroBgmVolume = clampedVal;
+            isBgmMuted = false;
+        } else {
+            isBgmMuted = true;
+        }
 
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
+        if (bgMusic) bgMusic.volume = clampedVal / 100;
 
-        if (bgMusic) {
-            bgMusic.volume = clampedVal / 100;
+        if (btnMute) {
+            btnMute.setAttribute("aria-pressed", String(isBgmMuted));
+            btnMute.classList.toggle("is-muted", isBgmMuted);
+            btnMute.setAttribute("aria-label", isBgmMuted ? "Unmute background music" : "Mute background music");
         }
     }
 
@@ -174,36 +189,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnVolumeUp) btnVolumeUp.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) + 10));
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
-    if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
+    if (btnMute) {
+        btnMute.addEventListener("click", () => {
+            setBgmVolume(isBgmMuted ? lastNonZeroBgmVolume : 0);
+        });
+    }
 
     // ==========================================
-    // FULLSCREEN & ORIENTATION LOCK
-    // ==========================================
+    // FULLSCREEN: use the browser API when available; never rotate the phone.
+    function isFullscreenActive() {
+        return Boolean(document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("fullscreen-fallback"));
+    }
+
     async function toggleFullscreen() {
+        const root = document.documentElement;
         try {
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) await elem.requestFullscreen();
-                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
-
-                if (screen.orientation && screen.orientation.lock) {
-                    await screen.orientation.lock("landscape").catch(err => console.log(err));
-                }
+            if (document.fullscreenElement && document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+                await document.webkitExitFullscreen();
+            } else if (root.classList.contains("fullscreen-fallback")) {
+                root.classList.remove("fullscreen-fallback");
+            } else if (root.requestFullscreen) {
+                await root.requestFullscreen();
+            } else if (root.webkitRequestFullscreen) {
+                await root.webkitRequestFullscreen();
             } else {
-                if (document.exitFullscreen) await document.exitFullscreen();
-                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
-
-                if (screen.orientation && screen.orientation.unlock) {
-                    screen.orientation.unlock();
-                }
+                root.classList.add("fullscreen-fallback");
             }
         } catch (err) {
-            console.error("Fullscreen error:", err);
+            root.classList.add("fullscreen-fallback");
+            console.error("Fullscreen fallback:", err);
         }
+        updateFullscreenIcon();
     }
 
     function updateFullscreenIcon() {
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        const isFullscreen = isFullscreenActive();
         if (fullscreenIcon) {
             if (isFullscreen) {
                 fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
@@ -211,13 +233,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
             }
         }
+        if (fullscreenBtn) fullscreenBtn.setAttribute("aria-pressed", String(isFullscreen));
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", updateFullscreenIcon);
     document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
-
-    // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
@@ -291,21 +312,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
+    // 4. DYNAMIC VIDEO PLAYER (24 VIDEOS)
     // ==========================================
-    function safePlayVideo(videoElem) {
-        if (!videoElem) return;
-        const playPromise = videoElem.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.log("Safe play handled:", error);
-            });
-        }
+    function loadChapterVideo(startTime = 0) {
+        const video = normalLawanVideo;
+        const notice = document.getElementById('video-loading-notice');
+        if (notice) notice.remove();
+        video.pause();
+        video.removeAttribute('src');
+        video.preload = 'auto';
+        video.onloadedmetadata = () => {
+            video.onloadedmetadata = null;
+            if (startTime > 0) seekChapterVideo(startTime);
+        };
+        video.load();
+        video.play().then(() => {
+            // Keep BGM playing through chapter videos unless the user muted it.
+            if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
+                bgMusic.play().catch(error => console.error("BGM resume error:", error));
+            }
+            window.setTimeout(() => {
+                if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
+                    bgMusic.play().catch(error => console.error("BGM resume error:", error));
+                }
+            }, 250);
+        }).catch(error => console.log('Press Play to start video:', error));
     }
 
-    function safePauseVideo(videoElem) {
-        if (!videoElem) return;
-        videoElem.pause();
+    function seekChapterVideo(target) {
+        const video = normalLawanVideo;
+        if (!Number.isFinite(target)) return;
+        const ranges = video.seekable;
+        for (let i = 0; i < ranges.length; i++) {
+            const start = ranges.start(i);
+            const end = Math.max(start, ranges.end(i) - 0.05);
+            if (target >= start && target <= end) {
+                video.currentTime = target;
+                return;
+            }
+        }
+        // Do not seek outside the server's available video range.
+        if (ranges.length && target > video.currentTime) {
+            const end = Math.max(ranges.start(ranges.length - 1), ranges.end(ranges.length - 1) - 0.05);
+            if (end > video.currentTime) video.currentTime = end;
+        }
     }
 
     function playChapterVideo(videoBaseName, parentSceneId) {
@@ -320,17 +370,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
         
+        if (normalLawanSource) normalLawanSource.src = videoFile;
+
         if (normalLawanVideo) {
-            safePauseVideo(normalLawanVideo);
-            
-            normalLawanVideo.currentTime = 0;
-            normalLawanVideo.src = videoFile;
             normalLawanVideo.volume = 1.0;
-            normalLawanVideo.load();
-            
-            normalLawanVideo.onloadeddata = () => {
-                safePlayVideo(normalLawanVideo);
-            };
+            loadChapterVideo();
         }
     }
 
@@ -360,66 +404,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (vbtnPlay && normalLawanVideo) {
-        vbtnPlay.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            safePlayVideo(normalLawanVideo);
-        });
-    }
-
-    if (vbtnPause && normalLawanVideo) {
-        vbtnPause.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            safePauseVideo(normalLawanVideo);
-        });
-    }
-
+    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
+    if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
     if (vbtnRestart && normalLawanVideo) {
-        vbtnRestart.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+        vbtnRestart.addEventListener("click", () => {
             normalLawanVideo.currentTime = 0;
-            safePlayVideo(normalLawanVideo);
+            normalLawanVideo.play();
         });
     }
-
-    // BUTANG REWIND (-10s)
     if (vbtnRewind && normalLawanVideo) {
-        vbtnRewind.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            let curTime = normalLawanVideo.currentTime || 0;
-            normalLawanVideo.currentTime = Math.max(0, curTime - 10);
+        vbtnRewind.addEventListener("click", () => {
+            seekChapterVideo(Math.max(0, normalLawanVideo.currentTime - 10));
         });
     }
-
-    // BUTANG FORWARD (+10s)
     if (vbtnForward && normalLawanVideo) {
-        vbtnForward.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            let curTime = normalLawanVideo.currentTime || 0;
-            let duration = normalLawanVideo.duration;
-
-            if (duration && !isNaN(duration) && duration > 0) {
-                if (curTime + 10 >= duration) {
-                    normalLawanVideo.currentTime = Math.max(0, duration - 0.2);
-                    safePauseVideo(normalLawanVideo);
-                } else {
-                    normalLawanVideo.currentTime = curTime + 10;
-                }
-            } else {
-                normalLawanVideo.currentTime = curTime + 10;
-            }
+        vbtnForward.addEventListener("click", () => {
+            // Wait for usable metadata instead of treating an unknown duration as zero.
+            const duration = normalLawanVideo.duration;
+            const currentTime = normalLawanVideo.currentTime;
+            if (!Number.isFinite(duration) || duration <= 0 || !Number.isFinite(currentTime)) return;
+            seekChapterVideo(Math.min(duration, currentTime + 10));
         });
     }
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
-            safePauseVideo(normalLawanVideo);
+            if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
@@ -429,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (normalLawanHomeBtn) {
         normalLawanHomeBtn.addEventListener("click", () => {
-            safePauseVideo(normalLawanVideo);
+            if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
         });
@@ -437,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (normalLawanSettingsBtn) {
         normalLawanSettingsBtn.addEventListener("click", () => {
-            safePauseVideo(normalLawanVideo);
+            if (normalLawanVideo) normalLawanVideo.pause();
             previousScene = "normal-lawan";
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (settingsOverlay) settingsOverlay.style.display = "flex";
@@ -612,18 +622,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     const langSuffix = selectedLang === "en" ? "bi" : "bm";
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
-                    if (!normalLawanVideo.src.endsWith(newVideoFile)) {
-                        const savedTime = normalLawanVideo.currentTime || 0;
+                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
+                        const currentTime = normalLawanVideo.currentTime;
 
-                        normalLawanVideo.src = newVideoFile;
-                        normalLawanVideo.load();
-
-                        normalLawanVideo.onloadedmetadata = () => {
-                            normalLawanVideo.currentTime = savedTime;
-                            safePlayVideo(normalLawanVideo);
-                        };
+                        normalLawanSource.src = newVideoFile;
+                        loadChapterVideo(currentTime);
                     } else {
-                        safePlayVideo(normalLawanVideo);
+                        normalLawanVideo.play().catch(err => console.log("Video play error:", err));
                     }
                 }
             } else if (previousScene === "scene12") {
@@ -1079,6 +1084,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
+        // Global Back Button updates
         if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
