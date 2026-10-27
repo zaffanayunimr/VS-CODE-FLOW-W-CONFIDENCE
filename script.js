@@ -292,9 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (ASYNC SAFE)
     // ==========================================
-    function playChapterVideo(videoBaseName, parentSceneId) {
+    async function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
         currentVideoBaseName = videoBaseName;
 
@@ -306,19 +306,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
         
-        if (normalLawanSource) normalLawanSource.src = videoFile;
+        if (normalLawanSource) {
+            normalLawanSource.src = videoFile;
+        }
 
         if (normalLawanVideo) {
+            normalLawanVideo.pause();
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            // Memastikan video metadata telah dimuat sebelum bermula
-            normalLawanVideo.onloadedmetadata = () => {
-                normalLawanVideo.play().catch(err => console.log("Video auto-play prevented:", err));
-            };
+            try {
+                await normalLawanVideo.play();
+            } catch (err) {
+                console.log("Video auto-play interrupted:", err);
+            }
         }
     }
 
+    // MAP FAIL DENGAN EJAAN HURUF BESAR/KECIL YANG TEPAT DARIPADA FOLDER ASSETS
     const videoButtonsMap = [
         { btnId: "btn-apa-haid", videoName: "Apa-itu-haid", parentScene: "scene7" },
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
@@ -346,10 +351,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (vbtnPlay && normalLawanVideo) {
-        vbtnPlay.addEventListener("click", (e) => {
+        vbtnPlay.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
-            normalLawanVideo.play();
+            try { await normalLawanVideo.play(); } catch(err){ console.log(err); }
         });
     }
 
@@ -362,11 +367,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (vbtnRestart && normalLawanVideo) {
-        vbtnRestart.addEventListener("click", (e) => {
+        vbtnRestart.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
             normalLawanVideo.currentTime = 0;
-            normalLawanVideo.play();
+            try { await normalLawanVideo.play(); } catch(err){ console.log(err); }
         });
     }
 
@@ -380,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s) - DENGAN SEMAKAN PEMBANYAKAN MASA PETA
+    // BUTANG FORWARD (+10s)
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -585,9 +590,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BACK BUTTON FROM SETTINGS
+    // BACK BUTTON FROM SETTINGS (ASYNC SAFE)
     if (backBtn) {
-        backBtn.addEventListener("click", () => {
+        backBtn.addEventListener("click", async () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
 
             if (previousScene === "normal-lawan") {
@@ -598,15 +603,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
                     if (!normalLawanSource.src.endsWith(newVideoFile)) {
-                        const currentTime = normalLawanVideo.currentTime;
+                        const currentTime = normalLawanVideo.currentTime || 0;
 
                         normalLawanSource.src = newVideoFile;
                         normalLawanVideo.load();
 
                         normalLawanVideo.currentTime = currentTime;
-                        normalLawanVideo.play().catch(err => console.log("Video resume error:", err));
+                        try {
+                            await normalLawanVideo.play();
+                        } catch (e) {
+                            console.log(e);
+                        }
                     } else {
-                        normalLawanVideo.play().catch(err => console.log("Video play error:", err));
+                        try {
+                            await normalLawanVideo.play();
+                        } catch (e) {
+                            console.log(e);
+                        }
                     }
                 }
             } else if (previousScene === "scene12") {
