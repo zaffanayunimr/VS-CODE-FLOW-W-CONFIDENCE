@@ -248,7 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stopIntroAudio();
 
-        // PEMBETULAN KHUSUS: Nama fail mp3 dijadikan .MP3 huruf besar mengikut folder
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
@@ -377,12 +376,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // PEMBETULAN KHUSUS FORWARD: Tambah 10 saat terus secara terus
+    // BUTANG FORWARD: TERUS TAMBAH 10 SAAT
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            normalLawanVideo.currentTime += 10;
+            normalLawanVideo.currentTime = normalLawanVideo.currentTime + 10;
         });
     }
 
