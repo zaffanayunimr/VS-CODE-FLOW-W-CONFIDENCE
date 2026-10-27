@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
-    // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
+    // VOLUME SLIDER ADJUSTMENT
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
 
@@ -193,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const root = document.documentElement;
 
         if (isFullscreenActive()) {
-            // KELUAR FULLSCREEN
             if (document.exitFullscreen) {
                 try { await document.exitFullscreen(); } catch (e) {}
             } else if (document.webkitExitFullscreen) {
@@ -205,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 try { screen.orientation.unlock(); } catch (e) {}
             }
         } else {
-            // MASUK FULLSCREEN
             let reqFS = root.requestFullscreen || root.webkitRequestFullscreen;
             
             if (reqFS) {
@@ -218,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 root.classList.add("fullscreen-fallback");
             }
 
-            // Kunci Orientasi ke Landscape jika disokong oleh peranti
             if (screen.orientation && screen.orientation.lock) {
                 try {
                     await screen.orientation.lock("landscape");
@@ -320,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (DIBAIKE)
     // ==========================================
     function loadChapterVideo(startTime = 0) {
         const video = normalLawanVideo;
@@ -343,12 +340,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function seekChapterVideo(target) {
         const video = normalLawanVideo;
         if (!video) return;
-        
+
         let targetTime = Math.max(0, target);
+
+        // Mengelakkan video terus tamat/kembali jika forward melebihi durasi
         if (Number.isFinite(video.duration) && video.duration > 0) {
-            targetTime = Math.min(video.duration, targetTime);
+            targetTime = Math.min(video.duration - 0.5, targetTime);
         }
-        
+
         try {
             video.currentTime = targetTime;
         } catch (e) {
@@ -367,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
-        
+
         if (normalLawanSource) normalLawanSource.src = videoFile;
 
         if (normalLawanVideo) {
@@ -425,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         normalLawanBackBtn.addEventListener("click", () => {
             if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
-            
+
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
             if (parentOverlay) parentOverlay.style.display = "flex";
         });
