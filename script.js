@@ -154,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
-    // VOLUME SLIDER ADJUSTMENT
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
 
@@ -179,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN: Mobile & iOS Safari Compatible
+    // FULLSCREEN HANDLER
     // ==========================================
     function isFullscreenActive() {
         return Boolean(
@@ -317,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (DIBAIKE)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (FORWARD DIBAIKE)
     // ==========================================
     function loadChapterVideo(startTime = 0) {
         const video = normalLawanVideo;
@@ -337,19 +336,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }).catch(error => console.log('Press Play to start video:', error));
     }
 
-    function seekChapterVideo(target) {
+    function seekChapterVideo(secondsToAdd) {
         const video = normalLawanVideo;
         if (!video) return;
 
-        let targetTime = Math.max(0, target);
+        let newTime = video.currentTime + secondsToAdd;
 
-        // Mengelakkan video terus tamat/kembali jika forward melebihi durasi
         if (Number.isFinite(video.duration) && video.duration > 0) {
-            targetTime = Math.min(video.duration - 0.5, targetTime);
+            if (newTime >= video.duration - 1) {
+                newTime = video.duration - 1; // Elak video tamat terkejut
+            }
         }
+        if (newTime < 0) newTime = 0;
 
         try {
-            video.currentTime = targetTime;
+            video.currentTime = newTime;
         } catch (e) {
             console.log("Seek error:", e);
         }
@@ -410,14 +411,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     if (vbtnRewind && normalLawanVideo) {
-        vbtnRewind.addEventListener("click", () => {
-            seekChapterVideo(normalLawanVideo.currentTime - 10);
-        });
+        vbtnRewind.addEventListener("click", () => seekChapterVideo(-10));
     }
     if (vbtnForward && normalLawanVideo) {
-        vbtnForward.addEventListener("click", () => {
-            seekChapterVideo(normalLawanVideo.currentTime + 10);
-        });
+        vbtnForward.addEventListener("click", () => seekChapterVideo(10));
     }
 
     if (normalLawanBackBtn) {
