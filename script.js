@@ -341,18 +341,21 @@ async function toggleFullscreen() {
         }).catch(error => console.log('Press Play to start video:', error));
     }
 
-    function seekChapterVideo(target) {
-        const video = normalLawanVideo;
-        if (!Number.isFinite(target)) return;
-        const ranges = video.seekable;
-        for (let i = 0; i < ranges.length; i++) {
-            const start = ranges.start(i);
-            const end = Math.max(start, ranges.end(i) - 0.05);
-            if (target >= start && target <= end) {
-                video.currentTime = target;
-                return;
-            }
-        }
+function seekChapterVideo(target) {
+    const video = normalLawanVideo;
+    if (!video) return;
+    
+    let targetTime = Math.max(0, target);
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+        targetTime = Math.min(video.duration, targetTime);
+    }
+    
+    try {
+        video.currentTime = targetTime;
+    } catch (e) {
+        console.log("Error seeking video:", e);
+    }
+}
         if (ranges.length && target > video.currentTime) {
             const end = Math.max(ranges.start(ranges.length - 1), ranges.end(ranges.length - 1) - 0.05);
             if (end > video.currentTime) video.currentTime = end;
@@ -413,19 +416,19 @@ async function toggleFullscreen() {
             normalLawanVideo.play();
         });
     }
-    if (vbtnRewind && normalLawanVideo) {
-        vbtnRewind.addEventListener("click", () => {
-            seekChapterVideo(Math.max(0, normalLawanVideo.currentTime - 10));
-        });
-    }
-    if (vbtnForward && normalLawanVideo) {
-        vbtnForward.addEventListener("click", () => {
-            const duration = normalLawanVideo.duration;
-            const currentTime = normalLawanVideo.currentTime;
-            if (!Number.isFinite(duration) || duration <= 0 || !Number.isFinite(currentTime)) return;
-            seekChapterVideo(Math.min(duration, currentTime + 10));
-        });
-    }
+// Butang Rewind -10s
+if (vbtnRewind && normalLawanVideo) {
+    vbtnRewind.addEventListener("click", () => {
+        seekChapterVideo(normalLawanVideo.currentTime - 10);
+    });
+}
+
+// Butang Forward +10s (Dibaiki)
+if (vbtnForward && normalLawanVideo) {
+    vbtnForward.addEventListener("click", () => {
+        seekChapterVideo(normalLawanVideo.currentTime + 10);
+    });
+}
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
