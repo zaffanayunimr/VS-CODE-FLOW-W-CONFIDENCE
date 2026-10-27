@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const vbtnPause = document.getElementById("vbtn-pause");
     const vbtnPlay = document.getElementById("vbtn-play");
     const vbtnRestart = document.getElementById("vbtn-restart");
+    const videoSpeed = document.getElementById("videoSpeed");
+const videoSpeedLabel = document.getElementById("video-speed-label");
     const normalLawanHomeBtn = document.getElementById("normal-lawan-home-btn");
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
@@ -305,11 +307,17 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (normalLawanSource) normalLawanSource.src = videoFile;
 
-        if (normalLawanVideo) {
-            normalLawanVideo.volume = 1.0;
-            normalLawanVideo.load();
-            normalLawanVideo.play().catch(err => console.log("Video auto-play prevented:", err));
-        }
+       if (normalLawanVideo) {
+    normalLawanVideo.volume = 1.0;
+    normalLawanVideo.load();
+
+    // Apply the selected playback speed
+    applyVideoSpeed();
+
+    normalLawanVideo.play().catch(err => {
+        console.log("Video auto-play prevented:", err);
+    });
+}
     }
 
     const videoButtonsMap = [
@@ -339,9 +347,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
    
-   // ==========================================
+// ==========================================
 // VIDEO PLAYER CONTROLS
 // ==========================================
+
+// Apply selected playback speed
+function applyVideoSpeed() {
+    if (!normalLawanVideo || !videoSpeed) return;
+
+    normalLawanVideo.playbackRate = Number(videoSpeed.value);
+}
+
+// Change speed when user selects an option
+if (videoSpeed) {
+    videoSpeed.addEventListener("change", () => {
+        applyVideoSpeed();
+    });
+}
+
+// Apply speed when a video is ready
+if (normalLawanVideo) {
+    normalLawanVideo.addEventListener(
+        "loadedmetadata",
+        applyVideoSpeed
+    );
+}
 
 // Play
 if (vbtnPlay && normalLawanVideo) {
