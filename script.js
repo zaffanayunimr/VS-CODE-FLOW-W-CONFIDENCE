@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Video Player & Controls Elements
     const normalLawanVideo = document.getElementById("normalLawanVideo");
-    const normalLawanSource = document.getElementById("normalLawanSource");
 
     const vbtnRewind = document.getElementById("vbtn-rewind");
     const vbtnPause = document.getElementById("vbtn-pause");
@@ -346,7 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const notice = document.getElementById('video-loading-notice');
         if (notice) notice.remove();
         video.pause();
-        video.removeAttribute('src');
         video.preload = 'auto';
         video.onloadedmetadata = () => {
             video.onloadedmetadata = null;
@@ -387,9 +385,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
         
-        if (normalLawanSource) normalLawanSource.src = videoFile;
 
         if (normalLawanVideo) {
+            normalLawanVideo.src = videoFile;
             normalLawanVideo.volume = 1;
             normalLawanVideo.muted = false;
             loadChapterVideo();
@@ -640,10 +638,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const langSuffix = selectedLang === "en" ? "bi" : "bm";
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
-                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
+                    if (!normalLawanVideo.src.endsWith(newVideoFile)) {
                         const currentTime = normalLawanVideo.currentTime;
 
-                        normalLawanSource.src = newVideoFile;
+                        normalLawanVideo.src = newVideoFile;
                         loadChapterVideo(currentTime);
                     } else {
                         normalLawanVideo.play().catch(err => console.log("Video play error:", err));
