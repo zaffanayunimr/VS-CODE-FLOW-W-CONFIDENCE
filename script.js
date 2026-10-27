@@ -339,22 +339,57 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
-    if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
+   
+    // VIDEO PLAYER CONTROLS
+    if (vbtnPlay && normalLawanVideo) {
+        vbtnPlay.addEventListener("click", () => {
+            normalLawanVideo.play().catch(console.error);
+        });
+    }
+
+    if (vbtnPause && normalLawanVideo) {
+        vbtnPause.addEventListener("click", () => {
+            normalLawanVideo.pause();
+        });
+    }
+
     if (vbtnRestart && normalLawanVideo) {
         vbtnRestart.addEventListener("click", () => {
             normalLawanVideo.currentTime = 0;
-            normalLawanVideo.play();
+            normalLawanVideo.play().catch(console.error);
         });
     }
-    if (vbtnRewind && normalLawanVideo) {
+
+    function seekVideo(seconds) {
+        if (!normalLawanVideo) return;
+
+        const video = normalLawanVideo;
+
+        // Pastikan video sudah mempunyai metadata
+        if (video.readyState < 1 || !Number.isFinite(video.duration)) {
+            video.addEventListener("loadedmetadata", () => {
+                seekVideo(seconds);
+            }, { once: true });
+            return;
+        }
+
+        const targetTime = Math.max(
+            0,
+            Math.min(video.duration, video.currentTime + seconds)
+        );
+
+        video.currentTime = targetTime;
+    }
+
+    if (vbtnRewind) {
         vbtnRewind.addEventListener("click", () => {
-            normalLawanVideo.currentTime = Math.max(0, normalLawanVideo.currentTime - 10);
+            seekVideo(-10);
         });
     }
-    if (vbtnForward && normalLawanVideo) {
+
+    if (vbtnForward) {
         vbtnForward.addEventListener("click", () => {
-            normalLawanVideo.currentTime = Math.min(normalLawanVideo.duration || 0, normalLawanVideo.currentTime + 10);
+            seekVideo(10);
         });
     }
 
