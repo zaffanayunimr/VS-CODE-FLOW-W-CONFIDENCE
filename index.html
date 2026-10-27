@@ -249,42 +249,80 @@
             </svg>
         </button>
 
-        <!-- Video Player Display Container -->
-        <div class="video-display-area">
-            <video id="normalLawanVideo" playsinline>
-                <source id="normalLawanSource" src="assets/normal-lawan-ms.mp4" type="video/mp4">
-                Browser anda tidak menyokong tag video.
-            </video>
-        </div>
+<!-- Video Player Display Container -->
+<div class="video-display-area">
+    <video id="normalLawanVideo" playsinline>
+        <source
+            id="normalLawanSource"
+            src="assets/Normal-lawan-bm.mp4"
+            type="video/mp4"
+        >
+        Browser anda tidak menyokong tag video.
+    </video>
+</div>
 
-        <!-- Vertical Control Toolbar on the Right -->
-        <div class="video-controls-toolbar">
-            <button id="vbtn-rewind" class="vcontrol-btn" aria-label="Rewind 10 Seconds" title="-10s">
-                <svg viewBox="0 0 24 24">
-                    <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
-                </svg>
-            </button>
-            <button id="vbtn-pause" class="vcontrol-btn" aria-label="Pause">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-            </button>
-            <button id="vbtn-play" class="vcontrol-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-            </button>
-            <button id="vbtn-restart" class="vcontrol-btn" aria-label="Restart from Start">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-                </svg>
-            </button>
-            <button id="vbtn-forward" class="vcontrol-btn" aria-label="Forward 10 Seconds" title="+10s">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
-                </svg>
-            </button>
-        </div>
+<!-- Video Controls -->
+<div class="video-controls-toolbar">
+
+    <!-- Pause -->
+    <button
+        id="vbtn-pause"
+        class="vcontrol-btn"
+        aria-label="Pause"
+        title="Pause"
+    >
+        <svg viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    </button>
+
+    <!-- Play -->
+    <button
+        id="vbtn-play"
+        class="vcontrol-btn"
+        aria-label="Play"
+        title="Play"
+    >
+        <svg viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+    </button>
+
+    <!-- Restart -->
+    <button
+        id="vbtn-restart"
+        class="vcontrol-btn"
+        aria-label="Restart from Start"
+        title="Restart"
+    >
+        <svg viewBox="0 0 24 24">
+            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+        </svg>
+    </button>
+
+    <!-- Playback Speed -->
+    <div
+        class="video-speed-control"
+        style="display:flex; flex-direction:column; align-items:center; gap:5px; margin-top:6px; color:#ffffff; font-size:12px;"
+    >
+        <label id="video-speed-label" for="videoSpeed">
+            Kelajuan
+        </label>
+
+        <select
+            id="videoSpeed"
+            aria-label="Kelajuan video"
+            style="width:76px; max-width:100%; padding:5px 3px; border:1px solid #ffffff; border-radius:8px; background:#ffffff; color:#333333; font:inherit; font-size:12px;"
+        >
+            <option value="0.75">0.75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1.25×</option>
+            <option value="1.5">1.5×</option>
+            <option value="2">2×</option>
+        </select>
+    </div>
+
+</div>
 
         <!-- Home Button Bottom Left -->
         <button id="normal-lawan-home-btn" class="home-circle-btn" aria-label="Home">
