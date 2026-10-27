@@ -315,14 +315,14 @@ body {
     background-color: #FFCCFF;
 }
 
-/* GEAR / SETTINGS BUTTON (DIBAIKI KEDUDUKAN & KELAS) */
+/* GEAR / SETTINGS BUTTON STYLING (PERBAIKAN BENTUK & KEDUDUKAN) */
 .gear-btn,
 #normal-lawan-settings-btn {
     position: absolute !important;
-    top: 28px !important;
-    right: 42px !important;
-    width: 50px !important;
-    height: 50px !important;
+    top: 30px !important;
+    right: 35px !important;
+    width: 52px !important;
+    height: 52px !important;
     background-color: #FFFFFF !important;
     border: none !important;
     border-radius: 50% !important;
@@ -334,24 +334,27 @@ body {
     transition: transform 0.2s ease !important;
     z-index: 99999 !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 .gear-btn .gear-icon,
 #normal-lawan-settings-btn .gear-icon {
-    width: 42px;
-    height: 42px;
-    fill: #52B2EC;
+    width: 32px !important;
+    height: 32px !important;
+    fill: #52B2EC !important;
+    display: block !important;
+    margin: auto !important;
     transition: fill 0.2s ease;
 }
 
 .gear-btn:hover,
 #normal-lawan-settings-btn:hover {
-    transform: translateY(-4px) rotate(15deg) !important;
+    transform: translateY(-2px) rotate(15deg) !important;
 }
 
 .gear-btn:hover .gear-icon,
 #normal-lawan-settings-btn:hover .gear-icon {
-    fill: #B033FF;
+    fill: #B033FF !important;
 }
 
 /* SCENE 4: MAIN MENU STYLING */
@@ -428,7 +431,7 @@ body {
     background-color: #FFFFCC !important;
 }
 
-/* SCENE 5: SETTINGS OVERLAY SCREEN */
+/* SCENE 5: SETTINGS OVERLAY SCREEN (PERBAIKAN BACKGROUND PAGE SETTING) */
 #settings-overlay {
     display: none;
     position: fixed;
@@ -436,7 +439,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('assets/Setting Page.png');
+    background-image: url('assets/setting%20page.png');
     background-size: cover;
     background-position: center;
     flex-direction: column;
