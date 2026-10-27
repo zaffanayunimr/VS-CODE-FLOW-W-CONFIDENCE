@@ -179,7 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN: use the browser API when available; never rotate the phone.
+    // FULLSCREEN: Mobile API with fallback logic
+    // ==========================================
     function isFullscreenActive() {
         return Boolean(document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("fullscreen-fallback"));
     }
@@ -187,21 +188,24 @@ document.addEventListener("DOMContentLoaded", () => {
     async function toggleFullscreen() {
         const root = document.documentElement;
         try {
-            if (document.fullscreenElement && document.exitFullscreen) {
-                await document.exitFullscreen();
-            } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
-                await document.webkitExitFullscreen();
-            } else if (root.classList.contains("fullscreen-fallback")) {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                if (document.exitFullscreen) {
+                    await document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    await document.webkitExitFullscreen();
+                }
                 root.classList.remove("fullscreen-fallback");
-            } else if (root.requestFullscreen) {
-                await root.requestFullscreen();
-            } else if (root.webkitRequestFullscreen) {
-                await root.webkitRequestFullscreen();
             } else {
-                root.classList.add("fullscreen-fallback");
+                if (root.requestFullscreen) {
+                    await root.requestFullscreen();
+                } else if (root.webkitRequestFullscreen) {
+                    await root.webkitRequestFullscreen();
+                } else {
+                    root.classList.toggle("fullscreen-fallback");
+                }
             }
         } catch (err) {
-            root.classList.add("fullscreen-fallback");
+            root.classList.toggle("fullscreen-fallback");
             console.error("Fullscreen fallback:", err);
         }
         updateFullscreenIcon();
@@ -222,6 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", updateFullscreenIcon);
     document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
+
+    // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
@@ -310,7 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         video.load();
         video.play().then(() => {
-            // Keep BGM playing through chapter videos unless the user muted it.
             if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
                 bgMusic.play().catch(error => console.error("BGM resume error:", error));
             }
@@ -334,7 +339,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
         }
-        // Do not seek outside the server's available video range.
         if (ranges.length && target > video.currentTime) {
             const end = Math.max(ranges.start(ranges.length - 1), ranges.end(ranges.length - 1) - 0.05);
             if (end > video.currentTime) video.currentTime = end;
@@ -402,7 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", () => {
-            // Wait for usable metadata instead of treating an unknown duration as zero.
             const duration = normalLawanVideo.duration;
             const currentTime = normalLawanVideo.currentTime;
             if (!Number.isFinite(duration) || duration <= 0 || !Number.isFinite(currentTime)) return;
