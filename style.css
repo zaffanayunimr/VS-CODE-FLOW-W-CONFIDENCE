@@ -1324,3 +1324,476 @@ body {
 #final-score-val {
     font-weight: bold;
 }
+
+/* ==========================================
+   MOBILE LANDSCAPE RESPONSIVE DESIGN
+   FLOW WITH CONFIDENCE
+   ========================================== */
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    /* General layout */
+    html,
+    body,
+    #player-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* Fullscreen button */
+    #fullscreen-btn {
+        top: 10px;
+        left: 10px;
+        width: 38px;
+        height: 38px;
+    }
+
+    #fullscreen-btn svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    /* =====================================
+       START SCREEN
+       ===================================== */
+
+    #start-overlay {
+        padding: 0 0 25px;
+        justify-content: flex-end;
+    }
+
+    .first-header {
+        top: 5vh;
+    }
+
+    .first-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: 3px;
+    }
+
+    .first-subtitle {
+        font-size: clamp(3rem, 9vw, 5rem);
+        margin-top: -8px;
+    }
+
+    #start-app-btn {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border-width: 3px;
+    }
+
+    /* =====================================
+       LANGUAGE SELECTION
+       ===================================== */
+
+    #language-overlay {
+        gap: 14px;
+    }
+
+    .lang-btn {
+        width: min(360px, 65vw);
+        height: 52px;
+        font-size: clamp(1rem, 2.8vw, 1.5rem);
+        border-width: 3px;
+        padding-left: 45px;
+    }
+
+    #language-overlay .flag-icon {
+        width: 52px;
+        height: 52px;
+        border-width: 3px;
+        left: -3px;
+    }
+
+    /* Footer logo */
+    .footer-logo {
+        bottom: 10px;
+    }
+
+    .footer-title {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .footer-subtitle {
+        font-size: 1.8rem;
+        margin-top: 3px;
+    }
+
+    /* =====================================
+       MAIN MENU
+       ===================================== */
+
+    .menu-header {
+        margin-top: -5vh;
+        margin-bottom: 5vh;
+    }
+
+    .menu-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 3px;
+    }
+
+    .menu-subtitle {
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        margin-top: -8px;
+    }
+
+    .menu-buttons-container {
+        gap: 10px;
+    }
+
+    .menu-btn {
+        width: min(250px, 55vw);
+        height: 46px;
+        font-size: 1.4rem;
+        border-width: 3px;
+    }
+
+    /* Settings gear buttons */
+    .gear-btn {
+        top: 12px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .gear-btn .gear-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+    /* =====================================
+       SETTINGS SCREEN
+       ===================================== */
+
+    #settings-overlay {
+        padding-top: 8px;
+    }
+
+    #settings-title {
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+    }
+
+    .settings-grid {
+        width: 90%;
+        gap: 22px;
+        margin-top: 22px;
+        align-items: stretch;
+    }
+
+    .settings-box {
+        min-width: 0;
+        padding: 28px 12px 12px;
+        border-width: 3px;
+        border-radius: 22px;
+    }
+
+    .box-header-badge {
+        top: -19px;
+        width: min(180px, 75%);
+        height: 38px;
+        border-width: 3px;
+        font-size: 1.35rem;
+    }
+
+    .audio-control-body {
+        gap: 18px;
+    }
+
+    .volume-slider-container {
+        width: 35px;
+        height: 105px;
+    }
+
+    #volume-slider {
+        width: 85px;
+        height: 12px;
+    }
+
+    #volume-slider::-webkit-slider-thumb {
+        width: 23px;
+        height: 23px;
+        border-width: 3px;
+    }
+
+    #volume-percentage {
+        font-size: 1rem;
+    }
+
+    .audio-btn-group,
+    .lang-btn-group {
+        gap: 9px;
+    }
+
+    .settings-action-btn {
+        width: clamp(135px, 25vw, 220px);
+        height: 38px;
+        grid-template-columns: 28px 1fr;
+        padding: 0 7px;
+        border-width: 2px;
+        font-size: clamp(0.8rem, 2vw, 1.1rem);
+    }
+
+    .btn-icon {
+        font-size: 1rem;
+    }
+
+    .settings-action-btn span:not(.btn-icon) {
+        padding-left: 4px;
+    }
+
+    .lang-option-btn {
+        width: clamp(150px, 28vw, 230px);
+        height: 42px;
+        padding-left: 38px;
+        padding-right: 5px;
+    }
+
+    .lang-option-btn .flag-icon {
+        width: 40px;
+        height: 40px;
+        left: -7px;
+        border-width: 2px;
+    }
+
+    #home-btn {
+        bottom: 12px;
+        left: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    #home-btn svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    #back-btn {
+        bottom: 12px;
+        right: 12px;
+        width: 110px;
+        height: 36px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    /* =====================================
+       CHAPTER MENUS
+       ===================================== */
+
+    #scene6-overlay,
+    #scene7-overlay,
+    #scene8-overlay,
+    #scene9-overlay,
+    #scene10-overlay {
+        padding-top: 12px;
+    }
+
+    #chapter-title,
+    #asas-title,
+    #penjagaan-title,
+    #quiz-title {
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    #kesihatan-title {
+        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    }
+
+    .chapter-buttons-container {
+        width: 94%;
+        max-width: 850px;
+        height: 70vh;
+        margin-top: 5vh;
+    }
+
+    .chapter-card-btn {
+        width: 37%;
+        height: 60px;
+        border-width: 3px;
+    }
+
+    .card-left {
+        top: 10px;
+        left: 20px;
+    }
+
+    .card-right {
+        top: 10px;
+        right: 20px;
+    }
+
+    .card-center {
+        bottom: 8px;
+    }
+
+    .card-icon-circle {
+        width: 60px;
+        height: 60px;
+        left: -10px;
+    }
+
+    .card-emoji {
+        font-size: 1.6rem;
+    }
+
+    .health-svg-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-label {
+        padding-left: 35px;
+        padding-right: 8px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+    }
+
+    /* Sub-menu buttons */
+    .sub-menu-grid {
+        width: 88%;
+        max-width: 850px;
+        gap: 3vh 3vw;
+        margin-top: 6vh;
+    }
+
+    .sub-menu-btn {
+        height: auto;
+        min-height: 58px;
+        padding: 8px 12px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+        border-width: 3px;
+        border-radius: 18px;
+    }
+
+    .sub-back-btn,
+    #normal-lawan-back-btn {
+        bottom: 12px;
+        right: 12px;
+        width: 105px;
+        height: 35px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    .home-circle-btn,
+    #normal-lawan-home-btn {
+        bottom: 12px;
+        left: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .home-circle-btn svg {
+        width: 33px;
+        height: 33px;
+    }
+
+    /* =====================================
+       VIDEO PLAYER
+       ===================================== */
+
+    .video-display-area video {
+        object-fit: contain;
+    }
+
+    .video-controls-toolbar {
+        right: 12px;
+        gap: 8px;
+    }
+
+    .vcontrol-btn {
+        width: 42px;
+        height: 42px;
+        border-width: 2px;
+    }
+
+    .vcontrol-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .video-speed-control {
+        width: 52px;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    #videoSpeed {
+        width: 52px;
+        height: 34px;
+        padding: 0 2px;
+        font-size: 11px;
+        border-width: 2px;
+        border-radius: 10px;
+    }
+
+    #normal-lawan-settings-btn {
+        top: 12px;
+        right: 15px;
+    }
+
+    /* =====================================
+       QUIZ
+       ===================================== */
+
+    #scene11-overlay {
+        padding-top: 12px;
+    }
+
+    .score-board {
+        top: 12px;
+        left: 60px;
+        font-size: 1.2rem;
+        padding: 4px 10px;
+    }
+
+    .question-container {
+        width: 84%;
+        margin-top: 35px;
+    }
+
+    #quiz-question-text {
+        font-size: clamp(1rem, 2.7vw, 1.6rem);
+        line-height: 1.2;
+    }
+
+    .options-grid {
+        width: 86%;
+        gap: 10px 16px;
+        margin-top: 24px;
+    }
+
+    .option-btn {
+        min-height: 55px;
+        padding: 8px 12px;
+        font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+        border-width: 2px;
+        border-radius: 15px;
+    }
+
+    /* =====================================
+       QUIZ RESULT
+       ===================================== */
+
+    #result-congrats {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 20px;
+    }
+
+    #result-motto {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        margin-bottom: 20px;
+    }
+
+    .score-display-line {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        gap: 10px;
+    }
+
+    .result-box {
+        margin-bottom: 25px;
+    }
+}
