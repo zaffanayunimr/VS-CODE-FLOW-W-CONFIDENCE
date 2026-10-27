@@ -56,57 +56,6 @@ body {
     fill: #52B2EC;
 }
 
-/* Responsive Scaling */
-@media (max-width: 768px) {
-    #start-app-btn {
-        padding: 15px 40px;
-        font-size: 1.6rem;
-    }
-
-    .menu-title {
-        font-size: 3.5rem;
-    }
-
-    .menu-subtitle {
-        font-size: 5.5rem;
-    }
-
-    .menu-btn {
-        width: 260px;
-        height: 55px;
-        font-size: 1.8rem;
-    }
-
-    .chapter-buttons-container {
-        height: 260px;
-        margin-top: 40px;
-    }
-
-    .chapter-card-btn {
-        width: 320px;
-        height: 75px;
-    }
-
-    .card-label {
-        font-size: 1.5rem;
-    }
-
-    .card-icon-circle {
-        width: 75px;
-        height: 75px;
-    }
-
-    .sub-menu-grid {
-        gap: 20px 40px;
-        margin-top: 30px;
-    }
-
-    .sub-menu-btn {
-        height: 75px;
-        font-size: 1.4rem;
-    }
-}
-
 /* 0. START SCREEN OVERLAY */
 #start-overlay {
     position: fixed;
@@ -729,7 +678,7 @@ body {
 
 .chapter-buttons-container {
     position: relative;
-    width: 130%;
+    width: 100%;
     max-width: 1100px;
     height: 380px;
     margin-top: 100px;
@@ -893,7 +842,7 @@ body {
     right: 20px;
     width: 160px;
     height: 46px;
-        background-color: #FFFFCC;
+    background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #28A745;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
@@ -909,9 +858,8 @@ body {
     transform: translateY(-4px);
     background-color: #FFCCFF;
 }
-/* ==========================================
-   NORMAL VS TIDAK NORMAL VIDEO PLAYER OVERLAY (FULLSCREEN)
-   ========================================== */
+
+/* NORMAL VS TIDAK NORMAL VIDEO PLAYER OVERLAY */
 #normal-lawan-overlay {
     display: none;
     position: fixed;
@@ -919,12 +867,11 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000000; /* Latar belakang hitam untuk mod video penuh */
+    background-color: #000000;
     z-index: 250;
     overflow: hidden;
 }
 
-/* Central Video Display Area - Memenuhi Seluruh Skrin */
 .video-display-area {
     position: absolute;
     top: 0;
@@ -941,11 +888,10 @@ body {
 .video-display-area video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Gunakan 'cover' untuk penuhi seluruh skrin tanpa margin putih */
+    object-fit: cover;
     background-color: #000000;
 }
 
-/* Vertical Toolbar On Right - Lapisan Atas Video */
 .video-controls-toolbar {
     position: absolute;
     right: 30px;
@@ -962,7 +908,7 @@ body {
 .vcontrol-btn {
     width: 60px;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.75); /* Latar belakang hitam lutsinar */
+    background-color: rgba(0, 0, 0, 0.75);
     border: 2px solid #FFFFFF;
     border-radius: 50%;
     display: flex;
@@ -982,7 +928,7 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #E70B90; /* Warna penyerlah semasa hover */
+    background-color: #E70B90;
     border-color: #E70B90;
 }
 
@@ -990,7 +936,6 @@ body {
     transform: scale(0.95);
 }
 
-/* Pelapisan Butang Navigasi (Settings, Home & Kembali) di Atas Video */
 #normal-lawan-settings-btn {
     z-index: 10;
 }
@@ -1004,18 +949,13 @@ body {
 
 #normal-lawan-back-btn {
     position: absolute;
-        background-color: #FFFFCC;
+    background-color: #FFFFCC;
     border: 4px solid #339933;
     bottom: 25px;
     right: 20px;
     width: 160px;
     height: 46px;
     z-index: 10;
-}
-
-.normal-lawan-back-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCCFF;
 }
 
 /* SCENE 8: SUB-MENU PENJAGAAN OVERLAY SCREEN */
@@ -1198,7 +1138,7 @@ body {
     font-weight: bold;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 5px 18x;
+    padding: 5px 18px;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
@@ -1257,7 +1197,9 @@ body {
     font-weight: bold;
 }
 
-/* Mobile layout: keep the existing desktop design */
+/* ==========================================
+   MOBILE & FULLSCREEN RESPONSIVE OVERRIDES
+   ========================================== */
 @media (max-width: 768px) {
   html,
   body,
@@ -1336,9 +1278,8 @@ body {
   #scene9-overlay,
   #scene10-overlay,
   #scene11-overlay,
-  #scene12-overlay,
-  #normal-lawan-overlay {
-    width: 100%;
+  #scene12-overlay {
+    width: 100vw;
     height: 100vh;
     height: 100dvh;
     max-height: 100dvh;
@@ -1405,8 +1346,8 @@ body {
   }
 
   .chapter-buttons-container {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     width: 100%;
     max-width: 480px;
@@ -1418,16 +1359,19 @@ body {
   .card-left,
   .card-right,
   .card-center {
-    position: relative;
-    inset: auto;
-    width: 100%;
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
     min-height: 72px;
     height: auto;
-    transform: none;
+    transform: none !important;
   }
 
   .card-center:hover {
-    transform: none;
+    transform: none !important;
   }
 
   .card-icon-circle {
@@ -1519,9 +1463,35 @@ body {
   }
 
   .audio-control-body {
-    gap: 20px;
+    flex-direction: column;
+    gap: 16px;
   }
 
+  .volume-slider-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    width: min(100%, 280px);
+    height: auto;
+    margin: 0;
+  }
+
+  #volume-slider {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
+  }
+
+  .audio-btn-group {
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .audio-btn-group .settings-action-btn,
   .settings-action-btn,
   .lang-option-btn {
     width: min(100%, 290px);
@@ -1606,59 +1576,6 @@ body {
     font-size: clamp(1.4rem, 6vw, 2.2rem);
   }
 
-  .video-controls-toolbar {
-    right: 10px;
-    gap: 10px;
-  }
-
-  .vcontrol-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  .vcontrol-btn svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* A browser may block the Fullscreen API on phones.
-   This fallback keeps the app fitted to the available viewport. */
-html.fullscreen-fallback,
-html.fullscreen-fallback body {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-
-/* Mobile audio controls: keep the BGM slider and buttons tappable. */
-@media (max-width: 768px) {
-  .audio-control-body { flex-direction: column; gap: 16px; }
-  .volume-slider-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 12px;
-    width: min(100%, 280px);
-    height: auto;
-    margin: 0;
-  }
-  #volume-slider { position: relative; top: auto; left: auto; width: 100%; transform: none; }
-  .audio-btn-group { width: 100%; align-items: center; gap: 10px; }
-  .audio-btn-group .settings-action-btn {
-    width: min(100%, 290px);
-    min-height: 54px;
-    height: auto;
-    padding: 10px 14px;
-    font-size: 1.1rem;
-  }
-}
-
-/* Landscape-shaped video on a portrait phone; keep the phone upright. */
-@media (max-width: 768px) {
   #normal-lawan-overlay {
     inset: 0;
     top: 0;
@@ -1685,4 +1602,29 @@ html.fullscreen-fallback body {
     aspect-ratio: 16 / 9;
     object-fit: contain;
   }
+
+  .video-controls-toolbar {
+    right: 10px;
+    gap: 10px;
+  }
+
+  .vcontrol-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .vcontrol-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Fallback class for mobile browsers without standard requestFullscreen support */
+html.fullscreen-fallback,
+html.fullscreen-fallback body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
