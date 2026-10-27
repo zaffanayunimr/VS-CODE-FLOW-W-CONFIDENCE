@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Video Player & Controls Elements
     const normalLawanVideo = document.getElementById("normalLawanVideo");
-    const normalLawanSource = document.getElementById("normalLawanSource");
 
     const vbtnRewind = document.getElementById("vbtn-rewind");
     const vbtnPause = document.getElementById("vbtn-pause");
@@ -292,14 +291,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (SAFE PROMISE & FORWARD FIX)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (DIRECT VIDEO SRC FIX)
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
         const playPromise = videoElem.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => {
-                console.log("Safe play prevented/handled:", error);
+                console.log("Safe play handled:", error);
             });
         }
     }
@@ -321,12 +320,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
         
-        if (normalLawanSource) {
-            normalLawanSource.src = videoFile;
-        }
-
         if (normalLawanVideo) {
             safePauseVideo(normalLawanVideo);
+            
+            // TUKAR SRC DIRECT PADA VIDEO ELEMEN (BUKAN SOURCE TAG)
+            normalLawanVideo.src = videoFile;
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
@@ -336,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // MAP FAIL SEPADAN DENGAN FOLDER ASSETS
+    // MAP FAIL TEPAT SEPADAN DENGAN HTML INDEX & FOLDER ASSETS
     const videoButtonsMap = [
         { btnId: "btn-apa-haid", videoName: "Apa-itu-haid", parentScene: "scene7" },
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
@@ -398,7 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s) - BERFUNGSI UNTUK SEMUA VIDEO
+    // BUTANG FORWARD (+10s) - BERFUNGSI SEMPURNA UNTUK SEMUA VIDEO
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -615,10 +613,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const langSuffix = selectedLang === "en" ? "bi" : "bm";
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
-                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
+                    if (!normalLawanVideo.src.endsWith(newVideoFile)) {
                         const savedTime = normalLawanVideo.currentTime || 0;
 
-                        normalLawanSource.src = newVideoFile;
+                        normalLawanVideo.src = newVideoFile;
                         normalLawanVideo.load();
 
                         normalLawanVideo.onloadedmetadata = () => {
