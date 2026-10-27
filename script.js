@@ -292,9 +292,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (ASYNC SAFE)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (KALIS BLANK & ABORT ERROR)
     // ==========================================
-    async function playChapterVideo(videoBaseName, parentSceneId) {
+    function safePlayVideo(videoElem) {
+        if (!videoElem) return;
+        const playPromise = videoElem.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Safe play prevented/handled:", error);
+            });
+        }
+    }
+
+    function safePauseVideo(videoElem) {
+        if (!videoElem) return;
+        videoElem.pause();
+    }
+
+    function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
         currentVideoBaseName = videoBaseName;
 
@@ -311,19 +326,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (normalLawanVideo) {
-            normalLawanVideo.pause();
+            safePauseVideo(normalLawanVideo);
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            try {
-                await normalLawanVideo.play();
-            } catch (err) {
-                console.log("Video auto-play interrupted:", err);
-            }
+            // Tunggu metadata bersedia sebelum memainkan video
+            normalLawanVideo.onloadedmetadata = () => {
+                safePlayVideo(normalLawanVideo);
+            };
         }
     }
 
-    // MAP FAIL DENGAN EJAAN HURUF BESAR/KECIL YANG TEPAT DARIPADA FOLDER ASSETS
     const videoButtonsMap = [
         { btnId: "btn-apa-haid", videoName: "Apa-itu-haid", parentScene: "scene7" },
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
@@ -351,10 +364,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (vbtnPlay && normalLawanVideo) {
-        vbtnPlay.addEventListener("click", async (e) => {
+        vbtnPlay.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            try { await normalLawanVideo.play(); } catch(err){ console.log(err); }
+            safePlayVideo(normalLawanVideo);
         });
     }
 
@@ -362,16 +375,16 @@ document.addEventListener("DOMContentLoaded", () => {
         vbtnPause.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            normalLawanVideo.pause();
+            safePauseVideo(normalLawanVideo);
         });
     }
 
     if (vbtnRestart && normalLawanVideo) {
-        vbtnRestart.addEventListener("click", async (e) => {
+        vbtnRestart.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
             normalLawanVideo.currentTime = 0;
-            try { await normalLawanVideo.play(); } catch(err){ console.log(err); }
+            safePlayVideo(normalLawanVideo);
         });
     }
 
@@ -385,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s)
+    // BUTANG FORWARD (+10s) - DIBAIKI AGAR TIADA LAGI BLANK / ERROR
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
@@ -396,8 +409,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!isNaN(duration) && duration > 0) {
                 if (curTime + 10 >= duration) {
-                    normalLawanVideo.currentTime = Math.max(0, duration - 0.5);
-                    normalLawanVideo.pause();
+                    normalLawanVideo.currentTime = Math.max(0, duration - 0.2);
+                    safePauseVideo(normalLawanVideo);
                 } else {
                     normalLawanVideo.currentTime = curTime + 10;
                 }
@@ -409,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
-            if (normalLawanVideo) normalLawanVideo.pause();
+            safePauseVideo(normalLawanVideo);
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
@@ -419,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (normalLawanHomeBtn) {
         normalLawanHomeBtn.addEventListener("click", () => {
-            if (normalLawanVideo) normalLawanVideo.pause();
+            safePauseVideo(normalLawanVideo);
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
         });
@@ -427,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (normalLawanSettingsBtn) {
         normalLawanSettingsBtn.addEventListener("click", () => {
-            if (normalLawanVideo) normalLawanVideo.pause();
+            safePauseVideo(normalLawanVideo);
             previousScene = "normal-lawan";
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (settingsOverlay) settingsOverlay.style.display = "flex";
@@ -590,9 +603,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BACK BUTTON FROM SETTINGS (ASYNC SAFE)
+    // BACK BUTTON FROM SETTINGS (SAFE & SMOOTH)
     if (backBtn) {
-        backBtn.addEventListener("click", async () => {
+        backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
 
             if (previousScene === "normal-lawan") {
@@ -603,23 +616,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
                     if (!normalLawanSource.src.endsWith(newVideoFile)) {
-                        const currentTime = normalLawanVideo.currentTime || 0;
+                        const savedTime = normalLawanVideo.currentTime || 0;
 
                         normalLawanSource.src = newVideoFile;
                         normalLawanVideo.load();
 
-                        normalLawanVideo.currentTime = currentTime;
-                        try {
-                            await normalLawanVideo.play();
-                        } catch (e) {
-                            console.log(e);
-                        }
+                        normalLawanVideo.onloadedmetadata = () => {
+                            normalLawanVideo.currentTime = savedTime;
+                            safePlayVideo(normalLawanVideo);
+                        };
                     } else {
-                        try {
-                            await normalLawanVideo.play();
-                        } catch (e) {
-                            console.log(e);
-                        }
+                        safePlayVideo(normalLawanVideo);
                     }
                 }
             } else if (previousScene === "scene12") {
