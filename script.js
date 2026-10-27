@@ -406,38 +406,51 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // PENGENDALI EVENT BUTTON VIDEO (DIBAIKI UNTUK MENYESUAIKAN KLIK)
-    if (vbtnPlay && normalLawanVideo) {
-        vbtnPlay.onclick = (e) => {
-            e.stopPropagation();
-            normalLawanVideo.play();
-        };
-    }
-    if (vbtnPause && normalLawanVideo) {
-        vbtnPause.onclick = (e) => {
-            e.stopPropagation();
-            normalLawanVideo.pause();
-        };
-    }
-    if (vbtnRestart && normalLawanVideo) {
-        vbtnRestart.onclick = (e) => {
-            e.stopPropagation();
+// Gantikan bahagian pendaftaran klik butang video dalam script.js dengan ini:
+
+if (vbtnPlay) {
+    vbtnPlay.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (normalLawanVideo) normalLawanVideo.play();
+    });
+}
+
+if (vbtnPause) {
+    vbtnPause.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (normalLawanVideo) normalLawanVideo.pause();
+    });
+}
+
+if (vbtnRestart) {
+    vbtnRestart.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (normalLawanVideo) {
             normalLawanVideo.currentTime = 0;
             normalLawanVideo.play();
-        };
-    }
-    if (vbtnRewind && normalLawanVideo) {
-        vbtnRewind.onclick = (e) => {
-            e.stopPropagation();
-            seekChapterVideo(-10);
-        };
-    }
-    if (vbtnForward && normalLawanVideo) {
-        vbtnForward.onclick = (e) => {
-            e.stopPropagation();
-            seekChapterVideo(10);
-        };
-    }
+        }
+    });
+}
+
+if (vbtnRewind) {
+    vbtnRewind.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        seekChapterVideo(-10);
+    });
+}
+
+if (vbtnForward) {
+    vbtnForward.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("Forward ditekan!"); // Untuk semakan di Console
+        seekChapterVideo(10);
+    });
+}
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
