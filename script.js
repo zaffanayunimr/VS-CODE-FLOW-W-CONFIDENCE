@@ -179,51 +179,56 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN: Mobile API with fallback logic
+    // FULLSCREEN: Mobile & iOS Safari Compatible
     // ==========================================
     function isFullscreenActive() {
-        return Boolean(document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("fullscreen-fallback"));
+        return Boolean(
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.documentElement.classList.contains("fullscreen-fallback")
+        );
     }
 
-async function toggleFullscreen() {
-    const root = document.documentElement;
-    try {
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
+    async function toggleFullscreen() {
+        const root = document.documentElement;
+
+        if (isFullscreenActive()) {
+            // KELUAR FULLSCREEN
             if (document.exitFullscreen) {
-                await document.exitFullscreen();
+                try { await document.exitFullscreen(); } catch (e) {}
             } else if (document.webkitExitFullscreen) {
-                await document.webkitExitFullscreen();
+                try { await document.webkitExitFullscreen(); } catch (e) {}
             }
             root.classList.remove("fullscreen-fallback");
 
-            // Buka semula kunci orientasi apabila keluar dari fullscreen
             if (screen.orientation && screen.orientation.unlock) {
-                screen.orientation.unlock();
+                try { screen.orientation.unlock(); } catch (e) {}
             }
         } else {
-            if (root.requestFullscreen) {
-                await root.requestFullscreen();
-            } else if (root.webkitRequestFullscreen) {
-                await root.webkitRequestFullscreen();
+            // MASUK FULLSCREEN
+            let reqFS = root.requestFullscreen || root.webkitRequestFullscreen;
+            
+            if (reqFS) {
+                try {
+                    await reqFS.call(root);
+                } catch (err) {
+                    root.classList.add("fullscreen-fallback");
+                }
             } else {
-                root.classList.toggle("fullscreen-fallback");
+                root.classList.add("fullscreen-fallback");
             }
 
-            // Kunci orientasi kepada landscape apabila memasuki fullscreen
+            // Kunci Orientasi ke Landscape jika disokong oleh peranti
             if (screen.orientation && screen.orientation.lock) {
                 try {
                     await screen.orientation.lock("landscape");
                 } catch (orientErr) {
-                    console.log("Orientation lock not supported/allowed:", orientErr);
+                    console.log("Orientation lock not supported:", orientErr);
                 }
             }
         }
-    } catch (err) {
-        root.classList.toggle("fullscreen-fallback");
-        console.error("Fullscreen fallback:", err);
+        updateFullscreenIcon();
     }
-    updateFullscreenIcon();
-}
 
     function updateFullscreenIcon() {
         const isFullscreen = isFullscreenActive();
@@ -315,12 +320,11 @@ async function toggleFullscreen() {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER (24 VIDEOS)
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
     // ==========================================
     function loadChapterVideo(startTime = 0) {
         const video = normalLawanVideo;
-        const notice = document.getElementById('video-loading-notice');
-        if (notice) notice.remove();
+        if (!video) return;
         video.pause();
         video.removeAttribute('src');
         video.preload = 'auto';
@@ -333,32 +337,22 @@ async function toggleFullscreen() {
             if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
                 bgMusic.play().catch(error => console.error("BGM resume error:", error));
             }
-            window.setTimeout(() => {
-                if (bgMusic && bgMusic.volume > 0 && bgMusic.paused) {
-                    bgMusic.play().catch(error => console.error("BGM resume error:", error));
-                }
-            }, 250);
         }).catch(error => console.log('Press Play to start video:', error));
     }
 
-function seekChapterVideo(target) {
-    const video = normalLawanVideo;
-    if (!video) return;
-    
-    let targetTime = Math.max(0, target);
-    if (Number.isFinite(video.duration) && video.duration > 0) {
-        targetTime = Math.min(video.duration, targetTime);
-    }
-    
-    try {
-        video.currentTime = targetTime;
-    } catch (e) {
-        console.log("Error seeking video:", e);
-    }
-}
-        if (ranges.length && target > video.currentTime) {
-            const end = Math.max(ranges.start(ranges.length - 1), ranges.end(ranges.length - 1) - 0.05);
-            if (end > video.currentTime) video.currentTime = end;
+    function seekChapterVideo(target) {
+        const video = normalLawanVideo;
+        if (!video) return;
+        
+        let targetTime = Math.max(0, target);
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+            targetTime = Math.min(video.duration, targetTime);
+        }
+        
+        try {
+            video.currentTime = targetTime;
+        } catch (e) {
+            console.log("Seek error:", e);
         }
     }
 
@@ -416,19 +410,16 @@ function seekChapterVideo(target) {
             normalLawanVideo.play();
         });
     }
-// Butang Rewind -10s
-if (vbtnRewind && normalLawanVideo) {
-    vbtnRewind.addEventListener("click", () => {
-        seekChapterVideo(normalLawanVideo.currentTime - 10);
-    });
-}
-
-// Butang Forward +10s (Dibaiki)
-if (vbtnForward && normalLawanVideo) {
-    vbtnForward.addEventListener("click", () => {
-        seekChapterVideo(normalLawanVideo.currentTime + 10);
-    });
-}
+    if (vbtnRewind && normalLawanVideo) {
+        vbtnRewind.addEventListener("click", () => {
+            seekChapterVideo(normalLawanVideo.currentTime - 10);
+        });
+    }
+    if (vbtnForward && normalLawanVideo) {
+        vbtnForward.addEventListener("click", () => {
+            seekChapterVideo(normalLawanVideo.currentTime + 10);
+        });
+    }
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
@@ -458,7 +449,7 @@ if (vbtnForward && normalLawanVideo) {
     }
 
     // ==========================================
-    // 5. NAVIGATION & SCENE ROUTING
+    // 5. NAVIGATION & ROUTING
     // ==========================================
     if (btnChapter) {
         btnChapter.addEventListener("click", () => {
@@ -613,27 +604,12 @@ if (vbtnForward && normalLawanVideo) {
         });
     }
 
-    // BACK BUTTON FROM SETTINGS
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
 
             if (previousScene === "normal-lawan") {
                 if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
-
-                if (normalLawanVideo && currentVideoBaseName) {
-                    const langSuffix = selectedLang === "en" ? "bi" : "bm";
-                    const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
-
-                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
-                        const currentTime = normalLawanVideo.currentTime;
-
-                        normalLawanSource.src = newVideoFile;
-                        loadChapterVideo(currentTime);
-                    } else {
-                        normalLawanVideo.play().catch(err => console.log("Video play error:", err));
-                    }
-                }
             } else if (previousScene === "scene12") {
                 if (scene12Overlay) scene12Overlay.style.display = "flex";
             } else if (previousScene === "scene11") {
@@ -670,7 +646,7 @@ if (vbtnForward && normalLawanVideo) {
     }
 
     // ==========================================
-    // 6. QUIZ DATA
+    // 6. QUIZ LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
@@ -1087,7 +1063,6 @@ if (vbtnForward && normalLawanVideo) {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
-        // Global Back Button updates
         if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
