@@ -175,7 +175,7 @@ body {
     line-height: 0.9;
 }
 
-/* VIDEO LAYERS */
+/* VIDEO LAYERS (INTRO) */
 .video-layer {
     position: absolute;
     top: 0;
@@ -917,18 +917,20 @@ body {
     background-color: #FFCCFF;
 }
 
-/* VIDEO PLAYER OVERLAY */
-#normalLawanVideo,
-.video-layer {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important; /* Memastikan nisbah video kekal seragam tanpa terpotong */
-    display: block !important;
+/* ==========================================
+   VIDEO PLAYER OVERLAY (PAPARAN SAHAJA)
+   ========================================== */
+#normal-lawan-overlay {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: #000000 !important;
+    z-index: 9999 !important;
 }
 
-/* Central Video Display Area */
 .video-display-area {
     width: 100% !important;
     height: 100% !important;
@@ -942,6 +944,7 @@ body {
     background-color: #000000 !important;
 }
 
+#normalLawanVideo,
 .video-display-area video {
     width: 100% !important;
     height: 100% !important;
