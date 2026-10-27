@@ -64,7 +64,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/Start.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -125,14 +125,14 @@ body {
     line-height: 0.9;
 }
 
-/* VIDEO LAYERS */
+/* VIDEO LAYERS (MENGELAKKAN STRETCH) */
 .video-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    object-fit: fill;
+    object-fit: cover;
     pointer-events: none;
     opacity: 0;
     z-index: 1;
@@ -152,7 +152,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/Language.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -310,7 +310,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg-homepage.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -385,7 +385,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/setting page.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -658,7 +658,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -785,7 +785,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -889,11 +889,10 @@ body {
 .video-display-area video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Mengekalkan nisbah asal video */
     background-color: #000000;
 }
 
-/* KAWALAN VIDEO DIBAIKI SUPAYA TIDAK BERTINDIH DENGAN BUTANG KEMBALI */
 .video-controls-toolbar {
     position: absolute;
     right: 25px;
@@ -969,7 +968,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1006,7 +1005,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1044,7 +1043,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1072,7 +1071,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/quiz bg.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1155,7 +1154,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/quiz bg.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1216,7 +1215,7 @@ body {
   #scene10-overlay,
   #scene11-overlay,
   #scene12-overlay {
-    background-size: 100% 100% !important;
+    background-size: cover !important;
     background-position: center center !important;
   }
 
@@ -1402,24 +1401,24 @@ body {
   #scene10-overlay,
   #scene11-overlay,
   #scene12-overlay {
-    background-size: 100% 100% !important;
+    background-size: cover !important;
     background-position: center center !important;
   }
 
-  /* KUIZ MELINTANG / FULLSCREEN DIBAIKI */
+  /* KUIZ MELINTANG / FULLSCREEN (KEDUDUKAN DIBAIKI) */
   #scene11-overlay {
-    padding-top: 40px;
+    padding-top: 60px; /* Diberikan ruang supaya tidak terlalu ke atas */
   }
 
   .score-board {
-    top: 10px;
+    top: 12px;
     left: 65px;
     font-size: 0.9rem;
     padding: 2px 8px;
   }
 
   .question-container {
-    margin-top: 0px;
+    margin-top: 10px;
     width: 82%;
   }
 
@@ -1431,20 +1430,19 @@ body {
   .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px 12px;
-    margin-top: 8px;
+    gap: 8px 12px;
+    margin-top: 12px;
     width: 88%;
   }
 
   .option-btn {
-    min-height: 38px;
+    min-height: 40px;
     font-size: 0.8rem;
     padding: 4px 8px;
     border-width: 2px;
     border-radius: 12px;
   }
 
-  /* KAWALAN TETAPAN MELINTANG DIBAIKI */
   #settings-overlay {
     padding-top: 15px;
   }
