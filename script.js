@@ -149,24 +149,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentScore = 0;
     let currentQuestionIndex = 0;
     let activeQuizCategory = "asas";
+    let lastNonZeroVolume = 100;
 
     // Initialize Background Music
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
     // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
+    function updateMuteLabel() {
+        if (textMute) textMute.textContent = selectedLang === "en" ? "Mute" : "Senyap";
+    }
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
+        if (clampedVal > 0) lastNonZeroVolume = clampedVal;
 
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
+        updateMuteLabel();
 
-        if (bgMusic) {
-            bgMusic.volume = clampedVal / 100;
-        }
+        const volume = clampedVal / 100;
+        [bgMusic].forEach((media) => {
+            if (!media) return;
+            media.volume = volume;
+            media.muted = clampedVal === 0;
+        });
     }
 
     if (volumeSlider) {
@@ -176,36 +185,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnVolumeUp) btnVolumeUp.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) + 10));
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
-    if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
+    if (btnMute) btnMute.addEventListener("click", () => {
+        const currentlyMuted = Number(volumeSlider?.value ?? 100) === 0;
+        setBgmVolume(currentlyMuted ? lastNonZeroVolume : 0);
+    });
 
     // ==========================================
     // FULLSCREEN & ORIENTATION LOCK
     // ==========================================
     async function toggleFullscreen() {
-        try {
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) await elem.requestFullscreen();
-                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+        const root = document.documentElement;
+        const nativeFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        const fallbackFullscreen = root.classList.contains("app-fullscreen");
 
-                if (screen.orientation && screen.orientation.lock) {
-                    await screen.orientation.lock("landscape").catch(err => console.log(err));
+        try {
+            if (!nativeFullscreen && !fallbackFullscreen) {
+                const elem = root;
+                let enteredNativeFullscreen = false;
+
+                try {
+                    if (elem.requestFullscreen) {
+                        await elem.requestFullscreen();
+                        enteredNativeFullscreen = true;
+                    } else if (elem.webkitRequestFullscreen) {
+                        elem.webkitRequestFullscreen();
+                        enteredNativeFullscreen = true;
+                    }
+                } catch (err) {
+                    console.log("Using page fullscreen mode:", err);
+                }
+
+                if (!enteredNativeFullscreen) root.classList.add("app-fullscreen");
+                if (screen.orientation?.lock && enteredNativeFullscreen) {
+                    await screen.orientation.lock("landscape").catch(() => {});
                 }
             } else {
-                if (document.exitFullscreen) await document.exitFullscreen();
-                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
-
-                if (screen.orientation && screen.orientation.unlock) {
-                    screen.orientation.unlock();
-                }
+                if (document.exitFullscreen && nativeFullscreen) await document.exitFullscreen();
+                else if (document.webkitExitFullscreen && nativeFullscreen) document.webkitExitFullscreen();
+                root.classList.remove("app-fullscreen");
+                if (screen.orientation?.unlock) screen.orientation.unlock();
             }
         } catch (err) {
             console.error("Fullscreen error:", err);
+            root.classList.toggle("app-fullscreen", !fallbackFullscreen && !nativeFullscreen);
+            updateFullscreenIcon();
         }
+        updateFullscreenIcon();
     }
 
     function updateFullscreenIcon() {
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("app-fullscreen");
         if (fullscreenIcon) {
             if (isFullscreen) {
                 fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
@@ -222,11 +251,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
+    function showLanguageSelection() {
+        if (video1) video1.classList.remove("active");
+        if (langOverlay) langOverlay.style.display = "flex";
+    }
+
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
             if (startOverlay) startOverlay.style.display = "none";
             bgMusic.play().catch(err => console.error("BGM error:", err));
-            if (video1) video1.play().catch(err => console.error("Video1 error:", err));
+
+            if (!video1 || video1.error) {
+                showLanguageSelection();
+                return;
+            }
+
+            video1.addEventListener("error", showLanguageSelection, { once: true });
+            video1.play().catch(err => {
+                console.error("Video1 error:", err);
+                showLanguageSelection();
+            });
         });
     }
 
@@ -251,6 +295,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
+        introAudio.volume = 1;
+        introAudio.muted = false;
 
         if (video2) {
             video2.currentTime = 0;
@@ -344,7 +390,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (normalLawanSource) normalLawanSource.src = videoFile;
 
         if (normalLawanVideo) {
-            normalLawanVideo.volume = 1.0;
+            normalLawanVideo.volume = 1;
+            normalLawanVideo.muted = false;
             loadChapterVideo();
         }
     }
@@ -1069,7 +1116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (labelLanguage) labelLanguage.textContent = "Language";
             if (textVolumeUp) textVolumeUp.textContent = "Volume Up";
             if (textVolumeDown) textVolumeDown.textContent = "Volume Down";
-            if (textMute) textMute.textContent = "Mute";
+            updateMuteLabel();
             if (textLangBm) textLangBm.textContent = "Malay";
             if (textLangEn) textLangEn.textContent = "English";
             if (backBtn) backBtn.textContent = "Back";
@@ -1122,7 +1169,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (labelLanguage) labelLanguage.textContent = "Bahasa";
             if (textVolumeUp) textVolumeUp.textContent = "Kuatkan";
             if (textVolumeDown) textVolumeDown.textContent = "Perlahankan";
-            if (textMute) textMute.textContent = "Senyap";
+            updateMuteLabel();
             if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
             if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
             if (backBtn) backBtn.textContent = "Kembali";
