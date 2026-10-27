@@ -336,29 +336,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }).catch(error => console.log('Press Play to start video:', error));
     }
 
-    // FUNGSI SEEK DIBAIKI UNTUK FORWARD (+10s)
-    function seekChapterVideo(secondsToAdd) {
-        const video = normalLawanVideo;
-        if (!video) return;
+// 1. FUNGSI LOMPAT MASA (DIRECT & SIMPLE)
+function seekChapterVideo(secondsToAdd) {
+    const video = normalLawanVideo;
+    if (!video) return;
 
-        if (video.readyState === 0) return;
-
-        let newTime = video.currentTime + secondsToAdd;
-
-        // Kunci nilai supaya tidak melebihi atau menyamai duration (elak auto exit)
-        if (Number.isFinite(video.duration) && video.duration > 0) {
-            if (newTime >= video.duration - 1) {
-                newTime = video.duration - 1;
-            }
+    // Jika video wujud, terus tambah/tolak masa tanpa syarat kompleks
+    try {
+        let targetTime = video.currentTime + secondsToAdd;
+        
+        // Hadkan supaya tidak kurang daripada 0
+        if (targetTime < 0) targetTime = 0;
+        
+        // Jika ada duration, jangan bagi lebih dari video
+        if (video.duration && targetTime > video.duration) {
+            targetTime = video.duration - 0.1;
         }
-        if (newTime < 0) newTime = 0;
 
-        try {
-            video.currentTime = newTime;
-        } catch (e) {
-            console.error("Seek error:", e);
-        }
+        video.currentTime = targetTime;
+    } catch (e) {
+        console.error("Gagal seek video:", e);
     }
+}
 
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -436,18 +435,21 @@ if (vbtnRestart) {
 }
 
 if (vbtnRewind) {
-    vbtnRewind.addEventListener("click", (e) => {
+    vbtnRewind.onclick = null;
+    vbtnRewind.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
         seekChapterVideo(-10);
     });
 }
 
+// 2. EVENT LISTENER (PASTIKAN GUNA ADDEVENTLISTENER DENGAN TOPOPTION)
 if (vbtnForward) {
-    vbtnForward.addEventListener("click", (e) => {
+    // Buang listener lama jika ada dan tambah yang baru
+    vbtnForward.onclick = null; 
+    vbtnForward.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Forward ditekan!"); // Untuk semakan di Console
         seekChapterVideo(10);
     });
 }
