@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Video Player & Controls Elements
     const normalLawanVideo = document.getElementById("normalLawanVideo");
+    const normalLawanSource = document.getElementById("normalLawanSource");
 
     const vbtnRewind = document.getElementById("vbtn-rewind");
     const vbtnPause = document.getElementById("vbtn-pause");
@@ -148,33 +149,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentScore = 0;
     let currentQuestionIndex = 0;
     let activeQuizCategory = "asas";
-    let lastNonZeroVolume = 100;
 
     // Initialize Background Music
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
     // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
-    function updateMuteLabel() {
-        if (textMute) textMute.textContent = selectedLang === "en" ? "Mute" : "Senyap";
-    }
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
-        if (clampedVal > 0) lastNonZeroVolume = clampedVal;
 
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
-        updateMuteLabel();
 
-        const volume = clampedVal / 100;
-        [bgMusic].forEach((media) => {
-            if (!media) return;
-            media.volume = volume;
-            media.muted = clampedVal === 0;
-        });
+        if (bgMusic) {
+            bgMusic.volume = clampedVal / 100;
+        }
     }
 
     if (volumeSlider) {
@@ -184,56 +176,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnVolumeUp) btnVolumeUp.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) + 10));
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
-    if (btnMute) btnMute.addEventListener("click", () => {
-        const currentlyMuted = Number(volumeSlider?.value ?? 100) === 0;
-        setBgmVolume(currentlyMuted ? lastNonZeroVolume : 0);
-    });
+    if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
     // FULLSCREEN & ORIENTATION LOCK
     // ==========================================
     async function toggleFullscreen() {
-        const root = document.documentElement;
-        const nativeFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-        const fallbackFullscreen = root.classList.contains("app-fullscreen");
-
         try {
-            if (!nativeFullscreen && !fallbackFullscreen) {
-                const elem = root;
-                let enteredNativeFullscreen = false;
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) await elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
 
-                try {
-                    if (elem.requestFullscreen) {
-                        await elem.requestFullscreen();
-                        enteredNativeFullscreen = true;
-                    } else if (elem.webkitRequestFullscreen) {
-                        elem.webkitRequestFullscreen();
-                        enteredNativeFullscreen = true;
-                    }
-                } catch (err) {
-                    console.log("Using page fullscreen mode:", err);
-                }
-
-                if (!enteredNativeFullscreen) root.classList.add("app-fullscreen");
-                if (screen.orientation?.lock && enteredNativeFullscreen) {
-                    await screen.orientation.lock("landscape").catch(() => {});
+                if (screen.orientation && screen.orientation.lock) {
+                    await screen.orientation.lock("landscape").catch(err => console.log(err));
                 }
             } else {
-                if (document.exitFullscreen && nativeFullscreen) await document.exitFullscreen();
-                else if (document.webkitExitFullscreen && nativeFullscreen) document.webkitExitFullscreen();
-                root.classList.remove("app-fullscreen");
-                if (screen.orientation?.unlock) screen.orientation.unlock();
+                if (document.exitFullscreen) await document.exitFullscreen();
+                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
             }
         } catch (err) {
             console.error("Fullscreen error:", err);
-            root.classList.toggle("app-fullscreen", !fallbackFullscreen && !nativeFullscreen);
-            updateFullscreenIcon();
         }
-        updateFullscreenIcon();
     }
 
     function updateFullscreenIcon() {
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("app-fullscreen");
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (fullscreenIcon) {
             if (isFullscreen) {
                 fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
@@ -250,26 +222,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
-    function showLanguageSelection() {
-        if (video1) video1.classList.remove("active");
-        if (langOverlay) langOverlay.style.display = "flex";
-    }
-
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
             if (startOverlay) startOverlay.style.display = "none";
             bgMusic.play().catch(err => console.error("BGM error:", err));
-
-            if (!video1 || video1.error) {
-                showLanguageSelection();
-                return;
-            }
-
-            video1.addEventListener("error", showLanguageSelection, { once: true });
-            video1.play().catch(err => {
-                console.error("Video1 error:", err);
-                showLanguageSelection();
-            });
+            if (video1) video1.play().catch(err => console.error("Video1 error:", err));
         });
     }
 
@@ -292,10 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stopIntroAudio();
 
-        const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
+        const audioFile = (selectedLang === "en") ? "assets/intro eng.mp3" : "assets/intro.mp3";
         introAudio = new Audio(audioFile);
-        introAudio.volume = 1;
-        introAudio.muted = false;
 
         if (video2) {
             video2.currentTime = 0;
@@ -340,39 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 4. DYNAMIC VIDEO PLAYER (24 VIDEOS)
     // ==========================================
-    function loadChapterVideo(startTime = 0) {
-        const video = normalLawanVideo;
-        const notice = document.getElementById('video-loading-notice');
-        if (notice) notice.remove();
-        video.pause();
-        video.preload = 'auto';
-        video.onloadedmetadata = () => {
-            video.onloadedmetadata = null;
-            if (startTime > 0) seekChapterVideo(startTime);
-        };
-        video.load();
-        video.play().catch(error => console.log('Press Play to start video:', error));
-    }
-
-    function seekChapterVideo(target) {
-        const video = normalLawanVideo;
-        if (!Number.isFinite(target)) return;
-        const ranges = video.seekable;
-        for (let i = 0; i < ranges.length; i++) {
-            const start = ranges.start(i);
-            const end = Math.max(start, ranges.end(i) - 0.05);
-            if (target >= start && target <= end) {
-                video.currentTime = target;
-                return;
-            }
-        }
-        // Do not seek outside the server's available video range.
-        if (ranges.length && target > video.currentTime) {
-            const end = Math.max(ranges.start(ranges.length - 1), ranges.end(ranges.length - 1) - 0.05);
-            if (end > video.currentTime) video.currentTime = end;
-        }
-    }
-
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
         currentVideoBaseName = videoBaseName;
@@ -385,12 +307,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
         
+        if (normalLawanSource) normalLawanSource.src = videoFile;
 
         if (normalLawanVideo) {
-            normalLawanVideo.src = videoFile;
-            normalLawanVideo.volume = 1;
-            normalLawanVideo.muted = false;
-            loadChapterVideo();
+            normalLawanVideo.volume = 1.0;
+            normalLawanVideo.load();
+            normalLawanVideo.play().catch(err => console.log("Video auto-play prevented:", err));
         }
     }
 
@@ -430,16 +352,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (vbtnRewind && normalLawanVideo) {
         vbtnRewind.addEventListener("click", () => {
-            seekChapterVideo(Math.max(0, normalLawanVideo.currentTime - 10));
+            normalLawanVideo.currentTime = Math.max(0, normalLawanVideo.currentTime - 10);
         });
     }
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", () => {
-            // Wait for usable metadata instead of treating an unknown duration as zero.
-            const duration = normalLawanVideo.duration;
-            const currentTime = normalLawanVideo.currentTime;
-            if (!Number.isFinite(duration) || duration <= 0 || !Number.isFinite(currentTime)) return;
-            seekChapterVideo(Math.min(duration, currentTime + 10));
+            normalLawanVideo.currentTime = Math.min(normalLawanVideo.duration || 0, normalLawanVideo.currentTime + 10);
         });
     }
 
@@ -638,11 +556,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     const langSuffix = selectedLang === "en" ? "bi" : "bm";
                     const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
 
-                    if (!normalLawanVideo.src.endsWith(newVideoFile)) {
+                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
                         const currentTime = normalLawanVideo.currentTime;
 
-                        normalLawanVideo.src = newVideoFile;
-                        loadChapterVideo(currentTime);
+                        normalLawanSource.src = newVideoFile;
+                        normalLawanVideo.load();
+
+                        normalLawanVideo.currentTime = currentTime;
+                        normalLawanVideo.play().catch(err => console.log("Video resume error:", err));
                     } else {
                         normalLawanVideo.play().catch(err => console.log("Video play error:", err));
                     }
@@ -1114,7 +1035,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (labelLanguage) labelLanguage.textContent = "Language";
             if (textVolumeUp) textVolumeUp.textContent = "Volume Up";
             if (textVolumeDown) textVolumeDown.textContent = "Volume Down";
-            updateMuteLabel();
+            if (textMute) textMute.textContent = "Mute";
             if (textLangBm) textLangBm.textContent = "Malay";
             if (textLangEn) textLangEn.textContent = "English";
             if (backBtn) backBtn.textContent = "Back";
@@ -1167,7 +1088,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (labelLanguage) labelLanguage.textContent = "Bahasa";
             if (textVolumeUp) textVolumeUp.textContent = "Kuatkan";
             if (textVolumeDown) textVolumeDown.textContent = "Perlahankan";
-            updateMuteLabel();
+            if (textMute) textMute.textContent = "Senyap";
             if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
             if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
             if (backBtn) backBtn.textContent = "Kembali";
