@@ -341,16 +341,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
    
     // VIDEO PLAYER CONTROLS
-    
-    // ==========================================
-    // VIDEO PLAYER CONTROLS
-    // ==========================================
-
     if (vbtnPlay && normalLawanVideo) {
         vbtnPlay.addEventListener("click", () => {
-            normalLawanVideo.play().catch(err => {
-                console.error("Video play error:", err);
-            });
+            normalLawanVideo.play().catch(console.error);
         });
     }
 
@@ -362,53 +355,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (vbtnRestart && normalLawanVideo) {
         vbtnRestart.addEventListener("click", () => {
-            seekVideo(0, true);
+            normalLawanVideo.currentTime = 0;
+            normalLawanVideo.play().catch(console.error);
         });
     }
 
-    function seekVideo(targetTime, playAfterSeek = false) {
-        const video = normalLawanVideo;
+   
+function seekVideo(seconds) {
+    const video = normalLawanVideo;
+    if (!video) return;
 
-        if (!video) return;
+    console.log("Video:", video.currentSrc);
+console.log("Duration:", video.duration);
+console.log("Current time:", video.currentTime);
+console.log("Seekable:", video.seekable.length);
 
-        if (video.readyState < 1 || !Number.isFinite(video.duration)) {
-            video.addEventListener("loadedmetadata", () => {
-                seekVideo(targetTime, playAfterSeek);
-            }, { once: true });
+for (let i = 0; i < video.seekable.length; i++) {
+    console.log(
+        "Seekable range:",
+        video.seekable.start(i),
+        video.seekable.end(i)
+    );
+}
+
+    const doSeek = () => {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) {
+            console.log("Video belum sedia untuk seek.");
             return;
         }
 
-        const target = Math.max(
+        const targetTime = Math.max(
             0,
-            Math.min(targetTime, video.duration)
+            Math.min(video.duration, video.currentTime + seconds)
         );
 
         try {
-            video.currentTime = target;
-
-            if (playAfterSeek) {
-                video.play().catch(err => {
-                    console.error("Video play error:", err);
-                });
-            }
-        } catch (err) {
-            console.error("Video seek error:", err);
+            video.currentTime = targetTime;
+            console.log("Cuba seek ke:", targetTime);
+        } catch (error) {
+            console.error("Seek gagal:", error);
         }
+    };
+
+    if (video.readyState >= 1) {
+        doSeek();
+    } else {
+        video.addEventListener("loadedmetadata", doSeek, {
+            once: true
+        });
     }
+}
+
 
     if (vbtnRewind) {
         vbtnRewind.addEventListener("click", () => {
-            if (!normalLawanVideo) return;
-
-            seekVideo(normalLawanVideo.currentTime - 10);
+            seekVideo(-10);
         });
     }
 
     if (vbtnForward) {
         vbtnForward.addEventListener("click", () => {
-            if (!normalLawanVideo) return;
-
-            seekVideo(normalLawanVideo.currentTime + 10);
+            seekVideo(10);
         });
     }
 
