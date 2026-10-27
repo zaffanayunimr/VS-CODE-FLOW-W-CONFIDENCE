@@ -64,7 +64,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/Start.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -152,7 +152,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/Language.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -212,7 +212,7 @@ body {
 
 .footer-logo {
     position: absolute;
-    bottom: 35px;
+    bottom: 20px;
     text-align: center;
     pointer-events: none;
 }
@@ -269,10 +269,10 @@ body {
 /* GEAR / SETTINGS BUTTON */
 .gear-btn {
     position: absolute;
-    top: 28px;
-    right: 42px;
-    width: 50px;
-    height: 50px;
+    top: 20px;
+    right: 20px;
+    width: 46px;
+    height: 46px;
     background-color: #FFFFFF;
     border: none;
     border-radius: 50%;
@@ -287,8 +287,8 @@ body {
 }
 
 .gear-btn .gear-icon {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
     fill: #52B2EC;
     transition: fill 0.2s ease;
 }
@@ -310,7 +310,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg-homepage.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -385,31 +385,31 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/setting page.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: 30px;
     z-index: 300;
 }
 
 #settings-title {
     font-family: "Cooper Black", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 5rem;
+    font-size: 4rem;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 #home-btn,
 .home-circle-btn {
     position: absolute;
-    bottom: 25px;
-    left: 35px;
-    width: 50px;
-    height: 50px;
+    bottom: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
     background-color: #FFFFFF;
     border: none;
     border-radius: 50%;
@@ -429,8 +429,8 @@ body {
 
 #home-btn svg,
 .home-circle-btn svg {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     fill: #52B2EC;
     transition: fill 0.2s ease;
 }
@@ -442,20 +442,20 @@ body {
 
 .settings-grid {
     display: flex;
-    gap: 50px;
+    gap: 40px;
     justify-content: center;
     align-items: stretch;
     width: 92%;
-    max-width: 1220px;
-    margin-top: 35px;
+    max-width: 1100px;
+    margin-top: 25px;
 }
 
 .settings-box {
     flex: 1;
     position: relative;
-    border: 4.5px solid #CC3399;
-    border-radius: 40px;
-    padding: 40px 25px 20px 25px;
+    border: 4px solid #CC3399;
+    border-radius: 35px;
+    padding: 40px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -464,19 +464,19 @@ body {
 
 .box-header-badge {
     position: absolute;
-    top: -34px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
-    width: 280px;
-    height: 65px;
-    border: 4.5px solid #CC3399;
-    border-radius: 35px;
+    width: 240px;
+    height: 55px;
+    border: 4px solid #CC3399;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #E70B90;
     font-family: "Berlin Sans FB", "Arial Rounded MT Bold", sans-serif;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
 }
 
 .header-audio {
@@ -489,7 +489,7 @@ body {
 
 .audio-control-body {
     display: flex;
-    gap: 45px;
+    gap: 30px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -497,25 +497,24 @@ body {
 
 .volume-slider-container {
     position: relative;
-    width: 60px;
-    height: 220px;
+    width: 50px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    margin-top: -15px;
 }
 
 #volume-slider {
     -webkit-appearance: none;
     appearance: none;
     position: absolute;
-    top: 42%;
+    top: 45%;
     left: 50%;
-    width: 150px;
-    height: 22px;
+    width: 140px;
+    height: 18px;
     background: linear-gradient(to right, #E70B90 100%, #FFCCE5 0%);
-    border-radius: 11px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
     transform: translate(-50%, -50%) rotate(-90deg);
@@ -524,43 +523,41 @@ body {
 
 #volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: #FFFFCC;
-    border: 4px solid #CC3399;
+    border: 3px solid #CC3399;
     cursor: pointer;
 }
 
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    height: 25px;
-    line-height: 25px;
     z-index: 2;
 }
 
 .audio-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .settings-action-btn {
-    width: 290px;
-    height: 62px;
+    width: 260px;
+    height: 55px;
     background-color: #E7F7A8;
     border: 4px solid #CC3399;
     color: #E70B90;
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
-    font-size: 1.85rem;
-    border-radius: 35px;
+    font-size: 1.6rem;
+    border-radius: 30px;
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 45px 1fr;
     align-items: center;
-    padding-left: 25px;
+    padding-left: 20px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -571,7 +568,7 @@ body {
 }
 
 .btn-icon {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 
@@ -583,32 +580,32 @@ body {
 .lang-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 22px;
     width: 100%;
     align-items: center;
 }
 
 .lang-option-btn {
     position: relative;
-    width: 330px;
-    height: 68px;
+    width: 280px;
+    height: 60px;
     background-color: #CFE1F7;
     border: 4px solid #CC3399;
-    border-radius: 40px;
+    border-radius: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 65px;
-    padding-right: 20px;
+    padding-left: 55px;
+    padding-right: 15px;
 }
 
 .flag-icon {
     position: absolute;
-    left: -15px;
+    left: -10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 68px;
-    height: 68px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 4px solid #CC3399;
     z-index: 5;
@@ -632,17 +629,17 @@ body {
 
 #back-btn {
     position: absolute;
-    bottom: 25px;
-    right: 35px;
-    width: 160px;
-    height: 46px;
+    bottom: 20px;
+    right: 20px;
+    width: 140px;
+    height: 44px;
     background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #009966;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.65rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    border-radius: 32px;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -661,7 +658,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -788,7 +785,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -842,17 +839,17 @@ body {
 
 .sub-back-btn {
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     right: 20px;
-    width: 160px;
-    height: 46px;
+    width: 140px;
+    height: 44px;
     background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #28A745;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.50rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    border-radius: 32px;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
     z-index: 220;
@@ -946,8 +943,8 @@ body {
 
 #normal-lawan-home-btn {
     position: absolute;
-    bottom: 25px;
-    left: 35px;
+    bottom: 20px;
+    left: 20px;
     z-index: 10;
 }
 
@@ -955,10 +952,10 @@ body {
     position: absolute;
     background-color: #FFFFCC;
     border: 4px solid #339933;
-    bottom: 25px;
+    bottom: 20px;
     right: 20px;
-    width: 160px;
-    height: 46px;
+    width: 140px;
+    height: 44px;
     z-index: 10;
 }
 
@@ -971,7 +968,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1008,7 +1005,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1046,7 +1043,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/bg fyp.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1074,13 +1071,13 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/quiz bg.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 25px;
+    padding-top: 20px;
     z-index: 200;
 }
 
@@ -1089,16 +1086,16 @@ body {
     z-index: 210;
     width: 80%;
     max-width: 1100px;
-    margin-top: 40px;
+    margin-top: 30px;
     text-align: center;
 }
 
 #quiz-question-text {
     font-family: "Dream Orphans Regular", "Dream Orphans", sans-serif;
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     font-weight: normal;
     color: #000;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 .options-grid {
@@ -1106,22 +1103,22 @@ body {
     z-index: 210;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 40px;
+    gap: 20px 30px;
     width: 85%;
     max-width: 950px;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
 .option-btn {
-    min-height: 110px;
+    min-height: 90px;
     background-color: #FFED96;
     border: 4px solid #E680CC;
-    border-radius: 25px;
+    border-radius: 20px;
     font-family: "Franklin Gothic Demi Cond", "Franklin Gothic Medium Condensed", "Arial Narrow", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: normal;
     color: #000;
-    padding: 15px 20px;
+    padding: 10px 15px;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1135,14 +1132,14 @@ body {
 
 .score-board {
     position: absolute;
-    top: 25px;
-    left: 90px;
+    top: 20px;
+    left: 80px;
     font-family: "Arial Rounded MT Bold", "Arial Rounded MT", sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 5px 18px;
+    padding: 4px 15px;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
@@ -1157,7 +1154,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-image: url('assets/quiz bg.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -1202,78 +1199,12 @@ body {
 }
 
 /* ==========================================
-   MOBILE & FULLSCREEN RESPONSIVE OVERRIDES
+   MOBILE RESPONSIVE OVERRIDES
    ========================================== */
 
-/* PORTRAIT MODE (EG: PEGAS TELEFON TEGAK) */
+/* PORTRAIT MODE (TEGAK) */
 @media (max-width: 768px) and (orientation: portrait) {
-  html,
-  body,
-  #player-container {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    overflow: hidden;
-  }
-
-  #player-container {
-    height: 100vh;
-    height: 100dvh;
-  }
-
-  #start-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    padding: max(24px, env(safe-area-inset-top))
-      16px
-      max(24px, env(safe-area-inset-bottom));
-    justify-content: space-between;
-  }
-
-  .first-header {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    margin-top: clamp(24px, 9vh, 72px);
-    transform: none;
-  }
-
-  .first-title,
-  .menu-title {
-    font-size: clamp(2rem, 9vw, 3.5rem);
-    letter-spacing: 2px;
-  }
-
-  .first-subtitle,
-  .menu-subtitle {
-    margin-top: 0;
-    font-size: clamp(3.5rem, 16vw, 6rem);
-  }
-
-  #start-app-btn {
-    width: min(100%, 340px);
-    min-height: 58px;
-    margin: auto 0 3vh;
-    padding: 12px 20px;
-    font-size: clamp(1.1rem, 5vw, 1.5rem);
-  }
-
-  #fullscreen-btn {
-    top: max(12px, env(safe-area-inset-top));
-    left: 12px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #fullscreen-btn svg {
-    width: 25px;
-    height: 25px;
-  }
-
+  #start-overlay,
   #language-overlay,
   #scene4-overlay,
   #settings-overlay,
@@ -1284,348 +1215,170 @@ body {
   #scene10-overlay,
   #scene11-overlay,
   #scene12-overlay {
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding-bottom: max(90px, calc(70px + env(safe-area-inset-bottom)));
+    background-size: 100% 100% !important;
+    padding-bottom: 80px;
   }
 
-  #scene4-overlay {
-    justify-content: center;
-    gap: 24px;
-    padding: 76px 18px 90px;
+  .first-header {
+    position: relative;
+    top: auto;
+    margin-top: 40px;
   }
 
-  .menu-header {
-    margin: 0;
+  .first-title,
+  .menu-title {
+    font-size: 2.5rem;
   }
 
-  .menu-buttons-container {
-    width: 100%;
-    gap: 14px;
-  }
-
-  .menu-btn {
-    width: min(100%, 340px);
-    min-height: 58px;
-    height: auto;
-    padding: 10px 18px;
-    font-size: 1.5rem;
-  }
-
-  .gear-btn {
-    top: max(14px, env(safe-area-inset-top));
-    right: 14px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #scene6-overlay,
-  #scene7-overlay,
-  #scene8-overlay,
-  #scene9-overlay,
-  #scene10-overlay {
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    padding: max(76px, calc(56px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
-  }
-
-  #chapter-title,
-  #asas-title,
-  #penjagaan-title,
-  #kesihatan-title,
-  #quiz-title {
-    font-size: clamp(1.8rem, 7vw, 2.8rem);
-    line-height: 1.15;
-  }
-
-  .chapter-title-box {
-    width: 100%;
-  }
-
-  .chapter-buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    margin: 0;
-  }
-
-  .chapter-card-btn,
-  .card-left,
-  .card-right,
-  .card-center {
-    position: relative !important;
-    top: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-    min-height: 72px;
-    height: auto;
-    transform: none !important;
-  }
-
-  .card-center:hover {
-    transform: none !important;
-  }
-
-  .card-icon-circle {
-    left: -4px;
-    width: 64px;
-    height: 64px;
-  }
-
-  .card-label {
-    padding: 10px 12px 10px 68px;
-    font-size: clamp(1.1rem, 4.8vw, 1.5rem);
-  }
-
-  .sub-menu-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-    max-width: 520px;
-    margin: 0;
-  }
-
-  .sub-menu-btn {
-    min-height: 64px;
-    height: auto;
-    padding: 12px 16px;
-    font-size: clamp(1rem, 4.5vw, 1.35rem);
-  }
-
-  #home-btn,
-  .home-circle-btn {
-    position: fixed;
-    bottom: max(14px, env(safe-area-inset-bottom));
-    left: 14px;
-    width: 46px;
-    height: 46px;
-  }
-
-  #home-btn svg,
-  .home-circle-btn svg {
-    width: 34px;
-    height: 34px;
-  }
-
-  #back-btn,
-  .sub-back-btn,
-  #normal-lawan-back-btn {
-    position: fixed;
-    right: 14px;
-    bottom: max(14px, env(safe-area-inset-bottom));
-    width: 132px;
-    height: 46px;
-    font-size: 1.1rem;
-  }
-
-  .footer-logo {
-    bottom: max(18px, env(safe-area-inset-bottom));
+  .first-subtitle,
+  .menu-subtitle {
+    font-size: 4.5rem;
   }
 
   #settings-overlay {
-    padding: max(68px, calc(48px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
+    padding-top: 20px;
   }
 
   #settings-title {
-    margin-bottom: 8px;
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
   }
 
   .settings-grid {
     flex-direction: column;
-    gap: 40px;
-    width: 100%;
-    margin-top: 24px;
+    gap: 25px;
+    width: 90%;
+    margin-top: 20px;
   }
 
   .settings-box {
-    width: 100%;
-    min-height: 190px;
-    padding: 38px 16px 20px;
-    border-radius: 26px;
+    padding: 30px 15px 15px 15px;
   }
 
   .box-header-badge {
-    width: min(230px, 80%);
-    height: 52px;
-    top: -28px;
-    font-size: 1.8rem;
+    width: 180px;
+    height: 42px;
+    top: -22px;
+    font-size: 1.5rem;
   }
 
   .audio-control-body {
     flex-direction: column;
-    gap: 16px;
+    gap: 15px;
   }
 
   .volume-slider-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 12px;
-    width: min(100%, 280px);
-    height: auto;
-    margin: 0;
+    width: 100%;
+    height: 35px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
   }
 
   #volume-slider {
     position: relative;
     top: auto;
     left: auto;
-    width: 100%;
     transform: none;
+    width: 180px;
   }
 
   .audio-btn-group {
     width: 100%;
     align-items: center;
-    gap: 10px;
   }
 
-  .audio-btn-group .settings-action-btn,
   .settings-action-btn,
   .lang-option-btn {
-    width: min(100%, 290px);
-    min-height: 54px;
-    height: auto;
-    padding: 10px 14px;
+    width: 100%;
+    max-width: 260px;
+    height: 48px;
     font-size: 1.1rem;
   }
 
-  .lang-btn {
-    width: min(100%, 420px);
-    height: 68px;
-    padding-left: 50px;
-    font-size: clamp(1.1rem, 5vw, 1.6rem);
+  .chapter-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    height: auto;
+    margin-top: 30px;
   }
 
-  #language-overlay .flag-icon {
-    width: 68px;
-    height: 68px;
+  .chapter-card-btn {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 70px !important;
+    transform: none !important;
   }
 
-  #skip-btn {
-    top: max(14px, env(safe-area-inset-top));
-    right: 14px;
-    width: 112px;
-    height: 44px;
-    font-size: 1.05rem;
+  .card-icon-circle {
+    left: -10px;
+    width: 65px;
+    height: 65px;
   }
 
-  #scene11-overlay {
-    padding: max(76px, calc(56px + env(safe-area-inset-top)))
-      16px
-      max(100px, calc(80px + env(safe-area-inset-bottom)));
+  .card-label {
+    padding-left: 55px;
+    font-size: 1.3rem;
   }
 
-  .score-board {
-    top: max(20px, env(safe-area-inset-top));
-    left: 72px;
-    font-size: 1.15rem;
-    padding: 6px 10px;
+  .sub-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 90%;
+    margin-top: 20px;
   }
 
+  .sub-menu-btn {
+    height: 60px;
+    font-size: 1.2rem;
+  }
+
+  /* KUIZ PADA PORTRAIT */
   .question-container {
-    width: 100%;
-    margin-top: 16px;
+    margin-top: 15px;
+    width: 90%;
   }
 
   #quiz-question-text {
-    font-size: clamp(1.25rem, 5.5vw, 1.8rem);
+    font-size: 1.3rem;
   }
 
   .options-grid {
     grid-template-columns: 1fr;
     gap: 12px;
-    width: 100%;
-    margin-top: 22px;
+    width: 90%;
+    margin-top: 15px;
   }
 
   .option-btn {
-    min-height: 62px;
-    padding: 12px;
-    font-size: 1.1rem;
-  }
-
-  #scene12-overlay {
-    justify-content: center;
-    padding: 80px 16px 100px;
-  }
-
-  .result-box {
-    margin-bottom: 16px;
-  }
-
-  #result-congrats {
-    margin-bottom: 20px;
-    font-size: clamp(2rem, 9vw, 3rem);
-  }
-
-  #result-motto,
-  .score-display-line {
-    margin-bottom: 20px;
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-  }
-
-  #normal-lawan-overlay {
-    inset: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    padding: 0;
-    overflow: hidden;
-    transform: none;
-  }
-
-  #normal-lawan-overlay .video-display-area {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #normal-lawan-overlay .video-display-area video {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-  }
-
-  .video-controls-toolbar {
-    right: 10px;
-    gap: 10px;
-  }
-
-  .vcontrol-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  .vcontrol-btn svg {
-    width: 24px;
-    height: 24px;
+    min-height: 55px;
+    font-size: 1rem;
+    padding: 8px;
   }
 }
 
-/* LANDSCAPE MODE (SEMASA TELEFON MELINTANG / SKRIN PENUH AUTO-ROTATE) */
+/* LANDSCAPE MODE (MELINTANG / FULLSCREEN) */
 @media (max-height: 500px) and (orientation: landscape) {
+  #start-overlay,
+  #language-overlay,
+  #scene4-overlay,
+  #settings-overlay,
+  #scene6-overlay,
+  #scene7-overlay,
+  #scene8-overlay,
+  #scene9-overlay,
+  #scene10-overlay,
+  #scene11-overlay,
+  #scene12-overlay {
+    background-size: 100% 100% !important;
+  }
+
   #start-overlay {
     padding: 10px 0;
     justify-content: center;
@@ -1634,7 +1387,7 @@ body {
   .first-header {
     position: relative;
     top: 0;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   .first-title,
@@ -1649,20 +1402,20 @@ body {
   }
 
   #start-app-btn {
-    padding: 10px 30px;
-    font-size: 1.4rem;
-    margin-top: 15px;
+    padding: 8px 30px;
+    font-size: 1.3rem;
+    margin-top: 10px;
   }
 
   .menu-header {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .menu-btn {
-    width: 260px;
-    height: 48px;
-    font-size: 1.5rem;
+    width: 240px;
+    height: 44px;
+    font-size: 1.4rem;
   }
 
   #chapter-title,
@@ -1670,261 +1423,181 @@ body {
   #penjagaan-title,
   #kesihatan-title,
   #quiz-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .chapter-buttons-container {
     height: auto;
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 15px;
   }
 
-  .chapter-card-btn,
-  .card-left,
-  .card-right,
-  .card-center {
+  .chapter-card-btn {
     position: relative !important;
     top: auto !important;
     bottom: auto !important;
     left: auto !important;
     right: auto !important;
     width: 28% !important;
-    min-width: 200px;
-    height: 65px !important;
+    min-width: 180px;
+    height: 55px !important;
     transform: none !important;
   }
 
   .card-icon-circle {
     left: -10px;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
   }
 
   .card-label {
-    padding-left: 45px;
-    padding-right: 10px;
-    font-size: 1.1rem;
+    padding-left: 40px;
+    padding-right: 5px;
+    font-size: 1rem;
   }
 
   .sub-menu-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 12px 20px;
-    margin-top: 15px;
+    gap: 10px 15px;
+    margin-top: 10px;
     width: 90%;
   }
 
   .sub-menu-btn {
-    height: 55px;
-    font-size: 1.1rem;
+    height: 50px;
+    font-size: 1rem;
     padding: 5px 10px;
   }
 
   #settings-overlay {
-    padding-top: 15px;
+    padding-top: 10px;
   }
 
   #settings-title {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 5px;
   }
 
   .settings-grid {
-    margin-top: 10px;
-    gap: 20px;
+    margin-top: 5px;
+    gap: 15px;
   }
 
   .settings-box {
-    padding: 25px 15px 15px 15px;
+    padding: 20px 10px 10px 10px;
   }
 
   .box-header-badge {
-    width: 180px;
-    height: 40px;
-    top: -20px;
-    font-size: 1.4rem;
+    width: 150px;
+    height: 35px;
+    top: -18px;
+    font-size: 1.2rem;
   }
 
   .audio-control-body {
-    gap: 20px;
+    gap: 15px;
   }
 
   .volume-slider-container {
-    width: 40px;
-    height: 110px;
+    width: 35px;
+    height: 100px;
   }
 
   #volume-slider {
-    width: 100px;
+    width: 90px;
   }
 
   .settings-action-btn,
   .lang-option-btn {
-    width: 200px;
-    height: 40px;
-    font-size: 1rem;
+    width: 180px;
+    height: 36px;
+    font-size: 0.9rem;
   }
 
   .flag-icon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   }
 
   #home-btn,
   .home-circle-btn {
     bottom: 10px;
-    left: 15px;
-    width: 40px;
-    height: 40px;
+    left: 10px;
+    width: 38px;
+    height: 38px;
   }
 
   #home-btn svg,
   .home-circle-btn svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
 
   #back-btn,
   .sub-back-btn,
   #normal-lawan-back-btn {
     bottom: 10px;
-    right: 15px;
-    width: 110px;
-    height: 38px;
-    font-size: 1rem;
+    right: 10px;
+    width: 100px;
+    height: 34px;
+    font-size: 0.9rem;
   }
 
   .footer-logo {
-    bottom: 10px;
+    bottom: 5px;
   }
 
   .footer-title {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .footer-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+
+  /* KUIZ PADA LANDSCAPE / FULLSCREEN */
+  #scene11-overlay {
+    padding-top: 10px;
   }
 
   .question-container {
-    margin-top: 10px;
+    margin-top: 5px;
+    width: 85%;
   }
 
   #quiz-question-text {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
+    line-height: 1.1;
   }
 
   .options-grid {
-    gap: 10px 20px;
-    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    margin-top: 8px;
+    width: 88%;
   }
 
   .option-btn {
-    min-height: 50px;
-    font-size: 1rem;
-    padding: 8px;
+    min-height: 42px;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-width: 2px;
+    border-radius: 12px;
   }
 
   .score-board {
-    top: 10px;
-    left: 70px;
-    font-size: 1.2rem;
-    padding: 3px 10px;
+    top: 8px;
+    left: 60px;
+    font-size: 1rem;
+    padding: 2px 8px;
   }
 }
 
-/* Fallback class for mobile browsers without standard requestFullscreen support */
-html.fullscreen-fallback,
-html.fullscreen-fallback body {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-  #quiz-question-text {
-    font-size: clamp(1.25rem, 5.5vw, 1.8rem);
-  }
-
-  .options-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    width: 100%;
-    margin-top: 22px;
-  }
-
-  .option-btn {
-    min-height: 62px;
-    padding: 12px;
-    font-size: 1.1rem;
-  }
-
-  #scene12-overlay {
-    justify-content: center;
-    padding: 80px 16px 100px;
-  }
-
-  .result-box {
-    margin-bottom: 16px;
-  }
-
-  #result-congrats {
-    margin-bottom: 20px;
-    font-size: clamp(2rem, 9vw, 3rem);
-  }
-
-  #result-motto,
-  .score-display-line {
-    margin-bottom: 20px;
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-  }
-
-  #normal-lawan-overlay {
-    inset: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
-    padding: 0;
-    overflow: hidden;
-    transform: none;
-  }
-
-  #normal-lawan-overlay .video-display-area {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #normal-lawan-overlay .video-display-area video {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-  }
-
-  .video-controls-toolbar {
-    right: 10px;
-    gap: 10px;
-  }
-
-  .vcontrol-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  .vcontrol-btn svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* Fallback class for mobile browsers without standard requestFullscreen support */
+/* Fallback class */
 html.fullscreen-fallback,
 html.fullscreen-fallback body {
   position: fixed;
