@@ -185,31 +185,45 @@ document.addEventListener("DOMContentLoaded", () => {
         return Boolean(document.fullscreenElement || document.webkitFullscreenElement || document.documentElement.classList.contains("fullscreen-fallback"));
     }
 
-    async function toggleFullscreen() {
-        const root = document.documentElement;
-        try {
-            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                if (document.exitFullscreen) {
-                    await document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    await document.webkitExitFullscreen();
-                }
-                root.classList.remove("fullscreen-fallback");
+async function toggleFullscreen() {
+    const root = document.documentElement;
+    try {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                await document.webkitExitFullscreen();
+            }
+            root.classList.remove("fullscreen-fallback");
+
+            // Buka semula kunci orientasi apabila keluar dari fullscreen
+            if (screen.orientation && screen.orientation.unlock) {
+                screen.orientation.unlock();
+            }
+        } else {
+            if (root.requestFullscreen) {
+                await root.requestFullscreen();
+            } else if (root.webkitRequestFullscreen) {
+                await root.webkitRequestFullscreen();
             } else {
-                if (root.requestFullscreen) {
-                    await root.requestFullscreen();
-                } else if (root.webkitRequestFullscreen) {
-                    await root.webkitRequestFullscreen();
-                } else {
-                    root.classList.toggle("fullscreen-fallback");
+                root.classList.toggle("fullscreen-fallback");
+            }
+
+            // Kunci orientasi kepada landscape apabila memasuki fullscreen
+            if (screen.orientation && screen.orientation.lock) {
+                try {
+                    await screen.orientation.lock("landscape");
+                } catch (orientErr) {
+                    console.log("Orientation lock not supported/allowed:", orientErr);
                 }
             }
-        } catch (err) {
-            root.classList.toggle("fullscreen-fallback");
-            console.error("Fullscreen fallback:", err);
         }
-        updateFullscreenIcon();
+    } catch (err) {
+        root.classList.toggle("fullscreen-fallback");
+        console.error("Fullscreen fallback:", err);
     }
+    updateFullscreenIcon();
+}
 
     function updateFullscreenIcon() {
         const isFullscreen = isFullscreenActive();
