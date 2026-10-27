@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER & CONTROLS
+    // 4. DYNAMIC VIDEO PLAYER & CONTROLS (DIBAIKI UNTUK METADATA & FORWARD)
     // ==========================================
     function safePlayVideo(videoElem) {
         if (!videoElem) return;
@@ -328,7 +328,8 @@ document.addEventListener("DOMContentLoaded", () => {
             normalLawanVideo.volume = 1.0;
             normalLawanVideo.load();
             
-            normalLawanVideo.onloadeddata = () => {
+            // GUNA ONLOADEDMETADATA (Membaca durasi sebenar sebelum mainkan video)
+            normalLawanVideo.onloadedmetadata = () => {
                 safePlayVideo(normalLawanVideo);
             };
         }
@@ -395,7 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD (+10s)
+    // BUTANG FORWARD (+10s) - KALIS NAN / BERFUNGSI UNTUK SEMUA BAB
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
