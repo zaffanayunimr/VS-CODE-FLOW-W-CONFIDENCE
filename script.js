@@ -376,12 +376,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BUTANG FORWARD: TERUS TAMBAH 10 SAAT
+    // BUTANG FORWARD: DIBAIKI AGAR TIDAK ULANG KE SAAT 0
     if (vbtnForward && normalLawanVideo) {
         vbtnForward.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
-            normalLawanVideo.currentTime = normalLawanVideo.currentTime + 10;
+
+            const targetTime = normalLawanVideo.currentTime + 10;
+            if (normalLawanVideo.duration && targetTime >= normalLawanVideo.duration) {
+                normalLawanVideo.currentTime = normalLawanVideo.duration - 0.5;
+                normalLawanVideo.pause();
+            } else {
+                normalLawanVideo.currentTime = targetTime;
+            }
         });
     }
 
@@ -920,7 +927,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
                     { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
-                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
+                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan meka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
