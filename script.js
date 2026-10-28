@@ -242,18 +242,29 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW
+    // 3. START OVERLAY & INTRO FLOW (DIBAIKI)
     // ==========================================
     if (startAppBtn) {
-        startAppBtn.addEventListener("click", () => {
+        startAppBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // 1. Minta Fullscreen
             requestLandscapeFullscreen();
             hideFullscreenBtn();
 
-            if (startOverlay) startOverlay.style.display = "none";
+            // 2. PAKSA PADAM START OVERLAY
+            if (startOverlay) {
+                startOverlay.style.setProperty("display", "none", "important");
+            }
 
+            // 3. Main BGM
             if (bgMusic) {
                 bgMusic.play().catch(err => console.log("BGM play catch:", err));
             }
+
+            // 4. Semak kewujudan Video 1 & Papar Skrin Seterusnya
+            let videoStarted = false;
 
             if (video1) {
                 video1.style.display = "block";
@@ -263,23 +274,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 const playPromise = video1.play();
                 if (playPromise !== undefined) {
                     playPromise.then(() => {
-                        console.log("Video logo berjaya dimainkan!");
+                        videoStarted = true;
+                        console.log("Video 1 berjaya dimainkan!");
                     }).catch(err => {
-                        console.error("Video logo terhalang:", err);
+                        console.warn("Autoplay video1 terhalang pelayar/iOS, terus ke skrin bahasa:", err);
                         video1.classList.remove("active");
-                        if (langOverlay) langOverlay.style.display = "flex";
+                        video1.style.display = "none";
+                        if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
                     });
                 }
-            } else {
-                if (langOverlay) langOverlay.style.display = "flex";
             }
+            
+            // Fallback: Jika video tiada / gagal dipicu serentak, paksa paparkan Skrin Pilihan Bahasa
+            setTimeout(() => {
+                if (!videoStarted && video1 && video1.paused) {
+                    video1.classList.remove("active");
+                    video1.style.display = "none";
+                    if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
+                }
+            }, 300);
         });
     }
 
     if (video1) {
         video1.addEventListener("ended", () => {
             video1.classList.remove("active");
-            if (langOverlay) langOverlay.style.display = "flex";
+            video1.style.display = "none";
+            if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
         });
     }
 
