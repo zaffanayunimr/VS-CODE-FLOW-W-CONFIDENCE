@@ -1266,6 +1266,11 @@ body {
     display: none !important;
 }
 
+/* ==========================================
+   PELARASAN KHAS IOS SAFARI (IPHONE & IPAD)
+   ========================================== */
+
+/* 1. Paksa Overlay Amaran Pusing Skrin di iOS Portrait */
 @supports (-webkit-touch-callout: none) {
     @media screen and (orientation: portrait) and (max-width: 768px) {
         #rotate-device-overlay {
@@ -1274,12 +1279,14 @@ body {
             top: 0 !important;
             left: 0 !important;
             width: 100vw !important;
-            height: 100vh !important;
+            height: 100dvh !important; /* Gunakan Dynamic Viewport Height untuk iOS */
             background-color: #FFCCE5 !important;
             z-index: 9999999 !important;
             justify-content: center !important;
             align-items: center !important;
+            flex-direction: column !important;
             text-align: center !important;
+            padding: 20px !important;
         }
 
         #player-container {
@@ -1354,6 +1361,57 @@ body {
    MOBILE LANDSCAPE RESPONSIVE DESIGN (RESPONSIF MOBILE SAHAJA)
    ========================================== */
 @media screen and (orientation: landscape) and (max-height: 500px) {
+
+        /* Paksa container mengikut skala ketinggian Safari iOS */
+        html, body, #player-container {
+            width: 100vw !important;
+            height: 100dvh !important;
+            overflow: hidden !important;
+        }
+
+        /* Laraskan SEMUA overlay skrin supaya berada di tengah dan skala muat */
+        #start-overlay,
+        #language-overlay,
+        #scene4-overlay,
+        #settings-overlay,
+        #scene6-overlay,
+        #scene7-overlay,
+        #scene8-overlay,
+        #scene9-overlay,
+        #scene10-overlay,
+        #scene11-overlay,
+        #scene12-overlay {
+            height: 100dvh !important;
+            box-sizing: border-box !important;
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+            justify-content: center !important;
+        }
+
+        /* Kecilkan skala kandungan secara automatik di iOS jika terlalu tinggi */
+        .chapter-buttons-container,
+        .sub-menu-grid,
+        .options-grid,
+        .settings-grid {
+            transform: scale(0.88) !important;
+            transform-origin: center center !important;
+            margin-top: 0 !important;
+        }
+
+        /* Kecilkan tajuk utama di semua skrin iOS supaya tidak terkeluar */
+        .first-header,
+        .menu-header,
+        #chapter-title,
+        #asas-title,
+        #penjagaan-title,
+        #kesihatan-title,
+        #quiz-title,
+        #settings-title {
+            transform: scale(0.8) !important;
+            transform-origin: center center !important;
+        }
+    }
+}
 
     html, body, #player-container {
         width: 100%;
