@@ -1800,10 +1800,9 @@ body {
 
 /* Khusus untuk telefon mod melintang (landscape) */
 @media screen and (max-width: 900px) and (orientation: landscape) {
-    /* Gantikan #volume-value atau .volume-text mengikut ID/Class teks 100% anda */
-    #volume-value, .volume-text { 
-        margin-top: 15px !important; /* Turunkan teks 100% ke bawah */
-        display: block;
-        text-align: center;
+    #volume-value, .volume-text {
+        bottom: -25px !important; /* Rendahkan kedudukan bottom supaya melepasi slider */
+        /* Atau ubah nilai top jika menggunakan top: */
+        /* top: 105% !important; */
     }
 }
