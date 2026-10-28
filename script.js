@@ -28,12 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalLawanVideo = document.getElementById("normalLawanVideo");
     const normalLawanSource = document.getElementById("normalLawanSource");
 
-    
     const vbtnPause = document.getElementById("vbtn-pause");
     const vbtnPlay = document.getElementById("vbtn-play");
     const vbtnRestart = document.getElementById("vbtn-restart");
     const videoSpeed = document.getElementById("videoSpeed");
-const videoSpeedLabel = document.getElementById("video-speed-label");
+    const videoSpeedLabel = document.getElementById("video-speed-label");
     const normalLawanHomeBtn = document.getElementById("normal-lawan-home-btn");
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
@@ -155,7 +154,6 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
-    // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
 
@@ -180,28 +178,47 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN & ORIENTATION LOCK
+    // FULLSCREEN & AUTO-ROTATE LOGIC (ANDROID & iOS SUPPORT)
     // ==========================================
-    async function toggleFullscreen() {
-        try {
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) await elem.requestFullscreen();
-                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+    function requestLandscapeFullscreen() {
+        const docEl = document.documentElement;
 
-                if (screen.orientation && screen.orientation.lock) {
-                    await screen.orientation.lock("landscape").catch(err => console.log(err));
-                }
-            } else {
-                if (document.exitFullscreen) await document.exitFullscreen();
-                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+        // 1. Permintaan Fullscreen (Sokongan Android & iOS Safari)
+        if (docEl.requestFullscreen) {
+            docEl.requestFullscreen().then(() => {
+                lockOrientationLandscape();
+            }).catch(err => console.log("Fullscreen request err:", err));
+        } else if (docEl.webkitRequestFullscreen) { // iOS Safari Standard
+            docEl.webkitRequestFullscreen();
+            lockOrientationLandscape();
+        } else if (docEl.webkitEnterFullscreen) { // Khas untuk peranti iOS lama / Mobile Safari
+            docEl.webkitEnterFullscreen();
+        }
+    }
 
-                if (screen.orientation && screen.orientation.unlock) {
-                    screen.orientation.unlock();
-                }
+    function lockOrientationLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => {
+                console.log("Orientation lock tidak disokong peranti ini / disekat:", err);
+            });
+        }
+    }
+
+    function toggleFullscreen() {
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+
+        if (!isFullscreen) {
+            requestLandscapeFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
             }
-        } catch (err) {
-            console.error("Fullscreen error:", err);
+
+            if (screen.orientation && screen.orientation.unlock) {
+                screen.orientation.unlock();
+            }
         }
     }
 
@@ -225,6 +242,9 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
+            // Auto-trigger Fullscreen dan Lock Landscape secara serta-merta
+            requestLandscapeFullscreen();
+
             if (startOverlay) startOverlay.style.display = "none";
             bgMusic.play().catch(err => console.error("BGM error:", err));
             if (video1) video1.play().catch(err => console.error("Video1 error:", err));
@@ -258,7 +278,6 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
             video2.classList.add("active");
         }
 
-        // Start both while the language-selection click still grants playback permission.
         const playback = [];
         if (video2) playback.push(video2.play());
         playback.push(introAudio.play());
@@ -291,7 +310,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER (24 VIDEOS)
+    // 4. DYNAMIC VIDEO PLAYER
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -304,20 +323,17 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
 
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
-        
+
         if (normalLawanSource) normalLawanSource.src = videoFile;
 
-       if (normalLawanVideo) {
-    normalLawanVideo.volume = 1.0;
-    normalLawanVideo.load();
-
-    // Apply the selected playback speed
-    applyVideoSpeed();
-
-    normalLawanVideo.play().catch(err => {
-        console.log("Video auto-play prevented:", err);
-    });
-}
+        if (normalLawanVideo) {
+            normalLawanVideo.volume = 1.0;
+            normalLawanVideo.load();
+            applyVideoSpeed();
+            normalLawanVideo.play().catch(err => {
+                console.log("Video auto-play prevented:", err);
+            });
+        }
     }
 
     const videoButtonsMap = [
@@ -346,65 +362,46 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
         }
     });
 
-   
-// ==========================================
-// VIDEO PLAYER CONTROLS
-// ==========================================
+    // ==========================================
+    // VIDEO PLAYER CONTROLS
+    // ==========================================
+    function applyVideoSpeed() {
+        if (!normalLawanVideo || !videoSpeed) return;
+        normalLawanVideo.playbackRate = Number(videoSpeed.value);
+    }
 
-// Apply selected playback speed
-function applyVideoSpeed() {
-    if (!normalLawanVideo || !videoSpeed) return;
+    if (videoSpeed) {
+        videoSpeed.addEventListener("change", applyVideoSpeed);
+    }
 
-    normalLawanVideo.playbackRate = Number(videoSpeed.value);
-}
+    if (normalLawanVideo) {
+        normalLawanVideo.addEventListener("loadedmetadata", applyVideoSpeed);
+    }
 
-// Change speed when user selects an option
-if (videoSpeed) {
-    videoSpeed.addEventListener("change", () => {
-        applyVideoSpeed();
-    });
-}
-
-// Apply speed when a video is ready
-if (normalLawanVideo) {
-    normalLawanVideo.addEventListener(
-        "loadedmetadata",
-        applyVideoSpeed
-    );
-}
-
-// Play
-if (vbtnPlay && normalLawanVideo) {
-    vbtnPlay.addEventListener("click", () => {
-        normalLawanVideo.play().catch(err => {
-            console.error("Video play error:", err);
+    if (vbtnPlay && normalLawanVideo) {
+        vbtnPlay.addEventListener("click", () => {
+            normalLawanVideo.play().catch(err => console.error("Video play error:", err));
         });
-    });
-}
+    }
 
-// Pause
-if (vbtnPause && normalLawanVideo) {
-    vbtnPause.addEventListener("click", () => {
-        normalLawanVideo.pause();
-    });
-}
-
-// Restart
-if (vbtnRestart && normalLawanVideo) {
-    vbtnRestart.addEventListener("click", () => {
-        normalLawanVideo.currentTime = 0;
-
-        normalLawanVideo.play().catch(err => {
-            console.error("Video restart error:", err);
+    if (vbtnPause && normalLawanVideo) {
+        vbtnPause.addEventListener("click", () => {
+            normalLawanVideo.pause();
         });
-    });
-}
+    }
+
+    if (vbtnRestart && normalLawanVideo) {
+        vbtnRestart.addEventListener("click", () => {
+            normalLawanVideo.currentTime = 0;
+            normalLawanVideo.play().catch(err => console.error("Video restart error:", err));
+        });
+    }
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
             if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
-            
+
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
             if (parentOverlay) parentOverlay.style.display = "flex";
         });
@@ -597,10 +594,8 @@ if (vbtnRestart && normalLawanVideo) {
 
                     if (!normalLawanSource.src.endsWith(newVideoFile)) {
                         const currentTime = normalLawanVideo.currentTime;
-
                         normalLawanSource.src = newVideoFile;
                         normalLawanVideo.load();
-
                         normalLawanVideo.currentTime = currentTime;
                         normalLawanVideo.play().catch(err => console.log("Video resume error:", err));
                     } else {
@@ -1060,7 +1055,6 @@ if (vbtnRestart && normalLawanVideo) {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
-        // Global Back Button updates
         if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
         if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
