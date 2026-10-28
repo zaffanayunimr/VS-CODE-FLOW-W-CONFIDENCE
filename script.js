@@ -203,23 +203,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Menyembunyikan butang fullscreen di Screen 1 selepas ditekan
+    // HANYA hilangkan butang fullscreen jika pengguna buka di TELEFON MOBILE (<= 768px)
     function hideFullscreenBtn() {
-        if (fullscreenBtn) {
+        const isMobile = window.innerWidth <= 768;
+        if (fullscreenBtn && isMobile) {
             fullscreenBtn.style.display = "none";
         }
     }
 
     function toggleFullscreen() {
+        const docEl = document.documentElement;
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn();
+            hideFullscreenBtn(); // Hilang pada fon sahaja, kekal di laptop
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    }
+
+    function updateFullscreenIcon() {
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fullscreenIcon) {
+            if (isFullscreen) {
+                fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
+            } else {
+                fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
+            }
         }
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", updateFullscreenIcon);
+    document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
@@ -229,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 1. Minta Fullscreen & Auto-Rotate Landscape
             requestLandscapeFullscreen();
 
-            // 2. Sembunyikan butang Fullscreen supaya pengguna tidak boleh keluar
+            // 2. Sembunyikan butang Fullscreen (hanya berkesan untuk telefon)
             hideFullscreenBtn();
 
             // 3. Teruskan aplikasi
@@ -918,7 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
                     { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
-                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan meka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
+                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
@@ -1173,7 +1194,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Mengunci semula automatik sebaik sahaja skrin di-unlocked & disentuh pengguna
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
             reLockOrientation();
