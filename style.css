@@ -1591,12 +1591,18 @@ body {
         border-width: 2px !important;
     }
 
+ /* ==========================================
+   PELARASAN KEDUDUKAN SKRIN DI PHONE (LANDSCAPE)
+   ========================================== */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    /* 1. Kurangkan padding atas skrin supaya tajuk & butang naik ke atas */
     #scene6-overlay,
     #scene7-overlay,
     #scene8-overlay,
     #scene9-overlay,
     #scene10-overlay {
-        padding-top: 12px;
+        padding-top: 8px !important; /* Sebelum ini 12px/35px */
     }
 
     #chapter-title,
@@ -1610,11 +1616,13 @@ body {
         font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     }
 
+
+    /* 2. Naikkan bekas Butang Kad Bab (Chapter) */
     .chapter-buttons-container {
         width: 94%;
         max-width: 850px;
-        height: 70vh;
-        margin-top: 5vh;
+        height: 65vh !important;
+        margin-top: 2vh !important; /* Dikurangkan supaya butang Chapter naik ke atas */
     }
 
     .chapter-card-btn {
@@ -1661,8 +1669,8 @@ body {
     .sub-menu-grid {
         width: 88%;
         max-width: 850px;
-        gap: 3vh 3vw;
-        margin-top: 6vh;
+        gap: 2.5vh 3vw !important;
+        margin-top: 3vh !important; /* Dikurangkan dari 6vh supaya lebih naik */
     }
 
     .sub-menu-btn {
@@ -1764,14 +1772,13 @@ body {
         margin-top: 24px;
     }
 
-    .option-btn {
-        min-height: 55px;
-        padding: 8px 12px;
-        font-size: clamp(0.8rem, 1.8vw, 1.1rem);
-        border-width: 2px;
-        border-radius: 15px;
+    /* 4. Naikkan Pilihan Jawapan Kuiz */
+    .options-grid {
+        width: 86%;
+        gap: 8px 16px !important;
+        margin-top: 12px !important; /* Dikurangkan dari 24px/80px */
     }
-
+    
     #result-congrats {
         font-size: clamp(2rem, 5vw, 3rem);
         margin-bottom: 20px;
