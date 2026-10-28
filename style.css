@@ -1831,7 +1831,26 @@ body {
    KEMASAN KHUSUS SKRIN MULA UNTUK MOD TEGAK (PORTRAIT ONLY)
    (Laptop & Melintang TIDAK TERJEJAS)
    ========================================== */
-@media screen and (orientation: portrait) {
+/* ==========================================
+   FAKE LANDSCAPE FOR IOS / PORTRAIT DEVICES
+   ========================================== */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+    /* Pusingkan seluruh container aplikasi 90 darjah */
+    body {
+        overflow: hidden;
+    }
+
+    #player-container {
+        position: fixed !important;
+        width: 100vh !important;  /* Tukar lebar jadi tinggi skrin */
+        height: 100vw !important; /* Tukar tinggi jadi lebar skrin */
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) rotate(90deg) !important;
+        transform-origin: center center !important;
+    }
+}
+
     #fullscreen-btn {
         top: 15px;
         left: 15px;
