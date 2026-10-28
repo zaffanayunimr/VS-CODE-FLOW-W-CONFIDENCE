@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             docEl.requestFullscreen().then(() => {
                 lockOrientationLandscape();
             }).catch(err => console.log("Fullscreen request err:", err));
-        } else if (docEl.webkitRequestFullscreen) { // Khas untuk iOS Safari
+        } else if (docEl.webkitRequestFullscreen) {
             docEl.webkitRequestFullscreen();
             lockOrientationLandscape();
         } else if (docEl.webkitEnterFullscreen) {
@@ -203,21 +203,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // HANYA hilangkan butang fullscreen jika pengguna buka di TELEFON MOBILE (<= 768px)
+    // Sembunyikan butang fullscreen HANYA pada peranti mobile
     function hideFullscreenBtn() {
-        const isMobile = window.innerWidth <= 768;
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
         if (fullscreenBtn && isMobile) {
-            fullscreenBtn.style.display = "none";
+            fullscreenBtn.style.setProperty("display", "none", "important");
         }
     }
 
     function toggleFullscreen() {
-        const docEl = document.documentElement;
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
 
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn(); // Hilang pada fon sahaja, kekal di laptop
+            hideFullscreenBtn();
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -247,16 +246,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
-            // 1. Minta Fullscreen & Auto-Rotate Landscape
             requestLandscapeFullscreen();
-
-            // 2. Sembunyikan butang Fullscreen (hanya berkesan untuk telefon)
             hideFullscreenBtn();
 
-            // 3. Teruskan aplikasi
             if (startOverlay) startOverlay.style.display = "none";
-            if (bgMusic) bgMusic.play().catch(err => console.error("BGM error:", err));
-            if (video1) video1.play().catch(err => console.error("Video1 error:", err));
+
+            if (bgMusic) {
+                bgMusic.play().catch(err => console.log("BGM play catch:", err));
+            }
+
+            if (video1) {
+                video1.style.display = "block";
+                video1.classList.add("active");
+                video1.currentTime = 0;
+
+                const playPromise = video1.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Video logo berjaya dimainkan!");
+                    }).catch(err => {
+                        console.error("Video logo terhalang:", err);
+                        video1.classList.remove("active");
+                        if (langOverlay) langOverlay.style.display = "flex";
+                    });
+                }
+            } else {
+                if (langOverlay) langOverlay.style.display = "flex";
+            }
         });
     }
 
