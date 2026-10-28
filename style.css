@@ -1770,6 +1770,27 @@ body {
             padding: 20px !important;
         }
 
+        .footer-logo {
+        bottom: 8px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        pointer-events: none !important;
+        z-index: 10 !important;
+    }
+
+    .footer-title {
+        font-size: 0.75rem !important; /* Diperkecil dari 1.3rem */
+        letter-spacing: 1.5px !important;
+        line-height: 1 !important;
+    }
+
+    .footer-subtitle {
+        font-size: 1.4rem !important; /* Diperkecil dari 2.5rem */
+        margin-top: 2px !important;
+        line-height: 0.8 !important;
+    }
+
         #player-container {
             display: none !important;
         }
@@ -1818,6 +1839,18 @@ body {
         #quiz-title,
         #settings-title {
             transform: scale(0.82) !important;
+            transform-origin: top center !important;
+        }
+
+        #start-overlay .first-header {
+            position: absolute !important;
+            top: 6vh !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            transform: scale(0.8) !important;
             transform-origin: top center !important;
         }
     }
