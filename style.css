@@ -1798,38 +1798,11 @@ body {
     }
 }
 
-/* FIX KHUSUS UNTUK PERANTI MUDAH ALIH (MOBILE LANDSCAPE) */
-@media screen and (orientation: landscape) and (max-height: 500px) {
-
-    /* 1. Besarkan container slider supaya ada ruang di bahagian bawah */
-    .volume-slider-container {
-        height: 135px !important; /* Tambah ketinggian container */
-        position: relative !important;
-    }
-
-    /* 2. Tolak teks 100% jauh lebih ke bawah */
-    #volume-percentage {
-        position: absolute !important;
-        bottom: -1px !important; /* Rendahkan teks melepasi slider */
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin: 0 !important;
-        z-index: 10 !important;
-    }
-
-    /* 3. Membawa naik butang MULA / START ke atas */
-    #start-overlay {
-        padding-bottom: 70px !important; /* Kurangkan padding bawah */
-    }
-
-    #start-app-btn {
-        margin-bottom: 45px !important; /* Naikkan butang MULA ke atas */
-    }
-}
-
-//* ==========================================
-   KEMASAN FAKE LANDSCAPE PORTRAIT (IOS & MOBILE)
+/* ==========================================
+   PELARASAN KHAS UTK PHONE (PORTRAIT vs LANDSCAPE)
    ========================================== */
+
+/* 1. JIKA FON DALAM MOD MENEGAK (PORTRAIT) */
 @media screen and (orientation: portrait) and (max-width: 768px) {
     html, body {
         width: 100vw;
@@ -1839,11 +1812,11 @@ body {
         padding: 0;
     }
 
-    /* Pusingkan seluruh container aplikasi 90 darjah */
+    /* Putaran visual 90 darjah untuk iOS / peranti menegak */
     #player-container {
         position: fixed !important;
-        width: 100vh !important;  /* Lebar disesuaikan mengikut tinggi fon */
-        height: 100vw !important; /* Tinggi disesuaikan mengikut lebar fon */
+        width: 100vh !important;
+        height: 100vw !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) rotate(90deg) !important;
@@ -1853,7 +1826,6 @@ body {
         align-items: center !important;
     }
 
-    /* Pastikan Skrin MULA kekal di tengah paksi putaran */
     #start-overlay {
         width: 100% !important;
         height: 100% !important;
@@ -1864,48 +1836,59 @@ body {
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        transform: none !important; /* Elak penumpukan transform */
+        transform: none !important;
+        gap: 20px !important;
     }
 
-    /* Posisikan butang Fullscreen supaya berada di penjuru atas yang betul selepas dipusing */
+    .first-header {
+        position: static !important;
+        transform: none !important;
+        margin: 0 !important;
+    }
+
+    #start-app-btn {
+        margin-top: 15px !important;
+        margin-bottom: 0 !important;
+    }
+
     #fullscreen-btn {
         position: fixed !important;
-        top: 20px !important;
-        left: 20px !important;
+        top: 15px !important;
+        left: 15px !important;
+        width: 40px !important;
+        height: 40px !important;
         z-index: 999999 !important;
     }
 }
 
-    /* 2. Kecilkan saiz Tajuk supaya muat penuh dalam skrin tegak */
+/* 2. JIKA FON DALAM MOD MELINTANG (LANDSCAPE) - RESET ROTATE */
+@media screen and (orientation: landscape) and (max-width: 900px) {
+    #player-container {
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important; /* Buang putaran 90 darjah */
+    }
+
+    #start-overlay {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    /* Elakkan teks & butang bertindih */
     .first-header {
-        position: absolute !important;
-        top: 15vh !important; /* Turunkan tajuk sedikit dari atas */
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 90% !important;
+        position: static !important;
+        transform: none !important;
+        margin: 0 !important;
     }
 
-    .first-title {
-        font-size: clamp(2.2rem, 8vw, 3.2rem) !important; /* Tajuk FLOW WITH mengecil mengikut skrin */
-        letter-spacing: 3px !important;
-        line-height: 1 !important;
-    }
-
-    .first-subtitle {
-        font-size: clamp(3.8rem, 14vw, 5.5rem) !important; /* Teks Confidence yang seimbang */
-        margin-top: -10px !important;
-        line-height: 1 !important;
-    }
-
-    /* 3. Kemaskan saiz Butang MULA / START */
     #start-app-btn {
-        padding: 14px 45px !important;
-        font-size: 1.4rem !important;
-        border-width: 3.5px !important;
-        border-radius: 40px !important;
-        max-width: 85vw !important; /* Elak butang terlebih lebar */
-        margin-bottom: 170px !important; /* Naikkan butang ke atas */
-        white-space: nowrap !important;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
+        margin-top: 10px !important;
+        margin-bottom: 0 !important;
     }
 }
