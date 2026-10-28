@@ -1501,9 +1501,13 @@ body {
         gap: 18px;
     }
 
-    .volume-slider-container {
+.volume-slider-container {
         width: 35px;
-        height: 105px;
+        height: 115px; /* Tambah sedikit ketinggian bekas slider */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
     }
 
     #volume-slider {
@@ -1518,8 +1522,12 @@ body {
     }
 
     #volume-percentage {
-        font-size: 6rem;
+        font-size: 0.95rem !important;
+        margin-top: 15px !important; /* Turunkan kedudukan teks % ke bawah */
+        position: relative !important;
+        top: 8px !important; /* Tolak lagi 8px ke bawah supaya tidak rapat dengan slider */
     }
+}
 
     .audio-btn-group,
     .lang-btn-group {
