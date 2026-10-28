@@ -1810,7 +1810,7 @@ body {
     /* 2. Tolak teks 100% jauh lebih ke bawah */
     #volume-percentage {
         position: absolute !important;
-        bottom: -15px !important; /* Rendahkan teks melepasi slider */
+        bottom: -1px !important; /* Rendahkan teks melepasi slider */
         left: 50% !important;
         transform: translateX(-50%) !important;
         margin: 0 !important;
