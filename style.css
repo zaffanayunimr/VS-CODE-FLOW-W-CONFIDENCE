@@ -1291,17 +1291,18 @@ body {
     #start-overlay {
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important;
+        justify-content: flex-start !important; /* Tolak tajuk ke atas */
         align-items: center !important;
         width: 100% !important;
         height: 100% !important;
-        padding: 20px !important;
+        padding-top: 120px !important; /* Jarak tajuk dari bahagian atas skrin */
+        padding-bottom: 40px !important;
     }
 
     .first-header {
         position: static !important;
         transform: none !important;
-        margin: 0 auto 30px auto !important;
+        margin: 0 auto 40px auto !important;
         text-align: center !important;
         width: 100% !important;
     }
@@ -1320,19 +1321,29 @@ body {
 
     #start-app-btn {
         position: static !important;
-        padding: 15px 40px !important;
+        padding: 15px 45px !important;
         font-size: 5vw !important;
-        margin-top: 0 !important;
+        margin-top: 10px !important;
     }
 
+    /* FIX BUTANG FULLSCREEN BULAT BULAT (BUAN PETAK) */
     #fullscreen-btn {
         display: flex !important;
         position: fixed !important;
         top: 15px !important;
         left: 15px !important;
-        width: 40px !important;
-        height: 40px !important;
+        width: 44px !important;
+        height: 44px !important;
+        background-color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 50% !important; /* Paksa jadi bulat */
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
         z-index: 999999 !important;
+        padding: 0 !important;
+        outline: none !important;
+        -webkit-appearance: none !important; /* Buang style asal petak mobile */
     }
 }
 
@@ -1365,7 +1376,7 @@ body {
     }
 
     .first-header {
-        top: 2vh;
+        top: 5vh;
     }
 
     .first-title {
