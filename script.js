@@ -203,11 +203,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Sembunyikan butang fullscreen HANYA pada peranti mobile
+    // Sembunyikan butang HANYA jika peranti ialah TELEFON MOBILE (<= 768px)
     function hideFullscreenBtn() {
         const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
-        if (fullscreenBtn && isMobile) {
-            fullscreenBtn.style.setProperty("display", "none", "important");
+        
+        if (fullscreenBtn) {
+            if (isMobile) {
+                fullscreenBtn.style.setProperty("display", "none", "important");
+            } else {
+                fullscreenBtn.style.setProperty("display", "flex", "important");
+            }
         }
     }
 
@@ -224,6 +229,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.webkitExitFullscreen();
             }
         }
+
+        // Semak semula untuk memastikan skrin laptop sentiasa dapat butang Fullscreen
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+        if (fullscreenBtn && !isMobile) {
+            fullscreenBtn.style.setProperty("display", "flex", "important");
+        }
     }
 
     function updateFullscreenIcon() {
@@ -235,6 +246,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
             }
         }
+
+        // Paksa butang sentiasa kekal dipaparkan pada laptop
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+        if (fullscreenBtn && !isMobile) {
+            fullscreenBtn.style.setProperty("display", "flex", "important");
+        }
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
@@ -242,18 +259,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW (DIBAIKI)
+    // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            // 1. Minta Fullscreen
+            // 1. Minta Fullscreen & sembunyikan jika di mobile
             requestLandscapeFullscreen();
             hideFullscreenBtn();
 
-            // 2. PAKSA PADAM START OVERLAY
+            // 2. Padam Start Overlay
             if (startOverlay) {
                 startOverlay.style.setProperty("display", "none", "important");
             }
@@ -285,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             
-            // Fallback: Jika video tiada / gagal dipicu serentak, paksa paparkan Skrin Pilihan Bahasa
+            // Fallback jika video gagal dimainkan serentak
             setTimeout(() => {
                 if (!videoStarted && video1 && video1.paused) {
                     video1.classList.remove("active");
