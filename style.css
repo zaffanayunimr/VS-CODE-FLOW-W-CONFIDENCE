@@ -1798,12 +1798,28 @@ body {
     }
 }
 
-@media screen and (max-width: 900px) and (orientation: landscape) {
-    .slider-wrapper { /* Nama container slider + teks */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 10px; /* Jarak antara bar slider dan teks 100% */
+/* FIX KHUSUS UNTUK PERANTI MUDAH ALIH (MOBILE LANDSCAPE) */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    /* 1. Menurunkkan teks 100% supaya melepasi slider menegak */
+    #volume-percentage {
+        margin-top: 15px !important; /* Menambah jarak di atas teks 100% */
+        position: relative !important;
+        z-index: 10 !important;
+    }
+
+    /* Memastikan container volume mempunyai ruang yang mencukupi untuk teks */
+    .volume-slider-container {
+        justify-content: space-between !important;
+        padding-bottom: 5px !important;
+    }
+
+    /* 2. Membawa naik butang MULA / START ke atas */
+    #start-overlay {
+        padding-bottom: 60px !important; /* Mengurangkan ruang bawah supaya butang naik ke atas (Asal: 25px / 100px) */
+    }
+
+    #start-app-btn {
+        margin-bottom: 35px !important; /* Menarik butang sedikit lagi ke atas dari margin bawah */
     }
 }
