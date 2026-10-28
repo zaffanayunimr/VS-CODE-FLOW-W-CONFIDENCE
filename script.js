@@ -1155,4 +1155,27 @@ document.addEventListener("DOMContentLoaded", () => {
             loadQuestion();
         }
     }
+    // ==========================================
+// AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
+// ==========================================
+function reLockOrientation() {
+    // Semak jika peranti disokong dan berada dalam mod aktif
+    if (document.visibilityState === "visible") {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => {
+                console.log("Re-lock dibendung oleh peranti:", err);
+            });
+        }
+    }
+}
+
+// Kesan apabila skrin dinyalakan semula atau tab dipokuskannya kembali
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        reLockOrientation();
+    }
+});
+
+window.addEventListener("focus", () => {
+    reLockOrientation();
 });
