@@ -1826,3 +1826,51 @@ body {
         margin-bottom: 45px !important; /* Naikkan butang MULA ke atas */
     }
 }
+
+/* ==========================================
+   KEMASAN KHUSUS SKRIN MULA UNTUK MOD TEGAK (PORTRAIT ONLY)
+   (Laptop & Melintang TIDAK TERJEJAS)
+   ========================================== */
+@media screen and (orientation: portrait) {
+
+    /* 1. Ratakan susunan Latar Belakang & Ruang Skrin Mula */
+    #start-overlay {
+        padding: 0 20px 80px 20px !important; /* Kekalkan ruang bawah yang selesa */
+        justify-content: flex-end !important; /* Letakkan kandungan dari tengah ke bawah */
+        align-items: center !important;
+        background-size: cover !important; /* Elak gambar terkeluar/pecah */
+        background-position: center center !important;
+    }
+
+    /* 2. Kecilkan saiz Tajuk supaya muat penuh dalam skrin tegak */
+    .first-header {
+        position: absolute !important;
+        top: 15vh !important; /* Turunkan tajuk sedikit dari atas */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 90% !important;
+    }
+
+    .first-title {
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important; /* Tajuk FLOW WITH mengecil mengikut skrin */
+        letter-spacing: 3px !important;
+        line-height: 1 !important;
+    }
+
+    .first-subtitle {
+        font-size: clamp(3.8rem, 14vw, 5.5rem) !important; /* Teks Confidence yang seimbang */
+        margin-top: -10px !important;
+        line-height: 1 !important;
+    }
+
+    /* 3. Kemaskan saiz Butang MULA / START */
+    #start-app-btn {
+        padding: 14px 45px !important;
+        font-size: 1.4rem !important;
+        border-width: 3.5px !important;
+        border-radius: 40px !important;
+        max-width: 85vw !important; /* Elak butang terlebih lebar */
+        white-space: nowrap !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+}
