@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
-// ==========================================
+    // ==========================================
     // FULLSCREEN & AUTO-ROTATE LOGIC
     // ==========================================
     function requestLandscapeFullscreen() {
@@ -185,15 +185,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (docEl.requestFullscreen) {
             docEl.requestFullscreen().then(() => {
-                if (screen.orientation && screen.orientation.lock) {
-                    screen.orientation.lock("landscape").catch(err => console.log(err));
-                }
-            }).catch(err => console.log("Fullscreen err:", err));
+                lockOrientationLandscape();
+            }).catch(err => console.log("Fullscreen request err:", err));
         } else if (docEl.webkitRequestFullscreen) { // Khas untuk iOS Safari
             docEl.webkitRequestFullscreen();
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock("landscape").catch(err => console.log(err));
-            }
+            lockOrientationLandscape();
+        } else if (docEl.webkitEnterFullscreen) {
+            docEl.webkitEnterFullscreen();
+        }
+    }
+
+    function lockOrientationLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => {
+                console.log("Orientation lock dibendung:", err);
+            });
         }
     }
 
@@ -209,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn(); // Sembunyikan butang sebaik sahaja pengguna tekan fullscreen
+            hideFullscreenBtn(); // Sembunyikan butang apabila ditekan
         }
     }
 
@@ -223,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 1. Minta Fullscreen & Auto-Rotate Landscape
             requestLandscapeFullscreen();
 
-            // 2. Sembunyikan butang Fullscreen supaya pengguna tidak boleh tekan keluar
+            // 2. Sembunyikan butang Fullscreen supaya pengguna tidak boleh keluar
             hideFullscreenBtn();
 
             // 3. Teruskan aplikasi
@@ -620,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA
+    // 6. QUIZ DATA & LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
@@ -1155,27 +1161,27 @@ document.addEventListener("DOMContentLoaded", () => {
             loadQuestion();
         }
     }
+
     // ==========================================
-// AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
-// ==========================================
-function reLockOrientation() {
-    // Semak jika peranti disokong dan berada dalam mod aktif
-    if (document.visibilityState === "visible") {
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("landscape").catch(err => {
-                console.log("Re-lock dibendung oleh peranti:", err);
-            });
+    // 8. AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
+    // ==========================================
+    function reLockOrientation() {
+        if (document.visibilityState === "visible") {
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock("landscape").catch(err => {
+                    console.log("Re-lock dibendung oleh peranti:", err);
+                });
+            }
         }
     }
-}
 
-// Kesan apabila skrin dinyalakan semula atau tab dipokuskannya kembali
-document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            reLockOrientation();
+        }
+    });
+
+    window.addEventListener("focus", () => {
         reLockOrientation();
-    }
-});
-
-window.addEventListener("focus", () => {
-    reLockOrientation();
+    });
 });
