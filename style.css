@@ -31,15 +31,17 @@ body {
     overflow: hidden;
 }
 
-/* Fullscreen Button */
+/* ==========================================
+   BUTANG FULLSCREEN (DESKTOP / LAPTOP)
+   ========================================== */
 @media screen and (min-width: 769px) {
     #fullscreen-btn {
         display: flex !important;
         position: fixed !important;
         top: 20px !important;
         left: 20px !important;
-        width: 45px !important;
-        height: 45px !important;
+        width: 50px !important;
+        height: 50px !important;
         background-color: #FFFFFF !important;
         border: none !important;
         border-radius: 50% !important;
@@ -47,66 +49,15 @@ body {
         align-items: center !important;
         cursor: pointer !important;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
-        z-index: 999999 !important;
+        z-index: 9999999 !important; /* Sentiasa di atas semua skrin */
         padding: 0 !important;
     }
 }
-    
+
 #fullscreen-btn svg {
     width: 28px;
     height: 28px;
     fill: #52B2EC;
-}
-
-/* Responsive Scaling */
-@media (max-width: 768px) {
-    #start-app-btn {
-        padding: 15px 40px;
-        font-size: 1.6rem;
-    }
-
-    .menu-title {
-        font-size: 3.5rem;
-    }
-
-    .menu-subtitle {
-        font-size: 5.5rem;
-    }
-
-    .menu-btn {
-        width: 260px;
-        height: 55px;
-        font-size: 1.8rem;
-    }
-
-    .chapter-buttons-container {
-        height: 260px;
-        margin-top: 40px;
-    }
-
-    .chapter-card-btn {
-        width: 320px;
-        height: 75px;
-    }
-
-    .card-label {
-        font-size: 1.5rem;
-    }
-
-    .card-icon-circle {
-        width: 75px;
-        height: 75px;
-    }
-
-    .sub-menu-grid {
-        gap: 20px 40px;
-        margin-top: 30px;
-    }
-
-    .sub-menu-btn {
-        height: 75px;
-        font-size: 1.4rem;
-    }
 }
 
 /* 0. START SCREEN OVERLAY */
@@ -131,7 +82,7 @@ body {
 #start-app-btn {
     padding: 24px 60px;
     font-size: 2.2rem;
-    font-family:"Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-weight: bold;
     color: #990184;
     background-color: #CFE1F7;
@@ -895,7 +846,7 @@ body {
     right: 20px;
     width: 160px;
     height: 46px;
-        background-color: #FFFFCC;
+    background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #28A745;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
@@ -911,9 +862,8 @@ body {
     transform: translateY(-4px);
     background-color: #FFCCFF;
 }
-/* ==========================================
-   NORMAL VS TIDAK NORMAL VIDEO PLAYER OVERLAY (FULLSCREEN)
-   ========================================== */
+
+/* VIDEO PLAYER OVERLAY */
 #normal-lawan-overlay {
     display: none;
     position: fixed;
@@ -921,12 +871,11 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000000; /* Latar belakang hitam untuk mod video penuh */
+    background-color: #000000;
     z-index: 250;
     overflow: hidden;
 }
 
-/* Central Video Display Area - Memenuhi Seluruh Skrin */
 .video-display-area {
     position: absolute;
     top: 0;
@@ -943,11 +892,10 @@ body {
 .video-display-area video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Gunakan 'cover' untuk penuhi seluruh skrin tanpa margin putih */
+    object-fit: cover;
     background-color: #000000;
 }
 
-/* Vertical Toolbar On Right - Lapisan Atas Video */
 .video-controls-toolbar {
     position: absolute;
     right: 30px;
@@ -964,7 +912,7 @@ body {
 .vcontrol-btn {
     width: 60px;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.75); /* Latar belakang hitam lutsinar */
+    background-color: rgba(0, 0, 0, 0.75);
     border: 2px solid #FFFFFF;
     border-radius: 50%;
     display: flex;
@@ -984,21 +932,13 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #E70B90; /* Warna penyerlah semasa hover */
+    background-color: #E70B90;
     border-color: #E70B90;
 }
 
 .vcontrol-btn:active {
     transform: scale(0.95);
 }
-
-/* ==========================================
-   VIDEO PLAYBACK SPEED CONTROL
-   ========================================== */
-
-/* ==========================================
-   VIDEO PLAYBACK SPEED CONTROL
-   ========================================== */
 
 .video-speed-control {
     display: flex;
@@ -1010,57 +950,45 @@ body {
     margin-top: 2px;
 }
 
-/* Hide Speed Label */
 #video-speed-label {
     display: none;
 }
 
-/* Speed Dropdown - Same Theme as Video Controls */
 #videoSpeed {
     width: 60px;
     height: 42px;
     padding: 0 3px;
-
     background-color: rgba(0, 0, 0, 0.75);
     color: #FFFFFF;
-
     border: 2px solid #FFFFFF;
     border-radius: 12px;
-
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-size: 13px;
     font-weight: bold;
     text-align: center;
-
     cursor: pointer;
     outline: none;
-
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-
-    transition: transform 0.15s ease,
-                background-color 0.15s ease;
+    transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-/* Hover Effect */
 #videoSpeed:hover {
     transform: scale(1.05);
     background-color: #E70B90;
     border-color: #E70B90;
 }
 
-/* Focus Effect */
 #videoSpeed:focus {
     border-color: #FFFFFF;
     outline: none;
 }
 
-/* Dropdown Options */
 #videoSpeed option {
     background-color: #222222;
     color: #FFFFFF;
     font-weight: bold;
 }
-/* Pelapisan Butang Navigasi (Settings, Home & Kembali) di Atas Video */
+
 #normal-lawan-settings-btn {
     z-index: 10;
 }
@@ -1074,7 +1002,7 @@ body {
 
 #normal-lawan-back-btn {
     position: absolute;
-        background-color: #FFFFCC;
+    background-color: #FFFFCC;
     border: 4px solid #339933;
     bottom: 25px;
     right: 20px;
@@ -1268,7 +1196,7 @@ body {
     font-weight: bold;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 5px 18x;
+    padding: 5px 18px;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
@@ -1328,22 +1256,97 @@ body {
 }
 
 /* ==========================================
-   MOBILE LANDSCAPE RESPONSIVE DESIGN
-   FLOW WITH CONFIDENCE
+   OVERLAY AMARAN KHAS UNTUK IOS (IPHONE/IPAD)
    ========================================== */
+#rotate-device-overlay {
+    display: none !important;
+}
 
+@supports (-webkit-touch-callout: none) {
+    @media screen and (orientation: portrait) and (max-width: 768px) {
+        #rotate-device-overlay {
+            display: flex !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: #FFCCE5 !important;
+            z-index: 9999999 !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+
+        #player-container {
+            display: none !important;
+        }
+    }
+}
+
+/* ==========================================
+   PELARASAN SKRIN 1 MOBILE (PORTRAIT)
+   ========================================== */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+    #start-overlay {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 20px !important;
+    }
+
+    .first-header {
+        position: static !important;
+        transform: none !important;
+        margin: 0 auto 30px auto !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .first-title {
+        font-size: 8.5vw !important;
+        line-height: 1.1 !important;
+        letter-spacing: 2px !important;
+    }
+
+    .first-subtitle {
+        font-size: 15vw !important;
+        margin-top: -10px !important;
+        line-height: 1 !important;
+    }
+
+    #start-app-btn {
+        position: static !important;
+        padding: 15px 40px !important;
+        font-size: 5vw !important;
+        margin-top: 0 !important;
+    }
+
+    #fullscreen-btn {
+        display: flex !important;
+        position: fixed !important;
+        top: 15px !important;
+        left: 15px !important;
+        width: 40px !important;
+        height: 40px !important;
+        z-index: 999999 !important;
+    }
+}
+
+/* ==========================================
+   MOBILE LANDSCAPE RESPONSIVE DESIGN
+   ========================================== */
 @media screen and (orientation: landscape) and (max-height: 500px) {
 
-    /* General layout */
-    html,
-    body,
-    #player-container {
+    html, body, #player-container {
         width: 100%;
         height: 100%;
         overflow: hidden;
     }
 
-    /* Fullscreen button */
     #fullscreen-btn {
         top: 10px;
         left: 10px;
@@ -1355,10 +1358,6 @@ body {
         width: 23px;
         height: 23px;
     }
-
-    /* =====================================
-       START SCREEN
-       ===================================== */
 
     #start-overlay {
         padding: 0 0 25px;
@@ -1385,10 +1384,6 @@ body {
         border-width: 3px;
     }
 
-    /* =====================================
-       LANGUAGE SELECTION
-       ===================================== */
-
     #language-overlay {
         gap: 14px;
     }
@@ -1408,7 +1403,6 @@ body {
         left: -3px;
     }
 
-    /* Footer logo */
     .footer-logo {
         bottom: 10px;
     }
@@ -1422,10 +1416,6 @@ body {
         font-size: 1.8rem;
         margin-top: 3px;
     }
-
-    /* =====================================
-       MAIN MENU
-       ===================================== */
 
     .menu-header {
         margin-top: -5vh;
@@ -1453,7 +1443,6 @@ body {
         border-width: 3px;
     }
 
-    /* Settings gear buttons */
     .gear-btn {
         top: 12px;
         right: 15px;
@@ -1465,10 +1454,6 @@ body {
         width: 29px;
         height: 29px;
     }
-
-    /* =====================================
-       SETTINGS SCREEN
-       ===================================== */
 
     #settings-overlay {
         padding-top: 8px;
@@ -1582,10 +1567,6 @@ body {
         border-width: 2px;
     }
 
-    /* =====================================
-       CHAPTER MENUS
-       ===================================== */
-
     #scene6-overlay,
     #scene7-overlay,
     #scene8-overlay,
@@ -1653,7 +1634,6 @@ body {
         font-size: clamp(0.85rem, 2vw, 1.3rem);
     }
 
-    /* Sub-menu buttons */
     .sub-menu-grid {
         width: 88%;
         max-width: 850px;
@@ -1692,10 +1672,6 @@ body {
         width: 33px;
         height: 33px;
     }
-
-    /* =====================================
-       VIDEO PLAYER
-       ===================================== */
 
     .video-display-area video {
         object-fit: contain;
@@ -1737,10 +1713,6 @@ body {
         right: 15px;
     }
 
-    /* =====================================
-       QUIZ
-       ===================================== */
-
     #scene11-overlay {
         padding-top: 12px;
     }
@@ -1776,10 +1748,6 @@ body {
         border-radius: 15px;
     }
 
-    /* =====================================
-       QUIZ RESULT
-       ===================================== */
-
     #result-congrats {
         font-size: clamp(2rem, 5vw, 3rem);
         margin-bottom: 20px;
@@ -1797,145 +1765,5 @@ body {
 
     .result-box {
         margin-bottom: 25px;
-    }
-}
-
-/* ==========================================
-   3. OVERLAY AMARAN KHAS UNTUK IOS (IPHONE/IPAD)
-   ========================================== */
-
-/* Default (Android & Laptop): Sembunyikan amaran */
-#rotate-device-overlay {
-    display: none !important;
-}
-
-/* HANYA PERANTI IOS & PORTRAIT: Tunjukkan amaran pusing fon */
-@supports (-webkit-touch-callout: none) {
-    @media screen and (orientation: portrait) and (max-width: 768px) {
-        #rotate-device-overlay {
-            display: flex !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            background-color: #FFCCE5 !important;
-            z-index: 999999 !important;
-            justify-content: center !important;
-            align-items: center !important;
-            text-align: center !important;
-        }
-
-        #player-container {
-            display: none !important;
-        }
-/* ==========================================
-   1. KONTROL BUTANG FULLSCREEN
-   ========================================== */
-
-/* PAPARAN LAPTOP (Skrin Lebar > 768px): SENTIASA POP-UP DI SETIAP SKRIN */
-@media screen and (min-width: 769px) {
-    #fullscreen-btn {
-        display: flex !important;
-        position: fixed !important;
-        top: 20px !important;
-        left: 20px !important;
-        width: 45px !important;
-        height: 45px !important;
-        background-color: #FFFFFF !important;
-        border: none !important;
-        border-radius: 50% !important;
-        justify-content: center !important;
-        align-items: center !important;
-        cursor: pointer !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
-        z-index: 999999 !important;
-        padding: 0 !important;
-    }
-}
-
-/* ==========================================
-   2. PELARASAN SKRIN 1 MOBILE (PORTRAIT)
-   ========================================== */
-@media screen and (orientation: portrait) and (max-width: 768px) {
-    #start-overlay {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-        height: 100% !important;
-        padding: 20px !important;
-    }
-
-    /* Kecilkan saiz kandungan supaya muat dan tak bertindih */
-    .first-header {
-        position: static !important;
-        transform: scale(0.65) !important; /* Kecilkan teks tajuk */
-        margin: 0 !important;
-        text-align: center !important;
-    }
-
-    #start-app-btn {
-        transform: scale(0.85) !important; /* Kecilkan butang Mula */
-        margin-top: -10px !important;
-    }
-
-    /* Butang Fullscreen di mobile (hanya di skrin 1) */
-    #fullscreen-btn {
-        display: flex !important;
-        position: fixed !important;
-        top: 15px !important;
-        left: 15px !important;
-        width: 40px !important;
-        height: 40px !important;
-        z-index: 999999 !important;
-    }
-}
-
-/* ==========================================
-   4. MOD MELINTANG (LANDSCAPE) DI MOBILE
-   ========================================== */
-@media screen and (orientation: landscape) and (max-width: 900px) {
-    #rotate-device-overlay {
-        display: none !important;
-    }
-
-    #player-container {
-        display: flex !important;
-        position: relative !important;
-        width: 100% !important;
-        height: 100% !important;
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
-    }
-
-    #start-overlay {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 15px !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    .first-header {
-        position: static !important;
-        transform: none !important;
-        margin: 0 !important;
-    }
-
-    #start-app-btn {
-        margin-top: 10px !important;
-        margin-bottom: 0 !important;
-    }
-
-    #fullscreen-btn {
-        top: 15px !important;
-        left: 15px !important;
-        width: 40px !important;
-        height: 40px !important;
     }
 }
