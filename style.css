@@ -1365,7 +1365,7 @@ body {
     }
 
     .first-header {
-        top: 5vh;
+        top: 2vh;
     }
 
     .first-title {
@@ -1507,7 +1507,7 @@ body {
     }
 
     #volume-percentage {
-        font-size: 1rem;
+        font-size: 6rem;
     }
 
     .audio-btn-group,
