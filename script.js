@@ -177,30 +177,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
-    // ==========================================
-    // FULLSCREEN & AUTO-ROTATE LOGIC (ANDROID & iOS SUPPORT)
+// ==========================================
+    // FULLSCREEN & AUTO-ROTATE LOGIC
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
 
-        // 1. Permintaan Fullscreen (Sokongan Android & iOS Safari)
         if (docEl.requestFullscreen) {
             docEl.requestFullscreen().then(() => {
-                lockOrientationLandscape();
-            }).catch(err => console.log("Fullscreen request err:", err));
-        } else if (docEl.webkitRequestFullscreen) { // iOS Safari Standard
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock("landscape").catch(err => console.log(err));
+                }
+            }).catch(err => console.log("Fullscreen err:", err));
+        } else if (docEl.webkitRequestFullscreen) { // Khas untuk iOS Safari
             docEl.webkitRequestFullscreen();
-            lockOrientationLandscape();
-        } else if (docEl.webkitEnterFullscreen) { // Khas untuk peranti iOS lama / Mobile Safari
-            docEl.webkitEnterFullscreen();
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock("landscape").catch(err => console.log(err));
+            }
         }
     }
 
-    function lockOrientationLandscape() {
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("landscape").catch(err => {
-                console.log("Orientation lock tidak disokong peranti ini / disekat:", err);
-            });
+    // Fungsi untuk menyembunyikan butang fullscreen
+    function hideFullscreenBtn() {
+        if (fullscreenBtn) {
+            fullscreenBtn.style.display = "none";
         }
     }
 
@@ -209,44 +209,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            }
-
-            if (screen.orientation && screen.orientation.unlock) {
-                screen.orientation.unlock();
-            }
-        }
-    }
-
-    function updateFullscreenIcon() {
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-        if (fullscreenIcon) {
-            if (isFullscreen) {
-                fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
-            } else {
-                fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
-            }
+            hideFullscreenBtn(); // Sembunyikan butang sebaik sahaja pengguna tekan fullscreen
         }
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
-    document.addEventListener("fullscreenchange", updateFullscreenIcon);
-    document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
-            // Auto-trigger Fullscreen dan Lock Landscape secara serta-merta
+            // 1. Minta Fullscreen & Auto-Rotate Landscape
             requestLandscapeFullscreen();
 
+            // 2. Sembunyikan butang Fullscreen supaya pengguna tidak boleh tekan keluar
+            hideFullscreenBtn();
+
+            // 3. Teruskan aplikasi
             if (startOverlay) startOverlay.style.display = "none";
-            bgMusic.play().catch(err => console.error("BGM error:", err));
+            if (bgMusic) bgMusic.play().catch(err => console.error("BGM error:", err));
             if (video1) video1.play().catch(err => console.error("Video1 error:", err));
         });
     }
