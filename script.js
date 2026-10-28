@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Fungsi untuk menyembunyikan butang fullscreen
+    // Menyembunyikan butang fullscreen di Screen 1 selepas ditekan
     function hideFullscreenBtn() {
         if (fullscreenBtn) {
             fullscreenBtn.style.display = "none";
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn(); // Sembunyikan butang apabila ditekan
+            hideFullscreenBtn();
         }
     }
 
@@ -918,7 +918,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
                     { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
-                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
+                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan meka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
@@ -1162,7 +1162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-// ==========================================
+    // ==========================================
     // 8. AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
     // ==========================================
     function reLockOrientation() {
@@ -1173,12 +1173,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Kesan apabila skrin dinyalakan semula
+    // Mengunci semula automatik sebaik sahaja skrin di-unlocked & disentuh pengguna
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
             reLockOrientation();
 
-            // Tambah pengesan sentuhan sekali sahaja sebaik sahaja pengguna sentuh skrin selepas unlock
             const handleFirstTouch = () => {
                 reLockOrientation();
                 window.removeEventListener("touchstart", handleFirstTouch);
@@ -1191,5 +1190,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("focus", reLockOrientation);
-    });
 });
