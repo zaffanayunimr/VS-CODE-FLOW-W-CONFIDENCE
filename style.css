@@ -1827,46 +1827,54 @@ body {
     }
 }
 
-/* ==========================================
-   KEMASAN KHUSUS SKRIN MULA UNTUK MOD TEGAK (PORTRAIT ONLY)
-   (Laptop & Melintang TIDAK TERJEJAS)
-   ========================================== */
-/* ==========================================
-   FAKE LANDSCAPE FOR IOS / PORTRAIT DEVICES
+//* ==========================================
+   KEMASAN FAKE LANDSCAPE PORTRAIT (IOS & MOBILE)
    ========================================== */
 @media screen and (orientation: portrait) and (max-width: 768px) {
-    /* Pusingkan seluruh container aplikasi 90 darjah */
-    body {
-        overflow: hidden;
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden !important;
+        margin: 0;
+        padding: 0;
     }
 
+    /* Pusingkan seluruh container aplikasi 90 darjah */
     #player-container {
         position: fixed !important;
-        width: 100vh !important;  /* Tukar lebar jadi tinggi skrin */
-        height: 100vw !important; /* Tukar tinggi jadi lebar skrin */
+        width: 100vh !important;  /* Lebar disesuaikan mengikut tinggi fon */
+        height: 100vw !important; /* Tinggi disesuaikan mengikut lebar fon */
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) rotate(90deg) !important;
         transform-origin: center center !important;
-    }
-}
-
-    #fullscreen-btn {
-        top: 15px;
-        left: 15px;
-        width: 40px;
-        height: 40px;
-    }
-}
-
-    /* 1. Ratakan susunan Latar Belakang & Ruang Skrin Mula */
-    #start-overlay {
-        padding: 0 20px 80px 20px !important; /* Kekalkan ruang bawah yang selesa */
-        justify-content: flex-end !important; /* Letakkan kandungan dari tengah ke bawah */
+        display: flex !important;
+        justify-content: center !important;
         align-items: center !important;
-        background-size: cover !important; /* Elak gambar terkeluar/pecah */
-        background-position: center center !important;
     }
+
+    /* Pastikan Skrin MULA kekal di tengah paksi putaran */
+    #start-overlay {
+        width: 100% !important;
+        height: 100% !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        transform: none !important; /* Elak penumpukan transform */
+    }
+
+    /* Posisikan butang Fullscreen supaya berada di penjuru atas yang betul selepas dipusing */
+    #fullscreen-btn {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 999999 !important;
+    }
+}
 
     /* 2. Kecilkan saiz Tajuk supaya muat penuh dalam skrin tegak */
     .first-header {
