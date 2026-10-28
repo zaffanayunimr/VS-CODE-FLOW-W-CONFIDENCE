@@ -1798,11 +1798,12 @@ body {
     }
 }
 
-/* Khusus untuk telefon mod melintang (landscape) */
 @media screen and (max-width: 900px) and (orientation: landscape) {
-    #volume-value, .volume-text {
-        bottom: -25px !important; /* Rendahkan kedudukan bottom supaya melepasi slider */
-        /* Atau ubah nilai top jika menggunakan top: */
-        /* top: 105% !important; */
+    .slider-wrapper { /* Nama container slider + teks */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px; /* Jarak antara bar slider dan teks 100% */
     }
 }
