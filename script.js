@@ -1162,26 +1162,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ==========================================
+// ==========================================
     // 8. AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
     // ==========================================
     function reLockOrientation() {
-        if (document.visibilityState === "visible") {
-            if (screen.orientation && screen.orientation.lock) {
-                screen.orientation.lock("landscape").catch(err => {
-                    console.log("Re-lock dibendung oleh peranti:", err);
-                });
-            }
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => {
+                console.log("Re-lock memerlukan sentuhan pengguna / disekat peranti:", err);
+            });
         }
     }
 
+    // Kesan apabila skrin dinyalakan semula
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
             reLockOrientation();
+
+            // Tambah pengesan sentuhan sekali sahaja sebaik sahaja pengguna sentuh skrin selepas unlock
+            const handleFirstTouch = () => {
+                reLockOrientation();
+                window.removeEventListener("touchstart", handleFirstTouch);
+                window.removeEventListener("click", handleFirstTouch);
+            };
+
+            window.addEventListener("touchstart", handleFirstTouch);
+            window.addEventListener("click", handleFirstTouch);
         }
     });
 
-    window.addEventListener("focus", () => {
-        reLockOrientation();
+    window.addEventListener("focus", reLockOrientation);
     });
 });
