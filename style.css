@@ -1801,25 +1801,28 @@ body {
 /* FIX KHUSUS UNTUK PERANTI MUDAH ALIH (MOBILE LANDSCAPE) */
 @media screen and (orientation: landscape) and (max-height: 500px) {
 
-    /* 1. Menurunkkan teks 100% supaya melepasi slider menegak */
-    #volume-percentage {
-        margin-top: 15px !important; /* Menambah jarak di atas teks 100% */
+    /* 1. Besarkan container slider supaya ada ruang di bahagian bawah */
+    .volume-slider-container {
+        height: 135px !important; /* Tambah ketinggian container */
         position: relative !important;
+    }
+
+    /* 2. Tolak teks 100% jauh lebih ke bawah */
+    #volume-percentage {
+        position: absolute !important;
+        bottom: -28px !important; /* Rendahkan teks melepasi slider */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
         z-index: 10 !important;
     }
 
-    /* Memastikan container volume mempunyai ruang yang mencukupi untuk teks */
-    .volume-slider-container {
-        justify-content: space-between !important;
-        padding-bottom: 5px !important;
-    }
-
-    /* 2. Membawa naik butang MULA / START ke atas */
+    /* 3. Membawa naik butang MULA / START ke atas */
     #start-overlay {
-        padding-bottom: 60px !important; /* Mengurangkan ruang bawah supaya butang naik ke atas (Asal: 25px / 100px) */
+        padding-bottom: 70px !important; /* Kurangkan padding bawah */
     }
 
     #start-app-btn {
-        margin-bottom: 35px !important; /* Menarik butang sedikit lagi ke atas dari margin bawah */
+        margin-bottom: 45px !important; /* Naikkan butang MULA ke atas */
     }
 }
