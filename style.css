@@ -1797,3 +1797,23 @@ body {
         margin-bottom: 25px;
     }
 }
+
+/* Khusus untuk paparan telefon dalam mod melintang (landscape) */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    /* Masukkan selector container yang memegang slider & teks 100% anda di sini */
+    .slider-container { 
+        display: flex;
+        flex-direction: column; /* Mengubah susunan dari sebelah-menyebelah ke atas-bawah */
+        align-items: center;    /* Memusatkan elemen di tengah */
+        gap: 8px;               /* Jarak antara slider dan teks 100% */
+    }
+
+    /* Memastikan teks peratusan berada di bawah slider */
+    .percentage-text { 
+        order: 2; /* Memastikan teks berada di urutan kedua (bawah) */
+    }
+
+    .slider-input {
+        order: 1; /* Memastikan slider berada di urutan pertama (atas) */
+    }
+}
