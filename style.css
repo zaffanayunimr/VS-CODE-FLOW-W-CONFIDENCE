@@ -353,6 +353,7 @@ body {
     flex-direction: column;
     gap: 16px;
     align-items: center;
+    margin-top: 70px !important; /* Ditolak lebih bawah di laptop */
 }
 
 .menu-btn {
@@ -688,7 +689,7 @@ body {
     width: 100%;
     max-width: 950px;
     height: 320px;
-    margin-top: 80px;
+    margin-top: 140px !important; /* Ditolak lebih bawah di laptop */
 }
 
 .chapter-card-btn {
@@ -816,7 +817,7 @@ body {
     gap: 60px 80px;
     width: 80%;
     max-width: 900px;
-    margin-top: 80px;
+    margin-top: 150px !important; /* Ditolak lebih bawah di laptop */
 }
 
 .sub-menu-btn {
@@ -1166,7 +1167,7 @@ body {
     gap: 25px 35px;
     width: 82%;
     max-width: 850px;
-    margin-top: 80px;
+    margin-top: 150px !important; /* Ditolak lebih bawah di laptop */
 }
 
 .option-btn {
@@ -1322,11 +1323,11 @@ body {
         line-height: 1 !important;
     }
 
-    #start-app-btn {
+#start-app-btn {
         position: static !important;
-        padding: 15px 45px !important;
-        font-size: 5vw !important;
-        margin-top: 10px !important;
+        padding: 12px 40px !important;
+        font-size: 4.5vw !important;
+        margin-top: 100px !important; /* Naikkan nilai ini (cth: 120px) jika nak turun lagi */
     }
 
     #fullscreen-btn {
@@ -1579,6 +1580,15 @@ body {
         height: 36px;
         font-size: 1rem;
         border-width: 2px;
+    }
+
+    #skip-btn {
+        top: 10px !important;
+        right: 12px !important;
+        width: 90px !important;   /* Lebar lebih kecil */
+        height: 32px !important;  /* Tinggi lebih kecil */
+        font-size: 0.85rem !important; /* Tulisan lebih kecil */
+        border-width: 2px !important;
     }
 
     #scene6-overlay,
