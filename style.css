@@ -415,7 +415,6 @@ body {
     height: 48px;
     background-color: rgba(255, 255, 255, 0.75);
     border: 2px solid #FFFFFF;
-    border: none;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -937,7 +936,7 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.75);
     border-color: #ffffff;
 }
 
@@ -979,7 +978,7 @@ body {
 
 #videoSpeed:hover {
     transform: scale(1.05);
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.75);
     border-color: #ffffff;
 }
 
