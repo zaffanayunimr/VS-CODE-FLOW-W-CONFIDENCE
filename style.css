@@ -1157,6 +1157,7 @@ body {
     font-weight: normal;
     color: #000;
     line-height: 1.3;
+    margin-top: 20px;
 }
 
 .options-grid {
@@ -1193,7 +1194,7 @@ body {
 
 .score-board {
     position: absolute;
-    top: 20px;
+    top: 35px;
     left: 85px;
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 1.9rem;
@@ -1230,7 +1231,7 @@ body {
 }
 
 #result-congrats {
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 4rem;
     color: #000;
     font-weight: normal;
@@ -1246,7 +1247,7 @@ body {
 }
 
 .score-display-line {
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 3rem;
     color: #000;
     display: flex;
