@@ -1115,7 +1115,7 @@ body {
 }
 
 #quiz-title {
-    font-family: "Cooper Black", "Arial Black", sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     color: #E70B90;
     font-size: 3.4rem;
     font-weight: 900;
@@ -1230,7 +1230,7 @@ body {
 }
 
 #result-congrats {
-    font-family: "Dream Orphans Regular", "Dream Orphans", sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-size: 4rem;
     color: #000;
     font-weight: normal;
@@ -1238,7 +1238,7 @@ body {
 }
 
 #result-motto {
-    font-family: "Dream Orphans Regular", "Dream Orphans", sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-size: 3rem;
     color: #000;
     font-weight: normal;
@@ -1246,7 +1246,7 @@ body {
 }
 
 .score-display-line {
-    font-family: "Dream Orphans Regular", "Dream Orphans", sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-size: 3rem;
     color: #000;
     display: flex;
