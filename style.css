@@ -936,8 +936,8 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #E70B90;
-    border-color: #E70B90;
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
 .vcontrol-btn:active {
@@ -978,8 +978,8 @@ body {
 
 #videoSpeed:hover {
     transform: scale(1.05);
-    background-color: #E70B90;
-    border-color: #E70B90;
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
 #videoSpeed:focus {
