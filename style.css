@@ -298,11 +298,11 @@ body {
 }
 
 .gear-btn:hover {
+    background-color: rgba(255, 255, 255, 0.75);
     transform: translateY(-4px) rotate(15deg);
 }
 
 .gear-btn:hover .gear-icon {
-    background-color: rgba(0, 0, 0, 0.75);
     fill: #52B2EC;
 }
 
