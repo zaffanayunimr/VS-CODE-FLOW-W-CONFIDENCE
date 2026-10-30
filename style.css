@@ -1115,7 +1115,7 @@ body {
 }
 
 #quiz-title {
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     color: #E70B90;
     font-size: 3.4rem;
     font-weight: 900;
@@ -1152,7 +1152,7 @@ body {
 }
 
 #quiz-question-text {
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 2.3rem;
     font-weight: normal;
     color: #000;
@@ -1195,7 +1195,7 @@ body {
     position: absolute;
     top: 20px;
     left: 85px;
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 1.9rem;
     font-weight: bold;
     color: #FF0000;
