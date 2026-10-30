@@ -931,7 +931,7 @@ body {
 .vcontrol-btn svg {
     width: 26px;
     height: 26px;
-    fill: #FFFFFF;
+    fill: #52B2EC;
 }
 
 .vcontrol-btn:hover {
@@ -963,7 +963,7 @@ body {
     height: 38px;
     padding: 0 3px;
     background-color: rgba(0, 0, 0, 0.75);
-    color: #FFFFFF;
+    color: #52B2EC;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
@@ -989,7 +989,7 @@ body {
 
 #videoSpeed option {
     background-color: #222222;
-    color: #FFFFFF;
+    color: #52B2EC;
     font-weight: bold;
 }
 
