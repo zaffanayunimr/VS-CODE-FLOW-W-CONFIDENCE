@@ -302,7 +302,8 @@ body {
 }
 
 .gear-btn:hover .gear-icon {
-    fill: #B033FF;
+    background-color: rgba(0, 0, 0, 0.75);
+    fill: #52B2EC;
 }
 
 /* SCENE 4: MAIN MENU STYLING */
@@ -427,6 +428,7 @@ body {
 
 #home-btn:hover,
 .home-circle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.75);
     transform: translateY(-4px) scale(1.05);
 }
 
@@ -440,7 +442,7 @@ body {
 
 #home-btn:hover svg,
 .home-circle-btn:hover svg {
-    fill: #B033FF;
+    fill: #52B2EC;
 }
 
 .settings-grid {
