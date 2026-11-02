@@ -310,7 +310,7 @@ body {
     transform: translateY(-4px) scale(1.05);
 }
 
-/* SUSUNAN BAR KAWALAN DI SEBELAH KIRI BAWAH (SETTING, HOME, BACK) */
+/* KAWALAN BOTTOM LEFT GROUP */
 .bottom-controls-group,
 .quiz-controls-group {
     position: absolute;
