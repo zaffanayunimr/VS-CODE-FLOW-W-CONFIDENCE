@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -31,14 +32,14 @@ body {
 }
 
 /* ==========================================
-   DESAIN TOMBOL LINGKARAN (SETTING, HOME, DLL)
+   DESAIN TOMBOL LINGKARAN (ORIGINAL LAPTOP)
    ========================================== */
 .circle-icon-btn,
 #fullscreen-btn {
-    width: 45px !important;
-    height: 45px !important;
+    width: 52px !important;
+    height: 52px !important;
     background-color: #FFFFFF !important;
-    border: 3px solid #38B6FF !important;
+    border: 3.5px solid #38B6FF !important;
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -56,8 +57,8 @@ body {
 #fullscreen-btn svg,
 .circle-icon-btn svg path,
 #fullscreen-btn svg path {
-    width: 22px !important;
-    height: 22px !important;
+    width: 26px !important;
+    height: 26px !important;
     fill: #38B6FF !important;
     stroke: none !important;
     stroke-width: 0 !important;
@@ -88,33 +89,46 @@ button:active {
         fill: #38B6FF !important;
         stroke: none !important;
     }
+
+    #start-app-btn:hover { transform: translateY(-4px) scale(1.02); background-color: #FFFFCC !important; }
+    .lang-btn:hover { transform: translateY(-4px); background-color: #FFFFCC !important; }
+    #skip-btn:hover { transform: translateY(-4px); background-color: #FFCCFF !important; }
+    .menu-btn:hover { transform: translateY(-4px); background-color: #FFFFCC !important; }
+    .settings-action-btn:hover { transform: translateY(-3px); background-color: #FFCCFF !important; }
+    .chapter-card-btn:hover { transform: translateY(-5px); background-color: #FFFF99 !important; }
+    .card-center:hover { transform: translate(-50%, -5px); }
+    .sub-menu-btn:hover { transform: translateY(-4px); background-color: #FFCCFF !important; }
+    .sub-menu-btn.green-btn:hover { background-color: #FFCCCC !important; }
+    .sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
+    .option-btn:hover { transform: translateY(-4px); background-color: #FFCC99 !important; }
+    #modal-close-btn:hover { transform: translateY(-2px); background-color: #FFFFCC !important; }
 }
 
 /* KONTROL KIRI BAWAH */
 .left-bottom-controls {
     position: absolute;
-    bottom: 3vh;
-    left: 2vw;
+    bottom: 4vh;
+    left: 3vw;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
     z-index: 310;
 }
 
 /* ==========================================
-   TOMBOL FULLSCREEN (LALAI LAPTOP & KHAS PHONE ONLY)
+   TOMBOL FULLSCREEN (LALAI LAPTOP KEKAL HILANG DI PHONE KECUALI SCENE 1)
    ========================================== */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
-    top: 15px !important;
-    left: 15px !important;
+    top: 20px !important;
+    left: 20px !important;
     z-index: 9999999 !important;
 }
 
-/* KHAS PHONE: Hilangkan pada skrin mobile, HANYA tunjuk bila ada kelas .show-on-phone (Scene 1) */
-@media screen and (max-width: 900px) {
+/* KHAS PHONE ONLY: Sembunyikan di telefon melainkan ada class .show-on-phone */
+@media screen and (max-width: 768px) and (pointer: coarse) {
     #fullscreen-btn {
         display: none !important;
     }
@@ -125,7 +139,7 @@ button:active {
 }
 
 /* ==========================================
-   0. OVERLAY LAYAR MULA (SCENE 1)
+   SCENE 1: OVERLAY LAYAR MULA (ORIGINAL LAPTOP)
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -140,14 +154,14 @@ button:active {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 25vh;
+    padding-bottom: 35vh;
     box-sizing: border-box;
     z-index: 999;
 }
 
 #start-app-btn {
-    padding: 14px 40px;
-    font-size: 1.5rem;
+    padding: 18px 50px;
+    font-size: 1.8rem;
     font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-weight: bold;
     color: #990184;
@@ -161,7 +175,7 @@ button:active {
 
 .first-header {
     position: absolute;
-    top: 8vh;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -173,8 +187,8 @@ button:active {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 4rem;
-    letter-spacing: 4px;
+    font-size: 4.5rem;
+    letter-spacing: 5px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -184,8 +198,8 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 7rem;
-    margin-top: -15px;
+    font-size: 8rem;
+    margin-top: -20px;
     line-height: 0.9;
 }
 
@@ -221,28 +235,28 @@ button:active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
     z-index: 100;
 }
 
 .lang-btn {
     position: relative;
-    border: 4px solid #CC3399;
+    border: 5px solid #CC3399;
     color: #E70B90;
-    height: 70px;
-    font-size: 1.8rem;
+    height: 80px;
+    font-size: 2rem;
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-weight: 900;
-    border-radius: 55px;
+    border-radius: 65px;
     cursor: pointer;
-    width: 440px;
-    max-width: 85vw;
+    width: 480px;
+    max-width: 90vw;
     text-align: center;
     white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 50px;
+    padding-left: 60px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -255,30 +269,29 @@ button:active {
     left: -5px;
     top: 50%;
     transform: translateY(-50%);
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 4px solid #CC3399;
+    border: 5px solid #CC3399;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.18);
     z-index: 5;
 }
 
 .footer-logo {
     position: absolute;
-    bottom: 2vh;
+    bottom: 3vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     pointer-events: none;
-    z-index: 10;
 }
 
 .footer-title {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -288,8 +301,8 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 1.9rem;
-    margin-top: 2px;
+    font-size: 2.2rem;
+    margin-top: 4px;
     line-height: 0.5;
 }
 
@@ -297,41 +310,27 @@ button:active {
 #skip-btn {
     display: none;
     position: absolute;
-    top: 20px;
-    right: 25px;
+    top: 25px;
+    right: 35px;
     z-index: 9999 !important;
-    width: 130px;
-    height: 40px;
+    width: 140px;
+    height: 45px;
     justify-content: center;
     align-items: center;
     text-align: center;
     background-color: #FFFFCC;
-    border: 3px solid #339933;
+    border: 4px solid #339933;
     color: #009966;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 25px;
+    border-radius: 30px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-/* KHAS PHONE ONLY: KECILKAN BUTTON LANGKAU */
-@media screen and (max-width: 768px) {
-    #skip-btn {
-        width: 95px !important;
-        height: 32px !important;
-        font-size: 0.85rem !important;
-        top: 12px !important;
-        right: 15px !important;
-        border-width: 2px !important;
-    }
-}
-
-/* ==========================================
-   SCENE 4: UTAMA MENU
-   ========================================== */
+/* SCENE 4: UTAMA MENU */
 #scene4-overlay {
     display: none;
     position: absolute;
@@ -350,15 +349,15 @@ button:active {
 
 .menu-header {
     text-align: center;
-    margin-top: 10vh !important;
+    margin-top: 12vh !important;
 }
 
 .menu-title {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 4rem;
-    letter-spacing: 4px;
+    font-size: 4.5rem;
+    letter-spacing: 5px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -368,29 +367,29 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 7rem;
-    margin-top: -15px;
+    font-size: 8rem;
+    margin-top: -20px;
     line-height: 0.9;
 }
 
 .menu-buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
     align-items: center;
-    margin-top: 22vh !important;
+    margin-top: 25vh !important;
 }
 
 .menu-btn {
-    width: 250px;
-    height: 52px;
+    width: 280px;
+    height: 58px;
     background-color: #CFE1F7;
-    border: 3.5px solid #CC3399;
+    border: 4px solid #CC3399;
     color: #990184;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    border-radius: 30px;
+    border-radius: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -399,9 +398,7 @@ button:active {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* ==========================================
-   SCENE 5: SETTINGS OVERLAY
-   ========================================== */
+/* SCENE 5: SETTINGS OVERLAY */
 #settings-overlay {
     display: none;
     position: fixed;
@@ -415,55 +412,55 @@ button:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 6vh;
+    padding-top: 8vh;
     z-index: 300;
 }
 
 #settings-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.5rem;
+    font-size: 3.8rem;
     text-align: center;
 }
 
 .settings-grid {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     justify-content: center;
     align-items: stretch;
     width: 86%;
-    max-width: 900px;
-    margin-top: 6vh !important;
+    max-width: 1000px;
+    margin-top: 8vh !important;
 }
 
 .settings-box {
     flex: 1;
     position: relative;
     border: 4px solid #CC3399;
-    border-radius: 30px;
-    padding: 35px 20px 25px 20px;
+    border-radius: 35px;
+    padding: 40px 25px 30px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 260px;
+    min-height: 290px;
 }
 
 .box-header-badge {
     position: absolute;
-    top: -24px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 46px;
-    border: 3.5px solid #CC3399;
-    border-radius: 25px;
+    width: 230px;
+    height: 52px;
+    border: 4px solid #CC3399;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #E70B90;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.1rem;
 }
 
 .header-audio { background-color: #E7F7A8; }
@@ -471,7 +468,7 @@ button:active {
 
 .audio-control-body {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -479,8 +476,8 @@ button:active {
 
 .volume-slider-container {
     position: relative;
-    width: 45px;
-    height: 160px;
+    width: 50px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -493,8 +490,8 @@ button:active {
     position: absolute;
     top: 40%;
     left: 50%;
-    width: 110px;
-    height: 16px;
+    width: 130px;
+    height: 18px;
     background: linear-gradient(to right, #E70B90 100%, #FFCCE5 0%);
     border-radius: 10px;
     outline: none;
@@ -504,8 +501,8 @@ button:active {
 
 #volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #FFFFCC;
     border: 3px solid #CC3399;
@@ -515,51 +512,52 @@ button:active {
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
 .audio-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 .settings-action-btn {
-    width: 210px;
-    height: 46px;
+    width: 240px;
+    height: 52px;
     background-color: #E7F7A8;
-    border: 3px solid #CC3399;
+    border: 3.5px solid #CC3399;
     color: #E70B90;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.3rem;
-    border-radius: 25px;
+    font-size: 1.45rem;
+    border-radius: 30px;
     display: grid;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 45px 1fr;
     align-items: center;
-    padding-left: 15px;
+    padding-left: 18px;
     cursor: pointer;
 }
 
 .lang-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     width: 100%;
     align-items: center;
 }
 
 .lang-option-btn {
     position: relative;
-    width: 240px;
-    height: 50px;
+    width: 270px;
+    height: 56px;
     background-color: #CFE1F7;
-    border: 3px solid #CC3399;
-    border-radius: 30px;
+    border: 3.5px solid #CC3399;
+    border-radius: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 45px;
+    padding-left: 50px;
+    padding-right: 15px;
 }
 
 .flag-icon {
@@ -567,10 +565,10 @@ button:active {
     left: -8px;
     top: 50%;
     transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    border: 3px solid #CC3399;
+    border: 3.5px solid #CC3399;
     z-index: 5;
     background-size: cover;
     background-position: center;
@@ -579,9 +577,7 @@ button:active {
 .flag-my { background-image: url('assets/flag-malaysia.png'); background-position: 20% center; }
 .flag-uk { background-image: url('assets/flag-uk.png'); }
 
-/* ==========================================
-   SCENE 6: MENU BAB & SCENE 10: QUIZ MENU
-   ========================================== */
+/* SCENE 6 & 10 */
 #scene6-overlay, #scene10-overlay {
     display: none;
     position: absolute;
@@ -595,36 +591,35 @@ button:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 10vh;
+    padding-top: 13vh;
     z-index: 200;
 }
 
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.8rem;
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
-    margin: 0;
 }
 
 .chapter-grid-container {
     position: absolute;
-    top: 35vh;
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
-    max-width: 850px;
-    height: 350px;
+    max-width: 900px;
+    height: 380px;
 }
 
 .chapter-card-btn {
     position: absolute;
-    width: 320px;
-    height: 80px;
+    width: 360px;
+    height: 90px;
     background-color: #FABFD7;
     border: 3.5px solid #E680CC;
-    border-radius: 40px;
+    border-radius: 45px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -632,13 +627,13 @@ button:active {
 
 .card-left { top: 0px; left: 10px; }
 .card-right { top: 0px; right: 10px; }
-.card-center { top: 150px; left: 50%; transform: translateX(-50%); }
+.card-center { top: 180px; left: 50%; transform: translateX(-50%); }
 
 .card-icon-circle {
     position: absolute;
-    left: -10px;
-    width: 76px;
-    height: 76px;
+    left: -12px;
+    width: 86px;
+    height: 86px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -652,18 +647,16 @@ button:active {
 .card-label {
     flex: 1;
     text-align: center;
-    padding-left: 45px;
-    padding-right: 10px;
+    padding-left: 48px;
+    padding-right: 15px;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.55rem;
+    font-size: 1.75rem;
     font-weight: 900;
     line-height: 1.1;
 }
 
-/* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS
-   ========================================== */
+/* SCENE 7, 8, 9 */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
     position: absolute;
@@ -677,45 +670,44 @@ button:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 10vh;
+    padding-top: 13vh;
     z-index: 200;
 }
 
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.8rem;
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
-    margin: 0;
 }
 
 .sub-menu-grid {
     position: absolute;
-    top: 32vh;
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px 50px;
+    gap: 80px 60px;
     width: 84%;
-    max-width: 850px;
+    max-width: 900px;
 }
 
 .sub-menu-btn {
-    height: 75px;
+    height: 85px;
     background-color: #B4D4F0;
     border: 3.5px solid #E680CC;
-    border-radius: 20px;
+    border-radius: 24px;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 900;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 8px 15px;
+    padding: 10px 18px;
     cursor: pointer;
 }
 
@@ -756,31 +748,29 @@ button:active {
 
 .video-controls-toolbar {
     position: absolute;
-    right: 25px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
     align-items: center;
     z-index: 10;
 }
 
 #videoSpeed {
-    width: 50px;
-    height: 35px;
+    width: 55px;
+    height: 38px;
     background-color: #FFFFFF;
     color: #52B2EC;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
 }
 
-/* ==========================================
-   SCENE 11: INTERFASE KUIS
-   ========================================== */
+/* SCENE 11: KUIZ */
 #scene11-overlay {
     display: none;
     position: absolute;
@@ -796,44 +786,44 @@ button:active {
 
 .question-container {
     position: absolute;
-    top: 12vh;
+    top: 14.8vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
-    max-width: 900px;
+    max-width: 950px;
     text-align: center;
     z-index: 210;
 }
 
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     color: #E70B90 !important;
-    line-height: 1.2;
+    line-height: 8vh;
 }
 
 .options-grid {
     position: absolute;
-    top: 38vh;
+    top: 42vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px 40px;
+    gap: 90px 50px;
     width: 88%;
-    max-width: 900px;
+    max-width: 980px;
     z-index: 210;
 }
 
 .option-btn {
-    min-height: 75px;
+    min-height: 90px;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
-    border-radius: 20px;
+    border-radius: 25px;
     font-family: "Franklin Gothic Demi Cond", "Arial Narrow", sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.45rem;
     color: #000;
-    padding: 10px 15px;
+    padding: 14px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -843,21 +833,19 @@ button:active {
 
 .score-board {
     position: absolute;
-    top: 4vh;
-    left: 4vw;
+    top: 5vh;
+    left: 5vw;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 4px 15px;
+    padding: 4px 18px;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
 }
 
-/* ==========================================
-   SCENE 12: SKRIN HASIL KUIS
-   ========================================== */
+/* SCENE 12: SKRIN HASIL */
 #scene12-overlay {
     display: none;
     position: absolute;
@@ -873,7 +861,7 @@ button:active {
 
 .result-box {
     position: absolute;
-    top: 32vh;
+    top: 36vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -882,24 +870,24 @@ button:active {
 
 #result-congrats {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 3.2rem;
+    font-size: 3.8rem;
     color: #E70B90 !important;
 }
 
 #result-motto {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 2.3rem;
+    font-size: 2.8rem;
     color: #E70B90 !important;
-    margin-bottom: 2vh;
+    margin-bottom: 3vh;
 }
 
 .score-display-line {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.3rem;
+    font-size: 2.8rem;
     color: #E70B90 !important;
 }
 
-/* POP-UP MODAL */
+/* POP-UP MODALS */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -918,9 +906,9 @@ button:active {
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 25px 30px 20px 30px;
+    padding: 30px 40px 25px 40px;
     width: 90%;
-    max-width: 440px;
+    max-width: 480px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -929,136 +917,95 @@ button:active {
 
 .modal-x-btn {
     position: absolute;
-    top: 12px;
-    right: 18px;
+    top: 15px;
+    right: 20px;
     background: transparent;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #E70B90;
     cursor: pointer;
 }
 
-.modal-icon { font-size: 2.8rem; margin-bottom: 8px; }
+.modal-icon { font-size: 3.2rem; margin-bottom: 12px; }
 
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: #E70B90 !important;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .modal-box p {
-    font-size: 0.95rem;
-    color: #333;
-    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: #333333;
+    margin-bottom: 20px;
     white-space: pre-line;
 }
 
 #modal-close-btn {
     background-color: #CFE1F7;
-    border: 3px solid #CC3399;
+    border: 3.5px solid #CC3399;
     color: #990184;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    padding: 6px 30px;
-    border-radius: 25px;
+    padding: 8px 35px;
+    border-radius: 30px;
     cursor: pointer;
 }
 
 /* ==========================================
-   PENGECILAN DRASTIK ELEMEN UNTUK TELEFON (MOBILE LANDSCAPE)
-   (Pengecilan Skala 50% - 60% Supaya Tiada Elemen Terpotong!)
+   PELARASAN KHAS TELEFON ONLY (MOBILE LANDSCAPE)
+   (Menggunakan (pointer: coarse) & max-height 600px supaya LAPTOP TIDAK TERJEJAS)
    ========================================== */
-@media screen and (max-width: 900px) and (orientation: landscape) {
+@media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
     html, body, #player-container {
         width: 100vw !important;
         height: 100dvh !important;
         overflow: hidden !important;
     }
 
-    /* 1. mengecilkan tajuk utama */
-    .first-header {
-        top: 2vh !important;
-        transform: translateX(-50%) scale(0.5) !important;
-        transform-origin: top center !important;
-    }
-
-    .menu-header {
-        margin-top: 2vh !important;
-        transform: scale(0.5) !important;
-        transform-origin: top center !important;
-    }
-
+    /* Pengecilan Tajuk di Telefon sahaja (Sederhana 70%) */
+    .first-header,
+    .menu-header,
     #chapter-title,
     #asas-title,
     #penjagaan-title,
     #kesihatan-title,
     #quiz-title,
     #settings-title {
-        transform: scale(0.52) !important;
+        transform: scale(0.68) !important;
         transform-origin: top center !important;
-        margin-top: -10px !important;
     }
 
-    /* 2. mengecilkan grid & container butang */
+    /* Pengecilan Grid/Butang di Telefon sahaja (Sederhana 72%) */
+    .chapter-grid-container,
+    .sub-menu-grid,
+    .options-grid,
+    .settings-grid,
     .menu-buttons-container {
-        margin-top: 14vh !important;
-        transform: scale(0.6) !important;
+        transform: scale(0.72) !important;
         transform-origin: center center !important;
     }
 
-    .chapter-grid-container {
-        top: 22vh !important;
-        transform: translateX(-50%) scale(0.58) !important;
-        transform-origin: top center !important;
+    /* Butang Langkau (Skip) khas dikecilan di Phone sahaja */
+    #skip-btn {
+        width: 100px !important;
+        height: 35px !important;
+        font-size: 0.95rem !important;
+        top: 15px !important;
+        right: 20px !important;
+        border-width: 2.5px !important;
     }
 
-    .sub-menu-grid {
-        top: 22vh !important;
-        gap: 15px 30px !important;
-        transform: translateX(-50%) scale(0.58) !important;
-        transform-origin: top center !important;
-    }
-
-    .settings-grid {
-        margin-top: 2vh !important;
-        transform: scale(0.6) !important;
-        transform-origin: top center !important;
-    }
-
-    /* 3. mengecilkan soalan & pilihan kuiz */
+    /* Kedudukan soalan di telefon */
     .question-container {
         top: 8vh !important;
-        transform: translateX(-50%) scale(0.6) !important;
+        transform: translateX(-50%) scale(0.72) !important;
         transform-origin: top center !important;
     }
 
     .options-grid {
-        top: 26vh !important;
-        gap: 12px 25px !important;
-        transform: translateX(-50%) scale(0.58) !important;
-        transform-origin: top center !important;
-    }
-
-    /* 4. mengecilkan result box */
-    .result-box {
-        top: 22vh !important;
-        transform: translateX(-50%) scale(0.65) !important;
-        transform-origin: top center !important;
-    }
-
-    /* 5. kedudukan footer logo */
-    .footer-logo {
-        bottom: 1vh !important;
-        transform: translateX(-50%) scale(0.7) !important;
-    }
-
-    /* 6. kedudukan kawalan kiri bawah */
-    .left-bottom-controls {
-        bottom: 2vh !important;
-        left: 2vw !important;
-        transform: scale(0.75) !important;
-        transform-origin: bottom left !important;
+        top: 34vh !important;
     }
 }
