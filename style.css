@@ -7,7 +7,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -32,7 +31,7 @@ body {
 }
 
 /* ==========================================
-   BUTANG FULLSCREEN GLOBAL (DESKTOP, LAPTOP & TABLET)
+   BUTANG FULLSCREEN GLOBAL
    ========================================== */
 #fullscreen-btn {
     display: flex !important;
@@ -103,8 +102,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    z-index: 9999;
+    z-index: 90;
     width: 100%;
+    pointer-events: none;
 }
 
 .first-title {
@@ -160,7 +160,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    z-index: 100;
+    z-index: 99999 !important;
 }
 
 .lang-btn {
@@ -183,6 +183,8 @@ body {
     padding-left: 60px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 100000 !important;
+    pointer-events: auto !important;
 }
 
 #btn-bm { background-color: #CFE1F7; }
@@ -239,7 +241,7 @@ body {
     position: absolute;
     top: 25px;
     right: 35px;
-    z-index: 9999 !important;
+    z-index: 999999 !important;
     width: 150px;
     height: 48px;
     justify-content: center;
@@ -389,7 +391,7 @@ body {
     background-color: #FFFFCC !important;
 }
 
-/* SCENE 5: SETTINGS OVERLAY SCREEN (PELARASAN TURUN KE BAWAH) */
+/* SCENE 5: SETTINGS OVERLAY SCREEN */
 #settings-overlay {
     display: none;
     position: fixed;
@@ -571,6 +573,7 @@ body {
     justify-content: center;
     padding-left: 55px;
     padding-right: 15px;
+    cursor: pointer;
 }
 
 .flag-icon {
@@ -601,7 +604,7 @@ body {
     background-color: #CC0000;
 }
 
-/* SCENE 6, 7, 8, 9, 10 SUB-MENUS (TAJUK & BUTANG DITURUNKAN) */
+/* SCENE 6, 7, 8, 9, 10 SUB-MENUS */
 #scene6-overlay,
 #scene7-overlay,
 #scene8-overlay,
@@ -862,7 +865,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* SCENE 11: SKRIN KUIZ & SOALAN (TURUN KE BAWAH) */
+/* SCENE 11: SKRIN KUIZ & SOALAN */
 #scene11-overlay {
     display: none;
     position: absolute;
@@ -1083,9 +1086,7 @@ body {
     to { transform: scale(1); opacity: 1; }
 }
 
-/* ==========================================
-   POP-UP ROTATE HANYA UNTUK TELEFON BIMBIT (PORTRAIT)
-   ========================================== */
+/* POP-UP ROTATE HANYA UNTUK TELEFON BIMBIT */
 #rotate-device-overlay {
     display: none !important;
 }
