@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <!-- Fullscreen button -->
+    <!-- Fullscreen button (Kekal pada laptop, tersembunyi di phone) -->
     <button id="fullscreen-btn" class="circle-icon-btn" aria-label="Toggle Fullscreen">
         <svg id="fullscreen-icon" viewBox="0 0 24 24">
             <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
@@ -284,7 +284,6 @@
             </button>
         </div>
 
-        <!-- Video Display Area -->
         <div class="video-display-area">
             <video id="normalLawanVideo" playsinline>
                 <source id="normalLawanSource" src="assets/normal-lawan-ms.mp4" type="video/mp4">
@@ -292,7 +291,6 @@
             </video>
         </div>
 
-        <!-- Vertical Control Toolbar on the Right -->
         <div class="video-controls-toolbar">
             <button id="vbtn-pause" class="vcontrol-btn circle-icon-btn" aria-label="Pause">
                 <svg viewBox="0 0 24 24">
@@ -474,7 +472,7 @@
             <span id="label-score">Skor</span>: <span id="quiz-score">0/8</span>
         </div>
 
-        <!-- Grouping Controls Left-Bottom: Setting, Home, Quit, Hint -->
+        <!-- Butang Kawalan Kiri Bawah Kuiz: Setting, Home, Quit, Hint -->
         <div class="left-bottom-controls">
             <button id="scene11-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
@@ -547,6 +545,16 @@
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
             <div class="footer-subtitle">Confidence</div>
+        </div>
+    </div>
+
+    <!-- POP-UP DIALOG MODALS FOR QUIZ & HINTS -->
+    <div id="quiz-modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon" id="modal-icon-elem">✨</div>
+            <h3 id="modal-title-elem">Tajuk</h3>
+            <p id="modal-msg-elem">Mesej kandungan di sini.</p>
+            <button id="modal-close-btn">TERUSKAN</button>
         </div>
     </div>
 
