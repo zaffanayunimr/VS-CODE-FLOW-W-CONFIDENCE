@@ -423,34 +423,43 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-    // ==========================================
+// ==========================================
     // 6. POP-UP MODAL FUNCTIONALITY
     // ==========================================
-    function showModal(icon, title, message, onComplete) {
+    function showModal(icon, title, message, onComplete, showXBtn = true) {
         if (!quizModalOverlay) return;
         if (modalIconElem) modalIconElem.textContent = icon;
         if (modalTitleElem) modalTitleElem.textContent = title;
         if (modalMsgElem) modalMsgElem.textContent = message;
 
         pendingNextQuestionCall = onComplete || null;
+
+        // Kawal paparan butang X (Sembunyikan untuk Hint/Petunjuk jika showXBtn = false)
+        if (modalXBtn) {
+            modalXBtn.style.display = showXBtn ? "block" : "none";
+        }
+
         quizModalOverlay.style.display = "flex";
     }
 
-    function closeModal() {
-        if (quizModalOverlay) quizModalOverlay.style.display = "none";
-        if (pendingNextQuestionCall) {
-            const action = pendingNextQuestionCall;
-            pendingNextQuestionCall = null;
-            action();
-        }
-    }
-
+    // Fungsi bila tekan butang utama (TERUSKAN) -> Jalankan tindakan lanjut
     if (modalCloseBtn) {
-        modalCloseBtn.addEventListener("click", closeModal);
+        modalCloseBtn.addEventListener("click", () => {
+            if (quizModalOverlay) quizModalOverlay.style.display = "none";
+            if (pendingNextQuestionCall) {
+                const action = pendingNextQuestionCall;
+                pendingNextQuestionCall = null;
+                action();
+            }
+        });
     }
 
+    // Fungsi bila tekan butang X -> Hanya tutup pop-up sahaja (Bukan keluar kuiz)
     if (modalXBtn) {
-        modalXBtn.addEventListener("click", closeModal);
+        modalXBtn.addEventListener("click", () => {
+            if (quizModalOverlay) quizModalOverlay.style.display = "none";
+            pendingNextQuestionCall = null; // Batalkan sebarang fungsi keluar/lanjut
+        });
     }
 
     // ==========================================
