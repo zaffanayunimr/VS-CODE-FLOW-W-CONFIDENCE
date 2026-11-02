@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
-    // AUTOMATIK: HILANGKAN WARNA HOVER DITEKAN DI PERANTI SENTUH
+    // AUTOMATIK: HILANGKAN WARNA HOVER DITEKAN PADA PERANTI SENTUH
     // ==========================================
     document.querySelectorAll("button").forEach(btn => {
         btn.addEventListener("touchend", () => {
@@ -152,6 +152,23 @@ document.addEventListener("DOMContentLoaded", () => {
     let pendingNextQuestionCall = null;
 
     // ==========================================
+    // KAWALAN FULLSCREEN KHAS UNTUK TELEFON (PHONE ONLY)
+    // (Muncul di Scene 1 sahaja, sembunyikan di scene lain)
+    // ==========================================
+    function checkFullscreenVisibility(sceneId) {
+        if (fullscreenBtn) {
+            if (sceneId === "start") {
+                fullscreenBtn.classList.add("show-on-phone");
+            } else {
+                fullscreenBtn.classList.remove("show-on-phone");
+            }
+        }
+    }
+
+    // Setkan paparan awal semasa mula-mula aplikasi dibuka (Scene 1)
+    checkFullscreenVisibility("start");
+
+    // ==========================================
     // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
     // ==========================================
     let selectedLang = "ms";
@@ -225,6 +242,9 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             requestLandscapeFullscreen();
 
+            // Sembunyikan butang fullscreen di telefon selepas tekan MULA / START
+            checkFullscreenVisibility("other");
+
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
 
@@ -287,6 +307,9 @@ document.addEventListener("DOMContentLoaded", () => {
             video2.classList.remove("active");
         }
         if (skipBtn) skipBtn.style.display = "none";
+
+        // Pastikan butang fullscreen kekal tersembunyi di telefon
+        checkFullscreenVisibility("scene4");
 
         updateLocalizationUI();
         if (scene4Overlay) scene4Overlay.style.display = "flex";
