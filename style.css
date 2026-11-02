@@ -69,14 +69,14 @@ body {
     margin: auto !important;
 }
 
-/* HILANGKAN WARNA KEKAL SELEPAS DITEKAN PADA PHONE/TABLET */
+/* HILANGKAN WARNA HOVER KEKAL SELEPAS DITEKAN PADA PHONE/TABLET */
 button:focus,
 button:active {
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* EFEK HOVER TOMBOL HANYA UNTUK PERANTI DENGAN TETIKUS (LAPTOP/DESKTOP) */
+/* EFEK HOVER HANYA AKTIF PADA PERANTI DENGAN TETIKUS (LAPTOP / DESKTOP) */
 @media (hover: hover) {
     .circle-icon-btn:hover,
     #fullscreen-btn:hover {
@@ -163,13 +163,26 @@ button:active {
     z-index: 310;
 }
 
-/* TOMBOL FULLSCREEN (SETIA APABILA DILIHAT DI DESKTOP / MOBILE) */
+/* ==========================================
+   TOMBOL FULLSCREEN (LALAI LAPTOP/DESKTOP & KHAS PHONE ONLY)
+   ========================================== */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
     top: 20px !important;
     left: 20px !important;
     z-index: 9999999 !important;
+}
+
+/* KHAS PHONE ONLY: Sembunyikan secara lalai pada telefon, hanya tunjuk jika ada class .show-on-phone (Scene 1 sahaja) */
+@media screen and (max-width: 768px) {
+    #fullscreen-btn {
+        display: none !important;
+    }
+
+    #fullscreen-btn.show-on-phone {
+        display: flex !important;
+    }
 }
 
 /* ==========================================
@@ -1134,8 +1147,51 @@ button:active {
 }
 
 /* ==========================================
-   KOD PELARASAN SAFARI IOS & TABLET (DARIPADA GAMBAR TANGKAPAN SKRIN)
+   PELARASAN & PENGECILAN ELEMEN UNTUK TELEFON / TABLET (LANDSCAPE)
+   (Termasuk 100% kod daripada gambar tangkapan skrin anda)
    ========================================== */
+
+/* 1. PELARASAN UMUM PHONE & TABLET MOD MELINTANG (LANDSCAPE) */
+@media screen and (orientation: landscape) and (max-height: 768px) {
+    html, body, #player-container {
+        width: 100vw !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    .first-header,
+    .menu-header,
+    #chapter-title,
+    #asas-title,
+    #penjagaan-title,
+    #kesihatan-title,
+    #quiz-title,
+    #settings-title {
+        transform: scale(0.65) !important;
+        transform-origin: top center !important;
+    }
+
+    .chapter-grid-container,
+    .sub-menu-grid,
+    .options-grid,
+    .settings-grid,
+    .menu-buttons-container {
+        transform: scale(0.75) !important;
+        transform-origin: center center !important;
+    }
+
+    .question-container {
+        top: 10vh !important;
+        transform: translateX(-50%) scale(0.8) !important;
+        transform-origin: top center !important;
+    }
+
+    .options-grid {
+        top: 38vh !important;
+    }
+}
+
+/* 2. KOD KHAS SAFARI IOS (SEPERTI DI DALAM GAMBAR ANDA) */
 @supports (-webkit-touch-callout: none) {
     /* Amaran Mod Portrait di iPhone */
     @media screen and (orientation: portrait) and (max-width: 768px) {
@@ -1189,7 +1245,7 @@ button:active {
         .sub-menu-grid,
         .options-grid,
         .settings-grid {
-            transform: scale(0.85) !important;
+            transform: scale(0.75) !important;
             transform-origin: center center !important;
         }
 
@@ -1201,20 +1257,20 @@ button:active {
         #kesihatan-title,
         #quiz-title,
         #settings-title {
-            transform: scale(0.8) !important;
+            transform: scale(0.7) !important;
             transform-origin: top center !important;
         }
 
         /* PAKSA TAJUK SCENE 1 SENTIASA RATAKAN TENGAH DI IOS SAFARI */
         #start-overlay .first-header {
             position: absolute !important;
-            top: 6vh !important;
+            top: 4vh !important;
             left: 0 !important;
             right: 0 !important;
             width: 100vw !important;
             margin: 0 auto !important;
             text-align: center !important;
-            transform: scale(0.8) !important;
+            transform: scale(0.7) !important;
             transform-origin: top center !important;
         }
     }
