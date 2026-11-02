@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -31,7 +32,7 @@ body {
 }
 
 /* ==========================================
-   BUTANG FULLSCREEN GLOBAL
+   BUTANG FULLSCREEN GLOBAL (DESKTOP, LAPTOP & TABLET)
    ========================================== */
 #fullscreen-btn {
     display: flex !important;
@@ -98,7 +99,7 @@ body {
 
 .first-header {
     position: absolute;
-    top: 120px; /* Dikitkan ke bawah sikit */
+    top: 130px; /* Dikitkan ke bawah */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -261,7 +262,7 @@ body {
     background-color: #FFCCFF;
 }
 
-/* GEAR / SETTINGS BUTTON & UNIVERSAL CIRCLE BUTTON STYLING */
+/* GEAR / SETTINGS BUTTON STYLING */
 .gear-btn,
 .circle-btn {
     width: 48px;
@@ -332,8 +333,8 @@ body {
 
 .menu-header {
     text-align: center;
-    margin-bottom: 60px;
-    margin-top: -40px; /* Bawa tajuk utama ke bawah */
+    margin-bottom: 50px;
+    margin-top: -30px; /* Tajuk diturunkan sikit */
 }
 
 .menu-title {
@@ -402,7 +403,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 60px; /* Bawa tajuk setting ke bawah sikit */
+    padding-top: 70px; /* Tajuk setting diturunkan sikit */
     z-index: 300;
 }
 
@@ -615,7 +616,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 65px; /* Turunkan tajuk Bab Penjagaan Haid */
+    padding-top: 80px; /* Tajuk Bab Penjagaan Haid diturunkan sikit */
     z-index: 200;
 }
 
@@ -633,7 +634,7 @@ body {
     width: 100%;
     max-width: 950px;
     height: 320px;
-    margin-top: 90px !important;
+    margin-top: 80px !important;
 }
 
 .chapter-card-btn {
@@ -707,7 +708,7 @@ body {
     line-height: 1.1;
 }
 
-/* SCENE 7, 8, 9 SUB-MENUS */
+/* SCENE 7, 8, 9 & 10 SUB-MENUS */
 #scene7-overlay,
 #scene8-overlay,
 #scene9-overlay,
@@ -725,7 +726,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 65px; /* Turunkan tajuk sub-menu ke bawah */
+    padding-top: 80px; /* Tajuk sub-menu & kuiz diturunkan sikit */
     z-index: 200;
 }
 
@@ -747,7 +748,7 @@ body {
     gap: 45px 70px;
     width: 86%;
     max-width: 1000px;
-    margin-top: 90px !important;
+    margin-top: 80px !important;
 }
 
 .sub-menu-btn {
@@ -902,7 +903,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: 30px;
     z-index: 200;
 }
 
@@ -921,25 +922,25 @@ body {
     font-weight: normal;
     color: #E70B90;
     line-height: 1.3;
-    margin-top: 70px; /* Bawa soalan kuiz ke bawah sedikit dari garis merah */
+    margin-top: 85px; /* Soalan diturunkan di bawah garisan */
 }
 
-/* PELARASAN BEKAS KOTAK JAWAPAN & LEBAR */
+/* PELARASAN BEKAS KOTAK JAWAPAN & JARAK KIRI-KANAN */
 .options-grid {
     position: relative;
     z-index: 210;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 50px;
-    width: 90% !important; /* Luaskan grid supaya mengurangkan ruang kosong di tepi */
-    max-width: 1100px !important;
-    margin-top: 50px !important;
+    gap: 35px 80px !important; /* Jarak atas-bawah = 35px, Jarak kiri-kanan = 80px */
+    width: 92% !important; /* Luaskan kawasan grid */
+    max-width: 1150px !important;
+    margin-top: 45px !important;
     align-items: stretch;
 }
 
 .option-btn {
     width: 100% !important;
-    min-height: 105px !important; /* Ketinggian seragam untuk semua 4 butang */
+    min-height: 105px !important; /* Tinggi seragam untuk semua 4 butang jawapan */
     height: 100% !important;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
@@ -1109,40 +1110,30 @@ body {
 }
 
 /* ==========================================
-   MOBILE & TABLET RESPONSIVE LANDSCAPE
+   POP-UP ROTATE HANYA UNTUK TELEFON BIMBIT (PORTRAIT)
    ========================================== */
-@media screen and (orientation: landscape) and (max-height: 500px) {
-    html, body, #player-container {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+#rotate-device-overlay {
+    display: none !important; /* Terpadam terus pada laptop/tablet/desktop */
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    #rotate-device-overlay {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-color: #FFCCE5 !important;
+        z-index: 9999999 !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 20px !important;
     }
 
-    #fullscreen-btn {
-        top: 10px !important;
-        left: 10px !important;
-        width: 38px !important;
-        height: 38px !important;
-    }
-
-    #chapter-title, #asas-title, #penjagaan-title, #quiz-title {
-        font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
-        margin-top: 10px !important;
-    }
-
-    .options-grid {
-        width: 92% !important;
-        max-width: 900px !important;
-        gap: 12px 20px !important;
-        margin-top: 15px !important;
-    }
-
-    .option-btn {
-        min-height: 65px !important;
-        height: 100% !important;
-        padding: 8px 14px !important;
-        font-size: clamp(0.75rem, 1.8vw, 1rem) !important;
-        border-width: 2.5px !important;
-        border-radius: 16px !important;
+    #player-container {
+        display: none !important;
     }
 }
