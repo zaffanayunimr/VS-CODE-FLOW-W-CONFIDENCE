@@ -203,10 +203,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function hideFullscreenBtn() {
-        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+    function updateFullscreenBtnVisibility() {
+        // Memeriksa peranti: Hanya sembunyikan jika peranti telefon bimbit dengan skrin kecil & sentuhan
+        const isMobilePhone = (window.innerWidth <= 768 && window.innerHeight <= 500) && 
+                              ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        
         if (fullscreenBtn) {
-            fullscreenBtn.style.setProperty("display", isMobile ? "none" : "flex", "important");
+            if (isMobilePhone) {
+                fullscreenBtn.style.setProperty("display", "none", "important");
+            } else {
+                // Laptop dan Tablet akan sentiasa nampak butang fullscreen
+                fullscreenBtn.style.setProperty("display", "flex", "important");
+            }
         }
     }
 
@@ -214,14 +222,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn();
         } else {
             if (document.exitFullscreen) document.exitFullscreen();
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         }
+        updateFullscreenBtnVisibility();
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+    // Semak keterlihatan butang secara automatik sewaktu mula & saiz pelayar berubah
+    updateFullscreenBtnVisibility();
+    window.addEventListener("resize", updateFullscreenBtnVisibility);
 
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
@@ -230,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
             requestLandscapeFullscreen();
-            hideFullscreenBtn();
+            updateFullscreenBtnVisibility();
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
