@@ -620,9 +620,9 @@ body {
 }
 
 /* ==========================================
-   SCENE 6: MENU BAB
+   SCENE 6: MENU BAB & SCENE 10: QUIZ MENU
    ========================================== */
-#scene6-overlay {
+#scene6-overlay, #scene10-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -636,11 +636,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 8vh;
+    padding-top: 10vh; /* Diturunkan supaya tajuk berada tepat di atas garisan biru atas */
     z-index: 200;
 }
 
-#chapter-title {
+#chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
     font-size: 3.4rem;
@@ -649,9 +649,10 @@ body {
     margin: 0;
 }
 
+/* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 30vh;
+    top: 38vh; /* Diturunkan dari 30vh ke 38vh supaya kad selari di atas garisan petak biru */
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -688,8 +689,9 @@ body {
     right: 10px;
 }
 
+/* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
-    top: 195px;
+    top: 180px; /* Diturunkan supaya kad berada di tengah petak lakaran biru bawah */
     left: 50%;
     transform: translateX(-50%);
 }
@@ -756,7 +758,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 8vh;
+    padding-top: 10vh;
     z-index: 200;
 }
 
@@ -771,7 +773,7 @@ body {
 
 .sub-menu-grid {
     position: absolute;
-    top: 28vh;
+    top: 32vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
@@ -890,34 +892,6 @@ body {
     outline: none;
 }
 
-/* SCENE 10: QUIZ MENU OVERLAY */
-#scene10-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('assets/bg fyp.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 8vh;
-    z-index: 200;
-}
-
-#quiz-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    color: #E70B90;
-    font-size: 3.4rem;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-}
-
 /* ==========================================
    SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
    ========================================== */
@@ -935,10 +909,10 @@ body {
     z-index: 200;
 }
 
-/* WADAH SOALAN: DILETAKKAN PADU SUPAYA MENDUDUKI TEPAT DI ATAS GARIS LATAR BELAKANG */
+/* WADAH SOALAN: top: 14.8vh MENUNJUKKAN TITIK MULA BARIS PERTAMA DUDUK TEPAT DI ATAS GARISAN BIRU KEDUA */
 .question-container {
     position: absolute;
-    top: 14.8vh; /* Titik mula garisan pertama */
+    top: 14.8vh; /* Menurunkan baris pertama soalan tepat ke garisan biru */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -953,7 +927,7 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru */
+    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru seterusnya */
     margin: 0;
 }
 
