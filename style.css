@@ -1293,7 +1293,7 @@ body {
 }
 
 .modal-content h2 {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 2.5rem;
     margin-bottom: 15px;
 }
@@ -1309,7 +1309,7 @@ body {
 .modal-btn {
     padding: 12px 35px;
     font-size: 1.3rem;
-    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-weight: bold;
     color: #FFFFFF;
     background-color: #CC3399;
