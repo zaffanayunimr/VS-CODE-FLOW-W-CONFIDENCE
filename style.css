@@ -96,7 +96,7 @@ body {
 }
 
 /* ==========================================
-   0. START SCREEN OVERLAY (Screenshot 163224.png)
+   0. START SCREEN OVERLAY (Screenshot 164435.png)
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -111,7 +111,7 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 22vh; /* DINAIKKAN KE ATAS MENGIKUT ANAK PANAH */
+    padding-bottom: 35vh; /* DINAIKKAN TEPAT MASUK PETAK BIRU CTH 164435.PNG */
     box-sizing: border-box;
     z-index: 999;
 }
@@ -297,7 +297,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 4: MAIN MENU STYLING (Screenshot 163616.jpg)
+   SCENE 4: MAIN MENU STYLING (Screenshot 164450.png)
    ========================================== */
 #scene4-overlay {
     display: none;
@@ -321,10 +321,9 @@ body {
     left: 25px;
 }
 
-/* TAJUK FLOW WITH CONFIDENCE DINAIKKAN KE ATAS */
 .menu-header {
     text-align: center;
-    margin-top: 15vh !important;
+    margin-top: 12vh !important;
     margin-bottom: 0px !important;
 }
 
@@ -348,13 +347,13 @@ body {
     line-height: 0.9;
 }
 
-/* BUTANG BAB & KUIZ DITURUNKAN KE BAWAH */
+/* BUTANG BAB & KUIZ DITURUNKAN PAS DENGAN LAKARAN PETAK BIRU CTH 164450.PNG */
 .menu-buttons-container {
     display: flex;
     flex-direction: column;
     gap: 18px;
     align-items: center;
-    margin-top: 16vh !important;
+    margin-top: 25vh !important;
 }
 
 .menu-btn {
@@ -706,7 +705,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS (Screenshot 163651.png)
+   SCENE 7, 8, 9: SUB-MENUS (Screenshot 164426.png)
    ========================================== */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
@@ -735,15 +734,15 @@ body {
     margin: 0;
 }
 
-/* BARISAN BUTANG ATAS DINAIKKAN SEDIKIT (JARAK DENGAN BAWAH) */
+/* DILARASKAN TEPAT MENGIKUT PETAK BIRU CTH 164426.PNG */
 .sub-menu-grid {
     position: absolute;
-    top: 40vh; /* DINAIKKAN KE ATAS MENGIKUT ANAK PANAH */
+    top: 28vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 35px 60px; /* JARAK ATAS & BAWAH DIBESARKAN */
+    gap: 80px 60px; /* GAP DIBESARKAN SUPAYA BARIS ATAS & BAWAH MASUK TEPAT KE PETAK BIRU */
     width: 84%;
     max-width: 900px;
 }
@@ -886,7 +885,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: QUIZ INTERFACE (Screenshot 163659.png)
+   SCENE 11: QUIZ INTERFACE (Screenshot 164416.png)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -902,10 +901,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOALAN DINAINIKKAN TEPAT BERADA DI GARIS PERTAMA BUKU */
+/* TEKS SOALAN DINAINIKKAN KE TOP 10VH SUPAYA DUDUK DI ATAS GARIS 1 (ATAS GARIS) */
 .question-container {
     position: absolute;
-    top: 17.5vh; /* DITARIK NAIK KE ATAS GARISAN PERTAMA BUKU */
+    top: 10vh; /* DITARIK NAIK DUDUK DENGAN KEMAS DI ATAS GARIS 1 */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -922,15 +921,16 @@ body {
     line-height: 1.35;
 }
 
-/* BUTANG JAWAPAN BARIS ATAS & BAWAH BERJARAK 2 GARISAN */
+/* KOTAK JAWAPAN A & B DITOLAK NAIK KE TOP 30VH (MASUK PETAK BIRU CTH 164416.PNG) */
+/* C & D KEKAL DI KEDUDUKAN ASAL DENGAN GAP 32PX */
 .options-grid {
     position: absolute;
-    top: 48vh; /* BARIS ATAS BERJARAK 1 GARIS DARI SOALAN */
+    top: 30vh; /* DITOLAK NAIK SUPAYA BARIS ATAS MASUK TEPAT PETAK BIRU & BERJARAK 1 GARIS DARI SOALAN */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 45px 50px; /* GAP 45px MEMBERIKAN JARAK TEPAT 2 GARISAN BUKU */
+    gap: 32px 50px; /* GAP KEKAL SAMA AGAR BARIS BOTTOM (C & D) KEKAL DI POSISI ASAL */
     width: 88%;
     max-width: 980px;
     z-index: 210;
