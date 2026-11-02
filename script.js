@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER
+    // 4. DYNAMIC VIDEO PLAYER (DIBAIKI)
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -309,6 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnGlobalHome) {
         btnGlobalHome.addEventListener("click", () => {
+            if (normalLawanVideo) normalLawanVideo.pause();
             const overlays = [settingsOverlay, scene6Overlay, scene7Overlay, scene8Overlay, scene9Overlay, scene10Overlay, scene11Overlay, scene12Overlay, normalLawanOverlay];
             overlays.forEach(ov => { if (ov) ov.style.display = "none"; });
             if (scene4Overlay) scene4Overlay.style.display = "flex";
@@ -318,7 +319,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnGlobalBack) {
         btnGlobalBack.addEventListener("click", () => {
-            if (settingsOverlay) settingsOverlay.style.display = "none";
+            if (normalLawanOverlay && normalLawanOverlay.style.display === "block") {
+                if (normalLawanVideo) normalLawanVideo.pause();
+                normalLawanOverlay.style.display = "none";
+                const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
+                if (parentOverlay) parentOverlay.style.display = "flex";
+                return;
+            }
+
+            if (settingsOverlay && settingsOverlay.style.display === "flex") {
+                settingsOverlay.style.display = "none";
+                return;
+            }
+
             if (scene11Overlay && scene11Overlay.style.display === "flex") {
                 scene11Overlay.style.display = "none";
                 if (scene10Overlay) scene10Overlay.style.display = "flex";
@@ -326,10 +339,14 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (scene10Overlay && scene10Overlay.style.display === "flex") {
                 scene10Overlay.style.display = "none";
                 if (scene4Overlay) scene4Overlay.style.display = "flex";
-            } else if (scene7Overlay || scene8Overlay || scene9Overlay) {
-                if (scene7Overlay) scene7Overlay.style.display = "none";
-                if (scene8Overlay) scene8Overlay.style.display = "none";
-                if (scene9Overlay) scene9Overlay.style.display = "none";
+            } else if (scene7Overlay && scene7Overlay.style.display === "flex") {
+                scene7Overlay.style.display = "none";
+                if (scene6Overlay) scene6Overlay.style.display = "flex";
+            } else if (scene8Overlay && scene8Overlay.style.display === "flex") {
+                scene8Overlay.style.display = "none";
+                if (scene6Overlay) scene6Overlay.style.display = "flex";
+            } else if (scene9Overlay && scene9Overlay.style.display === "flex") {
+                scene9Overlay.style.display = "none";
                 if (scene6Overlay) scene6Overlay.style.display = "flex";
             } else if (scene6Overlay && scene6Overlay.style.display === "flex") {
                 scene6Overlay.style.display = "none";
@@ -363,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (MEMILIKI SUSUNAN TEKS GARISAN UNTUK 24 SOALAN)
+    // 7. QUIZ DATA & LOGIC (24 SOALAN SELARI GARISAN)
     // ==========================================
     const quizCategories = {
         asas: [
@@ -777,7 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
-                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
+                    { text: { ms: "B) Mengabaikan perasaan meereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
                     { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ],
@@ -809,7 +826,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // FUNGSI MEMUTUSKAN TEKS KEPADA q-line SUPAYA TEPAT ATAS GARISAN
     function loadQuestion() {
         if (!quizQuestionText || !optA || !optB || !optC || !optD) return;
         const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
