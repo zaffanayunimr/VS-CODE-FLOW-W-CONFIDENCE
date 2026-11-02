@@ -448,12 +448,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (Dengan Sebab Jawapan Salah)
+    // 7. QUIZ DATA & LOGIC (Bahasa Melayu Piawai & English)
     // ==========================================
     const quizCategories = {
         asas: [
             {
-                hint: { ms: "Pikirkan tentang darah & tisu lembut yang keluar daripada badan setiap bulan.", en: "Think about the blood & soft lining that leaves the body every month." },
+                hint: { ms: "Fikirkan tentang darah & tisu lembut yang keluar daripada badan setiap bulan.", en: "Think about the blood & soft lining that leaves the body every month." },
                 question: { ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?", en: "1. What happens when a girl gets her period?" },
                 options: [
                     { text: { ms: "A) Darah dan tisu dari rahim keluar melalui faraj.", en: "A) Blood and tissue leave the body through the vagina." }, isCorrect: true },
@@ -537,7 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             {
-                hint: { ms: "Pilih rona semula jadi darah berasaskan merah/coklat.", en: "Look for natural red or brown shade spectrum." },
+                hint: { ms: "Pilih warna semula jadi darah berasaskan merah atau coklat.", en: "Look for natural red or brown shade spectrum." },
                 question: { ms: "7. Manakah antara warna darah haid berikut yang masih dianggap normal?", en: "7. Which of the following period blood colors is considered normal?" },
                 options: [
                     { text: { ms: "A) Hijau terang, kuning, atau oren.", en: "A) Bright green, yellow, or orange." }, isCorrect: false },
@@ -546,21 +546,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "D) Merah, merah jambu, atau coklat.", en: "D) Red, pink, or brown." }, isCorrect: true }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (D). Darah haid normal boleh berubah rona dari merah cerah, merah gelap, merah jambu hingga coklat.",
+                    ms: "Jawapan betul ialah (D). Darah haid normal boleh berubah warna dari merah cerah, merah gelap, merah jambu hingga coklat.",
                     en: "The correct answer is (D). Normal period blood can vary in shades of red, pink, or brown."
                 }
             },
             {
-                hint: { ms: "Pendarahan yang terlalu banyak bukanlah keadaan yang selesa.", en: "Extremely heavy bleeding is a sign to seek medical advice." },
+                hint: { ms: "Pendarahan yang terlalu banyak memerlukan pemeriksaan doktor.", en: "Extremely heavy bleeding is a sign to seek medical advice." },
                 question: { ms: "8. Tanda manakah yang menunjukkan anda perlu meminta bantuan atau berjumpa dengan doktor?", en: "8. Which sign indicates that you should ask for help or speak to a doctor?" },
                 options: [
                     { text: { ms: "A) Haid berlangsung selama 3 hingga 5 hari.", en: "A) A period that lasts for 3 to 5 days." }, isCorrect: false },
                     { text: { ms: "B) Warna darah bertukar menjadi coklat pada akhir haid.", en: "B) Blood turning brown near the end of your period." }, isCorrect: false },
-                    { text: { ms: "C) Perlu menukar pad setiap 1 hingga 2 jam kerana terlalu penuh.", en: "C) Needing to change your pad every 1 to 2 hours because it is full." }, isCorrect: true },
+                    { text: { ms: "C) Perlu menukar pad setiap 1 hingga 2 jam kerana lencana sepenuhnya.", en: "C) Needing to change your pad every 1 to 2 hours because it is full." }, isCorrect: true },
                     { text: { ms: "D) Rasa sedikit perubahan emosi semasa haid.", en: "D) Experiencing slight mood changes during your period." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (C). Pendarahan yang terlampau banyak (pad basah kuyup setiap 1-2 jam) memerlukan nasihat doktor.",
+                    ms: "Jawapan betul ialah (C). Pendarahan yang terlampau banyak (pad basah lencana setiap 1-2 jam) memerlukan nasihat doktor.",
                     en: "The correct answer is (C). Abnormally heavy bleeding (soaking through a pad every 1-2 hours) requires medical advice."
                 }
             }
@@ -609,7 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             {
-                hint: { ms: "Mengelap dari arah kawasan bersih ke belakang elak jangkitan.", en: "Wiping from front to back prevents bacteria spreading." },
+                hint: { ms: "Mengelap dari arah depan ke belakang elak jangkitan.", en: "Wiping from front to back prevents bacteria spreading." },
                 question: { ms: "4. Apakah arah yang betul semasa mengelap atau membersihkan kawasan sulit selepas menggunakan tandas?", en: "4. What is the correct direction to wipe or clean your private area after using the toilet?" },
                 options: [
                     { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
@@ -632,12 +632,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "D) Pad bersaiz paling panjang.", en: "D) The longest size pad available." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (B). Pantyliner amat sesuai untuk aliran darah yang sikit atau sebagai perlindungan pada akhir kitaran.",
+                    ms: "Jawapan betul ialah (B). Pantyliner amat sesuai untuk aliran darah yang sedikit atau sebagai perlindungan pada akhir kitaran.",
                     en: "The correct answer is (B). Pantyliners or light pads are designed specifically for light spot flow."
                 }
             },
             {
-                hint: { ms: "Saiz lebih lebar melindungi sewaktu baring/tidur.", en: "Wider back offers extra protection while sleeping." },
+                hint: { ms: "Bahagian belakang yang lebar melindungi sewaktu tidur.", en: "Wider back offers extra protection while sleeping." },
                 question: { ms: "6. Apakah kelebihan pad malam (overnight) atau pad maxi untuk aliran darah yang sangat banyak?", en: "6. What is the advantage of using an overnight or maxi pad for very heavy flow?" },
                 options: [
                     { text: { ms: "A) Ia bersaiz lebih pendek dan nipis.", en: "A) It is shorter and thinner." }, isCorrect: false },
@@ -646,7 +646,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "D) Ia menukar warna darah haid secara automatik.", en: "D) It automatically changes the color of the blood." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (C). Pad malam direka lebih panjang dengan pelindung belakang lebar untuk mencegah kebocoran semasa baring.",
+                    ms: "Jawapan betul ialah (C). Pad malam direka lebih panjang dengan bahagian belakang yang lebih lebar untuk mencegah kebocoran semasa baring.",
                     en: "The correct answer is (C). Overnight pads feature extra length and wider backs for maximum leak protection."
                 }
             },
@@ -654,10 +654,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 hint: { ms: "Kehangatan suam membantu melegakan otot rahim.", en: "Gentle warmth helps relax cramping muscles." },
                 question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
                 options: [
-                    { text: { ms: "A) Letakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
-                    { text: { ms: "B) Letakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
-                    { text: { ms: "C) Ditekan dengan objek keras dan berat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
-                    { text: { ms: "D) Dibiarkan terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
+                    { text: { ms: "A) Meletakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
+                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
+                    { text: { ms: "C) Menekan dengan objek keras dan berat secara kuat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
+                    { text: { ms: "D) Membiarkan kawasan perut terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
                 ],
                 explanation: {
                     ms: "Jawapan betul ialah (B). Haba daripada botol air suam atau pek pemanas melegakan otot rahim yang tegang semasa senggugut.",
@@ -666,10 +666,10 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 hint: { ms: "Dapatkan sokongan orang dewasa/doktor terlebih dahulu.", en: "Always get advice from guardians or medical professionals." },
-                question: { ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid??", en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?" },
+                question: { ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid?", en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?" },
                 options: [
-                    { text: { ms: "A) Ambil sahaja mengikut gerak hati sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
-                    { text: { ms: "B) Minum air berkafein yang tinggi terlebih dahulu.", en: "B) Drink a highly caffeinated beverage first." }, isCorrect: false },
+                    { text: { ms: "A) Ambil sahaja mengikut andaian sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
+                    { text: { ms: "B) Minum air berkafein tinggi terlebih dahulu.", en: "B) Drink a highly caffeinated beverage first." }, isCorrect: false },
                     { text: { ms: "C) Bertanya atau mendapat kebenaran daripada ibu bapa, penjaga, atau doktor.", en: "C) Ask a parent, guardian, or doctor for advice." }, isCorrect: true },
                     { text: { ms: "D) Sentiasa mengambil ubat melebihi dos yang disyorkan.", en: "D) Always take more than the recommended dose." }, isCorrect: false }
                 ],
@@ -774,7 +774,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "D) Menyuruh mereka melakukan kerja berat.", en: "D) Asking them to do heavy work." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (B). Menghulurkan pek haba atau botol air suam dapat memberikan kelegaan fizikal yang amat berkesan.",
+                    ms: "Jawapan betul ialah (B). Menggunakan pek haba atau botol air suam dapat memberikan kelegaan fizikal yang amat berkesan.",
                     en: "The correct answer is (B). Offering a heating pad or warm bottle helps ease cramping pain effectively."
                 }
             },
@@ -788,7 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (C). Sikap prihatin, empati, dan sedia mendengar tanpa menghakimi adalah bentuk sokongan terbaik.",
+                    ms: "Jawapan betul ialah (C). Sikap prihatin dan empati serta sedia mendengar tanpa menghakimi adalah bentuk sokongan terbaik.",
                     en: "The correct answer is (C). Empathetic active listening without judgment offers the best emotional support."
                 }
             }
@@ -952,7 +952,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 8. LOCALIZATION
+    // 8. LOCALIZATION (UI Language Toggle)
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
@@ -1021,13 +1021,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (labelApaHaid) labelApaHaid.textContent = "Apakah itu haid?";
             if (labelMengapaHaid) labelMengapaHaid.textContent = "Mengapa haid berlaku?";
             if (labelBerapaLama) labelBerapaLama.textContent = "Berapa lamakah kitaran haid?";
-            if (labelNormalLawan) labelNormalLawan.textContent = "Normal lawan tidak normal";
+            if (labelNormalLawan) labelNormalLawan.textContent = "Normal berbanding tidak normal";
 
             if (penjagaanTitle) penjagaanTitle.textContent = "Penjagaan";
             if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Penjagaan asas semasa haid";
             if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Penjagaan haid di sekolah";
             if (labelJenis) labelJenis.textContent = "Jenis-jenis tuala wanita";
-            if (labelCara) labelCara.textContent = "Cara menggurangkan sakit senggugut";
+            if (labelCara) labelCara.textContent = "Cara mengurangkan sakit senggugut";
 
             if (kesihatanTitle) kesihatanTitle.innerHTML = "Kesihatan &amp;<br>Kesedaran";
             if (labelHaidMental) labelHaidMental.textContent = "Haid & kesihatan mental";
