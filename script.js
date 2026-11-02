@@ -615,7 +615,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
                     { text: { ms: "B) Dari depan ke belakang.", en: "B) From front to back." }, isCorrect: true },
                     { text: { ms: "C) Dari kiri ke kanan.", en: "C) From left to right." }, isCorrect: false },
-                    { text: { ms: "D) Tidak perlu dielap sama sekali.", en: "D) It does not need to be wiped at all." }, isCorrect: false }
+                    { text: { ms: "D) Tidak perlu dilap sama sekali.", en: "D) It does not need to be wiped at all." }, isCorrect: false }
                 ],
                 explanation: {
                     ms: "Jawapan betul ialah (B). Mengelap dari depan ke belakang dapat mengelakkan kuman dari dubur berpindah ke faraj.",
