@@ -17,23 +17,27 @@
             </svg>
         </button>
 
-        <!-- KONTROL KIRI BAWAH GLOBAL -->
+        <!-- KONTROL KIRI BAWAH (BERALIN DENGAN SCENE) -->
         <div class="left-bottom-controls" id="global-controls" style="display: none;">
+            <!-- BUTANG TETAPAN (GEAR) -->
             <button class="circle-icon-btn" id="btn-global-settings" title="Tetapan">
                 <svg viewBox="0 0 24 24">
                     <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
                 </svg>
             </button>
+            <!-- BUTANG UTAMA (HOME) -->
             <button class="circle-icon-btn" id="btn-global-home" title="Laman Utama">
                 <svg viewBox="0 0 24 24">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </button>
-            <button class="circle-icon-btn" id="btn-global-back" title="Kembali">
+            <!-- BUTANG KEMBALI / BAB MENU -->
+            <button class="circle-icon-btn" id="btn-global-back" title="Kembali Ke Bab">
                 <svg viewBox="0 0 24 24">
                     <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"/>
                 </svg>
             </button>
+            <!-- BUTANG PETUNJUK / TIPS -->
             <button class="circle-icon-btn" id="btn-global-hint" title="Petunjuk" style="display: none;">
                 <svg viewBox="0 0 24 24">
                     <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C8.8 12.16 8 10.63 8 9c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.63-.8 3.16-2.15 4.1z"/>
@@ -51,8 +55,8 @@
         </div>
 
         <!-- SCENE 1 & SCENE 3 VIDEO LAYERS -->
-        <video id="videoPlayer1" class="video-layer" src="assets/videos/scene1.mp4" playsinline></video>
-        <video id="videoPlayer2" class="video-layer" src="assets/videos/scene3.mp4" playsinline></video>
+        <video id="video-scene1" class="video-layer" src="assets/videos/scene1.mp4" playsinline></video>
+        <video id="video-scene3" class="video-layer" src="assets/videos/scene3.mp4" playsinline></video>
 
         <!-- BUTANG LANGKAU VIDEO -->
         <button id="skip-btn">LANGKAU</button>
@@ -80,8 +84,8 @@
                 <div class="menu-subtitle">Confidence</div>
             </div>
             <div class="menu-buttons-container">
-                <button class="menu-btn" id="btn-chapter">Bab</button>
-                <button class="menu-btn" id="btn-quiz">Kuiz</button>
+                <button class="menu-btn" id="main-btn-bab">Bab</button>
+                <button class="menu-btn" id="main-btn-kuiz">Kuiz</button>
             </div>
         </div>
 
@@ -91,39 +95,35 @@
             <div class="settings-grid">
                 <!-- AUDIO BOX -->
                 <div class="settings-box">
-                    <div class="box-header-badge header-audio" id="label-audio">AUDIO</div>
+                    <div class="box-header-badge header-audio">AUDIO</div>
                     <div class="audio-control-body">
                         <div class="volume-slider-container">
                             <input type="range" id="volume-slider" min="0" max="100" value="80">
                             <span id="volume-percentage">80%</span>
                         </div>
                         <div class="audio-btn-group">
-                            <button class="settings-action-btn" id="btn-volume-up">
-                                <span class="btn-icon">🔊</span>
-                                <span id="text-volume-up">Kuatkan</span>
+                            <button class="settings-action-btn" id="btn-audio-bgm">
+                                <span class="btn-icon">🎵</span>
+                                <span id="label-bgm">BGM : ON</span>
                             </button>
-                            <button class="settings-action-btn" id="btn-volume-down">
-                                <span class="btn-icon">🔉</span>
-                                <span id="text-volume-down">Perlahankan</span>
-                            </button>
-                            <button class="settings-action-btn" id="btn-mute">
-                                <span class="btn-icon">🔇</span>
-                                <span id="text-mute">Senyap</span>
+                            <button class="settings-action-btn" id="btn-audio-vo">
+                                <span class="btn-icon">🗣️</span>
+                                <span id="label-vo">VO : ON</span>
                             </button>
                         </div>
                     </div>
                 </div>
                 <!-- BAHASA BOX -->
                 <div class="settings-box">
-                    <div class="box-header-badge header-lang" id="label-language">BAHASA</div>
+                    <div class="box-header-badge header-lang">BAHASA</div>
                     <div class="lang-btn-group">
-                        <button class="lang-option-btn" id="btn-set-bm">
+                        <button class="lang-option-btn" id="set-lang-bm">
                             <span class="flag-icon flag-my"></span>
-                            <span id="text-lang-bm" style="font-family: 'Franklin Gothic Heavy', sans-serif; font-size: 1.3rem; color: #E70B90;">BAHASA MELAYU</span>
+                            <span style="font-family: 'Franklin Gothic Heavy', sans-serif; font-size: 1.3rem; color: #E70B90;">BAHASA MELAYU</span>
                         </button>
-                        <button class="lang-option-btn" id="btn-set-en">
+                        <button class="lang-option-btn" id="set-lang-en">
                             <span class="flag-icon flag-uk"></span>
-                            <span id="text-lang-en" style="font-family: 'Franklin Gothic Heavy', sans-serif; font-size: 1.3rem; color: #E70B90;">ENGLISH</span>
+                            <span style="font-family: 'Franklin Gothic Heavy', sans-serif; font-size: 1.3rem; color: #E70B90;">ENGLISH</span>
                         </button>
                     </div>
                 </div>
@@ -134,25 +134,25 @@
         <div id="scene6-overlay">
             <h1 id="chapter-title">MENU BAB</h1>
             <div class="chapter-grid-container">
-                <button class="chapter-card-btn card-left" id="btn-asas">
+                <button class="chapter-card-btn card-left" id="btn-bab-1">
                     <div class="card-icon-circle icon-bg-blue">
                         <span class="card-emoji">🩸</span>
                     </div>
-                    <span class="card-label" id="label-asas">ASAS KITARAN HAID</span>
+                    <span class="card-label" id="label-bab1">ASAS KITARAN HAID</span>
                 </button>
-                <button class="chapter-card-btn card-right" id="btn-penjagaan">
+                <button class="chapter-card-btn card-right" id="btn-bab-2">
                     <div class="card-icon-circle icon-bg-cyan">
                         <span class="card-emoji">🧴</span>
                     </div>
-                    <span class="card-label" id="label-penjagaan">PENJAGAAN KEBERSIHAN</span>
+                    <span class="card-label" id="label-bab2">PENJAGAAN KEBERSIHAN</span>
                 </button>
-                <button class="chapter-card-btn card-center" id="btn-kesihatan">
+                <button class="chapter-card-btn card-center" id="btn-bab-3">
                     <div class="card-icon-circle icon-bg-purple">
                         <svg class="health-svg-icon" viewBox="0 0 24 24">
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
                         </svg>
                     </div>
-                    <span class="card-label" id="label-kesihatan">KESIHATAN & MITOS</span>
+                    <span class="card-label" id="label-bab3">KESIHATAN & MITOS</span>
                 </button>
             </div>
         </div>
@@ -161,10 +161,10 @@
         <div id="scene7-overlay">
             <h1 id="asas-title">ASAS KITARAN HAID</h1>
             <div class="sub-menu-grid">
-                <button class="sub-menu-btn" id="btn-apa-haid">Apakah itu haid?</button>
-                <button class="sub-menu-btn" id="btn-mengapa-haid">Mengapa haid berlaku?</button>
-                <button class="sub-menu-btn" id="btn-berapa-lama">Berapa lamakah kitaran haid?</button>
-                <button class="sub-menu-btn" id="btn-normal-lawan">Normal lawan tidak normal</button>
+                <button class="sub-menu-btn" id="btn-sub-1-1">Apakah itu haid?</button>
+                <button class="sub-menu-btn" id="btn-sub-1-2">Mengapa haid berlaku?</button>
+                <button class="sub-menu-btn" id="btn-sub-1-3">Berapa lamakah kitaran haid?</button>
+                <button class="sub-menu-btn" id="btn-sub-1-4">Normal lawan tidak normal</button>
             </div>
         </div>
 
@@ -172,10 +172,10 @@
         <div id="scene8-overlay">
             <h1 id="penjagaan-title">PENJAGAAN KEBERSIHAN</h1>
             <div class="sub-menu-grid">
-                <button class="sub-menu-btn green-btn" id="btn-penjagaan-asas">Jenis-jenis produk kebersihan</button>
-                <button class="sub-menu-btn green-btn" id="btn-penjagaan-haid">Cara penggunaan produk</button>
-                <button class="sub-menu-btn green-btn" id="btn-jenis-produk">Kekerapan menukar produk</button>
-                <button class="sub-menu-btn green-btn" id="btn-cara-guna">Cara pembuangan produk</button>
+                <button class="sub-menu-btn green-btn" id="btn-sub-2-1">Jenis-jenis produk kebersihan</button>
+                <button class="sub-menu-btn green-btn" id="btn-sub-2-2">Cara penggunaan produk</button>
+                <button class="sub-menu-btn green-btn" id="btn-sub-2-3">Kekerapan menukar produk</button>
+                <button class="sub-menu-btn green-btn" id="btn-sub-2-4">Cara pembuangan produk</button>
             </div>
         </div>
 
@@ -183,29 +183,28 @@
         <div id="scene9-overlay">
             <h1 id="kesihatan-title">KESIHATAN & MITOS</h1>
             <div class="sub-menu-grid">
-                <button class="sub-menu-btn yellow-btn" id="btn-haid-mental">Gejala biasa semasa haid</button>
-                <button class="sub-menu-btn yellow-btn" id="btn-mitos-fakta">Cara melegakan ketidakselesaan</button>
-                <button class="sub-menu-btn yellow-btn" id="btn-kesilapan-kebersihan">Mitos lawan fakta tentang haid</button>
-                <button class="sub-menu-btn yellow-btn" id="btn-sekeliling">Bila perlu berjumpa doktor?</button>
+                <button class="sub-menu-btn yellow-btn" id="btn-sub-3-1">Gejala biasa semasa haid</button>
+                <button class="sub-menu-btn yellow-btn" id="btn-sub-3-2">Cara melegakan ketidakselesaan</button>
+                <button class="sub-menu-btn yellow-btn" id="btn-sub-3-3">Mitos lawan fakta tentang haid</button>
+                <button class="sub-menu-btn yellow-btn" id="btn-sub-3-4">Bila perlu berjumpa doktor?</button>
             </div>
         </div>
 
         <!-- OVERLAY PEMUTAR VIDEO MODUL SUB-MENU -->
         <div id="normal-lawan-overlay">
             <div class="video-display-area">
-                <video id="normalLawanVideo" playsinline>
-                    <source id="normalLawanSource" src="" type="video/mp4">
-                </video>
+                <video id="content-module-video" playsinline></video>
             </div>
             <div class="video-controls-toolbar">
-                <button class="circle-icon-btn" id="vbtn-play" title="Main">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <button class="circle-icon-btn" id="btn-video-playpause" title="Main/Jeda">
+                    <svg viewBox="0 0 24 24" id="icon-playpause">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
                 </button>
-                <button class="circle-icon-btn" id="vbtn-pause" title="Jeda">
-                    <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                </button>
-                <button class="circle-icon-btn" id="vbtn-restart" title="Ulang">
-                    <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+                <button class="circle-icon-btn" id="btn-video-replay" title="Ulang Video">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                    </svg>
                 </button>
                 <div class="video-speed-control">
                     <select id="videoSpeed">
@@ -222,19 +221,19 @@
         <div id="scene10-overlay">
             <h1 id="quiz-title">MENU KUIZ</h1>
             <div class="chapter-grid-container">
-                <button class="chapter-card-btn card-left" id="btn-quiz-asas">
+                <button class="chapter-card-btn card-left" id="btn-quiz-1">
                     <div class="card-icon-circle icon-bg-blue">
                         <span class="card-emoji">🩸</span>
                     </div>
                     <span class="card-label">KUIZ BAB 1</span>
                 </button>
-                <button class="chapter-card-btn card-right" id="btn-quiz-penjagaan">
+                <button class="chapter-card-btn card-right" id="btn-quiz-2">
                     <div class="card-icon-circle icon-bg-cyan">
                         <span class="card-emoji">🧴</span>
                     </div>
                     <span class="card-label">KUIZ BAB 2</span>
                 </button>
-                <button class="chapter-card-btn card-center" id="btn-quiz-kesihatan">
+                <button class="chapter-card-btn card-center" id="btn-quiz-3">
                     <div class="card-icon-circle icon-bg-purple">
                         <svg class="health-svg-icon" viewBox="0 0 24 24">
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
@@ -248,16 +247,16 @@
         <!-- SCENE 11: QUIZ INTERFACE -->
         <div id="scene11-overlay">
             <div class="score-board">
-                <span id="quiz-score">0/8</span>
+                <span id="score-text">Skor: 0/8</span>
             </div>
             <div class="question-container">
-                <div id="quiz-question-text"></div>
+                <p id="quiz-question-text">1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?</p>
             </div>
             <div class="options-grid">
-                <button class="option-btn" id="opt-a"></button>
-                <button class="option-btn" id="opt-b"></button>
-                <button class="option-btn" id="opt-c"></button>
-                <button class="option-btn" id="opt-d"></button>
+                <button class="option-btn" id="opt-a">A) Darah dan tisu dari rahim keluar melalui faraj.</button>
+                <button class="option-btn" id="opt-b">B) Badan menghasilkan lebih banyak tenaga.</button>
+                <button class="option-btn" id="opt-c">C) Tulang tumbuh dengan cepat.</button>
+                <button class="option-btn" id="opt-d">D) Hati memproses toksin keluar daripada badan.</button>
             </div>
         </div>
 
@@ -267,19 +266,19 @@
                 <div id="result-congrats">TAHNIAH!</div>
                 <div id="result-motto">ANDA TELAH MENYELASAIKAN KUIZ</div>
                 <div class="score-display-line">
-                    <span id="result-score-label">SKOR ANDA:</span>
-                    <span id="final-score-val">0 / 8</span>
+                    <span>SKOR ANDA:</span>
+                    <span id="final-score-val">8 / 8</span>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL POP-UP DIALOG -->
-        <div class="modal-overlay" id="quiz-modal-overlay">
+        <!-- MODAL PETUNJUK / DIALOG -->
+        <div class="modal-overlay" id="hint-modal">
             <div class="modal-box">
-                <div class="modal-icon" id="modal-icon-elem">💡</div>
-                <h3 id="modal-title-elem">PETUNJUK KUIZ</h3>
-                <p id="modal-msg-elem">Baca soalan dengan teliti dan pilih jawapan yang paling tepat.</p>
-                <button id="modal-close-btn">TERUSKAN</button>
+                <div class="modal-icon">💡</div>
+                <h3 id="modal-title">PETUNJUK KUIZ</h3>
+                <p id="modal-desc">Baca soalan dengan teliti dan pilih jawapan yang paling tepat.</p>
+                <button id="modal-close-btn">TUTUP</button>
             </div>
         </div>
 
