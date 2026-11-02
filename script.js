@@ -235,6 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     video1.style.display = "none";
                     if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
                 });
+            } else {
+                if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
             }
         });
     }
@@ -247,15 +249,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (btnBm) btnBm.addEventListener("click", () => startIntroScene("ms"));
-    if (btnEn) btnEn.addEventListener("click", () => startIntroScene("en"));
+    if (btnBm) {
+        btnBm.addEventListener("click", (e) => {
+            e.stopPropagation();
+            startIntroScene("ms");
+        });
+    }
+    
+    if (btnEn) {
+        btnEn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            startIntroScene("en");
+        });
+    }
 
     function startIntroScene(lang) {
         selectedLang = lang;
         updateLocalizationUI();
 
-        if (langOverlay) langOverlay.style.display = "none";
-        if (skipBtn) skipBtn.style.display = "flex";
+        if (langOverlay) langOverlay.style.setProperty("display", "none", "important");
+        if (skipBtn) skipBtn.style.setProperty("display", "flex", "important");
 
         stopIntroAudio();
 
@@ -265,9 +278,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (video2) {
             video2.currentTime = 0;
             video2.classList.add("active");
-            video2.play();
+            video2.play().catch(err => console.log(err));
         }
-        introAudio.play();
+        introAudio.play().catch(err => console.log(err));
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
@@ -560,7 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA (SOALAN ASAL SCRIPT_2.JS DENGAN PENENTUAN HINT & EXPLANATION)
+    // 6. QUIZ DATA & LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
