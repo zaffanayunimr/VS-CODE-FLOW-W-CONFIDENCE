@@ -122,9 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const optC = document.getElementById("opt-c");
     const optD = document.getElementById("opt-d");
     const quizScoreElem = document.getElementById("quiz-score");
-    const labelScore = document.getElementById("label-score");
 
     const scene11HomeBtn = document.getElementById("scene11-home-btn");
+    const scene11BackBtn = document.getElementById("scene11-back-btn");
     const scene11QuitBtn = document.getElementById("scene11-quit-btn");
     const scene11HintBtn = document.getElementById("scene11-hint-btn");
     const scene11SettingsBtn = document.getElementById("scene11-settings-btn");
@@ -203,21 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function updateFullscreenBtnVisibility() {
-        // Memeriksa peranti: Hanya sembunyikan jika peranti telefon bimbit dengan skrin kecil & sentuhan
-        const isMobilePhone = (window.innerWidth <= 768 && window.innerHeight <= 500) && 
-                              ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        
-        if (fullscreenBtn) {
-            if (isMobilePhone) {
-                fullscreenBtn.style.setProperty("display", "none", "important");
-            } else {
-                // Laptop dan Tablet akan sentiasa nampak butang fullscreen
-                fullscreenBtn.style.setProperty("display", "flex", "important");
-            }
-        }
-    }
-
     function toggleFullscreen() {
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (!isFullscreen) {
@@ -226,14 +211,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (document.exitFullscreen) document.exitFullscreen();
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         }
-        updateFullscreenBtnVisibility();
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
-
-    // Semak keterlihatan butang secara automatik sewaktu mula & saiz pelayar berubah
-    updateFullscreenBtnVisibility();
-    window.addEventListener("resize", updateFullscreenBtnVisibility);
 
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
@@ -242,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
             requestLandscapeFullscreen();
-            updateFullscreenBtnVisibility();
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
@@ -274,10 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function startIntroScene(lang) {
         selectedLang = lang;
         updateLocalizationUI();
+
         if (langOverlay) langOverlay.style.display = "none";
         if (skipBtn) skipBtn.style.display = "flex";
 
         stopIntroAudio();
+
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
@@ -339,10 +320,12 @@ document.addEventListener("DOMContentLoaded", () => {
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
         { btnId: "btn-berapa-lama", videoName: "Berapa-lama", parentScene: "scene7" },
         { btnId: "btn-normal-lawan", videoName: "Normal-lawan", parentScene: "scene7" },
+
         { btnId: "btn-penjagaan-asas", videoName: "Basic-care", parentScene: "scene8" },
         { btnId: "btn-penjagaan-haid", videoName: "Basic-sekolah", parentScene: "scene8" },
         { btnId: "btn-jenis-produk", videoName: "Jenis-pad", parentScene: "scene8" },
         { btnId: "btn-cara-guna", videoName: "reduce", parentScene: "scene8" },
+
         { btnId: "btn-haid-mental", videoName: "Mental", parentScene: "scene9" },
         { btnId: "btn-mitos-fakta", videoName: "Mitos-fakta", parentScene: "scene9" },
         { btnId: "btn-kesilapan-kebersihan", videoName: "Kesalahan", parentScene: "scene9" },
@@ -551,7 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // BACK BUTTON FROM SETTINGS
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
@@ -578,13 +560,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA (FULL 8 QUESTIONS PER CATEGORY) & LOGIC
+    // 6. QUIZ DATA (SOALAN ASAL SCRIPT_2.JS DENGAN PENENTUAN HINT & EXPLANATION)
     // ==========================================
     const quizCategories = {
         asas: [
             {
                 question: { ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?", en: "1. What happens when a girl gets her period?" },
-                explanation: { ms: "Semasa haid, lapisan rahim bersama darah dan tisu luruh serta keluar melalui faraj.", en: "During menstruation, the lining of the uterus breaks down and leaves the body through the vagina." },
+                explanation: { ms: "Semasa haid, lapisan rahim bersama darah dan tisu luruh serta keluar melalui faraj.", en: "During menstruation, blood and tissue leave the body through the vagina." },
                 hint: { ms: "Fikirkan tentang cecair semula jadi yang keluar dari rahim setiap bulan.", en: "Think about the natural fluids leaving the uterus every month." },
                 options: [
                     { text: { ms: "A) Darah dan tisu dari rahim keluar melalui faraj.", en: "A) Blood and tissue leave the body through the vagina." }, isCorrect: true },
@@ -595,8 +577,8 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 question: { ms: "2. Purata umur kebanyakan orang mendapat haid pertama mereka ialah sekitar umur berapa?", en: "2. Around what age do most people get their first period?" },
-                explanation: { ms: "Purata umur kebanyakan orang mendapat haid pertama adalah sekitar 12 tahun.", en: "The average age for most people to get their first period is around 12 years old." },
-                hint: { ms: "Ia berlaku pada awal umur akil baligh (sekitar umur sekolah rendah / awal menengah).", en: "It happens around early puberty (upper primary or early secondary school age)." },
+                explanation: { ms: "Purata umur kebanyakan orang mendapat haid pertama ialah sekitar 12 tahun.", en: "The average age for most people to get their first period is around 12 years old." },
+                hint: { ms: "Ia berlaku pada awal umur akil baligh.", en: "It happens around early puberty." },
                 options: [
                     { text: { ms: "A) 6 tahun.", en: "A) 6 years old." }, isCorrect: false },
                     { text: { ms: "B) 8 tahun.", en: "B) 8 years old." }, isCorrect: false },
@@ -605,77 +587,77 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
-                question: { ms: "3. Berapa lamakah kitaran haid yang biasa?", en: "3. How long is a typical menstrual cycle?" },
-                explanation: { ms: "Kitaran haid secara purata berlangsung antara 21 hingga 35 hari.", en: "A typical menstrual cycle lasts between 21 to 35 days." },
-                hint: { ms: "Kira-kira sebulan sekali.", en: "Approximately once a month." },
+                question: { ms: "3. Mengapakah badan membina lapisan lembut di dalam rahim setiap bulan?", en: "3. Why does the body build a soft lining inside the uterus every month?" },
+                explanation: { ms: "Badan membina lapisan lembut di dalam rahim sebagai persediaan bagi menghadapi kehamilan.", en: "The body builds a soft lining to prepare for a possible pregnancy." },
+                hint: { ms: "Persediaan untuk kemungkinan adanya bayi.", en: "Preparation for a possible baby." },
                 options: [
-                    { text: { ms: "A) 7 hingga 10 hari.", en: "A) 7 to 10 days." }, isCorrect: false },
-                    { text: { ms: "B) 21 hingga 35 hari.", en: "B) 21 to 35 days." }, isCorrect: true },
-                    { text: { ms: "C) 40 hingga 50 hari.", en: "C) 40 to 50 days." }, isCorrect: false },
-                    { text: { ms: "D) 60 hari.", en: "D) 60 days." }, isCorrect: false }
+                    { text: { ms: "A) Untuk melindungi rahim daripada jangkitan.", en: "A) To protect the uterus from infection." }, isCorrect: false },
+                    { text: { ms: "B) Sebagai persediaan bagi menghadapi kehamilan.", en: "B) To prepare the body for a possible pregnancy." }, isCorrect: true },
+                    { text: { ms: "C) Untuk menyimpan cecair badan berlebihan.", en: "C) To store excess body fluids." }, isCorrect: false },
+                    { text: { ms: "D) Bagi membantu proses pencernaan makanan.", en: "D) To help digest food." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "4. Apakah fungsi utama ovari?", en: "4. What is the main function of the ovaries?" },
-                explanation: { ms: "Ovari menyimpan dan melepaskan telur (ovum) serta menghasilkan hormon.", en: "Ovaries store and release eggs (ova) and produce hormones." },
-                hint: { ms: "Organ ini melepaskan telur setiap bulan.", en: "This organ releases an egg every month." },
+                question: { ms: "4. Apakah yang berlaku kepada lapisan rahim jika kehamilan tidak berlaku?", en: "4. What happens to the uterus lining if pregnancy does not occur?" },
+                explanation: { ms: "Jika tiada kehamilan, lapisan rahim luruh dan keluar melalui faraj bersama darah.", en: "If no pregnancy occurs, the lining breaks down and leaves through the vagina as blood." },
+                hint: { ms: "Lapisan itu akan luruh.", en: "The lining will break down." },
                 options: [
-                    { text: { ms: "A) Menyimpan dan melepaskan telur.", en: "A) Store and release eggs." }, isCorrect: true },
-                    { text: { ms: "B) Memproses makanan.", en: "B) Process food." }, isCorrect: false },
-                    { text: { ms: "C) Menapis darah.", en: "C) Filter blood." }, isCorrect: false },
-                    { text: { ms: "D) Memompa darah ke seluruh badan.", en: "D) Pump blood to the body." }, isCorrect: false }
+                    { text: { ms: "A) Lapisan tersebut diserap semula secara kekal oleh hati.", en: "A) The lining is permanently reabsorbed by the liver." }, isCorrect: false },
+                    { text: { ms: "B) Lapisan tersebut akan bertambah tebal setiap bulan.", en: "B) The lining continues to thicken every month." }, isCorrect: false },
+                    { text: { ms: "C) Lapisan tersebut luruh dan keluar melalui faraj bersama darah.", en: "C) The lining breaks down and leaves through the vagina as blood." }, isCorrect: true },
+                    { text: { ms: "D) Lapisan tersebut bertukar menjadi otot rahim.", en: "D) The lining turns into uterine muscle." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "5. Berapa hari lamanya pendarahan haid biasanya berlangsung?", en: "5. How many days does menstrual bleeding typically last?" },
-                explanation: { ms: "Pendarahan haid yang normal selalunya berlanjutan selama 3 hingga 7 hari.", en: "Normal menstrual bleeding usually lasts for 3 to 7 days." },
-                hint: { ms: "Biasanya kurang daripada seminggu.", en: "Usually less than a week." },
+                question: { ms: "5. Berapakah tempoh julat kitaran haid yang normal bagi kebanyakan orang?", en: "5. What is the normal menstrual cycle length range for most people?" },
+                explanation: { ms: "Julat kitaran haid yang normal bagi kebanyakan orang ialah 21 hingga 35 hari.", en: "A normal cycle length range is 21 to 35 days." },
+                hint: { ms: "Kira-kira sebulan sekali.", en: "Around once a month." },
                 options: [
-                    { text: { ms: "A) 1 hingga 2 hari.", en: "A) 1 to 2 days." }, isCorrect: false },
-                    { text: { ms: "B) 3 hingga 7 hari.", en: "B) 3 to 7 days." }, isCorrect: true },
-                    { text: { ms: "C) 10 hingga 14 hari.", en: "C) 10 to 14 days." }, isCorrect: false },
-                    { text: { ms: "D) 20 hari.", en: "D) 20 days." }, isCorrect: false }
+                    { text: { ms: "A) 5 hingga 10 hari.", en: "A) 5 to 10 days." }, isCorrect: false },
+                    { text: { ms: "B) 10 hingga 15 hari.", en: "B) 10 to 15 days." }, isCorrect: false },
+                    { text: { ms: "C) 21 hingga 35 hari.", en: "C) 21 to 35 days." }, isCorrect: true },
+                    { text: { ms: "D) 40 hingga 50 hari.", en: "D) 40 to 50 days." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "6. Hormon utama yang mengawal kitaran haid ialah:", en: "6. The primary hormones regulating the menstrual cycle are:" },
-                explanation: { ms: "Estrogen dan progesteron adalah dua hormon utama yang mengawal kitaran haid.", en: "Estrogen and progesterone are the two main hormones regulating the cycle." },
-                hint: { ms: "Dua hormon wanita penting.", en: "Two important female hormones." },
+                question: { ms: "6. Apakah yang berlaku semasa fasa ketiga iaitu fasa ovulasi?", en: "6. What occurs during the third phase, known as ovulation?" },
+                explanation: { ms: "Semasa ovulasi, ovari melepaskan telur yang telah matang.", en: "During ovulation, an ovary releases a mature egg." },
+                hint: { ms: "Pelepasan telur matang oleh ovari.", en: "Release of a mature egg by an ovary." },
                 options: [
-                    { text: { ms: "A) Estrogen dan Progesteron.", en: "A) Estrogen and Progesterone." }, isCorrect: true },
-                    { text: { ms: "B) Insulin dan Glukagon.", en: "B) Insulin and Glucagon." }, isCorrect: false },
-                    { text: { ms: "C) Adrenalina dan Kortisol.", en: "C) Adrenaline and Cortisol." }, isCorrect: false },
-                    { text: { ms: "D) Tiroksin dan Melatonin.", en: "D) Thyroxine and Melatonin." }, isCorrect: false }
+                    { text: { ms: "A) Lapisan rahim mula luruh dan keluar sebagai darah.", en: "A) The lining of the uterus breaks down and leaves as blood." }, isCorrect: false },
+                    { text: { ms: "B) Ovari melepaskan telur yang telah matang.", en: "B) An ovary releases a mature egg." }, isCorrect: true },
+                    { text: { ms: "C) Badan berhenti menghasilkan hormon secara lengkap.", en: "C) The body completely stops producing hormones." }, isCorrect: false },
+                    { text: { ms: "D) Fasa pendarahan menstruasi baru bermula.", en: "D) The menstrual bleeding phase begins." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "7. Apakah maksud proses ovulasi?", en: "7. What does the process of ovulation mean?" },
-                explanation: { ms: "Ovulasi ialah proses pelepasan telur matang dari ovari.", en: "Ovulation is the release of a mature egg from the ovary." },
-                hint: { ms: "Pelepasan telur matang.", en: "Release of a mature egg." },
+                question: { ms: "7. Manakah antara warna darah haid berikut yang masih dianggap normal?", en: "7. Which of the following period blood colors is considered normal?" },
+                explanation: { ms: "Warna merah, merah jambu, atau coklat dianggap normal semasa haid.", en: "Red, pink, or brown colors are considered normal." },
+                hint: { ms: "Variasi warna merah dan coklat.", en: "Variations of red and brown." },
                 options: [
-                    { text: { ms: "A) Pelepasan telur matang dari ovari.", en: "A) Release of a mature egg from the ovary." }, isCorrect: true },
-                    { text: { ms: "B) Peluruhan lapisan rahim.", en: "B) Shedding of the uterine lining." }, isCorrect: false },
-                    { text: { ms: "C) Pembentukan sel darah baharu.", en: "C) Formation of new blood cells." }, isCorrect: false },
-                    { text: { ms: "D) Pembersihan saluran kencing.", en: "D) Clearing of the urinary tract." }, isCorrect: false }
+                    { text: { ms: "A) Hijau terang, kuning, atau oren.", en: "A) Bright green, yellow, or orange." }, isCorrect: false },
+                    { text: { ms: "B) Kelabu.", en: "B) Grey." }, isCorrect: false },
+                    { text: { ms: "C) Biru pekat, atau ungu.", en: "C) Deep blue, or purple." }, isCorrect: false },
+                    { text: { ms: "D) Merah, merah jambu, atau coklat.", en: "D) Red, pink, or brown." }, isCorrect: true }
                 ]
             },
             {
-                question: { ms: "8. Adakah haid merupakan tanda sistem pembiakan yang sihat?", en: "8. Is menstruation a sign of a healthy reproductive system?" },
-                explanation: { ms: "Ya, mengalami haid secara teratur menunjukkan sistem pembiakan berfungsi dengan sihat.", en: "Yes, regular periods indicate a healthy functioning reproductive system." },
-                hint: { ms: "Ia adalah proses fizikal semula jadi.", en: "It is a natural physical process." },
+                question: { ms: "8. Tanda manakah yang menunjukkan anda perlu meminta bantuan atau berjumpa dengan doktor?", en: "8. Which sign indicates that you should ask for help or speak to a doctor?" },
+                explanation: { ms: "Perlu menukar pad setiap 1 hingga 2 jam secara berterusan menunjukkan pendarahan terlalu berat.", en: "Needing to change pads every 1 to 2 hours indicates abnormally heavy flow." },
+                hint: { ms: "Aliran darah yang terlalu banyak secara berlebihan.", en: "Excessively heavy flow." },
                 options: [
-                    { text: { ms: "A) Ya, ia proses semula jadi dan sihat.", en: "A) Yes, it is a natural and healthy process." }, isCorrect: true },
-                    { text: { ms: "B) Tidak, ia adalah tanda penyakit.", en: "B) No, it is a sign of illness." }, isCorrect: false },
-                    { text: { ms: "C) Hanya jika berlaku setiap hari.", en: "C) Only if it happens daily." }, isCorrect: false },
-                    { text: { ms: "D) Tidak pasti.", en: "D) Not sure." }, isCorrect: false }
+                    { text: { ms: "A) Haid berlangsung selama 3 hingga 5 hari.", en: "A) A period that lasts for 3 to 5 days." }, isCorrect: false },
+                    { text: { ms: "B) Warna darah bertukar menjadi coklat pada akhir haid.", en: "B) Blood turning brown near the end of your period." }, isCorrect: false },
+                    { text: { ms: "C) Perlu menukar pad setiap 1 hingga 2 jam kerana terlalu penuh.", en: "C) Needing to change your pad every 1 to 2 hours because it is full." }, isCorrect: true },
+                    { text: { ms: "D) Rasa sedikit perubahan emosi semasa haid.", en: "D) Experiencing slight mood changes during your period." }, isCorrect: false }
                 ]
             }
         ],
         penjagaan: [
             {
                 question: { ms: "1. Berapa kerapkah anda perlu menukar pad jika aliran darah haid anda adalah banyak?", en: "1. How often should you change your pad if your period flow is heavy?" },
-                explanation: { ms: "Pad harus ditukar sekurang-kurangnya setiap 3 hingga 4 jam untuk menjaga kebersihan.", en: "Pads should be changed every 3 to 4 hours to maintain proper hygiene." },
-                hint: { ms: "Beberapa kali sehari (setiap 3-4 jam).", en: "Several times a day (every 3-4 hours)." },
+                explanation: { ms: "Pad perlu ditukar sekurang-kurangnya setiap 3 hingga 4 jam untuk kekal bersih.", en: "Pads should be changed every 3 to 4 hours." },
+                hint: { ms: "Setiap beberapa jam sekali.", en: "Every few hours." },
                 options: [
                     { text: { ms: "A) Setiap 12 jam.", en: "A) Every 12 hours." }, isCorrect: false },
                     { text: { ms: "B) Setiap 8 hingga 10 jam.", en: "B) Every 8 to 10 hours." }, isCorrect: false },
@@ -684,88 +666,88 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
-                question: { ms: "2. Bagaimanakah cara terbaik membuang tuala wanita terpakai?", en: "2. What is the best way to dispose of a used sanitary pad?" },
-                explanation: { ms: "Bungkus pad terpakai dengan kertas/plastik dan buang ke dalam tong sampah.", en: "Wrap the used pad in paper/plastic and throw it into a trash bin." },
-                hint: { ms: "Jangan sekali-kali pam ke dalam tandas.", en: "Never flush it down the toilet." },
+                question: { ms: "2. Bagaimanakah cara yang betul untuk membuang pad yang telah digunakan?", en: "2. What is the proper way to dispose of a used pad?" },
+                explanation: { ms: "Cara betul ialah membungkusnya rapi dan membuangnya ke dalam tong sampah.", en: "Proper way is to wrap it up and throw it in the trash bin." },
+                hint: { ms: "Jangan pam ke dalam tandas.", en: "Do not flush down the toilet." },
                 options: [
-                    { text: { ms: "A) Pam ke dalam mangkuk tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
-                    { text: { ms: "B) Bungkus rapi dan buang ke dalam tong sampah.", en: "B) Wrap neatly and throw into a trash bin." }, isCorrect: true },
-                    { text: { ms: "C) Tinggalkan di atas lantai tandas.", en: "C) Leave it on the bathroom floor." }, isCorrect: false },
-                    { text: { ms: "D) Tanam di dalam tanah.", en: "D) Bury it in the soil." }, isCorrect: false }
+                    { text: { ms: "A) Pam masuk ke dalam lubang tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
+                    { text: { ms: "B) Bungkus dan buang ke dalam tong sampah.", en: "B) Wrap it up and throw it in the bin." }, isCorrect: true },
+                    { text: { ms: "C) Cuci dengan sabun lalu simpan semula.", en: "C) Wash it with soap and keep it." }, isCorrect: false },
+                    { text: { ms: "D) Tanam di kawasan tanah luar rumah.", en: "D) Bury it in the dirt outside." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "3. Mengapakah mandi semasa haid itu penting?", en: "3. Why is showering during your period important?" },
-                explanation: { ms: "Mandi membantu menjaga kebersihan diri, mengelakkan bau serta jangkitan bakteria.", en: "Showering maintains personal hygiene, prevents odor and bacterial infection." },
-                hint: { ms: "Kekal bersih dan segar.", en: "Keep clean and fresh." },
+                question: { ms: "3. Antara berikut, manakah barang yang digalakkan untuk disimpan di dalam kit kecemasan haid di sekolah?", en: "3. Which of the following items is recommended to keep in your school period emergency kit?" },
+                explanation: { ms: "Simpan pad, pantyliner, dan seluar dalam tambahan untuk kesediaan kecemasan.", en: "Keep pads, pantyliners, and extra underwear for emergencies." },
+                hint: { ms: "Barang kebersihan diri.", en: "Personal hygiene items." },
                 options: [
-                    { text: { ms: "A) Membantu menjaga kebersihan dan elak jangkitan.", en: "A) Helps maintain hygiene and prevent infections." }, isCorrect: true },
-                    { text: { ms: "B) Untuk menghentikan aliran haid.", en: "B) To stop the period flow." }, isCorrect: false },
-                    { text: { ms: "C) Ia tidak penting langsung.", en: "C) It is not important at all." }, isCorrect: false },
-                    { text: { ms: "D) Supaya tidak perlu menukar pad.", en: "D) So you don't need to change pads." }, isCorrect: false }
+                    { text: { ms: "A) Pad, pantyliner, dan seluar dalam tambahan.", en: "A) Pads, pantyliners, and a spare pair of underwear." }, isCorrect: true },
+                    { text: { ms: "B) Mainan.", en: "B) Toys." }, isCorrect: false },
+                    { text: { ms: "C) Buku cerita tambahan.", en: "C) Additional storybooks." }, isCorrect: false },
+                    { text: { ms: "D) Botol penyembur minyak wangi bersaiz besar.", en: "D) Large-sized perfume spray bottle." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "4. Apakah cecair terbaik untuk membersihkan kawasan kewanitaan?", en: "4. What is the best liquid to clean the intimate area?" },
-                explanation: { ms: "Air bersih sudah mencukupi untuk membersihkan bahagian luar kawasan intim.", en: "Clean water is sufficient for washing the external intimate area." },
-                hint: { ms: "Gunakan cecair semula jadi tanpa bahan kimia keras.", en: "Use a natural liquid without harsh chemicals." },
-                options: [
-                    { text: { ms: "A) Sabun wangi berkimia tinggi.", en: "A) Highly fragranced chemical soap." }, isCorrect: false },
-                    { text: { ms: "B) Air bersih.", en: "B) Clean water." }, isCorrect: true },
-                    { text: { ms: "C) Alkohol pembersih.", en: "C) Rubbing alcohol." }, isCorrect: false },
-                    { text: { ms: "D) Peluntur berasaskan klorin.", en: "D) Chlorine-based bleach." }, isCorrect: false }
-                ]
-            },
-            {
-                question: { ms: "5. Apakah amalan yang membantu melegakan kesakitan senggugut?", en: "5. What practice helps relieve menstrual cramps?" },
-                explanation: { ms: "Meletakkan tuaman hangat di bahagian bawah perut membantu melegakan otot rahim.", en: "Applying a warm compress on the lower abdomen helps relax uterine muscles." },
-                hint: { ms: "Menggunakan haba atau suam.", en: "Applying warmth." },
-                options: [
-                    { text: { ms: "A) Tuaman hangat pada bahagian perut.", en: "A) Warm compress on the abdomen." }, isCorrect: true },
-                    { text: { ms: "B) Minum air ais yang terlalu sejuk.", en: "B) Drinking extremely cold ice water." }, isCorrect: false },
-                    { text: { ms: "C) Berlari maraton.", en: "C) Running a marathon." }, isCorrect: false },
-                    { text: { ms: "D) Menahan diri daripada makan.", en: "D) Refraining from eating." }, isCorrect: false }
-                ]
-            },
-            {
-                question: { ms: "6. Arah basuhan yang betul semasa membersihkan bahagian intim ialah:", en: "6. The correct wiping/washing direction for the intimate area is:" },
-                explanation: { ms: "Basuh dari depan ke belakang untuk mengelakkan bakteria dari dubur masuk ke faraj.", en: "Wipe from front to back to prevent bacteria from the anus entering the vagina." },
-                hint: { ms: "Daripada bahagian depan menuju ke belakang.", en: "From the front towards the back." },
+                question: { ms: "4. Apakah arah yang betul semasa mengelap atau membersihkan kawasan sulit selepas menggunakan tandas?", en: "4. What is the correct direction to wipe or clean your private area after using the toilet?" },
+                explanation: { ms: "Basuh dari depan ke belakang untuk mengelakkan penyebaran kuman/bakteria.", en: "Wipe from front to back to prevent germ spread." },
+                hint: { ms: "Dari bahagian depan menuju ke belakang.", en: "From front to back." },
                 options: [
                     { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
                     { text: { ms: "B) Dari depan ke belakang.", en: "B) From front to back." }, isCorrect: true },
-                    { text: { ms: "C) Dari tepi ke tepi.", en: "C) From side to side." }, isCorrect: false },
-                    { text: { ms: "D) Bebas ke mana-mana arah.", en: "D) Any random direction." }, isCorrect: false }
+                    { text: { ms: "C) Dari kiri ke kanan.", en: "C) From left to right." }, isCorrect: false },
+                    { text: { ms: "D) Tidak perlu dielap sama sekali.", en: "D) It does not need to be wiped at all." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "7. Jenis seluar dalam yang manakah paling sesuai dipakai semasa haid?", en: "7. Which type of underwear is most suitable during periods?" },
-                explanation: { ms: "Seluar dalam kain kapas menyerap peluh dan memberi peredaran udara yang baik.", en: "Cotton underwear absorbs sweat and provides good breathability." },
-                hint: { ms: "Bahan semula jadi yang serap peluh.", en: "Natural sweat-absorbing material." },
+                question: { ms: "5. Jenis produk haid manakah yang paling sesuai digunakan untuk aliran darah yang sangat ringan atau pada penghujung haid?", en: "5. Which period product is best suited for very light flow or toward the end of your period?" },
+                explanation: { ms: "Pantyliner atau pad ringan paling sesuai untuk aliran yang nipis/ringan.", en: "Pantyliners or light pads are best for light flow." },
+                hint: { ms: "Produk nipis seperti pantyliner.", en: "Thin products like pantyliners." },
                 options: [
-                    { text: { ms: "A) Kain kapas (cotton) yang serap peluh.", en: "A) Breathable cotton underwear." }, isCorrect: true },
-                    { text: { ms: "B) Kain sintetik yang terlalu ketat.", en: "B) Tight synthetic fabric." }, isCorrect: false },
-                    { text: { ms: "C) Seluar dalam plastik.", en: "C) Plastic underwear." }, isCorrect: false },
-                    { text: { ms: "D) Tidak perlu pakai seluar dalam.", en: "D) No underwear needed." }, isCorrect: false }
+                    { text: { ms: "A) Pad maxi malam.", en: "A) Overnight maxi pad." }, isCorrect: false },
+                    { text: { ms: "B) Pantyliner atau pad ringan.", en: "B) Pantyliner or light pad." }, isCorrect: true },
+                    { text: { ms: "C) Pad aliran sangat banyak.", en: "C) Very heavy flow pad." }, isCorrect: false },
+                    { text: { ms: "D) Pad bersaiz paling panjang.", en: "D) The longest size pad available." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "8. Mengapa penting untuk membasuh tangan sebelum dan selepas menukar pad?", en: "8. Why is it important to wash hands before and after changing pads?" },
-                explanation: { ms: "Membasuh tangan mengelakkan pemindahan bakteria jahat ke kawasan intim dan persekitaran.", en: "Washing hands prevents transferring harmful bacteria to the intimate area and surroundings." },
-                hint: { ms: "Untuk mengelakkan kuman dan jangkitan.", en: "To prevent germs and infections." },
+                question: { ms: "6. Apakah kelebihan pad malam (overnight) atau pad maxi untuk aliran darah yang sangat banyak?", en: "6. What is the advantage of using an overnight or maxi pad for very heavy flow?" },
+                explanation: { ms: "Pad malam biasanya lebih panjang dan mempunyai bahagian belakang lebih lebar.", en: "Overnight pads are longer with a wider back to prevent leaks." },
+                hint: { ms: "Bentuk saiz yang lebih panjang dan lebar.", en: "Longer and wider size design." },
                 options: [
-                    { text: { ms: "A) Mencegah penyebaran kuman dan kotoran.", en: "A) Prevent the spread of germs and dirt." }, isCorrect: true },
-                    { text: { ms: "B) Supaya tangan kelihatan wangi sahaja.", en: "B) Just to make hands smell nice." }, isCorrect: false },
-                    { text: { ms: "C) Tidak penting, basuh selepas sahaja.", en: "C) Not important, wash after only." }, isCorrect: false },
-                    { text: { ms: "D) Hanya syarat formaliti.", en: "D) Just a formality." }, isCorrect: false }
+                    { text: { ms: "A) Ia bersaiz lebih pendek dan nipis.", en: "A) It is shorter and thinner." }, isCorrect: false },
+                    { text: { ms: "B) Ia tidak perlu ditukar langsung.", en: "B) It never needs to be changed." }, isCorrect: false },
+                    { text: { ms: "C) Ia biasanya lebih panjang dan mempunyai bahagian belakang lebih lebar untuk mengelakkan kebocoran.", en: "C) It is usually longer and has a wider back to help prevent leaks." }, isCorrect: true },
+                    { text: { ms: "D) Ia menukar warna darah haid secara automatik.", en: "D) It automatically changes the color of the blood." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
+                explanation: { ms: "Meletakkan pek pemanas atau botol air suam membantu mengendurkan otot rahim.", en: "Applying a heating pad or hot water bottle helps relax uterine muscles." },
+                hint: { ms: "Mengaplikasikan kehangatan suam.", en: "Applying gentle warmth." },
+                options: [
+                    { text: { ms: "A) Letakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
+                    { text: { ms: "B) Letakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
+                    { text: { ms: "C) Ditekan dengan objek keras dan berat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
+                    { text: { ms: "D) Dibiarkan terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid??", en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?" },
+                explanation: { ms: "Sentiasa bertanya dan dapatkan nasihat daripada ibu bapa, penjaga, atau doktor.", en: "Always ask parents, guardians, or doctors for medical guidance." },
+                hint: { ms: "Bertanya kepada orang dewasa atau pakar kesihatan.", en: "Ask an adult or healthcare professional." },
+                options: [
+                    { text: { ms: "A) Ambil sahaja mengikut gerak hati sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
+                    { text: { ms: "B) Minum air berkafein yang tinggi terlebih dahulu.", en: "B) Drink a highly caffeinated beverage first." }, isCorrect: false },
+                    { text: { ms: "C) Bertanya atau mendapat kebenaran daripada ibu bapa, penjaga, atau doktor.", en: "C) Ask a parent, guardian, or doctor for advice." }, isCorrect: true },
+                    { text: { ms: "D) Sentiasa mengambil ubat melebihi dos yang disyorkan.", en: "D) Always take more than the recommended dose." }, isCorrect: false }
                 ]
             }
         ],
         kesihatan: [
             {
                 question: { ms: "1. Apakah yang membezakan PMDD daripada PMS?", en: "1. What differentiates PMDD from PMS?" },
-                explanation: { ms: "PMDD adalah bentuk PMS yang lebih teruk yang menyebabkan emosi terganggu secara berlebihan.", en: "PMDD is a severe form of PMS causing severe mood changes that impact daily life." },
-                hint: { ms: "PMDD memberi kesan yang lebih teruk kepada emosi dan aktiviti harian.", en: "PMDD causes far more severe mood impacts on daily activities." },
+                explanation: { ms: "PMDD menyebabkan perubahan mood yang lebih melampau sehingga menjejaskan harian.", en: "PMDD causes extreme mood changes that disrupt daily life." },
+                hint: { ms: "Simptom emosi yang jauh lebih teruk.", en: "Much more severe emotional symptoms." },
                 options: [
                     { text: { ms: "A) PMDD hanya menyebabkan sakit kepala.", en: "A) PMDD only causes headaches." }, isCorrect: false },
                     { text: { ms: "B) PMDD menyebabkan perubahan mood yang lebih melampau dan boleh menjejaskan kehidupan harian.", en: "B) PMDD causes more extreme mood changes that can disrupt daily life." }, isCorrect: true },
@@ -774,80 +756,80 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
-                question: { ms: "2. Adakah mitos bahawa seseorang tidak boleh bersukan semasa haid?", en: "2. Is it a myth that one should not exercise during periods?" },
-                explanation: { ms: "Ya! Senaman ringan sebenarnya membantu melegakan kesakitan senggugut.", en: "Yes! Light exercise actually helps relieve menstrual cramps." },
-                hint: { ms: "Senaman ringan adalah bagus.", en: "Light exercise is good." },
+                question: { ms: "2. Apakah maksud Peningkatan Prahaid (PME)?", en: "2. What is the meaning of Premenstrual Exacerbation (PME)?" },
+                explanation: { ms: "PME bermaksud keadaan kesihatan mental sedia ada menjadi lebih teruk sebelum haid.", en: "PME means existing mental health conditions worsen before periods." },
+                hint: { ms: "Masalah sedia ada menjadi semakin teruk.", en: "Existing condition getting worse." },
                 options: [
-                    { text: { ms: "A) Ya, ia mitos. Senaman ringan adalah digalakkan.", en: "A) Yes, it is a myth. Light exercise is encouraged." }, isCorrect: true },
-                    { text: { ms: "B) Tidak, bersukan berbahaya semasa haid.", en: "B) No, playing sports is dangerous during periods." }, isCorrect: false },
-                    { text: { ms: "C) Hanya sukan renang dibenarkan.", en: "C) Only swimming is allowed." }, isCorrect: false },
-                    { text: { ms: "D) Bersukan membuatkan haid berhenti.", en: "D) Exercise stops menstrual flow." }, isCorrect: false }
+                    { text: { ms: "A) Haid berlaku lebih awal daripada biasa.", en: "A) Period occurs earlier than usual." }, isCorrect: false },
+                    { text: { ms: "B) Kesihatan fizikal menjadi lebih baik sebelum haid.", en: "B) Physical health improves before period." }, isCorrect: false },
+                    { text: { ms: "C) Keadaan kesihatan mental sedia ada menjadi lebih teruk sebelum haid.", en: "C) Pre-existing mental health conditions become worse before period." }, isCorrect: true },
+                    { text: { ms: "D) Haid berhenti selama beberapa bulan.", en: "D) Period stops for several months." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "3. Apakah simptom emosi yang biasa dialami semasa PMS?", en: "3. What is a common emotional symptom during PMS?" },
-                explanation: { ms: "Perubahan mood (mood swings) dan rasa cepat marah sering berlaku disebabkan perubahan hormon.", en: "Mood swings and irritability often happen due to hormonal changes." },
-                hint: { ms: "Emosi berubah-ubah.", en: "Fluctuating emotions." },
+                question: { ms: "3. Yang manakah merupakan fakta tentang bersenam ketika haid?", en: "3. Which of the following is a fact about exercising during menstruation?" },
+                explanation: { ms: "Aktiviti fizikal selamat dan melegakan senggugut serta membaiki emosi.", en: "Physical activity is safe and helps reduce cramps and moodiness." },
+                hint: { ms: "Senaman adalah selamat dan digalakkan.", en: "Exercise is safe and encouraged." },
                 options: [
-                    { text: { ms: "A) Perubahan mood dan emosi sensitif.", en: "A) Mood swings and emotional sensitivity." }, isCorrect: true },
-                    { text: { ms: "B) Rasa terlalu gembira sepanjang masa.", en: "B) Feeling overjoyed all the time." }, isCorrect: false },
-                    { text: { ms: "C) Hilang ingatan ingatan jangka panjang.", en: "C) Long-term memory loss." }, isCorrect: false },
-                    { text: { ms: "D) Tiada sebarang kesan emosi.", en: "D) No emotional impact at all." }, isCorrect: false }
+                    { text: { ms: "A) Senaman mesti dielakkan ketika haid.", en: "A) Exercise must be avoided during period." }, isCorrect: false },
+                    { text: { ms: "B) Senaman boleh memburukkan senggugut.", en: "B) Exercise can worsen menstrual cramps." }, isCorrect: false },
+                    { text: { ms: "C) Aktiviti fizikal adalah selamat dan boleh membantu mengurangkan senggugut serta perubahan mood.", en: "C) Physical activity is safe and can help reduce cramps as well as mood changes." }, isCorrect: true },
+                    { text: { ms: "D) Hanya atlet boleh bersenam ketika haid.", en: "D) Only athletes can exercise during period." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "4. Bolehkah memakan makanan sihat membantu mengurangkan rasa tidak selesa semasa haid?", en: "4. Can eating healthy food help reduce discomfort during periods?" },
-                explanation: { ms: "Ya, diet seimbang kaya dengan zat besi dan magnesium membantu badan kekal bertenaga.", en: "Yes, a balanced diet rich in iron and magnesium helps keep the body energized." },
-                hint: { ms: "Makanan berkhasiat membantu badan.", en: "Nutritious food helps the body." },
+                question: { ms: "4. Apakah yang boleh digunakan untuk berenang dengan selamat semasa datang haid?", en: "4. What can be used to swim safely while on your period?" },
+                explanation: { ms: "Gunakan produk haid dalaman atau spesifik seperti tampon/cawan haid/pakaian renang haid.", en: "Use appropriate internal/swim period products like tampons or period swimwear." },
+                hint: { ms: "Produk renang khas haid atau tampon.", en: "Special period swimwear or tampons." },
                 options: [
-                    { text: { ms: "A) Ya, nutrisi seimbang mengurangkan simptom tidak selesa.", en: "A) Yes, balanced nutrition reduces uncomfortable symptoms." }, isCorrect: true },
-                    { text: { ms: "B) Tidak, makanan tiada kaitan langsung.", en: "B) No, food has no connection." }, isCorrect: false },
-                    { text: { ms: "C) Hanya gula berlebihan yang membantu.", en: "C) Only excess sugar helps." }, isCorrect: false },
-                    { text: { ms: "D) Makan junk food paling digalakkan.", en: "D) Eating junk food is recommended." }, isCorrect: false }
+                    { text: { ms: "A) Pad biasa atau pantyliner.", en: "A) Regular pads or pantyliners." }, isCorrect: false },
+                    { text: { ms: "B) Produk haid yang sesuai seperti tampon, cawan haid, atau pakaian renang khas haid.", en: "B) Appropriate period products such as tampons, menstrual cups, or period swimwear." }, isCorrect: true },
+                    { text: { ms: "C) Tisu kering yang dilipat.", en: "C) Folded dry tissues." }, isCorrect: false },
+                    { text: { ms: "D) Berenang tidak memerlukan sebarang produk haid.", en: "D) Swimming does not require any period products." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "5. Mengapakah anemia boleh berlaku disebabkan haid yang terlalu berat?", en: "5. Why can anemia occur due to excessively heavy periods?" },
-                explanation: { ms: "Kehilangan darah yang banyak menyebabkan paras zat besi dan sel darah merah menurun.", en: "Losing a lot of blood causes a drop in iron levels and red blood cells." },
-                hint: { ms: "Kekurangan zat besi dalam darah.", en: "Lack of iron in the blood." },
+                question: { ms: "5. Apakah jenis pakaian yang sepatutnya dielakkan semasa haid kerana boleh memerangkap haba dan kelembapan serta menggalakkan pertumbuhan bakteria dan kulat?", en: "5. What type of clothing should be avoided during your period because it can trap heat and moisture, promoting bacteria and fungal growth?" },
+                explanation: { ms: "Pakaian sintetik yang terlalu ketat perlu dielakkan kerana memerangkap haba.", en: "Tight synthetic clothing should be avoided as it traps heat and moisture." },
+                hint: { ms: "Pakaian sintetik yang amat ketat.", en: "Very tight synthetic clothes." },
                 options: [
-                    { text: { ms: "A) Kehilangan banyak darah mengurangkan zat besi.", en: "A) Heavy blood loss reduces body iron levels." }, isCorrect: true },
-                    { text: { ms: "B) Kerana terlalu banyak tidur.", en: "B) Because of sleeping too much." }, isCorrect: false },
-                    { text: { ms: "C) Anemia tidak berkaitan dengan darah.", en: "C) Anemia is not related to blood." }, isCorrect: false },
-                    { text: { ms: "D) Akibat minum air terlalu banyak.", en: "D) Due to drinking too much water." }, isCorrect: false }
+                    { text: { ms: "A) Pakaian daripada fabrik kapas yang longgar.", en: "A) Loose cotton fabric clothing." }, isCorrect: false },
+                    { text: { ms: "B) Pakaian yang selesa dan mempunyai pengudaraan baik.", en: "B) Comfortable and breathable clothing." }, isCorrect: false },
+                    { text: { ms: "C) Pakaian sintetik yang terlalu ketat.", en: "C) Overly tight synthetic clothing." }, isCorrect: true },
+                    { text: { ms: "D) Pakaian yang diperbuat daripada kain benang semula jadi.", en: "D) Clothing made from natural fiber fabrics." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "6. Apakah tindakan sewajarnya jika anda mengalami sakit senggugut yang teruk sehingga pengsan?", en: "6. What is the appropriate action if you experience period pain so severe that you faint?" },
-                explanation: { ms: "Kesakitan ekstrem sehingga pengsan adalah tidak normal dan memerlukan pemeriksaan doktor.", en: "Extreme pain causing fainting is abnormal and requires a doctor's examination." },
-                hint: { ms: "Dapatkan bantuan pakar perubatan.", en: "Seek medical professional help." },
+                question: { ms: "6. Mengapakah produk haid berpewangi boleh menyebabkan masalah?", en: "6. Why can scented menstrual products cause issues?" },
+                explanation: { ms: "Pewangi tambahan boleh mengganggu pH semula jadi dan menyebabkan kerengsaan.", en: "Added fragrances can disrupt natural pH balance and cause irritation." },
+                hint: { ms: "Mengganggu pH dan sebabkan kerengsaan.", en: "Disrupts pH and causes irritation." },
                 options: [
-                    { text: { ms: "A) Jumpa doktor untuk pemeriksaan kesihatan.", en: "A) See a doctor for a health examination." }, isCorrect: true },
-                    { text: { ms: "B) Biarkan sahaja kerana itu perkara biasa.", en: "B) Ignore it as it is completely normal." }, isCorrect: false },
-                    { text: { ms: "C) Hanya makan gula-gula.", en: "C) Just eat candy." }, isCorrect: false },
-                    { text: { ms: "D) Berhenti mandi selama seminggu.", en: "D) Stop showering for a week." }, isCorrect: false }
+                    { text: { ms: "A) Ia menyebabkan darah haid berhenti.", en: "A) They cause period blood to stop." }, isCorrect: false },
+                    { text: { ms: "B) Ia meningkatkan tempoh haid.", en: "B) They increase the duration of period." }, isCorrect: false },
+                    { text: { ms: "C) Ia boleh mengganggu keseimbangan pH semula jadi dan menyebabkan kerengsaan.", en: "C) They can disrupt the natural pH balance and cause irritation." }, isCorrect: true },
+                    { text: { ms: "D) Ia menyebabkan haid datang lebih kerap.", en: "D) They cause period to occur more frequently." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "7. Adakah meminum air yang cukup penting semasa haid?", en: "7. Is drinking enough water important during menstruation?" },
-                explanation: { ms: "Minum air yang cukup mengelakkan kembung perut dan kekejangan otot.", en: "Drinking sufficient water prevents bloating and muscle cramps." },
-                hint: { ms: "Hidrasi badan amat penting.", en: "Body hydration is very important." },
+                question: { ms: "7. Apakah yang boleh dilakukan untuk membantu seseorang yang mengalami senggugut?", en: "7. What can be done to help someone experiencing period cramps?" },
+                explanation: { ms: "Memberikan pad pemanas atau botol air panas melegakan sakit mereka.", en: "Providing a heating pad or hot water bottle helps relieve their pain." },
+                hint: { ms: "Haba suam daripada pad pemanas.", en: "Gentle warmth from a heating pad." },
                 options: [
-                    { text: { ms: "A) Ya, air membantu mengurangkan kembung dan senggugut.", en: "A) Yes, water helps reduce bloating and cramps." }, isCorrect: true },
-                    { text: { ms: "B) Tidak, air menambah pendarahan.", en: "B) No, water increases bleeding." }, isCorrect: false },
-                    { text: { ms: "C) Hanya perlu minum apabila dahaga sangat.", en: "C) Only drink when extremely thirsty." }, isCorrect: false },
-                    { text: { ms: "D) Minuman bersoda lebih baik.", en: "D) Carbonated drinks are better." }, isCorrect: false }
+                    { text: { ms: "A) Menyuruh mereka mengabaikan kesakitan.", en: "A) Telling them to ignore the pain." }, isCorrect: false },
+                    { text: { ms: "B) Memberikan pad pemanas atau botol air panas.", en: "B) Providing a heating pad or hot water bottle." }, isCorrect: true },
+                    { text: { ms: "C) Menghalang mereka daripada berehat.", en: "C) Preventing them from resting." }, isCorrect: false },
+                    { text: { ms: "D) Menyuruh mereka melakukan kerja berat.", en: "D) Asking them to do heavy work." }, isCorrect: false }
                 ]
             },
             {
-                question: { ms: "8. Apakah matlamat utama meningkatkan kesedaran tentang kesihatan haid?", en: "8. What is the main goal of raising awareness about menstrual health?" },
-                explanation: { ms: "Tujuannya adalah membendung stigma serta memastikan kebersihan dan kesihatan terjaga.", en: "The goal is to eliminate stigma and ensure proper hygiene and health care." },
-                hint: { ms: "Menghapuskan rasa malu dan stigma jahil.", en: "Eliminating shame and ignorant stigma." },
+                question: { ms: "8. Bagaimanakah cara terbaik untuk menyokong seseorang yang mengalami perubahan mood ketika haid?", en: "8. What is the best way to support someone experiencing mood swings during their period?" },
+                explanation: { ms: "Mendengar luahan emosi mereka tanpa menghakimi adalah sokongan terbaik.", en: "Listening without judgment and empathizing with them is the best support." },
+                hint: { ms: "Mendengar tanpa menghakimi.", en: "Listening without judgment." },
                 options: [
-                    { text: { ms: "A) Menghapuskan stigma dan memupuk amalan sihat.", en: "A) Eliminate stigma and promote healthy practices." }, isCorrect: true },
-                    { text: { ms: "B) Menyembunyikan topik ini daripada masyarakat.", en: "B) Hide this topic from society." }, isCorrect: false },
-                    { text: { ms: "C) Memaksa semua orang berhenti sekolah.", en: "C) Force everyone to drop out of school." }, isCorrect: false },
-                    { text: { ms: "D) Mengurangkan jualan pad di pasaran.", en: "D) Reduce pad sales in the market." }, isCorrect: false }
+                    { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
+                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
+                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
+                    { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
         ]
@@ -861,9 +843,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (scene11Overlay) scene11Overlay.style.display = "none";
         if (scene12Overlay) scene12Overlay.style.display = "flex";
 
-        // Dapatkan jumlah soalan kategori aktif
         const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
-        const totalQuestions = currentCategoryQuestions.length; // 8 soalan
+        const totalQuestions = currentCategoryQuestions.length;
 
         if (finalScoreVal) finalScoreVal.textContent = currentScore;
         if (totalScoreVal) totalScoreVal.textContent = ` / ${totalQuestions}`;
@@ -991,6 +972,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnQuizPenjagaan) btnQuizPenjagaan.addEventListener("click", () => startCategoryQuiz("penjagaan"));
     if (btnQuizKesihatan) btnQuizKesihatan.addEventListener("click", () => startCategoryQuiz("kesihatan"));
 
+    if (scene11BackBtn) {
+        scene11BackBtn.addEventListener("click", () => {
+            if (scene11Overlay) scene11Overlay.style.display = "none";
+            if (scene10Overlay) scene10Overlay.style.display = "flex";
+        });
+    }
+
     if (scene11HomeBtn) {
         scene11HomeBtn.addEventListener("click", () => {
             if (scene11Overlay) scene11Overlay.style.display = "none";
@@ -1034,6 +1022,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
+        if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
+        if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
+        if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
+        if (scene9BackBtn) scene9BackBtn.textContent = isEn ? "Back" : "Kembali";
+        if (scene11BackBtn) scene11BackBtn.textContent = isEn ? "Back" : "Kembali";
+        if (scene12BackBtn) scene12BackBtn.textContent = isEn ? "Back" : "Kembali";
+
         if (isEn) {
             if (settingsTitle) settingsTitle.textContent = "Setting";
             if (labelAudio) labelAudio.textContent = "Sound";
@@ -1043,6 +1038,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (textMute) textMute.textContent = "Mute";
             if (textLangBm) textLangBm.textContent = "Malay";
             if (textLangEn) textLangEn.textContent = "English";
+            if (backBtn) backBtn.textContent = "Back";
 
             if (btnChapter) btnChapter.textContent = "Chapter";
             if (btnQuiz) btnQuiz.textContent = "Quiz";
@@ -1095,6 +1091,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (textMute) textMute.textContent = "Senyap";
             if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
             if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
+            if (backBtn) backBtn.textContent = "Kembali";
 
             if (btnChapter) btnChapter.textContent = "Bab";
             if (btnQuiz) btnQuiz.textContent = "Kuiz";
