@@ -1,259 +1,1128 @@
+@font-face {
+    font-family: 'Dream Orphans Regular';
+    src: url('assets/fonts/DreamOrphans-Regular.ttf') format('truetype');
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif, Arial;
+    box-sizing: border-box;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html,
+body {
+    width: 100vw;
+    height: 100vh;
     background-color: #000;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* OVERLAY ASAS */
-.overlay {
+#player-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #a6f2eb;
+    overflow: hidden;
+}
+
+/* ==========================================
+   DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
+   ========================================== */
+.circle-icon-btn,
+#fullscreen-btn {
+    width: 52px !important;
+    height: 52px !important;
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #38B6FF !important; /* Garis lingkaran luar biru terang */
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    padding: 0 !important;
+    outline: none !important;
+    flex-shrink: 0;
+    overflow: visible !important;
+}
+
+/* SIMBOL IKON BIRU DI TENGAH */
+.circle-icon-btn svg,
+#fullscreen-btn svg,
+.circle-icon-btn svg path,
+#fullscreen-btn svg path {
+    width: 26px !important;
+    height: 26px !important;
+    fill: #38B6FF !important;
+    stroke: none !important;
+    stroke-width: 0 !important;
+    fill-rule: evenodd !important;
+    transition: fill 0.2s ease !important;
+    display: block !important;
+    margin: auto !important;
+}
+
+/* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
+.circle-icon-btn:hover,
+#fullscreen-btn:hover {
+    background-color: #FFE6F2 !important; /* Light Pink Soft */
+    border-color: #38B6FF !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+.circle-icon-btn:hover svg,
+#fullscreen-btn:hover svg,
+.circle-icon-btn:hover svg path,
+#fullscreen-btn:hover svg path {
+    fill: #38B6FF !important;
+    stroke: none !important;
+}
+
+/* KONTROL KIRI BAWAH */
+.left-bottom-controls {
+    position: absolute;
+    bottom: 4vh;
+    left: 3vw;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    z-index: 310;
+}
+
+/* TOMBOL FULLSCREEN */
+#fullscreen-btn {
+    display: flex !important;
+    position: fixed !important;
+    top: 20px !important;
+    left: 20px !important;
+    z-index: 9999999 !important;
+}
+
+@media screen and (max-width: 768px) {
+    #fullscreen-btn {
+        display: none !important;
+    }
+}
+
+/* ==========================================
+   0. OVERLAY LAYAR MULA
+   ========================================== */
+#start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/Start.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 35vh;
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+#start-app-btn {
+    padding: 18px 50px;
+    font-size: 1.8rem;
+    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-weight: bold;
+    color: #990184;
+    background-color: #CFE1F7;
+    border: 4px solid #CC3399;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#start-app-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    background-color: #FFFFCC !important;
+}
+
+.first-header {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 9999;
+    width: 100%;
+}
+
+.first-title {
+    color: #990184;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: bold;
+    font-size: 4.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+.first-subtitle {
+    color: #E70B90;
+    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 8rem;
+    margin-top: -20px;
+    line-height: 0.9;
+}
+
+/* LAYER VIDEO */
+.video-layer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+}
+
+.video-layer.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* SCENE 2: PEMILIHAN BAHASA */
+#language-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/Language.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10;
-}
-
-/* FULLSCREEN BUTTON */
-#fullscreen-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    gap: 30px;
     z-index: 100;
 }
 
-/* GLOBAL NAV CONTROLS */
-#global-controls {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    display: flex;
-    gap: 10px;
-    z-index: 100;
-}
-
-.icon-btn {
-    background: #FF4081;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
+.lang-btn {
+    position: relative;
+    border: 5px solid #CC3399;
+    color: #E70B90;
+    height: 80px;
+    font-size: 2rem;
+    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
+    font-weight: 900;
+    border-radius: 65px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    width: 480px;
+    max-width: 90vw;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 60px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.icon-btn:active {
-    transform: scale(0.92);
+#btn-bm { background-color: #CFE1F7; }
+#btn-en { background-color: #CCFFFF; }
+
+.lang-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFFFCC !important;
 }
 
-/* VIDEO ELEMENT INTRO & COMP1 */
-#videoPlayer1, #videoPlayer2 {
+#language-overlay .flag-icon {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid #CC3399;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.18);
     z-index: 5;
 }
 
-#videoPlayer1.active, #videoPlayer2.active {
-    display: block;
-}
-
-/* CARD KANDUNGAN MENU */
-.card {
-    background: #FFFFFF;
-    border-radius: 20px;
-    padding: 30px;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-}
-
-.card h1, .card h2 {
-    color: #E70B90;
-    margin-bottom: 20px;
-}
-
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.button-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.main-btn, .sub-btn, .secondary-btn {
-    background: linear-gradient(135deg, #FF4081, #E70B90);
-    color: white;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.main-btn:hover, .sub-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(231, 11, 144, 0.3);
-}
-
-#skip-btn {
+.footer-logo {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 20;
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
 }
 
-/* MODUL PEMAIN VIDEO DYNAMIK */
-.video-overlay {
+.footer-title {
+    color: #990184;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+.footer-subtitle {
+    color: #DC03A0;
+    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 2.2rem;
+    margin-top: 4px;
+    line-height: 0.5;
+}
+
+/* TOMBOL LANGKAU */
+#skip-btn {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    z-index: 9999 !important;
+    width: 140px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #FFFFCC;
+    border: 4px solid #339933;
+    color: #009966;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#skip-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFCCFF !important;
+}
+
+/* ==========================================
+   SCENE 4: UTAMA MENU
+   ========================================== */
+#scene4-overlay {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 15;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/bg-homepage.jpg');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 200;
 }
 
-#normalLawanVideo {
-    width: 100%;
-    height: calc(100% - 60px);
-    object-fit: contain;
+.menu-header {
+    text-align: center;
+    margin-top: 12vh !important;
+    margin-bottom: 0px !important;
 }
 
-.video-controls-bar {
-    height: 60px;
-    background: #111;
+.menu-title {
+    color: #990184;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-weight: bold;
+    font-size: 4.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+.menu-subtitle {
+    color: #E70B90;
+    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 8rem;
+    margin-top: -20px;
+    line-height: 0.9;
+}
+
+.menu-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    margin-top: 25vh !important;
+}
+
+.menu-btn {
+    width: 280px;
+    height: 58px;
+    background-color: #CFE1F7;
+    border: 4px solid #CC3399;
+    color: #990184;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.video-controls-bar button, .video-controls-bar select {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    background: #333;
-    color: white;
+.menu-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFFFCC !important;
+}
+
+/* ==========================================
+   SCENE 5: SETTINGS OVERLAY
+   ========================================== */
+#settings-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/setting-page.png');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8vh;
+    z-index: 300;
+}
+
+/* SEMBUNYIKAN BUTANG SETTING PADA SKRIN TETAPAN */
+#settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
+#settings-overlay .left-bottom-controls button[id*="setting"],
+#settings-overlay .left-bottom-controls .gear-btn {
+    display: none !important;
+}
+
+#settings-title {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 3.8rem;
+    text-align: center;
+}
+
+.settings-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: stretch;
+    width: 86%;
+    max-width: 1000px;
+    margin-top: 8vh !important;
+}
+
+.settings-box {
+    flex: 1;
+    position: relative;
+    border: 4px solid #CC3399;
+    border-radius: 35px;
+    padding: 40px 25px 30px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 290px;
+}
+
+.box-header-badge {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: 52px;
+    border: 4px solid #CC3399;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E70B90;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 2.1rem;
+}
+
+.header-audio { background-color: #E7F7A8; }
+.header-lang { background-color: #CFE1F7; }
+
+.audio-control-body {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.volume-slider-container {
+    position: relative;
+    width: 50px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 130px;
+    height: 18px;
+    background: linear-gradient(to right, #E70B90 100%, #FFCCE5 0%);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    margin: 0;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #FFFFCC;
+    border: 3px solid #CC3399;
     cursor: pointer;
 }
 
-/* REKA BENTUK SOALAN BUKU LATIHAN GARISAN BIRU */
-.quiz-container {
-    background: #FFF;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 700px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-.quiz-header {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 18px;
-    font-weight: bold;
+#volume-percentage {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.notebook-lines {
-    background: repeating-linear-gradient(
-        white,
-        white 39px,
-        #4A90E2 40px
-    );
-    line-height: 40px;
-    padding: 0 10px;
-    margin-bottom: 20px;
-    min-height: 120px;
+.audio-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.notebook-lines .q-line {
-    display: block;
-    font-size: 17px;
-    font-weight: 600;
-    color: #222;
-}
-
-.quiz-options {
+.settings-action-btn {
+    width: 240px;
+    height: 52px;
+    background-color: #E7F7A8;
+    border: 3.5px solid #CC3399;
+    color: #E70B90;
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 1.45rem;
+    border-radius: 30px;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: 45px 1fr;
+    align-items: center;
+    padding-left: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.settings-action-btn:hover {
+    transform: translateY(-3px);
+    background-color: #FFCCFF !important;
+}
+
+.btn-icon {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.settings-action-btn span:not(.btn-icon) {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.lang-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.lang-option-btn {
+    position: relative;
+    width: 270px;
+    height: 56px;
+    background-color: #CFE1F7;
+    border: 3.5px solid #CC3399;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 15px;
+}
+
+.flag-icon {
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3.5px solid #CC3399;
+    z-index: 5;
+    background-size: cover;
+    background-position: center;
+}
+
+.flag-my {
+    background-image: url('assets/flag-malaysia.png');
+    background-size: cover;
+    background-position: 20% center;
+    background-color: #000066;
+}
+
+.flag-uk {
+    background-image: url('assets/flag-uk.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #CC0000;
+}
+
+/* ==========================================
+   SCENE 6: MENU BAB
+   ========================================== */
+#scene6-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/bg fyp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8vh;
+    z-index: 200;
+}
+
+#chapter-title {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 3.4rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+}
+
+.chapter-grid-container {
+    position: absolute;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 900px;
+    height: 380px;
+}
+
+.chapter-card-btn {
+    position: absolute;
+    width: 360px;
+    height: 90px;
+    background-color: #FABFD7;
+    border: 3.5px solid #E680CC;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.chapter-card-btn:hover {
+    transform: translateY(-5px);
+    background-color: #FFFF99 !important;
+}
+
+.card-left {
+    top: 0px;
+    left: 10px;
+}
+
+.card-right {
+    top: 0px;
+    right: 10px;
+}
+
+.card-center {
+    top: 195px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-center:hover {
+    transform: translate(-50%, -5px);
+}
+
+.card-icon-circle {
+    position: absolute;
+    left: -12px;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-bg-blue { background-color: #CCFFFF; }
+.icon-bg-cyan { background-color: #CCEAFF; }
+.icon-bg-purple { background-color: #CFDEFC; }
+
+.card-emoji {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.health-svg-icon {
+    width: 38px;
+    height: 38px;
+    fill: #DC03A0;
+    display: block;
+    margin: auto;
+}
+
+.card-label {
+    flex: 1;
+    text-align: center;
+    padding-left: 48px;
+    padding-right: 15px;
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+/* ==========================================
+   SCENE 7, 8, 9: SUB-MENUS
+   ========================================== */
+#scene7-overlay, #scene8-overlay, #scene9-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/bg fyp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8vh;
+    z-index: 200;
+}
+
+#asas-title, #penjagaan-title, #kesihatan-title {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 3.4rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+}
+
+.sub-menu-grid {
+    position: absolute;
+    top: 28vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px 60px;
+    width: 84%;
+    max-width: 900px;
+}
+
+.sub-menu-btn {
+    height: 85px;
+    background-color: #B4D4F0;
+    border: 3.5px solid #E680CC;
+    border-radius: 24px;
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 1.7rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.sub-menu-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFCCFF !important;
+}
+
+.sub-menu-btn.green-btn {
+    background-color: #CFE4D1;
+    border: 3.5px solid #E680CC;
+}
+
+.sub-menu-btn.green-btn:hover { background-color: #FFCCCC !important; }
+
+.sub-menu-btn.yellow-btn {
+    background-color: #FFED96;
+    border: 3.5px solid #EFA6CC;
+}
+
+.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
+
+/* OVERLAY PEMUTAR VIDEO */
+#normal-lawan-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 250;
+    overflow: hidden;
+}
+
+.video-display-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.video-display-area video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #000000;
+}
+
+.video-controls-toolbar {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.video-speed-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 76px;
+}
+
+#videoSpeed {
+    width: 55px;
+    height: 38px;
+    padding: 0 3px;
+    background-color: #FFFFFF;
+    color: #52B2EC;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+}
+
+/* SCENE 10: QUIZ MENU OVERLAY */
+#scene10-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/bg fyp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8vh;
+    z-index: 200;
+}
+
+#quiz-title {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 3.4rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+}
+
+/* ==========================================
+   SCENE 11: INTERFASE KUIS (KEDUDUKAN GARISAN TEPAT)
+   ========================================== */
+#scene11-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/quiz bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 200;
+}
+
+/* BEKAS SOALAN KUIS */
+.question-container {
+    position: absolute;
+    top: 6.2vh; /* Kedudukan Baris 1 tepat di atas Garis 1 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 1000px;
+    text-align: center;
+    z-index: 210;
+}
+
+#quiz-question-text {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #E70B90 !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* KAWALAN BARIS TEKS TERPADU (GARIS 1, 2, DAN 3) */
+.q-line {
+    display: block;
+    height: 5.6vh;      /* Jarak antara garisan biru */
+    line-height: 5.2vh; /* Memastikan alas teks melekat di atas garisan */
+    white-space: nowrap;
+}
+
+.options-grid {
+    position: absolute;
+    top: 42vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 90px 50px;
+    width: 88%;
+    max-width: 980px;
+    z-index: 210;
 }
 
 .option-btn {
-    background: #F0F4F8;
-    border: 2px solid #D0D7DE;
-    padding: 12px 15px;
-    border-radius: 10px;
-    text-align: left;
-    font-size: 15px;
+    min-height: 90px;
+    background-color: #FFED96;
+    border: 3.5px solid #E680CC;
+    border-radius: 25px;
+    font-family: "Franklin Gothic Demi Cond", "Arial Narrow", sans-serif;
+    font-size: 1.45rem;
+    font-weight: normal;
+    color: #000;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     cursor: pointer;
-    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .option-btn:hover {
-    background: #E1E9F0;
-    border-color: #E70B90;
+    transform: translateY(-4px);
+    background-color: #FFCC99 !important;
 }
 
-/* SETTINGS & MODAL */
-.setting-item {
-    margin-bottom: 20px;
-    text-align: left;
+.score-board {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #FF0000;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 4px 18px;
+    border-radius: 12px;
+    border: 2px solid #FF0000;
+    z-index: 220;
 }
 
-.control-row {
+/* ==========================================
+   SCENE 12: SKRIN HASIL KUIS
+   ========================================== */
+#scene12-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/quiz bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 200;
+}
+
+.result-box {
+    position: absolute;
+    top: 36vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+#result-congrats {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 3.8rem;
+    color: #E70B90 !important;
+    font-weight: normal;
+    margin-bottom: 2.5vh;
+    line-height: 1;
+}
+
+#result-motto {
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 2.8rem;
+    color: #E70B90 !important;
+    font-weight: normal;
+    margin-bottom: 3vh;
+    line-height: 1;
+}
+
+.score-display-line {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 2.8rem;
+    color: #E70B90 !important;
     display: flex;
-    gap: 10px;
-    margin-top: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    line-height: 1;
 }
 
-.small-btn {
-    background: #E70B90;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
+#final-score-val {
+    font-weight: bold;
+}
+
+/* POP-UP DIALOG MODALS */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background-color: #FFFFFF;
+    border: 4px solid #E70B90;
+    border-radius: 25px;
+    padding: 25px 35px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .modal-icon {
-    font-size: 40px;
+    font-size: 3rem;
+    margin-bottom: 8px;
+}
+
+.modal-box h3 {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 2rem;
+    color: #E70B90 !important;
     margin-bottom: 10px;
 }
 
-.modal-card p {
-    margin: 15px 0;
-    color: #555;
-    line-height: 1.5;
+.modal-box p {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    color: #333333;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+#modal-close-btn {
+    background-color: #CFE1F7;
+    border: 3px solid #CC3399;
+    color: #990184;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 30px;
+    border-radius: 30px;
+    cursor: pointer;
 }
