@@ -872,7 +872,7 @@ body {
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: #EBF7FF !important;
+    background-color: #FFB6C1  !important;
 }
 
 .vcontrol-btn:active {
@@ -1071,7 +1071,7 @@ body {
     z-index: 210;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 35px 45px; /* UBAH SINI: Angka pertama = jarak atas/bawah, Angka kedua = jarak kiri/kanan */
+    gap: 45px 55px; /* UBAH SINI: Angka pertama = jarak atas/bawah, Angka kedua = jarak kiri/kanan */
     width: 82%;
     max-width: 850px;
     margin-top: 150px !important;
