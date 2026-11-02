@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
-    // 1. DOM ELEMENT SELECTION
+    // 1. ELEMEN DOM & KAWALAN UTAMA
     // ==========================================
     const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const fullscreenIcon = document.getElementById("fullscreen-icon");
 
     const startOverlay = document.getElementById("start-overlay");
     const startAppBtn = document.getElementById("start-app-btn");
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const video1 = document.getElementById("videoPlayer1");
     const video2 = document.getElementById("videoPlayer2");
 
-    // Overlays
+    // Overlays Skrin
     const langOverlay = document.getElementById("language-overlay");
     const scene4Overlay = document.getElementById("scene4-overlay");
     const settingsOverlay = document.getElementById("settings-overlay");
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12Overlay = document.getElementById("scene12-overlay");
     const normalLawanOverlay = document.getElementById("normal-lawan-overlay");
 
-    // Video Player & Controls Elements
+    // Pemutar Video & Kawalan Kelajuan
     const normalLawanVideo = document.getElementById("normalLawanVideo");
     const normalLawanSource = document.getElementById("normalLawanSource");
 
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
 
-    // Navigation Buttons
+    // Butang Navigasi Utama
     const btnBm = document.getElementById("btn-bm");
     const btnEn = document.getElementById("btn-en");
     const skipBtn = document.getElementById("skip-btn");
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById("home-btn");
     const backBtn = document.getElementById("back-btn");
 
-    // Scene 6 DOM Elements
+    // Elemen Scene 6 (Bab)
     const chapterTitle = document.getElementById("chapter-title");
     const labelAsas = document.getElementById("label-asas");
     const labelPenjagaan = document.getElementById("label-penjagaan");
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene6HomeBtn = document.getElementById("scene6-home-btn");
     const scene6SettingsBtn = document.getElementById("scene6-settings-btn");
 
-    // Scene 7 DOM Elements
+    // Elemen Scene 7 (Sub-Menu Asas)
     const btnAsas = document.getElementById("btn-asas");
     const scene7HomeBtn = document.getElementById("scene7-home-btn");
     const scene7BackBtn = document.getElementById("scene7-back-btn");
@@ -65,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelBerapaLama = document.getElementById("label-berapa-lama");
     const labelNormalLawan = document.getElementById("label-normal-lawan");
 
-    // Scene 8 DOM Elements
+    // Elemen Scene 8 (Sub-Menu Penjagaan)
     const btnPenjagaan = document.getElementById("btn-penjagaan");
     const scene8HomeBtn = document.getElementById("scene8-home-btn");
     const scene8BackBtn = document.getElementById("scene8-back-btn");
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelJenis = document.getElementById("label-jenis");
     const labelCara = document.getElementById("label-cara");
 
-    // Scene 9 DOM Elements
+    // Elemen Scene 9 (Sub-Menu Kesihatan)
     const btnKesihatan = document.getElementById("btn-kesihatan");
     const scene9HomeBtn = document.getElementById("scene9-home-btn");
     const scene9BackBtn = document.getElementById("scene9-back-btn");
@@ -87,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelKesilapanKebersihan = document.getElementById("label-kesilapan-kebersihan");
     const labelSekeliling = document.getElementById("label-sekeliling");
 
-    // Settings UI Text & Audio Controls
+    // Elemen Tetapan & Audio
     const settingsTitle = document.getElementById("settings-title");
     const labelAudio = document.getElementById("label-audio");
     const labelLanguage = document.getElementById("label-language");
@@ -105,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSetBm = document.getElementById("btn-set-bm");
     const btnSetEn = document.getElementById("btn-set-en");
 
-    // Quiz DOM Elements
+    // Elemen Kuiz
     const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
     const scene10HomeBtn = document.getElementById("scene10-home-btn");
     const quizTitle = document.getElementById("quiz-title");
@@ -133,22 +134,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-// Modal Pop-Up Elements
-const quizModalOverlay = document.getElementById("quiz-modal-overlay");
-const modalIconElem = document.getElementById("modal-icon-elem");
-const modalTitleElem = document.getElementById("modal-title-elem");
-const modalMsgElem = document.getElementById("modal-msg-elem");
-const modalCloseBtn = document.getElementById("modal-close-btn");
-const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris ini
+    // Pop-Up Modal
+    const quizModalOverlay = document.getElementById("quiz-modal-overlay");
+    const modalIconElem = document.getElementById("modal-icon-elem");
+    const modalTitleElem = document.getElementById("modal-title-elem");
+    const modalMsgElem = document.getElementById("modal-msg-elem");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const modalXBtn = document.getElementById("modal-x-btn");
     let pendingNextQuestionCall = null;
 
     // ==========================================
-    // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
+    // 2. KAWALAN AUDIO BGM & KEADAAN APLIKASI
     // ==========================================
     let selectedLang = "ms";
     let introAudio = null;
     let previousScene = "scene4";
     let currentVideoParentScene = "scene7";
+    let currentVideoBaseName = "";
 
     let currentScore = 0;
     let currentQuestionIndex = 0;
@@ -178,43 +180,53 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
+    // FULLSCREEN LOGIC (DAPAT DIKERJAKAN PADA LAPTOP)
     // ==========================================
-    function requestLandscapeFullscreen() {
-        const docEl = document.documentElement;
-        if (docEl.requestFullscreen) {
-            docEl.requestFullscreen().then(() => lockOrientationLandscape()).catch(err => console.log(err));
-        } else if (docEl.webkitRequestFullscreen) {
-            docEl.webkitRequestFullscreen();
-            lockOrientationLandscape();
+    async function toggleFullscreen() {
+        try {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) await elem.requestFullscreen();
+                else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+
+                if (screen.orientation && screen.orientation.lock) {
+                    await screen.orientation.lock("landscape").catch(err => console.log(err));
+                }
+            } else {
+                if (document.exitFullscreen) await document.exitFullscreen();
+                else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
+            }
+        } catch (err) {
+            console.error("Fullscreen error:", err);
         }
     }
 
-    function lockOrientationLandscape() {
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("landscape").catch(err => console.log("Orientation lock:", err));
-        }
-    }
-
-    function toggleFullscreen() {
+    function updateFullscreenIcon() {
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-        if (!isFullscreen) {
-            requestLandscapeFullscreen();
-        } else {
-            if (document.exitFullscreen) document.exitFullscreen();
-            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        if (fullscreenIcon) {
+            if (isFullscreen) {
+                fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
+            } else {
+                fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
+            }
         }
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", updateFullscreenIcon);
+    document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW
+    // 3. OVERLAY SKRIN MULA & PENGENALAN
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            requestLandscapeFullscreen();
+            toggleFullscreen();
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
@@ -256,9 +268,15 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         if (video2) {
             video2.currentTime = 0;
             video2.classList.add("active");
-            video2.play();
         }
-        if (introAudio) introAudio.play();
+
+        const playback = [];
+        if (video2) playback.push(video2.play());
+        playback.push(introAudio.play());
+        Promise.allSettled(playback).then(results => {
+            results.filter(result => result.status === "rejected")
+                .forEach(result => console.error("Intro playback error:", result.reason));
+        });
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
@@ -284,10 +302,11 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER
+    // 4. PEMUTAR VIDEO DINAMIK & KAWALAN KELAJUAN
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
+        currentVideoBaseName = videoBaseName;
 
         const parentOverlay = document.getElementById(parentSceneId + "-overlay");
         if (parentOverlay) parentOverlay.style.display = "none";
@@ -336,6 +355,8 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     }
 
     if (videoSpeed) videoSpeed.addEventListener("change", applyVideoSpeed);
+    if (normalLawanVideo) normalLawanVideo.addEventListener("loadedmetadata", applyVideoSpeed);
+
     if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
     if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
     if (vbtnRestart && normalLawanVideo) vbtnRestart.addEventListener("click", () => { normalLawanVideo.currentTime = 0; normalLawanVideo.play(); });
@@ -367,7 +388,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     }
 
     // ==========================================
-    // 5. NAVIGATION & ROUTING
+    // 5. NAVIGASI HALAMAN & ROUTING (SEMUA DI KIRI BAWAH)
     // ==========================================
     if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
     if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
@@ -400,18 +421,35 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
-            const sceneMap = {
-                "normal-lawan": normalLawanOverlay,
-                "scene12": scene12Overlay,
-                "scene11": scene11Overlay,
-                "scene10": scene10Overlay,
-                "scene9": scene9Overlay,
-                "scene8": scene8Overlay,
-                "scene7": scene7Overlay,
-                "scene6": scene6Overlay
-            };
-            const target = sceneMap[previousScene] || scene4Overlay;
-            target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
+
+            if (previousScene === "normal-lawan") {
+                if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
+                if (normalLawanVideo && currentVideoBaseName) {
+                    const langSuffix = selectedLang === "en" ? "bi" : "bm";
+                    const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
+                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
+                        const currentTime = normalLawanVideo.currentTime;
+                        normalLawanSource.src = newVideoFile;
+                        normalLawanVideo.load();
+                        normalLawanVideo.currentTime = currentTime;
+                        normalLawanVideo.play().catch(err => console.log(err));
+                    } else {
+                        normalLawanVideo.play().catch(err => console.log(err));
+                    }
+                }
+            } else {
+                const sceneMap = {
+                    "scene12": scene12Overlay,
+                    "scene11": scene11Overlay,
+                    "scene10": scene10Overlay,
+                    "scene9": scene9Overlay,
+                    "scene8": scene8Overlay,
+                    "scene7": scene7Overlay,
+                    "scene6": scene6Overlay
+                };
+                const target = sceneMap[previousScene] || scene4Overlay;
+                target.style.display = "flex";
+            }
         });
     }
 
@@ -423,7 +461,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-// ==========================================
+    // ==========================================
     // 6. POP-UP MODAL FUNCTIONALITY
     // ==========================================
     function showModal(icon, title, message, onComplete, showXBtn = true) {
@@ -434,7 +472,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
 
         pendingNextQuestionCall = onComplete || null;
 
-        // Kawal paparan butang X (Sembunyikan untuk Hint/Petunjuk jika showXBtn = false)
         if (modalXBtn) {
             modalXBtn.style.display = showXBtn ? "block" : "none";
         }
@@ -442,7 +479,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         quizModalOverlay.style.display = "flex";
     }
 
-    // Fungsi bila tekan butang utama (TERUSKAN) -> Jalankan tindakan lanjut
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
@@ -454,18 +490,17 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-    // Fungsi bila tekan butang X -> Hanya tutup pop-up sahaja (Bukan keluar kuiz)
     if (modalXBtn) {
         modalXBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            pendingNextQuestionCall = null; // Batalkan sebarang fungsi keluar/lanjut
+            pendingNextQuestionCall = null;
         });
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (Bahasa Melayu Piawai & English)
+    // 7. DATA KUIZ & SOALAN
     // ==========================================
-const quizCategories = {
+    const quizCategories = {
         asas: [
             {
                 hint: { 
@@ -635,7 +670,7 @@ const quizCategories = {
                     { text: { ms: "D) Tanam di kawasan tanah luar rumah.", en: "D) Bury it in the dirt outside." }, isCorrect: false }
                 ],
                 explanation: {
-                    ms: "Jawapan betul ialah (B). Pad yang digunaka hendaklah dibungkus kemas dan dibuang ke dalam tong sampah.",
+                    ms: "Jawapan betul ialah (B). Pad yang digunakan hendaklah dibungkus kemas dan dibuang ke dalam tong sampah.",
                     en: "The correct answer is (B). Used pads should be wrapped nicely and thrown in the trash bin."
                 }
             },
@@ -715,7 +750,7 @@ const quizCategories = {
                 question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
                 options: [
                     { text: { ms: "A) Meletakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
-                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 15 to 20 minutes." }, isCorrect: true },
+                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
                     { text: { ms: "C) Menekan dengan objek keras dan berat secara kuat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
                     { text: { ms: "D) Membiarkan kawasan perut terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
                 ],
@@ -989,15 +1024,14 @@ const quizCategories = {
             );
         });
     }
-    
-if (scene11HintBtn) {
+
+    if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            // Hantar false pada parameter ke-5 supaya butang X disembunyikan
             showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
         });
     }
@@ -1040,7 +1074,7 @@ if (scene11HintBtn) {
     }
 
     // ==========================================
-    // 8. LOCALIZATION (UI Language Toggle)
+    // 8. TUKAR BAHASA (LOCALIZATION)
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
