@@ -43,7 +43,7 @@ body {
         width: 45px !important;
         height: 45px !important;
         background-color: #FFFFFF !important;
-        border: none !important;
+        border: 2px solid #52B2EC !important;
         border-radius: 50% !important;
         justify-content: center !important;
         align-items: center !important;
@@ -97,7 +97,7 @@ body {
 
 #start-app-btn:hover {
     transform: translateY(-4px) scale(1.02);
-    background-color: #FFFFCC;
+    background-color: #FFCCFF !important;
 }
 
 .first-header {
@@ -106,8 +106,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    z-index: 9999;
+    z-index: 90;
     width: 100%;
+    pointer-events: none !important;
 }
 
 .first-title {
@@ -146,6 +147,7 @@ body {
 .video-layer.active {
     opacity: 1;
     z-index: 2;
+    pointer-events: auto;
 }
 
 /* SCENE 2: LANGUAGE SELECTION OVERLAY */
@@ -163,7 +165,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    z-index: 100;
+    z-index: 99999 !important;
+    pointer-events: auto !important;
 }
 
 .lang-btn {
@@ -175,7 +178,7 @@ body {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-weight: 900;
     border-radius: 65px;
-    cursor: pointer;
+    cursor: pointer !important;
     width: 520px;
     max-width: 90vw;
     text-align: center;
@@ -186,6 +189,7 @@ body {
     padding-left: 60px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 100000 !important;
 }
 
 #btn-bm { background-color: #CFE1F7; }
@@ -211,9 +215,12 @@ body {
 
 .footer-logo {
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     pointer-events: none;
+    z-index: 20;
 }
 
 .footer-title {
@@ -262,81 +269,59 @@ body {
 
 #skip-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important;
 }
 
 /* GEAR / SETTINGS & CIRCLE BUTTONS */
+.gear-btn,
+.circle-btn,
+.home-circle-btn {
+    width: 48px !important;
+    height: 48px !important;
+    background-color: #FFFFFF !important;
+    border: 2px solid #52B2EC !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    padding: 0 !important;
+    outline: none !important;
+    z-index: 300 !important;
+}
+
 .gear-btn {
     position: absolute;
-    top: auto;
-    bottom: 25px;
-    left: 35px;
-    right: auto;
-    width: 46px;
-    height: 46px;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 2px solid #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
-    z-index: 210;
-    padding: 0;
+    bottom: 22px;
+    left: 25px;
 }
 
-.gear-btn .gear-icon {
-    width: 38px;
-    height: 38px;
-    fill: #52B2EC;
-    transition: fill 0.2s ease;
+.gear-btn svg,
+.circle-btn svg,
+.home-circle-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+    fill: #52B2EC !important;
 }
 
-.gear-btn:hover {
-    background-color: rgba(0, 0, 0, 0.75);
-    transform: translateY(-4px) rotate(15deg);
-}
-
-.gear-btn:hover .gear-icon { fill: #52B2EC; }
-
-.circle-btn {
-    width: 46px;
-    height: 46px;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 2px solid #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
-    padding: 0;
-    outline: none;
-}
-
-.circle-btn svg {
-    width: 28px;
-    height: 28px;
-    fill: #52B2EC;
-}
-
-.circle-btn:hover {
-    background-color: rgba(0, 0, 0, 0.75);
+.gear-btn:hover,
+.circle-btn:hover,
+.home-circle-btn:hover {
+    background-color: #FFCCFF !important; /* LIGHT PINK HOVER */
     transform: translateY(-4px);
 }
 
 .quiz-controls-group {
     position: absolute;
-    bottom: 25px;
-    left: 35px;
+    bottom: 22px !important;
+    left: 25px !important;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
-    z-index: 220;
+    z-index: 300 !important;
 }
 
 .quiz-controls-group .gear-btn {
@@ -362,8 +347,8 @@ body {
 
 .menu-header {
     text-align: center;
-    margin-bottom: 90px;
-    margin-top: -100px;
+    margin-bottom: 60px;
+    margin-top: -40px;
 }
 
 .menu-title {
@@ -391,7 +376,7 @@ body {
     flex-direction: column;
     gap: 16px;
     align-items: center;
-    margin-top: 70px !important;
+    margin-top: 20px !important;
 }
 
 .menu-btn {
@@ -415,7 +400,7 @@ body {
 
 .menu-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFFFCC !important;
+    background-color: #FFCCFF !important;
 }
 
 /* SCENE 5: SETTINGS OVERLAY SCREEN */
@@ -447,38 +432,10 @@ body {
 #home-btn,
 .home-circle-btn {
     position: absolute;
-    bottom: 25px;
-    left: 91px;
-    width: 48px;
-    height: 48px;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 2px solid #FFFFFF;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
+    bottom: 22px;
+    left: 85px;
     z-index: 310;
 }
-
-#home-btn:hover,
-.home-circle-btn:hover {
-    background-color: rgba(0, 0, 0, 0.75);
-    transform: translateY(-4px) scale(1.05);
-}
-
-#home-btn svg,
-.home-circle-btn svg {
-    width: 42px;
-    height: 42px;
-    fill: #52B2EC;
-    transition: fill 0.2s ease;
-}
-
-#home-btn:hover svg,
-.home-circle-btn:hover svg { fill: #52B2EC; }
 
 .settings-grid {
     display: flex;
@@ -668,8 +625,8 @@ body {
 
 #back-btn {
     position: absolute;
-    bottom: 25px;
-    right: 35px;
+    bottom: 22px;
+    right: 25px;
     width: 145px;
     height: 42px;
     background-color: #FFFFCC;
@@ -681,15 +638,19 @@ body {
     border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 300;
 }
 
 #back-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important;
 }
 
-/* SCENE 6: CHAPTER MENU OVERLAY SCREEN */
-#scene6-overlay {
+/* ==========================================
+   SCENE 6 & SCENE 10: CHAPTER / QUIZ MENU (DIBETULKAN KEDUDUKAN TAJUK & BUTANG)
+   ========================================== */
+#scene6-overlay,
+#scene10-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -703,25 +664,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 35px;
+    padding-top: 65px !important; /* DITURUNKAN DARI ATAS */
     z-index: 200;
 }
 
-#chapter-title {
+#chapter-title,
+#quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.4rem;
+    font-size: 3.6rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
+/* KOTAK BUTANG BAB/KUIZ DITURUNKAN KE TENGAH */
 .chapter-buttons-container {
     position: relative;
     width: 100%;
     max-width: 950px;
     height: 320px;
-    margin-top: 140px !important;
+    margin-top: 75px !important; /* DITURUNKAN KE BAWAH SUPAYA SELARI */
 }
 
 .chapter-card-btn {
@@ -740,7 +703,7 @@ body {
 
 .chapter-card-btn:hover {
     transform: translateY(-6px);
-    background-color: #FFFF99;
+    background-color: #FFCCFF !important; /* LIGHT PINK HOVER */
 }
 
 .card-left { top: 15px; left: 20px; }
@@ -749,6 +712,7 @@ body {
 
 .card-center:hover {
     transform: translate(-50%, -6px);
+    background-color: #FFCCFF !important;
 }
 
 .card-icon-circle {
@@ -795,8 +759,10 @@ body {
     line-height: 1.1;
 }
 
-/* SCENE 7: SUB-MENU ASAS OVERLAY SCREEN */
-#scene7-overlay {
+/* SCENE 7, 8, 9: SUB-MENUS */
+#scene7-overlay,
+#scene8-overlay,
+#scene9-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -810,26 +776,37 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 35px;
+    padding-top: 65px !important;
     z-index: 200;
 }
 
-#asas-title {
+#asas-title,
+#penjagaan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.4rem;
+    font-size: 3.6rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
+#kesihatan-title {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    color: #E70B90;
+    font-size: 3.2rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    line-height: 1.1;
+}
+
 .sub-menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px 80px;
-    width: 80%;
-    max-width: 900px;
-    margin-top: 150px !important;
+    gap: 40px 65px;
+    width: 82%;
+    max-width: 950px;
+    margin-top: 75px !important;
 }
 
 .sub-menu-btn {
@@ -853,30 +830,44 @@ body {
 
 .sub-menu-btn:hover {
     transform: translateY(-5px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important; /* LIGHT PINK HOVER */
 }
+
+.sub-menu-btn.green-btn {
+    background-color: #CFE4D1;
+    border: 3.5px solid #E680CC;
+}
+
+.sub-menu-btn.green-btn:hover { background-color: #FFCCFF !important; }
+
+.sub-menu-btn.yellow-btn {
+    background-color: #FFED96;
+    border: 3.5px solid #EFA6CC;
+}
+
+.sub-menu-btn.yellow-btn:hover { background-color: #FFCCFF !important; }
 
 .sub-back-btn {
     position: absolute;
-    bottom: 25px;
-    right: 20px;
+    bottom: 22px;
+    right: 25px;
     width: 145px;
     height: 42px;
     background-color: #FFFFCC;
     border: 4px solid #339933;
-    color: #28A745;
+    color: #009966;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-size: 1.4rem;
     font-weight: bold;
     border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    z-index: 220;
+    z-index: 300;
 }
 
 .sub-back-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important;
 }
 
 /* VIDEO PLAYER OVERLAY */
@@ -928,8 +919,8 @@ body {
 .vcontrol-btn {
     width: 55px;
     height: 55px;
-    background-color: rgba(0, 0, 0, 0.75);
-    border: 2px solid #FFFFFF;
+    background-color: #FFFFFF !important;
+    border: 2px solid #52B2EC !important;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -943,13 +934,12 @@ body {
 .vcontrol-btn svg {
     width: 26px;
     height: 26px;
-    fill: #52B2EC;
+    fill: #52B2EC !important;
 }
 
 .vcontrol-btn:hover {
     transform: scale(1.1);
-    background-color: rgba(255, 255, 255, 0.75);
-    border-color: #ffffff;
+    background-color: #FFCCFF !important;
 }
 
 .vcontrol-btn:active { transform: scale(0.95); }
@@ -970,9 +960,9 @@ body {
     width: 55px;
     height: 38px;
     padding: 0 3px;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: #FFFFFF;
     color: #52B2EC;
-    border: 2px solid #FFFFFF;
+    border: 2px solid #52B2EC;
     border-radius: 10px;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-size: 12px;
@@ -981,151 +971,41 @@ body {
     cursor: pointer;
     outline: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 #videoSpeed:hover {
     transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.75);
-    border-color: #ffffff;
-}
-
-#videoSpeed:focus {
-    border-color: #FFFFFF;
-    outline: none;
-}
-
-#videoSpeed option {
-    background-color: #222222;
-    color: #52B2EC;
-    font-weight: bold;
+    background-color: #FFCCFF !important;
 }
 
 #normal-lawan-settings-btn { z-index: 10; }
 
 #normal-lawan-home-btn {
     position: absolute;
-    bottom: 25px;
-    left: 91px;
-    z-index: 10;
+    bottom: 22px;
+    left: 85px;
+    z-index: 310;
 }
 
 #normal-lawan-back-btn {
     position: absolute;
     background-color: #FFFFCC;
     border: 4px solid #339933;
-    bottom: 25px;
-    right: 20px;
+    bottom: 22px;
+    right: 25px;
     width: 145px;
     height: 42px;
-    z-index: 10;
+    z-index: 300;
 }
 
-.normal-lawan-back-btn:hover {
+#normal-lawan-back-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important;
 }
 
-/* SCENE 8: SUB-MENU PENJAGAAN OVERLAY SCREEN */
-#scene8-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('assets/bg fyp.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 35px;
-    z-index: 200;
-}
-
-#penjagaan-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    color: #E70B90;
-    font-size: 3.4rem;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-}
-
-.sub-menu-btn.green-btn {
-    background-color: #CFE4D1;
-    border: 3.5px solid #E680CC;
-}
-
-.sub-menu-btn.green-btn:hover { background-color: #FFCCCC; }
-
-/* SCENE 9: SUB-MENU KESIHATAN & KESEDARAN */
-#scene9-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('assets/bg fyp.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 25px;
-    z-index: 200;
-}
-
-#kesihatan-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    color: #E70B90;
-    font-size: 3rem;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-    line-height: 1.1;
-}
-
-.sub-menu-btn.yellow-btn {
-    background-color: #FFED96;
-    border: 3.5px solid #EFA6CC;
-}
-
-.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99; }
-
-/* SCENE 10: QUIZ MENU OVERLAY SCREEN */
-#scene10-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('assets/bg fyp.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 35px;
-    z-index: 200;
-}
-
-#quiz-title {
-    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
-    color: #E70B90;
-    font-size: 3.4rem;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-}
-
-/* SCENE 11: QUIZ INTERFACE STYLING */
+/* ==========================================
+   SCENE 11: QUIZ INTERFACE STYLING (WARNA PINK & JARAK DIBETULKAN)
+   ========================================== */
 #scene11-overlay {
     display: none;
     position: absolute;
@@ -1144,46 +1024,52 @@ body {
     z-index: 200;
 }
 
+/* SOALAN - WARNA PINK SEPERTI DALAM RUJUKAN GAMBAR */
 .question-container {
     position: relative;
     z-index: 210;
-    width: 78%;
-    max-width: 950px;
-    margin-top: 35px;
+    width: 85%;
+    max-width: 1050px;
+    margin-top: 30px;
     text-align: center;
 }
 
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 2.3rem;
-    font-weight: normal;
-    color: #000;
+    font-weight: 900;
+    color: #E70B90 !important; /* PINK TEPAT */
     line-height: 1.3;
-    margin-top: 150px;
+    margin-top: 110px !important;
 }
 
+/* KOTAK JAWAPAN DITURUNKAN KE BAWAH DENGAN JARAK SELESA */
 .options-grid {
     position: relative;
     z-index: 210;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px 35px;
-    width: 82%;
-    max-width: 850px;
-    margin-top: 150px !important;
+    gap: 30px 60px !important;
+    width: 84% !important;
+    max-width: 980px !important;
+    margin-top: 65px !important;
+    align-items: stretch;
 }
 
 .option-btn {
-    min-height: 95px;
+    min-height: 100px !important;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
     border-radius: 22px;
     font-family: "Franklin Gothic Demi Cond", "Franklin Gothic Medium Condensed", "Arial Narrow", sans-serif;
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-weight: normal;
     color: #000;
-    padding: 12px 18px;
-    text-align: center;
+    padding: 15px 22px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
@@ -1191,7 +1077,7 @@ body {
 
 .option-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCC99;
+    background-color: #FFCCFF !important; /* LIGHT PINK HOVER */
 }
 
 .score-board {
@@ -1235,7 +1121,7 @@ body {
 #result-congrats {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 4rem;
-    color: #000;
+    color: #E70B90;
     font-weight: normal;
     margin-bottom: 50px;
 }
@@ -1243,7 +1129,7 @@ body {
 #result-motto {
     font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-size: 3rem;
-    color: #000;
+    color: #E70B90;
     font-weight: normal;
     margin-bottom: 45px;
 }
@@ -1251,7 +1137,7 @@ body {
 .score-display-line {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 3rem;
-    color: #000;
+    color: #E70B90;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1338,7 +1224,7 @@ body {
 }
 
 /* ==========================================
-   1. PELARASAN SKRIN MOBILE PORTRAIT (TEGAK)
+   1. RESPONSIVE MOBILE PORTRAIT (TEGAK)
    ========================================== */
 @media screen and (orientation: portrait) and (max-width: 768px) {
     #start-overlay {
@@ -1387,7 +1273,7 @@ body {
         width: 44px !important;
         height: 44px !important;
         background-color: #FFFFFF !important;
-        border: none !important;
+        border: 2px solid #52B2EC !important;
         border-radius: 50% !important;
         justify-content: center !important;
         align-items: center !important;
@@ -1452,15 +1338,11 @@ body {
     }
 
     .gear-btn {
-        top: 12px !important;
-        right: 15px !important;
+        top: auto !important;
+        bottom: 12px !important;
+        left: 12px !important;
         width: 38px !important;
         height: 38px !important;
-    }
-
-    .gear-btn .gear-icon {
-        width: 29px !important;
-        height: 29px !important;
     }
 
     #start-overlay {
@@ -1518,8 +1400,8 @@ body {
     }
 
     .menu-header {
-        margin-top: -5vh !important;
-        margin-bottom: 5vh !important;
+        margin-top: -3vh !important;
+        margin-bottom: 3vh !important;
     }
 
     .menu-title {
@@ -1724,14 +1606,14 @@ body {
 
     #home-btn, .home-circle-btn, #normal-lawan-home-btn {
         bottom: 12px !important;
-        left: 12px !important;
+        left: 55px !important;
         width: 38px !important;
         height: 38px !important;
     }
 
     #home-btn svg, .home-circle-btn svg {
-        width: 32px !important;
-        height: 32px !important;
+        width: 28px !important;
+        height: 28px !important;
     }
 
     #back-btn, .sub-back-btn, #normal-lawan-back-btn {
@@ -1791,12 +1673,13 @@ body {
 
     .question-container {
         width: 84% !important;
-        margin-top: 35px !important;
+        margin-top: 20px !important;
     }
 
     #quiz-question-text {
         font-size: clamp(1rem, 2.7vw, 1.6rem) !important;
         line-height: 1.2 !important;
+        margin-top: 45px !important;
     }
 
     .options-grid {
@@ -1834,7 +1717,7 @@ body {
 }
 
 /* ==========================================
-   3. PELARASAN GLOBAL KHAS SAFARI IOS (SAFARI ONLY)
+   3. PELARASAN GLOBAL KHAS SAFARI IOS
    ========================================== */
 @supports (-webkit-touch-callout: none) {
     @media screen and (orientation: portrait) and (max-width: 768px) {
