@@ -133,13 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-    // Modal Pop-Up Elements
-    const quizModalOverlay = document.getElementById("quiz-modal-overlay");
-    const modalIconElem = document.getElementById("modal-icon-elem");
-    const modalTitleElem = document.getElementById("modal-title-elem");
-    const modalMsgElem = document.getElementById("modal-msg-elem");
-    const modalCloseBtn = document.getElementById("modal-close-btn");
-
+// Modal Pop-Up Elements
+const quizModalOverlay = document.getElementById("quiz-modal-overlay");
+const modalIconElem = document.getElementById("modal-icon-elem");
+const modalTitleElem = document.getElementById("modal-title-elem");
+const modalMsgElem = document.getElementById("modal-msg-elem");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris ini
     let pendingNextQuestionCall = null;
 
     // ==========================================
@@ -436,15 +436,21 @@ document.addEventListener("DOMContentLoaded", () => {
         quizModalOverlay.style.display = "flex";
     }
 
+    function closeModal() {
+        if (quizModalOverlay) quizModalOverlay.style.display = "none";
+        if (pendingNextQuestionCall) {
+            const action = pendingNextQuestionCall;
+            pendingNextQuestionCall = null;
+            action();
+        }
+    }
+
     if (modalCloseBtn) {
-        modalCloseBtn.addEventListener("click", () => {
-            if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            if (pendingNextQuestionCall) {
-                const action = pendingNextQuestionCall;
-                pendingNextQuestionCall = null;
-                action();
-            }
-        });
+        modalCloseBtn.addEventListener("click", closeModal);
+    }
+
+    if (modalXBtn) {
+        modalXBtn.addEventListener("click", closeModal);
     }
 
     // ==========================================
