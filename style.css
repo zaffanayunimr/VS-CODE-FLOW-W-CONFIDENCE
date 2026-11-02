@@ -1071,7 +1071,7 @@ body {
     z-index: 210;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px 140px; /* UBAH SINI: Angka pertama = jarak atas/bawah, Angka kedua = jarak kiri/kanan */
+    gap: 60px 100px; /* UBAH SINI: Angka pertama = jarak atas/bawah, Angka kedua = jarak kiri/kanan */
     width: 82%;
     max-width: 850px;
     margin-top: 150px !important;
