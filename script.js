@@ -134,6 +134,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
+    // Modal Pop-Up Elements
+    const quizModalOverlay = document.getElementById("quiz-modal-overlay");
+    const modalIconElem = document.getElementById("modal-icon-elem");
+    const modalTitleElem = document.getElementById("modal-title-elem");
+    const modalMsgElem = document.getElementById("modal-msg-elem");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+
+    let pendingNextQuestionCall = null;
+
     // ==========================================
     // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
     // ==========================================
@@ -146,25 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentScore = 0;
     let currentQuestionIndex = 0;
     let activeQuizCategory = "asas";
-
     const totalQuestions = 8;
 
-    // Initialize Background Music
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
-
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
-
-        if (bgMusic) {
-            bgMusic.volume = clampedVal / 100;
-        }
+        if (bgMusic) bgMusic.volume = clampedVal / 100;
     }
 
     if (volumeSlider) {
@@ -177,11 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN & AUTO-ROTATE LOGIC
+    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
-
         if (docEl.requestFullscreen) {
             docEl.requestFullscreen().then(() => lockOrientationLandscape()).catch(err => console.log(err));
         } else if (docEl.webkitRequestFullscreen) {
@@ -192,14 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function lockOrientationLandscape() {
         if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("landscape").catch(err => console.log("Orientation lock warning:", err));
-        }
-    }
-
-    function hideFullscreenBtn() {
-        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
-        if (fullscreenBtn) {
-            fullscreenBtn.style.setProperty("display", isMobile ? "none" : "flex", "important");
+            screen.orientation.lock("landscape").catch(err => console.log("Orientation lock:", err));
         }
     }
 
@@ -207,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (!isFullscreen) {
             requestLandscapeFullscreen();
-            hideFullscreenBtn();
         } else {
             if (document.exitFullscreen) document.exitFullscreen();
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -223,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
             requestLandscapeFullscreen();
-            hideFullscreenBtn();
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
@@ -336,9 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     videoButtonsMap.forEach(item => {
         const btnElem = document.getElementById(item.btnId);
         if (btnElem) {
-            btnElem.addEventListener("click", () => {
-                playChapterVideo(item.videoName, item.parentScene);
-            });
+            btnElem.addEventListener("click", () => playChapterVideo(item.videoName, item.parentScene));
         }
     });
 
@@ -437,11 +428,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA & LOGIC
+    // 6. POP-UP MODAL FUNCTIONALITY
+    // ==========================================
+    function showModal(icon, title, message, onComplete) {
+        if (!quizModalOverlay) return;
+        if (modalIconElem) modalIconElem.textContent = icon;
+        if (modalTitleElem) modalTitleElem.textContent = title;
+        if (modalMsgElem) modalMsgElem.textContent = message;
+
+        pendingNextQuestionCall = onComplete || null;
+        quizModalOverlay.style.display = "flex";
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener("click", () => {
+            if (quizModalOverlay) quizModalOverlay.style.display = "none";
+            if (pendingNextQuestionCall) {
+                const action = pendingNextQuestionCall;
+                pendingNextQuestionCall = null;
+                action();
+            }
+        });
+    }
+
+    // ==========================================
+    // 7. QUIZ DATA & LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
             {
+                hint: { ms: "Pikirkan tentang darah & tisu lembut yang keluar daripada badan setiap bulan.", en: "Think about the blood & soft lining that leaves the body every month." },
                 question: { ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?", en: "1. What happens when a girl gets her period?" },
                 options: [
                     { text: { ms: "A) Darah dan tisu dari rahim keluar melalui faraj.", en: "A) Blood and tissue leave the body through the vagina." }, isCorrect: true },
@@ -451,6 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Ini biasanya berlaku pada awal usia remaja sekolah rendah/menengah.", en: "It usually happens during early pre-teen / teenage years." },
                 question: { ms: "2. Purata umur kebanyakan orang mendapat haid pertama mereka ialah sekitar umur berapa?", en: "2. Around what age do most people get their first period?" },
                 options: [
                     { text: { ms: "A) 6 tahun.", en: "A) 6 years old." }, isCorrect: false },
@@ -460,6 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Ia adalah persediaan untuk kemungkinan berkembangnya bayi.", en: "It prepares the body for potential baby growth." },
                 question: { ms: "3. Mengapakah badan membina lapisan lembut di dalam rahim setiap bulan?", en: "3. Why does the body build a soft lining inside the uterus every month?" },
                 options: [
                     { text: { ms: "A) Untuk melindungi rahim daripada jangkitan.", en: "A) To protect the uterus from infection." }, isCorrect: false },
@@ -469,6 +487,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Bila persediaan tidak digunakan, ia akan luruh keluar.", en: "When not used, the lining sheds." },
                 question: { ms: "4. Apakah yang berlaku kepada lapisan rahim jika kehamilan tidak berlaku?", en: "4. What happens to the uterus lining if pregnancy does not occur?" },
                 options: [
                     { text: { ms: "A) Lapisan tersebut diserap semula secara kekal oleh hati.", en: "A) The lining is permanently reabsorbed by the liver." }, isCorrect: false },
@@ -478,6 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Biasanya antara 3 hingga 5 minggu.", en: "Usually ranges between 3 to 5 weeks." },
                 question: { ms: "5. Berapakah tempoh julat kitaran haid yang normal bagi kebanyakan orang?", en: "5. What is the normal menstrual cycle length range for most people?" },
                 options: [
                     { text: { ms: "A) 5 hingga 10 hari.", en: "A) 5 to 10 days." }, isCorrect: false },
@@ -487,6 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Ovulasi bermaksud pelepasan sel telur.", en: "Ovulation means releasing a mature egg cell." },
                 question: { ms: "6. Apakah yang berlaku semasa fasa ketiga iaitu fasa ovulasi?", en: "6. What occurs during the third phase, known as ovulation?" },
                 options: [
                     { text: { ms: "A) Lapisan rahim mula luruh dan keluar sebagai darah.", en: "A) The lining of the uterus breaks down and leaves as blood." }, isCorrect: false },
@@ -496,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Pilih rona semula jadi darah berasaskan merah/coklat.", en: "Look for natural red or brown shade spectrum." },
                 question: { ms: "7. Manakah antara warna darah haid berikut yang masih dianggap normal?", en: "7. Which of the following period blood colors is considered normal?" },
                 options: [
                     { text: { ms: "A) Hijau terang, kuning, atau oren.", en: "A) Bright green, yellow, or orange." }, isCorrect: false },
@@ -505,6 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Pendarahan yang terlalu banyak bukanlah keadaan yang selesa.", en: "Extremely heavy bleeding is a sign to seek medical advice." },
                 question: { ms: "8. Tanda manakah yang menunjukkan anda perlu meminta bantuan atau berjumpa dengan doktor?", en: "8. Which sign indicates that you should ask for help or speak to a doctor?" },
                 options: [
                     { text: { ms: "A) Haid berlangsung selama 3 hingga 5 hari.", en: "A) A period that lasts for 3 to 5 days." }, isCorrect: false },
@@ -516,6 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         penjagaan: [
             {
+                hint: { ms: "Menukar pad secara berkala menjaga kebersihan diri.", en: "Changing pads regularly keeps hygiene top notch." },
                 question: { ms: "1. Berapa kerapkah anda perlu menukar pad jika aliran darah haid anda adalah banyak?", en: "1. How often should you change your pad if your period flow is heavy?" },
                 options: [
                     { text: { ms: "A) Setiap 12 jam.", en: "A) Every 12 hours." }, isCorrect: false },
@@ -525,6 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Jangan sekali-kali pam ke dalam tandas!", en: "Never flush sanitary products down the toilet!" },
                 question: { ms: "2. Bagaimanakah cara yang betul untuk membuang pad yang telah digunakan?", en: "2. What is the proper way to dispose of a used pad?" },
                 options: [
                     { text: { ms: "A) Pam masuk ke dalam lubang tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
@@ -534,6 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Barang asas untuk persediaan kecemasan haid.", en: "Essential hygiene items for period preparation." },
                 question: { ms: "3. Antara berikut, manakah barang yang digalakkan untuk disimpan di dalam kit kecemasan haid di sekolah?", en: "3. Which of the following items is recommended to keep in your school period emergency kit?" },
                 options: [
                     { text: { ms: "A) Pad, pantyliner, dan seluar dalam tambahan.", en: "A) Pads, pantyliners, and a spare pair of underwear." }, isCorrect: true },
@@ -543,6 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Mengelap dari arah kawasan bersih ke belakang elak jangkitan.", en: "Wiping from front to back prevents bacteria spreading." },
                 question: { ms: "4. Apakah arah yang betul semasa mengelap atau membersihkan kawasan sulit selepas menggunakan tandas?", en: "4. What is the correct direction to wipe or clean your private area after using the toilet?" },
                 options: [
                     { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
@@ -552,6 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Pad paling nipis sesuai untuk pendarahan sangat sedikit.", en: "Thinnest pad products suited for light spots." },
                 question: { ms: "5. Jenis produk haid manakah yang paling sesuai digunakan untuk aliran darah yang sangat ringan atau pada penghujung haid?", en: "5. Which period product is best suited for very light flow or toward the end of your period?" },
                 options: [
                     { text: { ms: "A) Pad maxi malam.", en: "A) Overnight maxi pad." }, isCorrect: false },
@@ -561,6 +589,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Saiz lebih lebar melindungi sewaktu baring/tidur.", en: "Wider back offers extra protection while sleeping." },
                 question: { ms: "6. Apakah kelebihan pad malam (overnight) atau pad maxi untuk aliran darah yang sangat banyak?", en: "6. What is the advantage of using an overnight or maxi pad for very heavy flow?" },
                 options: [
                     { text: { ms: "A) Ia bersaiz lebih pendek dan nipis.", en: "A) It is shorter and thinner." }, isCorrect: false },
@@ -570,6 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Kehangatan suam membantu melegakan otot rahim.", en: "Gentle warmth helps relax cramping muscles." },
                 question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
                 options: [
                     { text: { ms: "A) Letakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
@@ -579,6 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Dapatkan sokongan orang dewasa/doktor terlebih dahulu.", en: "Always get advice from guardians or medical professionals." },
                 question: { ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid??", en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?" },
                 options: [
                     { text: { ms: "A) Ambil sahaja mengikut gerak hati sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
@@ -590,6 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         kesihatan: [
             {
+                hint: { ms: "PMDD adalah bentuk PMS yang jauh lebih teruk.", en: "PMDD is a much more severe form of PMS." },
                 question: { ms: "1. Apakah yang membezakan PMDD daripada PMS?", en: "1. What differentiates PMDD from PMS?" },
                 options: [
                     { text: { ms: "A) PMDD hanya menyebabkan sakit kepala.", en: "A) PMDD only causes headaches." }, isCorrect: false },
@@ -599,6 +631,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Exacerbation bermaksud menjadikan keadaan lebih buruk.", en: "Exacerbation means worsening pre-existing mental health." },
                 question: { ms: "2. Apakah maksud Peningkatan Prahaid (PME)?", en: "2. What is the meaning of Premenstrual Exacerbation (PME)?" },
                 options: [
                     { text: { ms: "A) Haid berlaku lebih awal daripada biasa.", en: "A) Period occurs earlier than usual." }, isCorrect: false },
@@ -608,6 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Pergerakan perlahan merembeskan hormon gembira.", en: "Light movement releases endorphins to help cramps." },
                 question: { ms: "3. Yang manakah merupakan fakta tentang bersenam ketika haid?", en: "3. Which of the following is a fact about exercising during menstruation?" },
                 options: [
                     { text: { ms: "A) Senaman mesti dielakkan ketika haid.", en: "A) Exercise must be avoided during period." }, isCorrect: false },
@@ -617,6 +651,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Produk dalaman atau khas digunakan untuk aktiviti air.", en: "Internal or specialized products are used for water activities." },
                 question: { ms: "4. Apakah yang boleh digunakan untuk berenang dengan selamat semasa datang haid?", en: "4. What can be used to swim safely while on your period?" },
                 options: [
                     { text: { ms: "A) Pad biasa atau pantyliner.", en: "A) Regular pads or pantyliners." }, isCorrect: false },
@@ -626,6 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Pakaian ketat dari bahan buatan menyekat pengudaraan.", en: "Tight synthetic clothes trap sweat and block airflow." },
                 question: { ms: "5. Apakah jenis pakaian yang sepatutnya dielakkan semasa haid kerana boleh memerangkap haba dan kelembapan serta menggalakkan pertumbuhan bakteria dan kulat?", en: "5. What type of clothing should be avoided during your period because it can trap heat and moisture, promoting bacteria and fungal growth?" },
                 options: [
                     { text: { ms: "A) Pakaian daripada fabrik kapas yang longgar.", en: "A) Loose cotton fabric clothing." }, isCorrect: false },
@@ -635,6 +671,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Bahan kimia pewangi boleh merengsakan kulit sensitif.", en: "Fragrance chemicals can irritate sensitive areas." },
                 question: { ms: "6. Mengapakah produk haid berpewangi boleh menyebabkan masalah?", en: "6. Why can scented menstrual products cause issues?" },
                 options: [
                     { text: { ms: "A) Ia menyebabkan darah haid berhenti.", en: "A) They cause period blood to stop." }, isCorrect: false },
@@ -644,6 +681,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Bantuan keselesaan haba meringankan rasa sakit.", en: "Warmth provides physical comfort and pain relief." },
                 question: { ms: "7. Apakah yang boleh dilakukan untuk membantu seseorang yang mengalami senggugut?", en: "7. What can be done to help someone experiencing period cramps?" },
                 options: [
                     { text: { ms: "A) Menyuruh mereka mengabaikan kesakitan.", en: "A) Telling them to ignore the pain." }, isCorrect: false },
@@ -653,6 +691,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ]
             },
             {
+                hint: { ms: "Empati dan sokongan emosi tanpa menghakimi.", en: "Empathy, support, and active listening help most." },
                 question: { ms: "8. Bagaimanakah cara terbaik untuk menyokong seseorang yang mengalami perubahan mood ketika haid?", en: "8. What is the best way to support someone experiencing mood swings during their period?" },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
@@ -707,14 +746,33 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
+            const isEn = selectedLang === "en";
 
             if (currentQ.options[optionIndex].isCorrect) {
                 currentScore += 1;
-            }
+                updateScoreDisplay();
 
-            updateScoreDisplay();
-            currentQuestionIndex++;
-            loadQuestion();
+                showModal(
+                    "🎉",
+                    isEn ? "Correct!" : "Jawapan Betul!",
+                    isEn ? "Great job! That is the right answer." : "Syabas! Jawapan anda sangat tepat.",
+                    () => {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                    }
+                );
+            } else {
+                updateScoreDisplay();
+                showModal(
+                    "❌",
+                    isEn ? "Incorrect!" : "Jawapan Salah!",
+                    isEn ? "Oops, that was not correct. Keep trying!" : "Alamak, jawapan anda kurang tepat. Cuba lagi!",
+                    () => {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                    }
+                );
+            }
         });
     });
 
@@ -735,16 +793,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (scene11QuitBtn) {
         scene11QuitBtn.addEventListener("click", () => {
-            if (confirm(selectedLang === "en" ? "Are you sure you want to quit the quiz?" : "Adakah anda pasti mahu keluar daripada kuiz?")) {
-                if (scene11Overlay) scene11Overlay.style.display = "none";
-                if (scene10Overlay) scene10Overlay.style.display = "flex";
-            }
+            const isEn = selectedLang === "en";
+            showModal(
+                "🚪",
+                isEn ? "Quit Quiz?" : "Keluar Kuiz?",
+                isEn ? "Returning to Quiz Selection menu." : "Kembali ke menu pilihan kuiz.",
+                () => {
+                    if (scene11Overlay) scene11Overlay.style.display = "none";
+                    if (scene10Overlay) scene10Overlay.style.display = "flex";
+                }
+            );
         });
     }
 
     if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
-            alert(selectedLang === "en" ? "Hint: Read the options carefully and pick the healthiest choice!" : "Petunjuk: Baca pilihan jawapan dengan teliti dan pilih jawapan yang paling tepat!");
+            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
+            const currentQ = currentCategoryQuestions[currentQuestionIndex];
+            const isEn = selectedLang === "en";
+            const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
+
+            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null);
         });
     }
 
@@ -786,7 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. LOCALIZATION
+    // 8. LOCALIZATION
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
@@ -830,6 +899,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (quizTitle) quizTitle.textContent = "Menstrual Care Quiz";
             if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
+            if (modalCloseBtn) modalCloseBtn.textContent = "CONTINUE";
 
         } else {
             if (settingsTitle) settingsTitle.textContent = "Tetapan";
@@ -870,6 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (quizTitle) quizTitle.textContent = "Kuiz Penjagaan Haid";
             if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
+            if (modalCloseBtn) modalCloseBtn.textContent = "TERUSKAN";
         }
 
         if (scene11Overlay && scene11Overlay.style.display === "flex") {
