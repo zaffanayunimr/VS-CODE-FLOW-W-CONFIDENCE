@@ -58,7 +58,6 @@ body {
     transition: fill 0.2s ease;
 }
 
-/* Hover Effect: Soft Pink Light Pink (#FFE6F2) dengan simbol biru */
 .circle-icon-btn:hover {
     background-color: #FFE6F2 !important;
     border-color: #FFE6F2 !important;
@@ -81,7 +80,7 @@ body {
     z-index: 310;
 }
 
-/* BUTANG FULLSCREEN (Diatur Khas untuk Laptop & Phone) */
+/* BUTANG FULLSCREEN */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
@@ -1014,7 +1013,7 @@ body {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
-    color: #000;
+    color: #E70B90 !important;
     line-height: 1.35;
     margin-top: 110px;
 }
@@ -1092,7 +1091,7 @@ body {
 #result-congrats {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 4rem;
-    color: #000;
+    color: #E70B90 !important;
     font-weight: normal;
     margin-bottom: 50px;
 }
@@ -1100,7 +1099,7 @@ body {
 #result-motto {
     font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-size: 3rem;
-    color: #000;
+    color: #E70B90 !important;
     font-weight: normal;
     margin-bottom: 45px;
 }
@@ -1108,7 +1107,7 @@ body {
 .score-display-line {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 3rem;
-    color: #000;
+    color: #E70B90 !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1119,9 +1118,7 @@ body {
     font-weight: bold;
 }
 
-/* ==========================================
-   POP-UP DIALOG MODAL STYLES (HINT, BETUL & SALAH)
-   ========================================== */
+/* POP-UP DIALOG MODAL STYLES */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1166,16 +1163,17 @@ body {
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.2rem;
-    color: #E70B90;
+    color: #E70B90 !important;
     margin-bottom: 12px;
 }
 
 .modal-box p {
     font-family: Arial, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #333333;
     line-height: 1.4;
     margin-bottom: 25px;
+    white-space: pre-line;
 }
 
 #modal-close-btn {
@@ -1196,9 +1194,7 @@ body {
     background-color: #FFE6F2;
 }
 
-/* ==========================================
-   PELARASAN MOBILE LANDSCAPE (MOBILE RESPONSIVE)
-   ========================================== */
+/* PELARASAN MOBILE LANDSCAPE */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .left-bottom-controls {
         bottom: 12px !important;
