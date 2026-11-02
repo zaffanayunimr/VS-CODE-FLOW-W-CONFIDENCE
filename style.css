@@ -106,12 +106,6 @@ body {
     z-index: 9999999 !important;
 }
 
-@media screen and (max-width: 768px) {
-    #fullscreen-btn {
-        display: none !important;
-    }
-}
-
 /* ==========================================
    0. OVERLAY LAYAR MULA
    ========================================== */
@@ -636,24 +630,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan lagi supaya tajuk berada tepat di atas garisan biru */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK DIBESARKAN & DITURUNKAN SAMAN DENGAN SEMUA HALAMAN */
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 38vh; /* Kekal di kedudukan selari petak biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -690,7 +682,6 @@ body {
     right: 10px;
 }
 
-/* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
     top: 180px;
     left: 50%;
@@ -759,29 +750,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan selari dengan tajuk Kuiz & Bab */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK ASAS, PENJAGAAN, KESIHATAN DIBESARKAN & DITURUNKAN */
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan sama dengan tajuk Kuiz & Bab */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* GRID BUTANG SUB-MENU DITURUNKAN KE PETAK LAKARAN BIRU (JARAK ANTARA KOTAK KEKAL) */
 .sub-menu-grid {
     position: absolute;
-    top: 38vh; /* Diturunkan supaya baris atas & bawah berada di dalam petak lakaran biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px; /* Jarak antara kotak dikekalkan */
+    gap: 80px 60px;
     width: 84%;
     max-width: 900px;
 }
@@ -896,7 +885,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
+   SCENE 11: INTERFASE KUIS
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -912,10 +901,9 @@ body {
     z-index: 200;
 }
 
-/* WADAH SOALAN: top: 14.8vh MENUNJUKKAN TITIK MULA BARIS PERTAMA DUDUK TEPAT DI ATAS GARISAN BIRU KEDUA */
 .question-container {
     position: absolute;
-    top: 14.8vh; /* Menurunkan baris pertama soalan tepat ke garisan biru */
+    top: 14.8vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -924,13 +912,12 @@ body {
     z-index: 210;
 }
 
-/* LINE-HEIGHT 8vh MENYESUAIKAN DENGAN JARAK GARISAN BIRU PADA LATAR BELAKANG */
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru seterusnya */
+    line-height: 8vh;
     margin: 0;
 }
 
@@ -1059,15 +1046,14 @@ body {
     align-items: center;
 }
 
-/* 1. KOTAK POP-UP (Dibesarkan sedikit tinggi & lebarnya supaya selesa) */
 .modal-box {
-    position: relative; /* Wajib supaya butang X melekat pada bucu kotak sahaja */
+    position: relative;
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px; /* Ditambah padding atas untuk ruang ikon & butang X */
+    padding: 30px 40px 25px 40px;
     width: 90%;
-    max-width: 480px;            /* Dibesarkan sedikit daripada 450px ke 480px */
+    max-width: 480px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -1075,7 +1061,6 @@ body {
     align-items: center;
 }
 
-/* 2. BUTANG X (Diletakkan di bucu atas kanan tanpa menolak elemen lain) */
 .modal-x-btn {
     position: absolute;
     top: 15px;
@@ -1098,14 +1083,12 @@ body {
     transform: scale(1.2);
 }
 
-/* 3. IKON (Dolar/Pintu/Lampu) */
 .modal-icon {
     font-size: 3.2rem;
     line-height: 1;
     margin-bottom: 12px;
 }
 
-/* 4. TAJUK (Keluar Kuiz? / Petunjuk) */
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.2rem;
@@ -1115,7 +1098,6 @@ body {
     line-height: 1.1;
 }
 
-/* 5. TEKS PENERANGAN (Kembali ke menu pilihan kuiz) */
 .modal-box p {
     font-family: Arial, sans-serif;
     font-size: 1.05rem;
@@ -1126,7 +1108,6 @@ body {
     white-space: pre-line;
 }
 
-/* 6. BUTANG TERUSKAN */
 #modal-close-btn {
     background-color: #CFE1F7;
     border: 3px solid #CC3399;
@@ -1143,4 +1124,449 @@ body {
 #modal-close-btn:hover {
     transform: translateY(-2px);
     background-color: #FFFFCC !important;
+}
+
+/* ==========================================
+   MOBILE LANDSCAPE RESPONSIVE DESIGN (PHONE)
+   IGUT YG SCRIPT 1 / STYLE DARI SCRIPT 2 (PHONE ONLY)
+   ========================================== */
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+
+    html,
+    body,
+    #player-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #fullscreen-btn {
+        top: 10px;
+        left: 10px;
+        width: 38px;
+        height: 38px;
+    }
+
+    #fullscreen-btn svg {
+        width: 23px;
+        height: 23px;
+    }
+
+    /* START SCREEN */
+    #start-overlay {
+        padding: 0 0 25px;
+        justify-content: flex-end;
+    }
+
+    .first-header {
+        top: 5vh;
+    }
+
+    .first-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: 3px;
+    }
+
+    .first-subtitle {
+        font-size: clamp(3rem, 9vw, 5rem);
+        margin-top: -8px;
+    }
+
+    #start-app-btn {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border-width: 3px;
+    }
+
+    /* LANGUAGE SELECTION */
+    #language-overlay {
+        gap: 14px;
+    }
+
+    .lang-btn {
+        width: min(360px, 65vw);
+        height: 52px;
+        font-size: clamp(1rem, 2.8vw, 1.5rem);
+        border-width: 3px;
+        padding-left: 45px;
+    }
+
+    #language-overlay .flag-icon {
+        width: 52px;
+        height: 52px;
+        border-width: 3px;
+        left: -3px;
+    }
+
+    .footer-logo {
+        bottom: 10px;
+    }
+
+    .footer-title {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .footer-subtitle {
+        font-size: 1.8rem;
+        margin-top: 3px;
+    }
+
+    /* MAIN MENU */
+    .menu-header {
+        margin-top: -5vh;
+        margin-bottom: 5vh;
+    }
+
+    .menu-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 3px;
+    }
+
+    .menu-subtitle {
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        margin-top: -8px;
+    }
+
+    .menu-buttons-container {
+        gap: 10px;
+    }
+
+    .menu-btn {
+        width: min(250px, 55vw);
+        height: 46px;
+        font-size: 1.4rem;
+        border-width: 3px;
+    }
+
+    .gear-btn {
+        top: 12px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .gear-btn .gear-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+    /* SETTINGS SCREEN */
+    #settings-overlay {
+        padding-top: 8px;
+    }
+
+    #settings-title {
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+    }
+
+    .settings-grid {
+        width: 90%;
+        gap: 22px;
+        margin-top: 22px;
+        align-items: stretch;
+    }
+
+    .settings-box {
+        min-width: 0;
+        padding: 28px 12px 12px;
+        border-width: 3px;
+        border-radius: 22px;
+    }
+
+    .box-header-badge {
+        top: -19px;
+        width: min(180px, 75%);
+        height: 38px;
+        border-width: 3px;
+        font-size: 1.35rem;
+    }
+
+    .audio-control-body {
+        gap: 18px;
+    }
+
+    .volume-slider-container {
+        width: 35px;
+        height: 105px;
+    }
+
+    #volume-slider {
+        width: 85px;
+        height: 12px;
+    }
+
+    #volume-slider::-webkit-slider-thumb {
+        width: 23px;
+        height: 23px;
+        border-width: 3px;
+    }
+
+    #volume-percentage {
+        font-size: 1rem;
+    }
+
+    .audio-btn-group,
+    .lang-btn-group {
+        gap: 9px;
+    }
+
+    .settings-action-btn {
+        width: clamp(135px, 25vw, 220px);
+        height: 38px;
+        grid-template-columns: 28px 1fr;
+        padding: 0 7px;
+        border-width: 2px;
+        font-size: clamp(0.8rem, 2vw, 1.1rem);
+    }
+
+    .btn-icon {
+        font-size: 1rem;
+    }
+
+    .settings-action-btn span:not(.btn-icon) {
+        padding-left: 4px;
+    }
+
+    .lang-option-btn {
+        width: clamp(150px, 28vw, 230px);
+        height: 42px;
+        padding-left: 38px;
+        padding-right: 5px;
+    }
+
+    .lang-option-btn .flag-icon {
+        width: 40px;
+        height: 40px;
+        left: -7px;
+        border-width: 2px;
+    }
+
+    #home-btn {
+        bottom: 12px;
+        left: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    #home-btn svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    #back-btn {
+        bottom: 12px;
+        right: 12px;
+        width: 110px;
+        height: 36px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    /* CHAPTER MENUS */
+    #scene6-overlay,
+    #scene7-overlay,
+    #scene8-overlay,
+    #scene9-overlay,
+    #scene10-overlay {
+        padding-top: 12px;
+    }
+
+    #chapter-title,
+    #asas-title,
+    #penjagaan-title,
+    #quiz-title {
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    #kesihatan-title {
+        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    }
+
+    .chapter-buttons-container {
+        width: 94%;
+        max-width: 850px;
+        height: 70vh;
+        margin-top: 5vh;
+    }
+
+    .chapter-card-btn {
+        width: 37%;
+        height: 60px;
+        border-width: 3px;
+    }
+
+    .card-left {
+        top: 10px;
+        left: 20px;
+    }
+
+    .card-right {
+        top: 10px;
+        right: 20px;
+    }
+
+    .card-center {
+        bottom: 8px;
+    }
+
+    .card-icon-circle {
+        width: 60px;
+        height: 60px;
+        left: -10px;
+    }
+
+    .card-emoji {
+        font-size: 1.6rem;
+    }
+
+    .health-svg-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-label {
+        padding-left: 35px;
+        padding-right: 8px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+    }
+
+    /* Sub-menu buttons */
+    .sub-menu-grid {
+        width: 88%;
+        max-width: 850px;
+        gap: 3vh 3vw;
+        margin-top: 6vh;
+    }
+
+    .sub-menu-btn {
+        height: auto;
+        min-height: 58px;
+        padding: 8px 12px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+        border-width: 3px;
+        border-radius: 18px;
+    }
+
+    .sub-back-btn,
+    #normal-lawan-back-btn {
+        bottom: 12px;
+        right: 12px;
+        width: 105px;
+        height: 35px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    .home-circle-btn,
+    #normal-lawan-home-btn {
+        bottom: 12px;
+        left: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .home-circle-btn svg {
+        width: 33px;
+        height: 33px;
+    }
+
+    /* VIDEO PLAYER */
+    .video-display-area video {
+        object-fit: contain;
+    }
+
+    .video-controls-toolbar {
+        right: 12px;
+        gap: 8px;
+    }
+
+    .vcontrol-btn {
+        width: 42px;
+        height: 42px;
+        border-width: 2px;
+    }
+
+    .vcontrol-btn svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .video-speed-control {
+        width: 52px;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    #videoSpeed {
+        width: 52px;
+        height: 34px;
+        padding: 0 2px;
+        font-size: 11px;
+        border-width: 2px;
+        border-radius: 10px;
+    }
+
+    #normal-lawan-settings-btn {
+        top: 12px;
+        right: 15px;
+    }
+
+    /* QUIZ */
+    #scene11-overlay {
+        padding-top: 12px;
+    }
+
+    .score-board {
+        top: 12px;
+        left: 60px;
+        font-size: 1.2rem;
+        padding: 4px 10px;
+    }
+
+    .question-container {
+        width: 84%;
+        margin-top: 35px;
+    }
+
+    #quiz-question-text {
+        font-size: clamp(1rem, 2.7vw, 1.6rem);
+        line-height: 1.2;
+    }
+
+    .options-grid {
+        width: 86%;
+        gap: 10px 16px;
+        margin-top: 24px;
+    }
+
+    .option-btn {
+        min-height: 55px;
+        padding: 8px 12px;
+        font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+        border-width: 2px;
+        border-radius: 15px;
+    }
+
+    /* QUIZ RESULT */
+    #result-congrats {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 20px;
+    }
+
+    #result-motto {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        margin-bottom: 20px;
+    }
+
+    .score-display-line {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        gap: 10px;
+    }
+
+    .result-box {
+        margin-bottom: 25px;
+    }
 }
