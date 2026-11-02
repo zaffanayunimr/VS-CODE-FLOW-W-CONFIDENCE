@@ -463,9 +463,9 @@
 
     <!-- Scene 11: Quiz Interface -->
     <div id="scene11-overlay">
-        <div class="score-board">
-            <span id="label-score">Skor</span>: <span id="quiz-score">0</span>
-        </div>
+<div class="score-board">
+    <span id="label-score">Skor</span>: <span id="quiz-score">0</span> / 8
+</div>
 
         <div class="question-container">
             <h2 id="quiz-question-text">1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?</h2>
@@ -507,16 +507,18 @@
         </div>
     </div>
 
-    <!-- Scene 12: Quiz Result Screen -->
-    <div id="scene12-overlay" class="notebook-bg">
-        <div class="result-box">
-            <h1 id="result-congrats">Tahniah!</h1>
-            <h2 id="result-motto">Usaha tangga kejayaan!</h2>
-            <div class="score-display-line">
-                <span id="result-score-label">Skor anda:</span>
-                <span id="final-score-val">0</span>
-            </div>
+<!-- Scene 12: Quiz Result Screen -->
+<div id="scene12-overlay" class="notebook-bg">
+    <div class="result-box">
+        <h1 id="result-congrats">Tahniah!</h1>
+        <h2 id="result-motto">Usaha tangga kejayaan!</h2>
+        <div class="score-display-line">
+            <span id="result-score-label">Skor anda:</span>
+            <span id="final-score-val">0</span>
+            <span id="total-score-val"> / 8</span> <!-- Tambah baris ini -->
         </div>
+    </div>
+    ...
 
         <div class="bottom-controls-group">
             <button id="scene12-settings-btn" class="circle-btn" aria-label="Settings">
