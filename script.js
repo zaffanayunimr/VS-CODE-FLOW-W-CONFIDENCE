@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const vbtnPlay = document.getElementById("vbtn-play");
     const vbtnRestart = document.getElementById("vbtn-restart");
     const videoSpeed = document.getElementById("videoSpeed");
+    const videoSpeedLabel = document.getElementById("video-speed-label");
     const normalLawanHomeBtn = document.getElementById("normal-lawan-home-btn");
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
@@ -122,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const optC = document.getElementById("opt-c");
     const optD = document.getElementById("opt-d");
     const quizScoreElem = document.getElementById("quiz-score");
+    const labelScore = document.getElementById("label-score");
 
     const scene11HomeBtn = document.getElementById("scene11-home-btn");
     const scene11BackBtn = document.getElementById("scene11-back-btn");
@@ -138,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-    // Modal Feedback & Hint Elements
+    // Modal Elements
     const quizModal = document.getElementById("quiz-modal");
     const modalTitle = document.getElementById("modal-title");
     const modalMessage = document.getElementById("modal-message");
@@ -185,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN & AUTO-ROTATE LOGIC
+    // FULLSCREEN & AUTO-ROTATE LOGIC (ASAL)
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
@@ -194,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (docEl.webkitRequestFullscreen) {
             docEl.webkitRequestFullscreen();
             lockOrientationLandscape();
+        } else if (docEl.webkitEnterFullscreen) {
+            docEl.webkitEnterFullscreen();
         }
     }
 
@@ -203,17 +207,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function hideFullscreenBtn() {
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+        if (fullscreenBtn) {
+            if (isMobile) fullscreenBtn.style.setProperty("display", "none", "important");
+            else fullscreenBtn.style.setProperty("display", "flex", "important");
+        }
+    }
+
     function toggleFullscreen() {
         const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
         if (!isFullscreen) {
             requestLandscapeFullscreen();
+            hideFullscreenBtn();
         } else {
             if (document.exitFullscreen) document.exitFullscreen();
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         }
+
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+        if (fullscreenBtn && !isMobile) fullscreenBtn.style.setProperty("display", "flex", "important");
+    }
+
+    function updateFullscreenIcon() {
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fullscreenIcon) {
+            if (isFullscreen) {
+                fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
+            } else {
+                fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
+            }
+        }
+        const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
+        if (fullscreenBtn && !isMobile) fullscreenBtn.style.setProperty("display", "flex", "important");
     }
 
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", updateFullscreenIcon);
+    document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
     // 3. START OVERLAY & INTRO FLOW
@@ -221,23 +252,40 @@ document.addEventListener("DOMContentLoaded", () => {
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
+            e.stopPropagation();
+
             requestLandscapeFullscreen();
+            hideFullscreenBtn();
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
+
+            let videoStarted = false;
 
             if (video1) {
                 video1.style.display = "block";
                 video1.classList.add("active");
                 video1.currentTime = 0;
-                video1.play().catch(() => {
+
+                const playPromise = video1.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        videoStarted = true;
+                    }).catch(err => {
+                        video1.classList.remove("active");
+                        video1.style.display = "none";
+                        if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
+                    });
+                }
+            }
+
+            setTimeout(() => {
+                if (!videoStarted && video1 && video1.paused) {
                     video1.classList.remove("active");
                     video1.style.display = "none";
                     if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
-                });
-            } else {
-                if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
-            }
+                }
+            }, 300);
         });
     }
 
@@ -249,26 +297,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (btnBm) {
-        btnBm.addEventListener("click", (e) => {
-            e.stopPropagation();
-            startIntroScene("ms");
-        });
-    }
-    
-    if (btnEn) {
-        btnEn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            startIntroScene("en");
-        });
-    }
+    if (btnBm) btnBm.addEventListener("click", () => startIntroScene("ms"));
+    if (btnEn) btnEn.addEventListener("click", () => startIntroScene("en"));
 
     function startIntroScene(lang) {
         selectedLang = lang;
         updateLocalizationUI();
 
-        if (langOverlay) langOverlay.style.setProperty("display", "none", "important");
-        if (skipBtn) skipBtn.style.setProperty("display", "flex", "important");
+        if (langOverlay) langOverlay.style.display = "none";
+        if (skipBtn) skipBtn.style.display = "flex";
 
         stopIntroAudio();
 
@@ -278,9 +315,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (video2) {
             video2.currentTime = 0;
             video2.classList.add("active");
-            video2.play().catch(err => console.log(err));
         }
-        introAudio.play().catch(err => console.log(err));
+
+        const playback = [];
+        if (video2) playback.push(video2.play());
+        playback.push(introAudio.play());
+        Promise.allSettled(playback).then(results => {
+            results.filter(result => result.status === "rejected")
+                .forEach(result => console.error("Intro playback error:", result.reason));
+        });
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
@@ -300,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
             video2.classList.remove("active");
         }
         if (skipBtn) skipBtn.style.display = "none";
+
         updateLocalizationUI();
         if (scene4Overlay) scene4Overlay.style.display = "flex";
     }
@@ -358,11 +402,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (videoSpeed) videoSpeed.addEventListener("change", applyVideoSpeed);
-    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
+    if (normalLawanVideo) normalLawanVideo.addEventListener("loadedmetadata", applyVideoSpeed);
+
+    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play().catch(err => console.error(err)));
     if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
     if (vbtnRestart && normalLawanVideo) vbtnRestart.addEventListener("click", () => {
         normalLawanVideo.currentTime = 0;
-        normalLawanVideo.play();
+        normalLawanVideo.play().catch(err => console.error(err));
     });
 
     if (normalLawanBackBtn) {
@@ -550,10 +596,39 @@ document.addEventListener("DOMContentLoaded", () => {
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
-            const targetScene = document.getElementById(previousScene + "-overlay");
-            if (targetScene) targetScene.style.display = "flex";
-            else if (previousScene === "normal-lawan" && normalLawanOverlay) normalLawanOverlay.style.display = "block";
-            else if (scene4Overlay) scene4Overlay.style.display = "flex";
+
+            if (previousScene === "normal-lawan") {
+                if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
+                if (normalLawanVideo && currentVideoBaseName) {
+                    const langSuffix = selectedLang === "en" ? "bi" : "bm";
+                    const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
+                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
+                        const currentTime = normalLawanVideo.currentTime;
+                        normalLawanSource.src = newVideoFile;
+                        normalLawanVideo.load();
+                        normalLawanVideo.currentTime = currentTime;
+                        normalLawanVideo.play().catch(err => console.log(err));
+                    } else {
+                        normalLawanVideo.play().catch(err => console.log(err));
+                    }
+                }
+            } else if (previousScene === "scene12") {
+                if (scene12Overlay) scene12Overlay.style.display = "flex";
+            } else if (previousScene === "scene11") {
+                if (scene11Overlay) scene11Overlay.style.display = "flex";
+            } else if (previousScene === "scene10") {
+                if (scene10Overlay) scene10Overlay.style.display = "flex";
+            } else if (previousScene === "scene9") {
+                if (scene9Overlay) scene9Overlay.style.display = "flex";
+            } else if (previousScene === "scene8") {
+                if (scene8Overlay) scene8Overlay.style.display = "flex";
+            } else if (previousScene === "scene7") {
+                if (scene7Overlay) scene7Overlay.style.display = "flex";
+            } else if (previousScene === "scene6") {
+                if (scene6Overlay) scene6Overlay.style.display = "flex";
+            } else {
+                if (scene4Overlay) scene4Overlay.style.display = "flex";
+            }
         });
     }
 
@@ -573,7 +648,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA & LOGIC
+    // 6. QUIZ DATA & LOGIC (HINT + MODAL FEEDBACK KEKAL)
     // ==========================================
     const quizCategories = {
         asas: [
@@ -1153,4 +1228,28 @@ document.addEventListener("DOMContentLoaded", () => {
             loadQuestion();
         }
     }
+
+    // ==========================================
+    // 8. AUTO RE-LOCK LANDSCAPE (ASAL)
+    // ==========================================
+    function reLockOrientation() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => console.log(err));
+        }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            reLockOrientation();
+            const handleFirstTouch = () => {
+                reLockOrientation();
+                window.removeEventListener("touchstart", handleFirstTouch);
+                window.removeEventListener("click", handleFirstTouch);
+            };
+            window.addEventListener("touchstart", handleFirstTouch);
+            window.addEventListener("click", handleFirstTouch);
+        }
+    });
+
+    window.addEventListener("focus", reLockOrientation);
 });
