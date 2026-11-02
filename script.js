@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelPenjagaan = document.getElementById("label-penjagaan");
     const labelKesihatan = document.getElementById("label-kesihatan");
     const scene6HomeBtn = document.getElementById("scene6-home-btn");
-    const scene6BackBtn = document.getElementById("scene6-back-btn");
     const scene6SettingsBtn = document.getElementById("scene6-settings-btn");
 
     // Scene 7 DOM Elements
@@ -109,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Quiz DOM Elements
     const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
     const scene10HomeBtn = document.getElementById("scene10-home-btn");
-    const scene10BackBtn = document.getElementById("scene10-back-btn");
     const quizTitle = document.getElementById("quiz-title");
     const labelQuizAsas = document.getElementById("label-quiz-asas");
     const labelQuizPenjagaan = document.getElementById("label-quiz-penjagaan");
@@ -417,13 +415,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (scene6BackBtn) {
-        scene6BackBtn.addEventListener("click", () => {
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
-
     if (btnAsas) {
         btnAsas.addEventListener("click", () => {
             if (scene6Overlay) scene6Overlay.style.display = "none";
@@ -542,13 +533,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (scene10HomeBtn) {
         scene10HomeBtn.addEventListener("click", () => {
-            if (scene10Overlay) scene10Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene10BackBtn) {
-        scene10BackBtn.addEventListener("click", () => {
             if (scene10Overlay) scene10Overlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
         });
