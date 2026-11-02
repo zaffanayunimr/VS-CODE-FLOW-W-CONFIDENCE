@@ -35,9 +35,7 @@ body {
    DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
    ========================================== */
 .circle-icon-btn,
-#fullscreen-btn,
-.home-circle-btn,
-.gear-btn {
+#fullscreen-btn {
     width: 52px !important;
     height: 52px !important;
     background-color: #FFFFFF !important;
@@ -58,9 +56,6 @@ body {
 /* SIMBOL IKON BIRU DI TENGAH */
 .circle-icon-btn svg,
 #fullscreen-btn svg,
-.home-circle-btn svg,
-.gear-btn svg,
-.gear-btn .gear-icon,
 .circle-icon-btn svg path,
 #fullscreen-btn svg path {
     width: 26px !important;
@@ -76,9 +71,7 @@ body {
 
 /* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
 .circle-icon-btn:hover,
-#fullscreen-btn:hover,
-.home-circle-btn:hover,
-.gear-btn:hover {
+#fullscreen-btn:hover {
     background-color: #FFE6F2 !important; /* Light Pink Soft */
     border-color: #38B6FF !important;
     transform: translateY(-3px) scale(1.05) !important;
@@ -86,20 +79,14 @@ body {
 
 .circle-icon-btn:hover svg,
 #fullscreen-btn:hover svg,
-.home-circle-btn:hover svg,
-.gear-btn:hover svg,
-.gear-btn:hover .gear-icon,
 .circle-icon-btn:hover svg path,
 #fullscreen-btn:hover svg path {
     fill: #38B6FF !important;
     stroke: none !important;
 }
 
-/* KONTROL KIRI BAWAH (SETTING, HOME) */
-.left-bottom-controls,
-#home-btn,
-.home-circle-btn,
-#normal-lawan-home-btn {
+/* KONTROL KIRI BAWAH */
+.left-bottom-controls {
     position: absolute;
     bottom: 4vh;
     left: 3vw;
@@ -110,46 +97,6 @@ body {
     z-index: 310;
 }
 
-/* BUTANG KEMBALI ARROW BACK (DI KIRI BAWAH BERSEBELAHAN) */
-.back-arrow-btn,
-#back-btn,
-.sub-back-btn,
-#normal-lawan-back-btn {
-    position: absolute;
-    bottom: 4vh;
-    left: calc(3vw + 65px);
-    width: 52px !important;
-    height: 52px !important;
-    background-color: #FFFFFF !important;
-    border: 3.5px solid #38B6FF !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
-    transition: transform 0.2s ease, background-color 0.2s ease !important;
-    padding: 0 !important;
-    z-index: 310;
-}
-
-.back-arrow-btn:hover,
-#back-btn:hover,
-.sub-back-btn:hover,
-#normal-lawan-back-btn:hover {
-    background-color: #FFE6F2 !important;
-    transform: translateY(-3px) scale(1.05) !important;
-}
-
-.back-arrow-btn svg,
-#back-btn svg,
-.sub-back-btn svg,
-#normal-lawan-back-btn svg {
-    width: 26px !important;
-    height: 26px !important;
-    fill: #38B6FF !important;
-}
-
 /* TOMBOL FULLSCREEN */
 #fullscreen-btn {
     display: flex !important;
@@ -157,6 +104,12 @@ body {
     top: 20px !important;
     left: 20px !important;
     z-index: 9999999 !important;
+}
+
+@media screen and (max-width: 768px) {
+    #fullscreen-btn {
+        display: none !important;
+    }
 }
 
 /* ==========================================
@@ -1190,252 +1143,4 @@ body {
 #modal-close-btn:hover {
     transform: translateY(-2px);
     background-color: #FFFFCC !important;
-}
-
-/* ==========================================
-   KECERASAN SKRIN TELEFON BIMBIT (MOBILE RESPONSIVE)
-   MENGENDALIKAN RATIO SKRIN TELEFON (2700x1224 PORTRAIT/LANDSCAPE DAN LAIN-LAIN)
-   ========================================== */
-
-@media screen and (max-width: 900px), screen and (max-height: 500px) {
-
-    /* Sembunyikan Butang Fullscreen Pada Telefon Bimbit */
-    #fullscreen-btn {
-        display: none !important;
-    }
-
-    /* Pengecilan Saiz Butang Bulat Navigasi */
-    .circle-icon-btn,
-    .home-circle-btn,
-    .gear-btn {
-        width: 40px !important;
-        height: 40px !important;
-        border-width: 2.5px !important;
-    }
-
-    .circle-icon-btn svg,
-    .home-circle-btn svg,
-    .gear-btn svg,
-    .gear-btn .gear-icon,
-    .circle-icon-btn svg path,
-    #fullscreen-btn svg path {
-        width: 20px !important;
-        height: 20px !important;
-    }
-
-    /* Pengecilan Saiz & Kedudukan Butang Kembali (Arrow Back) */
-    .back-arrow-btn,
-    #back-btn,
-    .sub-back-btn,
-    #normal-lawan-back-btn {
-        width: 40px !important;
-        height: 40px !important;
-        border-width: 2.5px !important;
-        left: calc(12px + 50px) !important; /* Diletakkan tepat di sebelah butang Setting/Home */
-        bottom: 12px !important;
-    }
-
-    .back-arrow-btn svg,
-    #back-btn svg,
-    .sub-back-btn svg,
-    #normal-lawan-back-btn svg {
-        width: 20px !important;
-        height: 20px !important;
-    }
-
-    /* Penetapan Kedudukan Kiri Bawah Pada Telefon Bimbit */
-    .left-bottom-controls,
-    #home-btn,
-    .home-circle-btn,
-    #normal-lawan-home-btn,
-    #scene4-overlay .gear-btn {
-        bottom: 12px !important;
-        left: 12px !important;
-    }
-
-    /* Skrin Mula & Tajuk */
-    .first-header {
-        top: 6vh;
-    }
-
-    .first-title {
-        font-size: clamp(2rem, 5vw, 3.2rem);
-    }
-
-    .first-subtitle {
-        font-size: clamp(3.2rem, 9vw, 5.5rem);
-    }
-
-    #start-app-btn {
-        padding: 12px 35px;
-        font-size: 1.3rem;
-    }
-
-    /* Skrin Tetapan (Settings) */
-    #settings-overlay {
-        padding-top: 5vh;
-    }
-
-    #settings-title {
-        font-size: clamp(2rem, 5vw, 2.8rem);
-    }
-
-    .settings-grid {
-        gap: 20px;
-        margin-top: 5vh !important;
-        width: 92%;
-    }
-
-    .settings-box {
-        padding: 25px 15px 15px 15px;
-        min-height: 200px;
-        border-radius: 20px;
-    }
-
-    .box-header-badge {
-        top: -20px;
-        width: 160px;
-        height: 38px;
-        font-size: 1.3rem;
-    }
-
-    .settings-action-btn {
-        width: 180px;
-        height: 40px;
-        font-size: 1rem;
-        grid-template-columns: 30px 1fr;
-    }
-
-    .volume-slider-container {
-        height: 120px;
-    }
-
-    #volume-slider {
-        width: 90px;
-    }
-
-    .lang-option-btn {
-        width: 180px;
-        height: 42px;
-        padding-left: 35px;
-    }
-
-    .flag-icon {
-        width: 38px;
-        height: 38px;
-    }
-
-    /* Tajuk Bab, Kuiz & Sub-Menu */
-    #chapter-title, #quiz-title, #asas-title, #penjagaan-title, #kesihatan-title {
-        font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-    }
-
-    /* Menu Utamna & Butang Bab */
-    .menu-header {
-        margin-top: 8vh !important;
-    }
-
-    .menu-buttons-container {
-        margin-top: 18vh !important;
-        gap: 12px;
-    }
-
-    .menu-btn {
-        width: min(250px, 70vw);
-        height: 48px;
-        font-size: 1.4rem;
-    }
-
-    .chapter-grid-container {
-        top: 25vh;
-        width: 92%;
-        height: 260px;
-    }
-
-    .chapter-card-btn {
-        width: min(300px, 80vw);
-        height: 65px;
-    }
-
-    .card-center {
-        top: 130px;
-    }
-
-    .card-icon-circle {
-        width: 60px;
-        height: 60px;
-        left: -8px;
-    }
-
-    .card-label {
-        font-size: 1.2rem;
-        padding-left: 35px;
-    }
-
-    .sub-menu-grid {
-        top: 25vh;
-        gap: 20px 25px;
-        width: 90%;
-    }
-
-    .sub-menu-btn {
-        height: 60px;
-        font-size: 1.1rem;
-        padding: 5px 10px;
-        border-radius: 16px;
-    }
-
-    /* Interfase Soalan & Pilihan Kuiz */
-    .question-container {
-        top: 10vh;
-        width: 90%;
-    }
-
-    #quiz-question-text {
-        font-size: clamp(1.1rem, 2.8vw, 1.5rem);
-        line-height: 1.3;
-    }
-
-    .options-grid {
-        top: 32vh;
-        gap: 15px 20px;
-        width: 92%;
-    }
-
-    .option-btn {
-        min-height: 55px;
-        font-size: 1rem;
-        padding: 8px 12px;
-        border-radius: 16px;
-    }
-
-    .score-board {
-        top: 2vh;
-        left: 3vw;
-        font-size: 1.2rem;
-        padding: 2px 10px;
-    }
-
-    /* Skrin Hasil Kuiz */
-    .result-box {
-        top: 25vh;
-    }
-
-    #result-congrats {
-        font-size: clamp(2rem, 5vw, 2.8rem);
-    }
-
-    #result-motto {
-        font-size: clamp(1.5rem, 3.5vw, 2rem);
-    }
-
-    .score-display-line {
-        font-size: clamp(1.5rem, 3.5vw, 2rem);
-    }
-
-    /* Kawalan Pemutar Video */
-    .video-controls-toolbar {
-        right: 12px;
-        gap: 10px;
-    }
 }
