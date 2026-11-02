@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <!-- Fullscreen button (Kekal pada laptop, tersembunyi di phone) -->
+    <!-- Fullscreen button -->
     <button id="fullscreen-btn" class="circle-icon-btn" aria-label="Toggle Fullscreen">
         <svg id="fullscreen-icon" viewBox="0 0 24 24">
             <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
@@ -33,7 +33,6 @@
                 <h1 class="first-title">FLOW WITH</h1>
                 <h2 class="first-subtitle">Confidence</h2>
             </div>
-
             <button id="start-app-btn">MULA / START</button>
         </div>
     </div>
@@ -41,7 +40,6 @@
     <!-- Scene 1: Logo Video -->
     <video id="videoPlayer1" class="video-layer active" playsinline muted>
         <source src="assets/comp1.mp4" type="video/mp4">
-        Browser anda tidak menyokong tag video.
     </video>
 
     <!-- Scene 2: Language Selection Overlay -->
@@ -66,14 +64,14 @@
         <source src="assets/full-intro.mp4" type="video/mp4">
     </video>
 
-    <!-- Skip / Langkau Button -->
+    <!-- Skip Button -->
     <button id="skip-btn">Langkau</button>
 
     <!-- Scene 4: Main Menu Overlay -->
     <div id="scene4-overlay">
         <button id="settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
             <svg class="gear-icon" viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
             </svg>
         </button>
 
@@ -88,14 +86,14 @@
         </div>
     </div>
 
-    <!-- Scene 5: Settings Overlay Screen -->
+    <!-- Scene 5: Settings Overlay Screen (Dilaraskan ke Garis Biru cth5.jpg) -->
     <div id="settings-overlay">
         <h1 id="settings-title">Tetapan</h1>
 
         <div class="left-bottom-controls">
             <button id="settings-gear-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -115,24 +113,20 @@
                 <div class="box-header-badge header-audio">
                     <span id="label-audio">Audio</span>
                 </div>
-
                 <div class="audio-control-body">
                     <div class="volume-slider-container">
                         <input type="range" id="volume-slider" min="0" max="100" value="100">
                         <span id="volume-percentage">100%</span>
                     </div>
-
                     <div class="audio-btn-group">
                         <button class="settings-action-btn" id="btn-volume-up">
                             <span class="btn-icon">🔊</span>
                             <span id="text-volume-up">Kuatkan</span>
                         </button>
-
                         <button class="settings-action-btn" id="btn-volume-down">
                             <span class="btn-icon">🔉</span>
                             <span id="text-volume-down">Perlahankan</span>
                         </button>
-
                         <button class="settings-action-btn" id="btn-mute">
                             <span class="btn-icon">🔇</span>
                             <span id="text-mute">Senyap</span>
@@ -145,13 +139,11 @@
                 <div class="box-header-badge header-lang">
                     <span id="label-language">Bahasa</span>
                 </div>
-
                 <div class="lang-btn-group">
                     <button class="settings-action-btn lang-option-btn" id="btn-set-bm">
                         <span class="flag-icon flag-my"></span>
                         <span id="text-lang-bm">Bahasa Melayu</span>
                     </button>
-
                     <button class="settings-action-btn lang-option-btn" id="btn-set-en">
                         <span class="flag-icon flag-uk"></span>
                         <span id="text-lang-en">Bahasa Inggeris</span>
@@ -166,12 +158,12 @@
         </div>
     </div>
 
-    <!-- Scene 6: Chapter Menu Overlay Screen -->
+    <!-- Scene 6: Chapter Menu Overlay Screen (Dilaraskan ke Garis Biru cth3.jpg) -->
     <div id="scene6-overlay">
         <div class="left-bottom-controls">
             <button id="scene6-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene6-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -185,7 +177,8 @@
             <h1 id="chapter-title">Bab Penjagaan Haid</h1>
         </div>
 
-        <div class="chapter-buttons-container">
+        <!-- Wadah Kedudukan Kad Mengikut Garis Biru cth3.jpg -->
+        <div class="chapter-grid-container">
             <button class="chapter-card-btn card-left" id="btn-asas">
                 <div class="card-icon-circle icon-bg-blue">
                     <span class="card-emoji">📖</span>
@@ -216,7 +209,7 @@
         </div>
     </div>
 
-    <!-- Scene 7: Sub-Menu Asas -->
+    <!-- Scene 7: Sub-Menu Asas (Dilaraskan ke 4 Petak Biru Bawah cth2.jpg) -->
     <div id="scene7-overlay">
         <div class="left-bottom-controls">
             <button id="scene7-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
@@ -244,15 +237,12 @@
             <button class="sub-menu-btn" id="btn-apa-haid">
                 <span id="label-apa-haid">Apakah itu haid?</span>
             </button>
-
             <button class="sub-menu-btn" id="btn-mengapa-haid">
                 <span id="label-mengapa-haid">Mengapa haid berlaku?</span>
             </button>
-
             <button class="sub-menu-btn" id="btn-berapa-lama">
                 <span id="label-berapa-lama">Berapa lamakah kitaran haid?</span>
             </button>
-
             <button class="sub-menu-btn" id="btn-normal-lawan">
                 <span id="label-normal-lawan">Normal lawan tidak normal</span>
             </button>
@@ -269,7 +259,7 @@
         <div class="left-bottom-controls">
             <button id="normal-lawan-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="normal-lawan-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -287,28 +277,20 @@
         <div class="video-display-area">
             <video id="normalLawanVideo" playsinline>
                 <source id="normalLawanSource" src="assets/normal-lawan-ms.mp4" type="video/mp4">
-                Browser anda tidak menyokong tag video.
             </video>
         </div>
 
         <div class="video-controls-toolbar">
             <button id="vbtn-pause" class="vcontrol-btn circle-icon-btn" aria-label="Pause">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
             </button>
             <button id="vbtn-play" class="vcontrol-btn circle-icon-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
             <button id="vbtn-restart" class="vcontrol-btn circle-icon-btn" aria-label="Restart from Start">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
             </button>
             <div class="video-speed-control">
-                <label id="video-speed-label" for="videoSpeed">Kelajuan</label>
                 <select id="videoSpeed" aria-label="Kelajuan video">
                     <option value="0.75">0.75×</option>
                     <option value="1" selected>1×</option>
@@ -325,7 +307,7 @@
         <div class="left-bottom-controls">
             <button id="scene8-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene8-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -348,15 +330,12 @@
             <button class="sub-menu-btn green-btn" id="btn-penjagaan-asas">
                 <span id="label-penjagaan-asas">Penjagaan Asas</span>
             </button>
-
             <button class="sub-menu-btn green-btn" id="btn-penjagaan-haid">
                 <span id="label-penjagaan-haid">Penjagaan Diri Semasa Haid</span>
             </button>
-
             <button class="sub-menu-btn green-btn" id="btn-jenis-produk">
                 <span id="label-jenis">Jenis-jenis Produk Haid</span>
             </button>
-
             <button class="sub-menu-btn green-btn" id="btn-cara-guna">
                 <span id="label-cara">Cara Menggunakan Produk Haid</span>
             </button>
@@ -373,7 +352,7 @@
         <div class="left-bottom-controls">
             <button id="scene9-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene9-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -396,15 +375,12 @@
             <button class="sub-menu-btn yellow-btn" id="btn-haid-mental">
                 <span id="label-haid-mental">Haid & kesihatan mental</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-mitos-fakta">
                 <span id="label-mitos-fakta">Mitos & fakta</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-kesilapan-kebersihan">
                 <span id="label-kesilapan-kebersihan">Kesilapan kebersihan semasa haid</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-sekeliling">
                 <span id="label-sekeliling">Penjagaan haid kepada orang sekeliling</span>
             </button>
@@ -421,7 +397,7 @@
         <div class="left-bottom-controls">
             <button id="scene10-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene10-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -435,7 +411,7 @@
             <h1 id="quiz-title">Kuiz Penjagaan Haid</h1>
         </div>
 
-        <div class="chapter-buttons-container">
+        <div class="chapter-grid-container">
             <button class="chapter-card-btn card-left" id="btn-quiz-asas">
                 <div class="card-icon-circle icon-bg-blue">
                     <span class="card-emoji">📖</span>
@@ -466,17 +442,16 @@
         </div>
     </div>
 
-    <!-- Scene 11: Quiz Interface -->
+    <!-- Scene 11: Quiz Interface (Dilaraskan ke Garis Biru cth1.png) -->
     <div id="scene11-overlay">
         <div class="score-board">
             <span id="label-score">Skor</span>: <span id="quiz-score">0/8</span>
         </div>
 
-        <!-- Butang Kawalan Kiri Bawah Kuiz: Setting, Home, Quit, Hint -->
         <div class="left-bottom-controls">
             <button id="scene11-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene11-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -513,12 +488,12 @@
         </div>
     </div>
 
-    <!-- Scene 12: Quiz Result Screen -->
-    <div id="scene12-overlay" class="notebook-bg">
+    <!-- Scene 12: Quiz Result Screen (Dilaraskan ke Garis Biru cth4.png) -->
+    <div id="scene12-overlay">
         <div class="left-bottom-controls">
             <button id="scene12-settings-btn" class="gear-btn circle-icon-btn" aria-label="Settings">
                 <svg class="gear-icon" viewBox="0 0 24 24">
-                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
                 </svg>
             </button>
             <button id="scene12-home-btn" class="home-circle-btn circle-icon-btn" aria-label="Home">
@@ -548,7 +523,7 @@
         </div>
     </div>
 
-    <!-- POP-UP DIALOG MODALS FOR QUIZ & HINTS -->
+    <!-- POP-UP DIALOG MODALS -->
     <div id="quiz-modal-overlay" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-icon" id="modal-icon-elem">✨</div>
