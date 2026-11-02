@@ -7,7 +7,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -32,14 +31,14 @@ body {
 }
 
 /* ==========================================
-   DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
+   DESAIN TOMBOL LINGKARAN (SETTING, HOME, DLL)
    ========================================== */
 .circle-icon-btn,
 #fullscreen-btn {
-    width: 52px !important;
-    height: 52px !important;
+    width: 45px !important;
+    height: 45px !important;
     background-color: #FFFFFF !important;
-    border: 3.5px solid #38B6FF !important; /* Garis lingkaran luar biru terang */
+    border: 3px solid #38B6FF !important;
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -53,13 +52,12 @@ body {
     overflow: visible !important;
 }
 
-/* SIMBOL IKON BIRU DI TENGAH */
 .circle-icon-btn svg,
 #fullscreen-btn svg,
 .circle-icon-btn svg path,
 #fullscreen-btn svg path {
-    width: 26px !important;
-    height: 26px !important;
+    width: 22px !important;
+    height: 22px !important;
     fill: #38B6FF !important;
     stroke: none !important;
     stroke-width: 0 !important;
@@ -69,18 +67,16 @@ body {
     margin: auto !important;
 }
 
-/* HILANGKAN WARNA HOVER KEKAL SELEPAS DITEKAN PADA PHONE/TABLET */
 button:focus,
 button:active {
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* EFEK HOVER HANYA AKTIF PADA PERANTI DENGAN TETIKUS (LAPTOP / DESKTOP) */
 @media (hover: hover) {
     .circle-icon-btn:hover,
     #fullscreen-btn:hover {
-        background-color: #FFE6F2 !important; /* Light Pink Soft */
+        background-color: #FFE6F2 !important;
         border-color: #38B6FF !important;
         transform: translateY(-3px) scale(1.05) !important;
     }
@@ -92,90 +88,33 @@ button:active {
         fill: #38B6FF !important;
         stroke: none !important;
     }
-
-    #start-app-btn:hover {
-        transform: translateY(-4px) scale(1.02);
-        background-color: #FFFFCC !important;
-    }
-
-    .lang-btn:hover {
-        transform: translateY(-4px);
-        background-color: #FFFFCC !important;
-    }
-
-    #skip-btn:hover {
-        transform: translateY(-4px);
-        background-color: #FFCCFF !important;
-    }
-
-    .menu-btn:hover {
-        transform: translateY(-4px);
-        background-color: #FFFFCC !important;
-    }
-
-    .settings-action-btn:hover {
-        transform: translateY(-3px);
-        background-color: #FFCCFF !important;
-    }
-
-    .chapter-card-btn:hover {
-        transform: translateY(-5px);
-        background-color: #FFFF99 !important;
-    }
-
-    .card-center:hover {
-        transform: translate(-50%, -5px);
-    }
-
-    .sub-menu-btn:hover {
-        transform: translateY(-4px);
-        background-color: #FFCCFF !important;
-    }
-
-    .sub-menu-btn.green-btn:hover {
-        background-color: #FFCCCC !important;
-    }
-
-    .sub-menu-btn.yellow-btn:hover {
-        background-color: #CCFF99 !important;
-    }
-
-    .option-btn:hover {
-        transform: translateY(-4px);
-        background-color: #FFCC99 !important;
-    }
-
-    #modal-close-btn:hover {
-        transform: translateY(-2px);
-        background-color: #FFFFCC !important;
-    }
 }
 
 /* KONTROL KIRI BAWAH */
 .left-bottom-controls {
     position: absolute;
-    bottom: 4vh;
-    left: 3vw;
+    bottom: 3vh;
+    left: 2vw;
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
     z-index: 310;
 }
 
 /* ==========================================
-   TOMBOL FULLSCREEN (LALAI LAPTOP/DESKTOP & KHAS PHONE ONLY)
+   TOMBOL FULLSCREEN (LALAI LAPTOP & KHAS PHONE ONLY)
    ========================================== */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
-    top: 20px !important;
-    left: 20px !important;
+    top: 15px !important;
+    left: 15px !important;
     z-index: 9999999 !important;
 }
 
-/* KHAS PHONE ONLY: Sembunyikan secara lalai pada telefon, hanya tunjuk jika ada class .show-on-phone (Scene 1 sahaja) */
-@media screen and (max-width: 768px) {
+/* KHAS PHONE: Hilangkan pada skrin mobile, HANYA tunjuk bila ada kelas .show-on-phone (Scene 1) */
+@media screen and (max-width: 900px) {
     #fullscreen-btn {
         display: none !important;
     }
@@ -186,7 +125,7 @@ button:active {
 }
 
 /* ==========================================
-   0. OVERLAY LAYAR MULA
+   0. OVERLAY LAYAR MULA (SCENE 1)
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -201,14 +140,14 @@ button:active {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 35vh;
+    padding-bottom: 25vh;
     box-sizing: border-box;
     z-index: 999;
 }
 
 #start-app-btn {
-    padding: 18px 50px;
-    font-size: 1.8rem;
+    padding: 14px 40px;
+    font-size: 1.5rem;
     font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
     font-weight: bold;
     color: #990184;
@@ -222,7 +161,7 @@ button:active {
 
 .first-header {
     position: absolute;
-    top: 10vh;
+    top: 8vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -234,8 +173,8 @@ button:active {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 4.5rem;
-    letter-spacing: 5px;
+    font-size: 4rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -245,8 +184,8 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 8rem;
-    margin-top: -20px;
+    font-size: 7rem;
+    margin-top: -15px;
     line-height: 0.9;
 }
 
@@ -282,28 +221,28 @@ button:active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     z-index: 100;
 }
 
 .lang-btn {
     position: relative;
-    border: 5px solid #CC3399;
+    border: 4px solid #CC3399;
     color: #E70B90;
-    height: 80px;
-    font-size: 2rem;
+    height: 70px;
+    font-size: 1.8rem;
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-weight: 900;
-    border-radius: 65px;
+    border-radius: 55px;
     cursor: pointer;
-    width: 480px;
-    max-width: 90vw;
+    width: 440px;
+    max-width: 85vw;
     text-align: center;
     white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 60px;
+    padding-left: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -316,29 +255,30 @@ button:active {
     left: -5px;
     top: 50%;
     transform: translateY(-50%);
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: 5px solid #CC3399;
+    border: 4px solid #CC3399;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.18);
     z-index: 5;
 }
 
 .footer-logo {
     position: absolute;
-    bottom: 3vh;
+    bottom: 2vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     pointer-events: none;
+    z-index: 10;
 }
 
 .footer-title {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -348,33 +288,45 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 2.2rem;
-    margin-top: 4px;
+    font-size: 1.9rem;
+    margin-top: 2px;
     line-height: 0.5;
 }
 
-/* TOMBOL LANGKAU */
+/* TOMBOL LANGKAU (SKIP) */
 #skip-btn {
     display: none;
     position: absolute;
-    top: 25px;
-    right: 35px;
+    top: 20px;
+    right: 25px;
     z-index: 9999 !important;
-    width: 140px;
-    height: 45px;
+    width: 130px;
+    height: 40px;
     justify-content: center;
     align-items: center;
     text-align: center;
     background-color: #FFFFCC;
-    border: 4px solid #339933;
+    border: 3px solid #339933;
     color: #009966;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    border-radius: 30px;
+    border-radius: 25px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* KHAS PHONE ONLY: KECILKAN BUTTON LANGKAU */
+@media screen and (max-width: 768px) {
+    #skip-btn {
+        width: 95px !important;
+        height: 32px !important;
+        font-size: 0.85rem !important;
+        top: 12px !important;
+        right: 15px !important;
+        border-width: 2px !important;
+    }
 }
 
 /* ==========================================
@@ -396,24 +348,17 @@ button:active {
     z-index: 200;
 }
 
-#scene4-overlay .gear-btn {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-}
-
 .menu-header {
     text-align: center;
-    margin-top: 12vh !important;
-    margin-bottom: 0px !important;
+    margin-top: 10vh !important;
 }
 
 .menu-title {
     color: #990184;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 4.5rem;
-    letter-spacing: 5px;
+    font-size: 4rem;
+    letter-spacing: 4px;
     text-transform: uppercase;
     line-height: 0.9;
 }
@@ -423,36 +368,35 @@ button:active {
     font-family: "Bell MT", "Garamond", "Georgia", serif;
     font-style: italic;
     font-weight: normal;
-    font-size: 8rem;
-    margin-top: -20px;
+    font-size: 7rem;
+    margin-top: -15px;
     line-height: 0.9;
 }
 
 .menu-buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
     align-items: center;
-    margin-top: 25vh !important;
+    margin-top: 22vh !important;
 }
 
 .menu-btn {
-    width: 280px;
-    height: 58px;
+    width: 250px;
+    height: 52px;
     background-color: #CFE1F7;
-    border: 4px solid #CC3399;
+    border: 3.5px solid #CC3399;
     color: #990184;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    border-radius: 35px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 /* ==========================================
@@ -471,61 +415,55 @@ button:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 8vh;
+    padding-top: 6vh;
     z-index: 300;
-}
-
-#settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
-#settings-overlay .left-bottom-controls button[id*="setting"],
-#settings-overlay .left-bottom-controls .gear-btn {
-    display: none !important;
 }
 
 #settings-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     text-align: center;
 }
 
 .settings-grid {
     display: flex;
-    gap: 40px;
+    gap: 30px;
     justify-content: center;
     align-items: stretch;
     width: 86%;
-    max-width: 1000px;
-    margin-top: 8vh !important;
+    max-width: 900px;
+    margin-top: 6vh !important;
 }
 
 .settings-box {
     flex: 1;
     position: relative;
     border: 4px solid #CC3399;
-    border-radius: 35px;
-    padding: 40px 25px 30px 25px;
+    border-radius: 30px;
+    padding: 35px 20px 25px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 290px;
+    min-height: 260px;
 }
 
 .box-header-badge {
     position: absolute;
-    top: -28px;
+    top: -24px;
     left: 50%;
     transform: translateX(-50%);
-    width: 230px;
-    height: 52px;
-    border: 4px solid #CC3399;
-    border-radius: 30px;
+    width: 200px;
+    height: 46px;
+    border: 3.5px solid #CC3399;
+    border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #E70B90;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
 }
 
 .header-audio { background-color: #E7F7A8; }
@@ -533,7 +471,7 @@ button:active {
 
 .audio-control-body {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -541,8 +479,8 @@ button:active {
 
 .volume-slider-container {
     position: relative;
-    width: 50px;
-    height: 180px;
+    width: 45px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -555,20 +493,19 @@ button:active {
     position: absolute;
     top: 40%;
     left: 50%;
-    width: 130px;
-    height: 18px;
+    width: 110px;
+    height: 16px;
     background: linear-gradient(to right, #E70B90 100%, #FFCCE5 0%);
     border-radius: 10px;
     outline: none;
     cursor: pointer;
     transform: translate(-50%, -50%) rotate(-90deg);
-    margin: 0;
 }
 
 #volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #FFFFCC;
     border: 3px solid #CC3399;
@@ -578,64 +515,51 @@ button:active {
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-top: 10px;
 }
 
 .audio-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .settings-action-btn {
-    width: 240px;
-    height: 52px;
+    width: 210px;
+    height: 46px;
     background-color: #E7F7A8;
-    border: 3.5px solid #CC3399;
+    border: 3px solid #CC3399;
     color: #E70B90;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.45rem;
-    border-radius: 30px;
+    font-size: 1.3rem;
+    border-radius: 25px;
     display: grid;
-    grid-template-columns: 45px 1fr;
+    grid-template-columns: 40px 1fr;
     align-items: center;
-    padding-left: 18px;
+    padding-left: 15px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.btn-icon {
-    font-size: 1.4rem;
-    text-align: center;
-}
-
-.settings-action-btn span:not(.btn-icon) {
-    text-align: left;
-    padding-left: 5px;
 }
 
 .lang-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
     align-items: center;
 }
 
 .lang-option-btn {
     position: relative;
-    width: 270px;
-    height: 56px;
+    width: 240px;
+    height: 50px;
     background-color: #CFE1F7;
-    border: 3.5px solid #CC3399;
-    border-radius: 35px;
+    border: 3px solid #CC3399;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 50px;
-    padding-right: 15px;
+    padding-left: 45px;
 }
 
 .flag-icon {
@@ -643,28 +567,17 @@ button:active {
     left: -8px;
     top: 50%;
     transform: translateY(-50%);
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    border: 3.5px solid #CC3399;
+    border: 3px solid #CC3399;
     z-index: 5;
     background-size: cover;
     background-position: center;
 }
 
-.flag-my {
-    background-image: url('assets/flag-malaysia.png');
-    background-size: cover;
-    background-position: 20% center;
-    background-color: #000066;
-}
-
-.flag-uk {
-    background-image: url('assets/flag-uk.png');
-    background-size: cover;
-    background-position: center;
-    background-color: #CC0000;
-}
+.flag-my { background-image: url('assets/flag-malaysia.png'); background-position: 20% center; }
+.flag-uk { background-image: url('assets/flag-uk.png'); }
 
 /* ==========================================
    SCENE 6: MENU BAB & SCENE 10: QUIZ MENU
@@ -679,18 +592,17 @@ button:active {
     background-image: url('assets/bg fyp.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 10vh;
     z-index: 200;
 }
 
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -698,87 +610,59 @@ button:active {
 
 .chapter-grid-container {
     position: absolute;
-    top: 38vh;
+    top: 35vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
-    max-width: 900px;
-    height: 380px;
+    max-width: 850px;
+    height: 350px;
 }
 
 .chapter-card-btn {
     position: absolute;
-    width: 360px;
-    height: 90px;
+    width: 320px;
+    height: 80px;
     background-color: #FABFD7;
     border: 3.5px solid #E680CC;
-    border-radius: 45px;
+    border-radius: 40px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.card-left {
-    top: 0px;
-    left: 10px;
-}
-
-.card-right {
-    top: 0px;
-    right: 10px;
-}
-
-.card-center {
-    top: 180px;
-    left: 50%;
-    transform: translateX(-50%);
-}
+.card-left { top: 0px; left: 10px; }
+.card-right { top: 0px; right: 10px; }
+.card-center { top: 150px; left: 50%; transform: translateX(-50%); }
 
 .card-icon-circle {
     position: absolute;
-    left: -12px;
-    width: 86px;
-    height: 86px;
+    left: -10px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .icon-bg-blue { background-color: #CCFFFF; }
 .icon-bg-cyan { background-color: #CCEAFF; }
 .icon-bg-purple { background-color: #CFDEFC; }
 
-.card-emoji {
-    font-size: 2.2rem;
-    line-height: 1;
-}
-
-.health-svg-icon {
-    width: 38px;
-    height: 38px;
-    fill: #DC03A0;
-    display: block;
-    margin: auto;
-}
-
 .card-label {
     flex: 1;
     text-align: center;
-    padding-left: 48px;
-    padding-right: 15px;
+    padding-left: 45px;
+    padding-right: 10px;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.75rem;
+    font-size: 1.55rem;
     font-weight: 900;
     line-height: 1.1;
 }
 
 /* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS (ASAS, PENJAGAAN, KESIHATAN)
+   SCENE 7, 8, 9: SUB-MENUS
    ========================================== */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
@@ -790,18 +674,17 @@ button:active {
     background-image: url('assets/bg fyp.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 10vh;
     z-index: 200;
 }
 
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -809,44 +692,35 @@ button:active {
 
 .sub-menu-grid {
     position: absolute;
-    top: 38vh;
+    top: 32vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px;
+    gap: 40px 50px;
     width: 84%;
-    max-width: 900px;
+    max-width: 850px;
 }
 
 .sub-menu-btn {
-    height: 85px;
+    height: 75px;
     background-color: #B4D4F0;
     border: 3.5px solid #E680CC;
-    border-radius: 24px;
+    border-radius: 20px;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 900;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 10px 18px;
+    padding: 8px 15px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.sub-menu-btn.green-btn {
-    background-color: #CFE4D1;
-    border: 3.5px solid #E680CC;
-}
-
-.sub-menu-btn.yellow-btn {
-    background-color: #FFED96;
-    border: 3.5px solid #EFA6CC;
-}
+.sub-menu-btn.green-btn { background-color: #CFE4D1; }
+.sub-menu-btn.yellow-btn { background-color: #FFED96; }
 
 /* OVERLAY PEMUTAR VIDEO */
 #normal-lawan-overlay {
@@ -878,45 +752,30 @@ button:active {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-color: #000000;
 }
 
 .video-controls-toolbar {
     position: absolute;
-    right: 30px;
+    right: 25px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
-    justify-content: center;
     z-index: 10;
 }
 
-.video-speed-control {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    width: 76px;
-}
-
 #videoSpeed {
-    width: 55px;
-    height: 38px;
-    padding: 0 3px;
+    width: 50px;
+    height: 35px;
     background-color: #FFFFFF;
     color: #52B2EC;
     border: 2px solid #FFFFFF;
     border-radius: 10px;
-    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     text-align: center;
-    cursor: pointer;
-    outline: none;
 }
 
 /* ==========================================
@@ -932,72 +791,65 @@ button:active {
     background-image: url('assets/quiz bg.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     z-index: 200;
 }
 
 .question-container {
     position: absolute;
-    top: 14.8vh;
+    top: 12vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
-    max-width: 950px;
+    max-width: 900px;
     text-align: center;
     z-index: 210;
 }
 
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.1rem;
-    font-weight: normal;
+    font-size: 1.8rem;
     color: #E70B90 !important;
-    line-height: 8vh;
-    margin: 0;
+    line-height: 1.2;
 }
 
 .options-grid {
     position: absolute;
-    top: 42vh;
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 90px 50px;
+    gap: 40px 40px;
     width: 88%;
-    max-width: 980px;
+    max-width: 900px;
     z-index: 210;
 }
 
 .option-btn {
-    min-height: 90px;
+    min-height: 75px;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
-    border-radius: 25px;
+    border-radius: 20px;
     font-family: "Franklin Gothic Demi Cond", "Arial Narrow", sans-serif;
-    font-size: 1.45rem;
-    font-weight: normal;
+    font-size: 1.3rem;
     color: #000;
-    padding: 14px 20px;
+    padding: 10px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .score-board {
     position: absolute;
-    top: 5vh;
-    left: 5vw;
+    top: 4vh;
+    left: 4vw;
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 4px 18px;
+    padding: 4px 15px;
     border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
@@ -1016,13 +868,12 @@ button:active {
     background-image: url('assets/quiz bg.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     z-index: 200;
 }
 
 .result-box {
     position: absolute;
-    top: 36vh;
+    top: 32vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -1031,38 +882,24 @@ button:active {
 
 #result-congrats {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 3.8rem;
+    font-size: 3.2rem;
     color: #E70B90 !important;
-    font-weight: normal;
-    margin-bottom: 2.5vh;
-    line-height: 1;
 }
 
 #result-motto {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 2.8rem;
+    font-size: 2.3rem;
     color: #E70B90 !important;
-    font-weight: normal;
-    margin-bottom: 3vh;
-    line-height: 1;
+    margin-bottom: 2vh;
 }
 
 .score-display-line {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.8rem;
+    font-size: 2.3rem;
     color: #E70B90 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    line-height: 1;
 }
 
-#final-score-val {
-    font-weight: bold;
-}
-
-/* POP-UP DIALOG MODALS */
+/* POP-UP MODAL */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1081,11 +918,10 @@ button:active {
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px;
+    padding: 25px 30px 20px 30px;
     width: 90%;
-    max-width: 480px;
+    max-width: 440px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1093,43 +929,28 @@ button:active {
 
 .modal-x-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 12px;
+    right: 18px;
     background: transparent;
     border: none;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     color: #E70B90;
     cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    margin: 0;
-    z-index: 10;
-    transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.modal-icon {
-    font-size: 3.2rem;
-    line-height: 1;
-    margin-bottom: 12px;
-}
+.modal-icon { font-size: 2.8rem; margin-bottom: 8px; }
 
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: #E70B90 !important;
-    margin-top: 0;
-    margin-bottom: 8px;
-    line-height: 1.1;
+    margin-bottom: 6px;
 }
 
 .modal-box p {
-    font-family: Arial, sans-serif;
-    font-size: 1.05rem;
-    color: #333333;
-    line-height: 1.4;
-    margin-top: 0;
-    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 15px;
     white-space: pre-line;
 }
 
@@ -1138,140 +959,106 @@ button:active {
     border: 3px solid #CC3399;
     color: #990184;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 8px 35px;
-    border-radius: 30px;
+    padding: 6px 30px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 /* ==========================================
-   PELARASAN & PENGECILAN ELEMEN UNTUK TELEFON / TABLET (LANDSCAPE)
-   (Termasuk 100% kod daripada gambar tangkapan skrin anda)
+   PENGECILAN DRASTIK ELEMEN UNTUK TELEFON (MOBILE LANDSCAPE)
+   (Pengecilan Skala 50% - 60% Supaya Tiada Elemen Terpotong!)
    ========================================== */
-
-/* 1. PELARASAN UMUM PHONE & TABLET MOD MELINTANG (LANDSCAPE) */
-@media screen and (orientation: landscape) and (max-height: 768px) {
+@media screen and (max-width: 900px) and (orientation: landscape) {
     html, body, #player-container {
         width: 100vw !important;
         height: 100dvh !important;
         overflow: hidden !important;
     }
 
-    .first-header,
-    .menu-header,
+    /* 1. mengecilkan tajuk utama */
+    .first-header {
+        top: 2vh !important;
+        transform: translateX(-50%) scale(0.5) !important;
+        transform-origin: top center !important;
+    }
+
+    .menu-header {
+        margin-top: 2vh !important;
+        transform: scale(0.5) !important;
+        transform-origin: top center !important;
+    }
+
     #chapter-title,
     #asas-title,
     #penjagaan-title,
     #kesihatan-title,
     #quiz-title,
     #settings-title {
-        transform: scale(0.65) !important;
+        transform: scale(0.52) !important;
         transform-origin: top center !important;
+        margin-top: -10px !important;
     }
 
-    .chapter-grid-container,
-    .sub-menu-grid,
-    .options-grid,
-    .settings-grid,
+    /* 2. mengecilkan grid & container butang */
     .menu-buttons-container {
-        transform: scale(0.75) !important;
+        margin-top: 14vh !important;
+        transform: scale(0.6) !important;
         transform-origin: center center !important;
     }
 
+    .chapter-grid-container {
+        top: 22vh !important;
+        transform: translateX(-50%) scale(0.58) !important;
+        transform-origin: top center !important;
+    }
+
+    .sub-menu-grid {
+        top: 22vh !important;
+        gap: 15px 30px !important;
+        transform: translateX(-50%) scale(0.58) !important;
+        transform-origin: top center !important;
+    }
+
+    .settings-grid {
+        margin-top: 2vh !important;
+        transform: scale(0.6) !important;
+        transform-origin: top center !important;
+    }
+
+    /* 3. mengecilkan soalan & pilihan kuiz */
     .question-container {
-        top: 10vh !important;
-        transform: translateX(-50%) scale(0.8) !important;
+        top: 8vh !important;
+        transform: translateX(-50%) scale(0.6) !important;
         transform-origin: top center !important;
     }
 
     .options-grid {
-        top: 38vh !important;
-    }
-}
-
-/* 2. KOD KHAS SAFARI IOS (SEPERTI DI DALAM GAMBAR ANDA) */
-@supports (-webkit-touch-callout: none) {
-    /* Amaran Mod Portrait di iPhone */
-    @media screen and (orientation: portrait) and (max-width: 768px) {
-        #rotate-device-overlay {
-            display: flex !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100dvh !important;
-            background-color: #FFCCE5 !important;
-            z-index: 9999999 !important;
-            justify-content: center !important;
-            align-items: center !important;
-            flex-direction: column !important;
-            text-align: center !important;
-            padding: 20px !important;
-        }
-
-        #player-container {
-            display: none !important;
-        }
+        top: 26vh !important;
+        gap: 12px 25px !important;
+        transform: translateX(-50%) scale(0.58) !important;
+        transform-origin: top center !important;
     }
 
-    /* Skala & Viewport Khas iOS Landscape */
-    @media screen and (orientation: landscape) and (max-height: 500px) {
-        html, body, #player-container {
-            width: 100vw !important;
-            height: 100dvh !important;
-            overflow: hidden !important;
-        }
+    /* 4. mengecilkan result box */
+    .result-box {
+        top: 22vh !important;
+        transform: translateX(-50%) scale(0.65) !important;
+        transform-origin: top center !important;
+    }
 
-        #start-overlay,
-        #language-overlay,
-        #scene4-overlay,
-        #settings-overlay,
-        #scene6-overlay,
-        #scene7-overlay,
-        #scene8-overlay,
-        #scene9-overlay,
-        #scene10-overlay,
-        #scene11-overlay,
-        #scene12-overlay {
-            height: 100dvh !important;
-            box-sizing: border-box !important;
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-        }
+    /* 5. kedudukan footer logo */
+    .footer-logo {
+        bottom: 1vh !important;
+        transform: translateX(-50%) scale(0.7) !important;
+    }
 
-        .chapter-buttons-container,
-        .sub-menu-grid,
-        .options-grid,
-        .settings-grid {
-            transform: scale(0.75) !important;
-            transform-origin: center center !important;
-        }
-
-        .first-header,
-        .menu-header,
-        #chapter-title,
-        #asas-title,
-        #penjagaan-title,
-        #kesihatan-title,
-        #quiz-title,
-        #settings-title {
-            transform: scale(0.7) !important;
-            transform-origin: top center !important;
-        }
-
-        /* PAKSA TAJUK SCENE 1 SENTIASA RATAKAN TENGAH DI IOS SAFARI */
-        #start-overlay .first-header {
-            position: absolute !important;
-            top: 4vh !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100vw !important;
-            margin: 0 auto !important;
-            text-align: center !important;
-            transform: scale(0.7) !important;
-            transform-origin: top center !important;
-        }
+    /* 6. kedudukan kawalan kiri bawah */
+    .left-bottom-controls {
+        bottom: 2vh !important;
+        left: 2vw !important;
+        transform: scale(0.75) !important;
+        transform-origin: bottom left !important;
     }
 }
