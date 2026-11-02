@@ -1082,13 +1082,37 @@ body {
     margin-bottom: 10px;
 }
 
-.modal-box p {
-    font-family: Arial, sans-serif;
-    font-size: 1.1rem;
-    color: #333333;
-    line-height: 1.4;
-    margin-bottom: 20px;
-    white-space: pre-line;
+.modal-box {
+    position: relative; /* Diperlukan supaya position: absolute pada butang X berfungsi */
+    background-color: #FFFFFF;
+    border: 4px solid #E70B90;
+    border-radius: 25px;
+    padding: 25px 35px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Gaya Butang X di Bucu Pop-up */
+.modal-x-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #E70B90;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-x-btn:hover {
+    color: #CC0000;
+    transform: scale(1.2);
 }
 
 #modal-close-btn {
