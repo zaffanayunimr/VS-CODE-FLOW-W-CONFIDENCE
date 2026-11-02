@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
+    // AUTOMATIK: HILANGKAN WARNA HOVER DITEKAN DI PERANTI SENTUH
+    // ==========================================
+    document.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("touchend", () => {
+            btn.blur();
+        });
+    });
+
+    // ==========================================
     // 1. DOM ELEMENT SELECTION
     // ==========================================
     const fullscreenBtn = document.getElementById("fullscreen-btn");
@@ -133,13 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-// Modal Pop-Up Elements
-const quizModalOverlay = document.getElementById("quiz-modal-overlay");
-const modalIconElem = document.getElementById("modal-icon-elem");
-const modalTitleElem = document.getElementById("modal-title-elem");
-const modalMsgElem = document.getElementById("modal-msg-elem");
-const modalCloseBtn = document.getElementById("modal-close-btn");
-const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris ini
+    // Modal Pop-Up Elements
+    const quizModalOverlay = document.getElementById("quiz-modal-overlay");
+    const modalIconElem = document.getElementById("modal-icon-elem");
+    const modalTitleElem = document.getElementById("modal-title-elem");
+    const modalMsgElem = document.getElementById("modal-msg-elem");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const modalXBtn = document.getElementById("modal-x-btn");
     let pendingNextQuestionCall = null;
 
     // ==========================================
@@ -178,7 +187,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
+    // FULLSCREEN LOGIC
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
@@ -423,7 +432,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-// ==========================================
+    // ==========================================
     // 6. POP-UP MODAL FUNCTIONALITY
     // ==========================================
     function showModal(icon, title, message, onComplete, showXBtn = true) {
@@ -434,7 +443,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
 
         pendingNextQuestionCall = onComplete || null;
 
-        // Kawal paparan butang X (Sembunyikan untuk Hint/Petunjuk jika showXBtn = false)
         if (modalXBtn) {
             modalXBtn.style.display = showXBtn ? "block" : "none";
         }
@@ -442,7 +450,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         quizModalOverlay.style.display = "flex";
     }
 
-    // Fungsi bila tekan butang utama (TERUSKAN) -> Jalankan tindakan lanjut
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
@@ -454,18 +461,17 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-    // Fungsi bila tekan butang X -> Hanya tutup pop-up sahaja (Bukan keluar kuiz)
     if (modalXBtn) {
         modalXBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            pendingNextQuestionCall = null; // Batalkan sebarang fungsi keluar/lanjut
+            pendingNextQuestionCall = null;
         });
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (Bahasa Melayu Piawai & English)
+    // 7. QUIZ DATA & LOGIC
     // ==========================================
-const quizCategories = {
+    const quizCategories = {
         asas: [
             {
                 hint: { 
@@ -715,7 +721,7 @@ const quizCategories = {
                 question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
                 options: [
                     { text: { ms: "A) Meletakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
-                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 15 to 20 minutes." }, isCorrect: true },
+                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
                     { text: { ms: "C) Menekan dengan objek keras dan berat secara kuat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
                     { text: { ms: "D) Membiarkan kawasan perut terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
                 ],
@@ -989,15 +995,14 @@ const quizCategories = {
             );
         });
     }
-    
-if (scene11HintBtn) {
+
+    if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            // Hantar false pada parameter ke-5 supaya butang X disembunyikan
             showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
         });
     }
