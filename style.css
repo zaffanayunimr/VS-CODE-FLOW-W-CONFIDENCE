@@ -53,15 +53,15 @@ body {
     overflow: visible !important;
 }
 
-/* SIMBOL IKON BIRU DI TENGAH (BERSIH DARI BERCAK/GARIS INTERNAL) */
+/* SIMBOL IKON BIRU DI TENGAH */
 .circle-icon-btn svg,
 #fullscreen-btn svg,
 .circle-icon-btn svg path,
 #fullscreen-btn svg path {
     width: 26px !important;
     height: 26px !important;
-    fill: #38B6FF !important; /* Warna simbol biru terang murni */
-    stroke: none !important; /* Menghapus semua garis tepi/garis potong di dalam simbol */
+    fill: #38B6FF !important;
+    stroke: none !important;
     stroke-width: 0 !important;
     fill-rule: evenodd !important;
     transition: fill 0.2s ease !important;
@@ -69,10 +69,10 @@ body {
     margin: auto !important;
 }
 
-/* EFEK HOVER SERAGAM UNTUK SEMUA TOMBOL LINGKARAN */
+/* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
 .circle-icon-btn:hover,
 #fullscreen-btn:hover {
-    background-color: #E6F5FF !important;
+    background-color: #FFE6F2 !important; /* Light Pink Soft */
     border-color: #38B6FF !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
@@ -420,6 +420,13 @@ body {
     justify-content: flex-start;
     padding-top: 8vh;
     z-index: 300;
+}
+
+/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
+#settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
+#settings-overlay .left-bottom-controls button[id*="setting"],
+#settings-overlay .left-bottom-controls .gear-btn {
+    display: none !important;
 }
 
 #settings-title {
@@ -912,7 +919,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS
+   SCENE 11: INTERFASE KUIS (POSISI TEKS PAS DI ATAS GARIS 1 & GARIS 2)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -928,9 +935,10 @@ body {
     z-index: 200;
 }
 
+/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
 .question-container {
     position: absolute;
-    top: 7vh;
+    top: 6.8vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -944,7 +952,7 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 5.5vh;
+    line-height: 5.8vh;
     margin: 0;
 }
 
