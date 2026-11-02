@@ -137,12 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-        // Dapatkan elemen DOM
-const quizModal = document.getElementById('quiz-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalMessage = document.getElementById('modal-message');
-const modalNextBtn = document.getElementById('modal-next-btn');
-
+    // Modal Feedback Elements
+    const quizModal = document.getElementById("quiz-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalMessage = document.getElementById("modal-message");
+    const modalNextBtn = document.getElementById("modal-next-btn");
 
     // ==========================================
     // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
@@ -210,7 +209,6 @@ const modalNextBtn = document.getElementById('modal-next-btn');
         }
     }
 
-    // Sembunyikan butang HANYA jika peranti ialah TELEFON MOBILE (<= 768px)
     function hideFullscreenBtn() {
         const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
         
@@ -237,7 +235,6 @@ const modalNextBtn = document.getElementById('modal-next-btn');
             }
         }
 
-        // Semak semula untuk memastikan skrin laptop sentiasa dapat butang Fullscreen
         const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
         if (fullscreenBtn && !isMobile) {
             fullscreenBtn.style.setProperty("display", "flex", "important");
@@ -254,7 +251,6 @@ const modalNextBtn = document.getElementById('modal-next-btn');
             }
         }
 
-        // Paksa butang sentiasa kekal dipaparkan pada laptop
         const isMobile = window.innerWidth <= 768 || window.innerHeight <= 768;
         if (fullscreenBtn && !isMobile) {
             fullscreenBtn.style.setProperty("display", "flex", "important");
@@ -273,21 +269,17 @@ const modalNextBtn = document.getElementById('modal-next-btn');
             e.preventDefault();
             e.stopPropagation();
 
-            // 1. Minta Fullscreen & sembunyikan jika di mobile
             requestLandscapeFullscreen();
             hideFullscreenBtn();
 
-            // 2. Padam Start Overlay
             if (startOverlay) {
                 startOverlay.style.setProperty("display", "none", "important");
             }
 
-            // 3. Main BGM
             if (bgMusic) {
                 bgMusic.play().catch(err => console.log("BGM play catch:", err));
             }
 
-            // 4. Semak kewujudan Video 1 & Papar Skrin Seterusnya
             let videoStarted = false;
 
             if (video1) {
@@ -309,7 +301,6 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 }
             }
             
-            // Fallback jika video gagal dimainkan serentak
             setTimeout(() => {
                 if (!videoStarted && video1 && video1.paused) {
                     video1.classList.remove("active");
@@ -432,9 +423,7 @@ const modalNextBtn = document.getElementById('modal-next-btn');
         }
     });
 
-    // ==========================================
     // VIDEO PLAYER CONTROLS
-    // ==========================================
     function applyVideoSpeed() {
         if (!normalLawanVideo || !videoSpeed) return;
         normalLawanVideo.playbackRate = Number(videoSpeed.value);
@@ -708,7 +697,7 @@ const modalNextBtn = document.getElementById('modal-next-btn');
     }
 
     // ==========================================
-    // 6. QUIZ DATA & LOGIC
+    // 6. QUIZ DATA & LOGIC WITH FEEDBACK MODAL
     // ==========================================
     const quizCategories = {
         asas: [
@@ -716,6 +705,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?",
                     en: "1. What happens when a girl gets her period?"
+                },
+                explanation: {
+                    ms: "Semasa haid, lapisan rahim bersama darah dan tisu luruh serta keluar melalui faraj.",
+                    en: "During menstruation, the lining of the uterus breaks down and leaves the body through the vagina."
                 },
                 options: [
                     { text: { ms: "A) Darah dan tisu dari rahim keluar melalui faraj.", en: "A) Blood and tissue leave the body through the vagina." }, isCorrect: true },
@@ -729,6 +722,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "2. Purata umur kebanyakan orang mendapat haid pertama mereka ialah sekitar umur berapa?",
                     en: "2. Around what age do most people get their first period?"
                 },
+                explanation: {
+                    ms: "Purata umur kebanyakan orang mendapat haid pertama adalah sekitar 12 tahun.",
+                    en: "The average age for most people to get their first period is around 12 years old."
+                },
                 options: [
                     { text: { ms: "A) 6 tahun.", en: "A) 6 years old." }, isCorrect: false },
                     { text: { ms: "B) 8 tahun.", en: "B) 8 years old." }, isCorrect: false },
@@ -740,6 +737,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "3. Mengapakah badan membina lapisan lembut di dalam rahim setiap bulan?",
                     en: "3. Why does the body build a soft lining inside the uterus every month?"
+                },
+                explanation: {
+                    ms: "Lapisan rahim dibina setiap bulan sebagai persediaan untuk menerima telur yang disenyawakan bagi kehamilan.",
+                    en: "The lining builds up each month to prepare the body for a possible pregnancy."
                 },
                 options: [
                     { text: { ms: "A) Untuk melindungi rahim daripada jangkitan.", en: "A) To protect the uterus from infection." }, isCorrect: false },
@@ -753,6 +754,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "4. Apakah yang berlaku kepada lapisan rahim jika kehamilan tidak berlaku?",
                     en: "4. What happens to the uterus lining if pregnancy does not occur?"
                 },
+                explanation: {
+                    ms: "Jika kehamilan tidak berlaku, lapisan rahim akan luruh dan keluar sebagai darah haid.",
+                    en: "If pregnancy does not occur, the lining breaks down and exits the body as period blood."
+                },
                 options: [
                     { text: { ms: "A) Lapisan tersebut diserap semula secara kekal oleh hati.", en: "A) The lining is permanently reabsorbed by the liver." }, isCorrect: false },
                     { text: { ms: "B) Lapisan tersebut akan bertambah tebal setiap bulan.", en: "B) The lining continues to thicken every month." }, isCorrect: false },
@@ -765,6 +770,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "5. Berapakah tempoh julat kitaran haid yang normal bagi kebanyakan orang?",
                     en: "5. What is the normal menstrual cycle length range for most people?"
                 },
+                explanation: {
+                    ms: "Kitaran haid yang normal biasanya berkisar antara 21 hingga 35 hari.",
+                    en: "A normal menstrual cycle range is typically between 21 to 35 days."
+                },
                 options: [
                     { text: { ms: "A) 5 hingga 10 hari.", en: "A) 5 to 10 days." }, isCorrect: false },
                     { text: { ms: "B) 10 hingga 15 hari.", en: "B) 10 to 15 days." }, isCorrect: false },
@@ -776,6 +785,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "6. Apakah yang berlaku semasa fasa ketiga iaitu fasa ovulasi?",
                     en: "6. What occurs during the third phase, known as ovulation?"
+                },
+                explanation: {
+                    ms: "Semasa ovulasi, salah satu ovari melepaskan telur yang telah matang.",
+                    en: "During ovulation, an ovary releases a mature egg."
                 },
                 options: [
                     { text: { ms: "A) Lapisan rahim mula luruh dan keluar sebagai darah.", en: "A) The lining of the uterus breaks down and leaves as blood." }, isCorrect: false },
@@ -794,12 +807,20 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     { text: { ms: "B) Kelabu.", en: "B) Grey." }, isCorrect: false },
                     { text: { ms: "C) Biru pekat, atau ungu.", en: "C) Deep blue, or purple." }, isCorrect: false },
                     { text: { ms: "D) Merah, merah jambu, atau coklat.", en: "D) Red, pink, or brown." }, isCorrect: true }
-                ]
+                ],
+                explanation: {
+                    ms: "Warna darah haid daripada merah jambu, merah terang, hingga coklat tua adalah normal.",
+                    en: "Period blood colors ranging from pink, bright red, to dark brown are all normal."
+                }
             },
             {
                 question: {
                     ms: "8. Tanda manakah yang menunjukkan anda perlu meminta bantuan atau berjumpa dengan doktor?",
                     en: "8. Which sign indicates that you should ask for help or speak to a doctor?"
+                },
+                explanation: {
+                    ms: "Pendarahan yang terlalu banyak (perlu menukar pad setiap 1-2 jam) memerlukan perhatian doktor.",
+                    en: "Extremely heavy bleeding (needing a pad change every 1-2 hours) requires medical attention."
                 },
                 options: [
                     { text: { ms: "A) Haid berlangsung selama 3 hingga 5 hari.", en: "A) A period that lasts for 3 to 5 days." }, isCorrect: false },
@@ -815,6 +836,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "1. Berapa kerapkah anda perlu menukar pad jika aliran darah haid anda adalah banyak?",
                     en: "1. How often should you change your pad if your period flow is heavy?"
                 },
+                explanation: {
+                    ms: "Pad harus ditukar sekurang-kurangnya setiap 3 hingga 4 jam untuk menjaga kebersihan.",
+                    en: "Pads should be changed every 3 to 4 hours to maintain proper hygiene."
+                },
                 options: [
                     { text: { ms: "A) Setiap 12 jam.", en: "A) Every 12 hours." }, isCorrect: false },
                     { text: { ms: "B) Setiap 8 hingga 10 jam.", en: "B) Every 8 to 10 hours." }, isCorrect: false },
@@ -826,6 +851,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "2. Bagaimanakah cara yang betul untuk membuang pad yang telah digunakan?",
                     en: "2. What is the proper way to dispose of a used pad?"
+                },
+                explanation: {
+                    ms: "Pad terpakai hendaklah dibungkus rapi dan dibuang ke dalam tong sampah, bukannya di dalam mangkuk tandas.",
+                    en: "Used pads should be wrapped properly and disposed of in a bin, never flushed down the toilet."
                 },
                 options: [
                     { text: { ms: "A) Pam masuk ke dalam lubang tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
@@ -839,6 +868,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "3. Antara berikut, manakah barang yang digalakkan untuk disimpan di dalam kit kecemasan haid di sekolah?",
                     en: "3. Which of the following items is recommended to keep in your school period emergency kit?"
                 },
+                explanation: {
+                    ms: "Kit kecemasan sepatutnya mengandungi tuala wanita, pantyliner, dan seluar dalam tambahan.",
+                    en: "An emergency kit should contain pads, pantyliners, and a spare pair of underwear."
+                },
                 options: [
                     { text: { ms: "A) Pad, pantyliner, dan seluar dalam tambahan.", en: "A) Pads, pantyliners, and a spare pair of underwear." }, isCorrect: true },
                     { text: { ms: "B) Mainan.", en: "B) Toys." }, isCorrect: false },
@@ -850,6 +883,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "4. Apakah arah yang betul semasa mengelap atau membersihkan kawasan sulit selepas menggunakan tandas?",
                     en: "4. What is the correct direction to wipe or clean your private area after using the toilet?"
+                },
+                explanation: {
+                    ms: "Mengelap dari depan ke belakang dapat mengelakkan penyebaran bakteria dari dubur ke faraj.",
+                    en: "Wiping from front to back prevents bacteria from spreading from the anus to the vagina."
                 },
                 options: [
                     { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
@@ -863,6 +900,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "5. Jenis produk haid manakah yang paling sesuai digunakan untuk aliran darah yang sangat ringan atau pada penghujung haid?",
                     en: "5. Which period product is best suited for very light flow or toward the end of your period?"
                 },
+                explanation: {
+                    ms: "Pantyliner atau pad nipis paling selesa digunakan untuk aliran darah yang sedikit.",
+                    en: "Pantyliners or light pads are best suited for minimal period flow."
+                },
                 options: [
                     { text: { ms: "A) Pad maxi malam.", en: "A) Overnight maxi pad." }, isCorrect: false },
                     { text: { ms: "B) Pantyliner atau pad ringan.", en: "B) Pantyliner or light pad." }, isCorrect: true },
@@ -874,6 +915,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "6. Apakah kelebihan pad malam (overnight) atau pad maxi untuk aliran darah yang sangat banyak?",
                     en: "6. What is the advantage of using an overnight or maxi pad for very heavy flow?"
+                },
+                explanation: {
+                    ms: "Pad malam dibina lebih panjang dan lebar di belakang untuk perlindungan maksumum daripada kebocoran.",
+                    en: "Overnight pads are longer and wider at the back to offer maximum leak protection."
                 },
                 options: [
                     { text: { ms: "A) Ia bersaiz lebih pendek dan nipis.", en: "A) It is shorter and thinner." }, isCorrect: false },
@@ -887,6 +932,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?",
                     en: "7. What can you apply to your lower tummy to help ease period cramps?"
                 },
+                explanation: {
+                    ms: "Kepanasan lembut daripada botol air suam atau pek pemanas membantu meregangkan otot rahim.",
+                    en: "Gentle heat from a hot-water bottle or heating pad helps relax the uterine muscles."
+                },
                 options: [
                     { text: { ms: "A) Letakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
                     { text: { ms: "B) Letakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
@@ -898,6 +947,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid??",
                     en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?"
+                },
+                explanation: {
+                    ms: "Sentiasa dapatkan dorongan atau kebenaran ibu bapa, penjaga atau nasihat doktor sebelum mengambil sebarang ubat.",
+                    en: "Always seek permission or advice from a parent, guardian, or healthcare professional before taking medication."
                 },
                 options: [
                     { text: { ms: "A) Ambil sahaja mengikut gerak hati sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
@@ -913,6 +966,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "1. Apakah yang membezakan PMDD daripada PMS?",
                     en: "1. What differentiates PMDD from PMS?"
                 },
+                explanation: {
+                    ms: "PMDD adalah bentuk PMS yang lebih teruk yang menyebabkan emosi terganggu secara berlebihan.",
+                    en: "PMDD is a severe form of PMS causing severe mood changes that impact daily life."
+                },
                 options: [
                     { text: { ms: "A) PMDD hanya menyebabkan sakit kepala.", en: "A) PMDD only causes headaches." }, isCorrect: false },
                     { text: { ms: "B) PMDD menyebabkan perubahan mood yang lebih melampau dan boleh menjejaskan kehidupan harian.", en: "B) PMDD causes more extreme mood changes that can disrupt daily life." }, isCorrect: true },
@@ -924,6 +981,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "2. Apakah maksud Peningkatan Prahaid (PME)?",
                     en: "2. What is the meaning of Premenstrual Exacerbation (PME)?"
+                },
+                explanation: {
+                    ms: "PME merujuk kepada keadaan kesihatan mental sedia ada yang menjadi lebih memburuk menjelang haid.",
+                    en: "PME refers to the worsening of pre-existing mental health conditions prior to a period."
                 },
                 options: [
                     { text: { ms: "A) Haid berlaku lebih awal daripada biasa.", en: "A) Period occurs earlier than usual." }, isCorrect: false },
@@ -937,6 +998,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "3. Yang manakah merupakan fakta tentang bersenam ketika haid?",
                     en: "3. Which of the following is a fact about exercising during menstruation?"
                 },
+                explanation: {
+                    ms: "Bersenam secara sederhana membantu merembeskan endorfin yang dapat merelakkan sakit dan mengurangkan senggugut.",
+                    en: "Light exercise releases endorphins which help reduce cramps and boost mood."
+                },
                 options: [
                     { text: { ms: "A) Senaman mesti dielakkan ketika haid.", en: "A) Exercise must be avoided during period." }, isCorrect: false },
                     { text: { ms: "B) Senaman boleh memburukkan senggugut.", en: "B) Exercise can worsen menstrual cramps." }, isCorrect: false },
@@ -948,6 +1013,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "4. Apakah yang boleh digunakan untuk berenang dengan selamat semasa datang haid?",
                     en: "4. What can be used to swim safely while on your period?"
+                },
+                explanation: {
+                    ms: "Tampon, cawan haid, atau pakaian renang khas membolehkan seseorang berenang tanpa sebarang masalah kebocoran.",
+                    en: "Tampons, menstrual cups, or period swimwear allow you to swim safely without leak concerns."
                 },
                 options: [
                     { text: { ms: "A) Pad biasa atau pantyliner.", en: "A) Regular pads or pantyliners." }, isCorrect: false },
@@ -961,6 +1030,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "5. Apakah jenis pakaian yang sepatutnya dielakkan semasa haid kerana boleh memerangkap haba dan kelembapan serta menggalakkan pertumbuhan bakteria dan kulat?",
                     en: "5. What type of clothing should be avoided during your period because it can trap heat and moisture, promoting bacteria and fungal growth?"
                 },
+                explanation: {
+                    ms: "Pakaian sintetik yang ketat memerangkap kelembapan dan mewujudkan persekitaran pembiakan bakteria.",
+                    en: "Tight synthetic clothing traps heat and moisture, leading to bacterial growth."
+                },
                 options: [
                     { text: { ms: "A) Pakaian daripada fabrik kapas yang longgar.", en: "A) Loose cotton fabric clothing." }, isCorrect: false },
                     { text: { ms: "B) Pakaian yang selesa dan mempunyai pengudaraan baik.", en: "B) Comfortable and breathable clothing." }, isCorrect: false },
@@ -972,6 +1045,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "6. Mengapakah produk haid berpewangi boleh menyebabkan masalah?",
                     en: "6. Why can scented menstrual products cause issues?"
+                },
+                explanation: {
+                    ms: "Bahan kimia pewangi boleh mengganggu tahap pH semula jadi faraj dan mencetuskan kerengsaan.",
+                    en: "Fragrance chemicals can disrupt natural pH balances and lead to skin irritation."
                 },
                 options: [
                     { text: { ms: "A) Ia menyebabkan darah haid berhenti.", en: "A) They cause period blood to stop." }, isCorrect: false },
@@ -985,6 +1062,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                     ms: "7. Apakah yang boleh dilakukan untuk membantu seseorang yang mengalami senggugut?",
                     en: "7. What can be done to help someone experiencing period cramps?"
                 },
+                explanation: {
+                    ms: "Memberi pek pemanas membantu meregangkan kejang otot rahim dengan berkesan.",
+                    en: "Providing a heating pad helps soothe cramp muscles effectively."
+                },
                 options: [
                     { text: { ms: "A) Menyuruh mereka mengabaikan kesakitan.", en: "A) Telling them to ignore the pain." }, isCorrect: false },
                     { text: { ms: "B) Memberikan pad pemanas atau botol air panas.", en: "B) Providing a heating pad or hot water bottle." }, isCorrect: true },
@@ -996,6 +1077,10 @@ const modalNextBtn = document.getElementById('modal-next-btn');
                 question: {
                     ms: "8. Bagaimanakah cara terbaik untuk menyokong seseorang yang mengalami perubahan mood ketika haid?",
                     en: "8. What is the best way to support someone experiencing mood swings during their period?"
+                },
+                explanation: {
+                    ms: "Sokongan emosi yang bersikap memahami dan mendengar tanpa menghakimi amatlah bermakna.",
+                    en: "Offering empathetic support and non-judgmental listening is key to supporting them."
                 },
                 options: [
                     { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
@@ -1045,18 +1130,54 @@ const modalNextBtn = document.getElementById('modal-next-btn');
         optD.textContent = q.options[3].text[lang];
     }
 
+    // POPUP MODAL FEEDBACK LOGIC
+    function showFeedbackModal(isCorrect, explanationObj) {
+        const isEn = selectedLang === "en";
+        const lang = selectedLang || "ms";
+
+        if (isCorrect) {
+            modalTitle.textContent = isEn ? "Correct!" : "Betul!";
+            modalTitle.style.color = "#28a745";
+        } else {
+            modalTitle.textContent = isEn ? "Incorrect!" : "Salah!";
+            modalTitle.style.color = "#dc3545";
+        }
+
+        if (explanationObj && explanationObj[lang]) {
+            modalMessage.textContent = explanationObj[lang];
+        } else {
+            modalMessage.textContent = isCorrect 
+                ? (isEn ? "Great job, your answer is correct!" : "Tahniah, jawapan anda tepat!") 
+                : (isEn ? "Keep going and try your best on the next question." : "Teruskan usaha untuk soalan seterusnya.");
+        }
+
+        if (modalNextBtn) {
+            modalNextBtn.textContent = isEn ? "Next" : "Seterusnya";
+        }
+
+        if (quizModal) quizModal.classList.remove("hidden");
+    }
+
+    if (modalNextBtn) {
+        modalNextBtn.addEventListener("click", () => {
+            if (quizModal) quizModal.classList.add("hidden");
+            currentQuestionIndex++;
+            loadQuestion();
+        });
+    }
+
     [optA, optB, optC, optD].forEach((btn, optionIndex) => {
         if (!btn) return;
         btn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
+            const isCorrect = currentQ.options[optionIndex].isCorrect;
 
-            if (currentQ.options[optionIndex].isCorrect) currentScore += 1;
+            if (isCorrect) currentScore += 1;
             else currentScore -= 1;
 
             updateScoreDisplay();
-            currentQuestionIndex++;
-            loadQuestion();
+            showFeedbackModal(isCorrect, currentQ.explanation);
         });
     });
 
@@ -1243,39 +1364,6 @@ const modalNextBtn = document.getElementById('modal-next-btn');
             loadQuestion();
         }
     }
-
-// Fungsi untuk menampilkan Popup Feedback
-function showFeedbackModal(isCorrect, explanation = '') {
-  if (isCorrect) {
-    modalTitle.textContent = "Betul! / Correct!";
-    modalTitle.style.color = "#28a745"; // Warna Hijau
-    modalMessage.textContent = explanation || "Tahniah, jawapan anda tepat!";
-  } else {
-    modalTitle.textContent = "Salah! / Incorrect!";
-    modalTitle.style.color = "#dc3545"; // Warna Merah
-    modalMessage.textContent = explanation || "Sila cuba lagi untuk soalan seterusnya.";
-  }
-  
-  // Tampilkan modal
-  quizModal.classList.remove('hidden');
-}
-
-// Logika ketika pengguna memilih jawaban
-function checkAnswer(selectedOption, currentQuestion) {
-  const isCorrect = selectedOption === currentQuestion.correctAnswer;
-  
-  // Tampilkan popup feedback
-  showFeedbackModal(isCorrect, currentQuestion.explanation);
-}
-
-// Event Listener pada tombol Next di Modal Popup
-modalNextBtn.addEventListener('click', () => {
-  // Sembunyikan modal
-  quizModal.classList.add('hidden');
-  
-  // Panggil fungsi untuk berpindah ke soalan seterusnya
-  goToNextQuestion(); 
-});
 
     // ==========================================
     // 8. AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
