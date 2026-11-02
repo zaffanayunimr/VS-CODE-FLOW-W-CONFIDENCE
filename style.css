@@ -938,7 +938,7 @@ body {
 /* WADAH SOALAN: DILETAKKAN PADU SUPAYA MENDUDUKI TEPAT DI ATAS GARIS LATAR BELAKANG */
 .question-container {
     position: absolute;
-    top: 6.8vh; /* Titik mula garisan pertama */
+    top: 14.8vh; /* Titik mula garisan pertama */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
