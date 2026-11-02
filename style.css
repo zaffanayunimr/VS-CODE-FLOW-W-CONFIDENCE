@@ -69,20 +69,86 @@ body {
     margin: auto !important;
 }
 
-/* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
-.circle-icon-btn:hover,
-#fullscreen-btn:hover {
-    background-color: #FFE6F2 !important; /* Light Pink Soft */
-    border-color: #38B6FF !important;
-    transform: translateY(-3px) scale(1.05) !important;
+/* HILANGKAN WARNA KEKAL SELEPAS DITEKAN PADA PHONE/TABLET */
+button:focus,
+button:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.circle-icon-btn:hover svg,
-#fullscreen-btn:hover svg,
-.circle-icon-btn:hover svg path,
-#fullscreen-btn:hover svg path {
-    fill: #38B6FF !important;
-    stroke: none !important;
+/* EFEK HOVER TOMBOL HANYA UNTUK PERANTI DENGAN TETIKUS (LAPTOP/DESKTOP) */
+@media (hover: hover) {
+    .circle-icon-btn:hover,
+    #fullscreen-btn:hover {
+        background-color: #FFE6F2 !important; /* Light Pink Soft */
+        border-color: #38B6FF !important;
+        transform: translateY(-3px) scale(1.05) !important;
+    }
+
+    .circle-icon-btn:hover svg,
+    #fullscreen-btn:hover svg,
+    .circle-icon-btn:hover svg path,
+    #fullscreen-btn:hover svg path {
+        fill: #38B6FF !important;
+        stroke: none !important;
+    }
+
+    #start-app-btn:hover {
+        transform: translateY(-4px) scale(1.02);
+        background-color: #FFFFCC !important;
+    }
+
+    .lang-btn:hover {
+        transform: translateY(-4px);
+        background-color: #FFFFCC !important;
+    }
+
+    #skip-btn:hover {
+        transform: translateY(-4px);
+        background-color: #FFCCFF !important;
+    }
+
+    .menu-btn:hover {
+        transform: translateY(-4px);
+        background-color: #FFFFCC !important;
+    }
+
+    .settings-action-btn:hover {
+        transform: translateY(-3px);
+        background-color: #FFCCFF !important;
+    }
+
+    .chapter-card-btn:hover {
+        transform: translateY(-5px);
+        background-color: #FFFF99 !important;
+    }
+
+    .card-center:hover {
+        transform: translate(-50%, -5px);
+    }
+
+    .sub-menu-btn:hover {
+        transform: translateY(-4px);
+        background-color: #FFCCFF !important;
+    }
+
+    .sub-menu-btn.green-btn:hover {
+        background-color: #FFCCCC !important;
+    }
+
+    .sub-menu-btn.yellow-btn:hover {
+        background-color: #CCFF99 !important;
+    }
+
+    .option-btn:hover {
+        transform: translateY(-4px);
+        background-color: #FFCC99 !important;
+    }
+
+    #modal-close-btn:hover {
+        transform: translateY(-2px);
+        background-color: #FFFFCC !important;
+    }
 }
 
 /* KONTROL KIRI BAWAH */
@@ -97,19 +163,13 @@ body {
     z-index: 310;
 }
 
-/* TOMBOL FULLSCREEN */
+/* TOMBOL FULLSCREEN (SETIA APABILA DILIHAT DI DESKTOP / MOBILE) */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
     top: 20px !important;
     left: 20px !important;
     z-index: 9999999 !important;
-}
-
-@media screen and (max-width: 768px) {
-    #fullscreen-btn {
-        display: none !important;
-    }
 }
 
 /* ==========================================
@@ -145,11 +205,6 @@ body {
     cursor: pointer;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-#start-app-btn:hover {
-    transform: translateY(-4px) scale(1.02);
-    background-color: #FFFFCC !important;
 }
 
 .first-header {
@@ -243,11 +298,6 @@ body {
 #btn-bm { background-color: #CFE1F7; }
 #btn-en { background-color: #CCFFFF; }
 
-.lang-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFFFCC !important;
-}
-
 #language-overlay .flag-icon {
     position: absolute;
     left: -5px;
@@ -312,11 +362,6 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-#skip-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCCFF !important;
 }
 
 /* ==========================================
@@ -397,11 +442,6 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.menu-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFFFCC !important;
-}
-
 /* ==========================================
    SCENE 5: SETTINGS OVERLAY
    ========================================== */
@@ -422,7 +462,6 @@ body {
     z-index: 300;
 }
 
-/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -554,11 +593,6 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.settings-action-btn:hover {
-    transform: translateY(-3px);
-    background-color: #FFCCFF !important;
-}
-
 .btn-icon {
     font-size: 1.4rem;
     text-align: center;
@@ -636,24 +670,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan lagi supaya tajuk berada tepat di atas garisan biru */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK DIBESARKAN & DITURUNKAN SAMAN DENGAN SEMUA HALAMAN */
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 38vh; /* Kekal di kedudukan selari petak biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -675,11 +707,6 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.chapter-card-btn:hover {
-    transform: translateY(-5px);
-    background-color: #FFFF99 !important;
-}
-
 .card-left {
     top: 0px;
     left: 10px;
@@ -690,15 +717,10 @@ body {
     right: 10px;
 }
 
-/* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
     top: 180px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.card-center:hover {
-    transform: translate(-50%, -5px);
 }
 
 .card-icon-circle {
@@ -759,29 +781,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan selari dengan tajuk Kuiz & Bab */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK ASAS, PENJAGAAN, KESIHATAN DIBESARKAN & DITURUNKAN */
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan sama dengan tajuk Kuiz & Bab */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* GRID BUTANG SUB-MENU DITURUNKAN KE PETAK LAKARAN BIRU (JARAK ANTARA KOTAK KEKAL) */
 .sub-menu-grid {
     position: absolute;
-    top: 38vh; /* Diturunkan supaya baris atas & bawah berada di dalam petak lakaran biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px; /* Jarak antara kotak dikekalkan */
+    gap: 80px 60px;
     width: 84%;
     max-width: 900px;
 }
@@ -805,24 +825,15 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.sub-menu-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCCFF !important;
-}
-
 .sub-menu-btn.green-btn {
     background-color: #CFE4D1;
     border: 3.5px solid #E680CC;
 }
 
-.sub-menu-btn.green-btn:hover { background-color: #FFCCCC !important; }
-
 .sub-menu-btn.yellow-btn {
     background-color: #FFED96;
     border: 3.5px solid #EFA6CC;
 }
-
-.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
 
 /* OVERLAY PEMUTAR VIDEO */
 #normal-lawan-overlay {
@@ -896,7 +907,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
+   SCENE 11: INTERFASE KUIS
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -912,10 +923,9 @@ body {
     z-index: 200;
 }
 
-/* WADAH SOALAN: top: 14.8vh MENUNJUKKAN TITIK MULA BARIS PERTAMA DUDUK TEPAT DI ATAS GARISAN BIRU KEDUA */
 .question-container {
     position: absolute;
-    top: 14.8vh; /* Menurunkan baris pertama soalan tepat ke garisan biru */
+    top: 14.8vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -924,13 +934,12 @@ body {
     z-index: 210;
 }
 
-/* LINE-HEIGHT 8vh MENYESUAIKAN DENGAN JARAK GARISAN BIRU PADA LATAR BELAKANG */
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru seterusnya */
+    line-height: 8vh;
     margin: 0;
 }
 
@@ -964,11 +973,6 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.option-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCC99 !important;
 }
 
 .score-board {
@@ -1059,15 +1063,14 @@ body {
     align-items: center;
 }
 
-/* 1. KOTAK POP-UP (Dibesarkan sedikit tinggi & lebarnya supaya selesa) */
 .modal-box {
-    position: relative; /* Wajib supaya butang X melekat pada bucu kotak sahaja */
+    position: relative;
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px; /* Ditambah padding atas untuk ruang ikon & butang X */
+    padding: 30px 40px 25px 40px;
     width: 90%;
-    max-width: 480px;            /* Dibesarkan sedikit daripada 450px ke 480px */
+    max-width: 480px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -1075,7 +1078,6 @@ body {
     align-items: center;
 }
 
-/* 2. BUTANG X (Diletakkan di bucu atas kanan tanpa menolak elemen lain) */
 .modal-x-btn {
     position: absolute;
     top: 15px;
@@ -1093,19 +1095,12 @@ body {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.modal-x-btn:hover {
-    color: #CC0000;
-    transform: scale(1.2);
-}
-
-/* 3. IKON (Dolar/Pintu/Lampu) */
 .modal-icon {
     font-size: 3.2rem;
     line-height: 1;
     margin-bottom: 12px;
 }
 
-/* 4. TAJUK (Keluar Kuiz? / Petunjuk) */
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.2rem;
@@ -1115,7 +1110,6 @@ body {
     line-height: 1.1;
 }
 
-/* 5. TEKS PENERANGAN (Kembali ke menu pilihan kuiz) */
 .modal-box p {
     font-family: Arial, sans-serif;
     font-size: 1.05rem;
@@ -1126,7 +1120,6 @@ body {
     white-space: pre-line;
 }
 
-/* 6. BUTANG TERUSKAN */
 #modal-close-btn {
     background-color: #CFE1F7;
     border: 3px solid #CC3399;
@@ -1140,7 +1133,89 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-#modal-close-btn:hover {
-    transform: translateY(-2px);
-    background-color: #FFFFCC !important;
+/* ==========================================
+   KOD PELARASAN SAFARI IOS & TABLET (DARIPADA GAMBAR TANGKAPAN SKRIN)
+   ========================================== */
+@supports (-webkit-touch-callout: none) {
+    /* Amaran Mod Portrait di iPhone */
+    @media screen and (orientation: portrait) and (max-width: 768px) {
+        #rotate-device-overlay {
+            display: flex !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100dvh !important;
+            background-color: #FFCCE5 !important;
+            z-index: 9999999 !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 20px !important;
+        }
+
+        #player-container {
+            display: none !important;
+        }
+    }
+
+    /* Skala & Viewport Khas iOS Landscape */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+        html, body, #player-container {
+            width: 100vw !important;
+            height: 100dvh !important;
+            overflow: hidden !important;
+        }
+
+        #start-overlay,
+        #language-overlay,
+        #scene4-overlay,
+        #settings-overlay,
+        #scene6-overlay,
+        #scene7-overlay,
+        #scene8-overlay,
+        #scene9-overlay,
+        #scene10-overlay,
+        #scene11-overlay,
+        #scene12-overlay {
+            height: 100dvh !important;
+            box-sizing: border-box !important;
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+        }
+
+        .chapter-buttons-container,
+        .sub-menu-grid,
+        .options-grid,
+        .settings-grid {
+            transform: scale(0.85) !important;
+            transform-origin: center center !important;
+        }
+
+        .first-header,
+        .menu-header,
+        #chapter-title,
+        #asas-title,
+        #penjagaan-title,
+        #kesihatan-title,
+        #quiz-title,
+        #settings-title {
+            transform: scale(0.8) !important;
+            transform-origin: top center !important;
+        }
+
+        /* PAKSA TAJUK SCENE 1 SENTIASA RATAKAN TENGAH DI IOS SAFARI */
+        #start-overlay .first-header {
+            position: absolute !important;
+            top: 6vh !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            transform: scale(0.8) !important;
+            transform-origin: top center !important;
+        }
+    }
 }
