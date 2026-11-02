@@ -636,14 +636,15 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 10vh; /* Diturunkan supaya tajuk berada tepat di atas garisan biru atas */
+    padding-top: 13vh; /* Diturunkan lagi supaya tajuk berada tepat di atas garisan biru */
     z-index: 200;
 }
 
+/* TAJUK DIBESARKAN & DITURUNKAN SAMAN DENGAN SEMUA HALAMAN */
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.4rem;
+    font-size: 4.2rem; /* Dibesarkan */
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -652,7 +653,7 @@ body {
 /* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 38vh; /* Diturunkan dari 30vh ke 38vh supaya kad selari di atas garisan petak biru */
+    top: 38vh; /* Kekal di kedudukan selari petak biru */
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -691,7 +692,7 @@ body {
 
 /* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
-    top: 180px; /* Diturunkan supaya kad berada di tengah petak lakaran biru bawah */
+    top: 180px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -742,7 +743,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS
+   SCENE 7, 8, 9: SUB-MENUS (ASAS, PENJAGAAN, KESIHATAN)
    ========================================== */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
@@ -758,27 +759,29 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 10vh;
+    padding-top: 13vh; /* Diturunkan selari dengan tajuk Kuiz & Bab */
     z-index: 200;
 }
 
+/* TAJUK ASAS, PENJAGAAN, KESIHATAN DIBESARKAN & DITURUNKAN */
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 3.4rem;
+    font-size: 4.2rem; /* Dibesarkan sama dengan tajuk Kuiz & Bab */
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
+/* GRID BUTANG SUB-MENU DITURUNKAN KE PETAK LAKARAN BIRU (JARAK ANTARA KOTAK KEKAL) */
 .sub-menu-grid {
     position: absolute;
-    top: 32vh;
+    top: 38vh; /* Diturunkan supaya baris atas & bawah berada di dalam petak lakaran biru */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px;
+    gap: 80px 60px; /* Jarak antara kotak dikekalkan */
     width: 84%;
     max-width: 900px;
 }
