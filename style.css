@@ -95,7 +95,9 @@ body {
     }
 }
 
-/* 0. START SCREEN OVERLAY */
+/* ==========================================
+   0. START SCREEN OVERLAY (Screenshot 163224.png)
+   ========================================== */
 #start-overlay {
     position: fixed;
     top: 0;
@@ -109,7 +111,7 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 12vh;
+    padding-bottom: 22vh; /* DINAIKKAN KE ATAS MENGIKUT ANAK PANAH */
     box-sizing: border-box;
     z-index: 999;
 }
@@ -135,7 +137,7 @@ body {
 
 .first-header {
     position: absolute;
-    top: 12vh;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -294,7 +296,9 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* SCENE 4: MAIN MENU STYLING */
+/* ==========================================
+   SCENE 4: MAIN MENU STYLING (Screenshot 163616.jpg)
+   ========================================== */
 #scene4-overlay {
     display: none;
     position: absolute;
@@ -306,7 +310,7 @@ body {
     background-size: cover;
     background-position: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     z-index: 200;
 }
@@ -317,10 +321,11 @@ body {
     left: 25px;
 }
 
+/* TAJUK FLOW WITH CONFIDENCE DINAIKKAN KE ATAS */
 .menu-header {
     text-align: center;
-    margin-top: -8vh;
-    margin-bottom: 5vh;
+    margin-top: 15vh !important;
+    margin-bottom: 0px !important;
 }
 
 .menu-title {
@@ -343,11 +348,13 @@ body {
     line-height: 0.9;
 }
 
+/* BUTANG BAB & KUIZ DITURUNKAN KE BAWAH */
 .menu-buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
     align-items: center;
+    margin-top: 16vh !important;
 }
 
 .menu-btn {
@@ -369,7 +376,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 5: SETTINGS OVERLAY (Kekal Seperti Yang Dah Okay)
+   SCENE 5: SETTINGS OVERLAY
    ========================================== */
 #settings-overlay {
     display: none;
@@ -579,7 +586,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 6: CHAPTER MENU (cth3.jpg - Diturunkan Masuk Garis Biru)
+   SCENE 6: CHAPTER MENU
    ========================================== */
 #scene6-overlay {
     display: none;
@@ -610,7 +617,7 @@ body {
 
 .chapter-grid-container {
     position: absolute;
-    top: 32vh; /* DILARASKAN KE BAWAH MASUK PETAK BIRU CTH3.JPG */
+    top: 30vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -699,7 +706,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS (cth2.jpg - Diturunkan Masuk 4 Petak Biru)
+   SCENE 7, 8, 9: SUB-MENUS (Screenshot 163651.png)
    ========================================== */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
@@ -728,20 +735,21 @@ body {
     margin: 0;
 }
 
+/* BARISAN BUTANG ATAS DINAIKKAN SEDIKIT (JARAK DENGAN BAWAH) */
 .sub-menu-grid {
     position: absolute;
-    top: 48vh; /* DILARASKAN TERUS KE BAWAH MASUK 4 PETAK BIRU CTH2.JPG */
+    top: 40vh; /* DINAIKKAN KE ATAS MENGIKUT ANAK PANAH */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 60px;
+    gap: 35px 60px; /* JARAK ATAS & BAWAH DIBESARKAN */
     width: 84%;
     max-width: 900px;
 }
 
 .sub-menu-btn {
-    height: 90px;
+    height: 85px;
     background-color: #B4D4F0;
     border: 3.5px solid #E680CC;
     border-radius: 24px;
@@ -878,7 +886,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: QUIZ INTERFACE (cth1.png - Soalan Di Garis, Jawapan Di Petak Biru)
+   SCENE 11: QUIZ INTERFACE (Screenshot 163659.png)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -894,10 +902,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOALAN DILARASKAN TEPAT DUDUK DI ATAS GARISAN BUKU (cth1.png) */
+/* TEKS SOALAN DINAINIKKAN TEPAT BERADA DI GARIS PERTAMA BUKU */
 .question-container {
     position: absolute;
-    top: 25vh; /* DITARIK KE BAWAH MASUK ATAS GARISAN BUKU */
+    top: 17.5vh; /* DITARIK NAIK KE ATAS GARISAN PERTAMA BUKU */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -914,30 +922,30 @@ body {
     line-height: 1.35;
 }
 
-/* BUTANG JAWAPAN DIBESARKAN & DITURUNKAN TEPAT MASUK 2 PETAK BIRU BAWAH */
+/* BUTANG JAWAPAN BARIS ATAS & BAWAH BERJARAK 2 GARISAN */
 .options-grid {
     position: absolute;
-    top: 55vh; /* DILARASKAN KE BAWAH TEPAT PADA PETAK BIRU BAWAH */
+    top: 48vh; /* BARIS ATAS BERJARAK 1 GARIS DARI SOALAN */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px 50px;
+    gap: 45px 50px; /* GAP 45px MEMBERIKAN JARAK TEPAT 2 GARISAN BUKU */
     width: 88%;
     max-width: 980px;
     z-index: 210;
 }
 
 .option-btn {
-    min-height: 110px; /* KOTAK JAWAPAN DIBESARKAN */
+    min-height: 90px;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
     border-radius: 25px;
     font-family: "Franklin Gothic Demi Cond", "Arial Narrow", sans-serif;
-    font-size: 1.5rem; /* TEKS JAWAPAN DIBESARKAN */
+    font-size: 1.45rem;
     font-weight: normal;
     color: #000;
-    padding: 16px 22px;
+    padding: 14px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -968,7 +976,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 12: QUIZ RESULT (cth4.png)
+   SCENE 12: QUIZ RESULT
    ========================================== */
 #scene12-overlay {
     display: none;
