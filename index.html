@@ -92,18 +92,11 @@
     <div id="settings-overlay">
         <h1 id="settings-title">Tetapan</h1>
 
-        <div class="bottom-controls-group">
-            <button id="home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
-        </div>
+        <button id="home-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+        </button>
 
         <div class="settings-grid">
             <div class="settings-box">
@@ -159,10 +152,18 @@
             <div class="footer-title">FLOW WITH</div>
             <div class="footer-subtitle">Confidence</div>
         </div>
+
+        <button id="back-btn">Kembali</button>
     </div>
 
-    <!-- Scene 6: Chapter Menu Overlay Screen (Hanya Setting + Home) -->
+    <!-- Scene 6: Chapter Menu Overlay Screen -->
     <div id="scene6-overlay">
+        <button id="scene6-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="chapter-title-box">
             <h1 id="chapter-title">Bab Penjagaan Haid</h1>
         </div>
@@ -192,18 +193,11 @@
             </button>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="scene6-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene6-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-        </div>
+        <button id="scene6-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+        </button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -213,6 +207,12 @@
 
     <!-- Scene 7: Sub-Menu Asas -->
     <div id="scene7-overlay">
+        <button id="scene7-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="chapter-title-box">
             <h1 id="asas-title">Asas</h1>
         </div>
@@ -235,23 +235,13 @@
             </button>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="scene7-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene7-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="scene7-back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
-        </div>
+        <button id="scene7-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+        </button>
+
+        <button id="scene7-back-btn" class="sub-back-btn">Kembali</button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -259,8 +249,14 @@
         </div>
     </div>
 
-    <!-- Video Player Overlay -->
+    <!-- Normal vs Tidak Normal Video Player Overlay -->
     <div id="normal-lawan-overlay">
+        <button id="normal-lawan-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="video-display-area">
             <video id="normalLawanVideo" playsinline>
                 <source id="normalLawanSource" src="assets/normal-lawan-ms.mp4" type="video/mp4">
@@ -270,19 +266,13 @@
 
         <div class="video-controls-toolbar">
             <button id="vbtn-pause" class="vcontrol-btn" aria-label="Pause">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
             </button>
             <button id="vbtn-play" class="vcontrol-btn" aria-label="Play">
-                <svg viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </button>
-            <button id="vbtn-restart" class="vcontrol-btn" aria-label="Restart from Start">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-                </svg>
+            <button id="vbtn-restart" class="vcontrol-btn" aria-label="Restart">
+                <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
             </button>
             <div class="video-speed-control">
                 <label id="video-speed-label" for="videoSpeed">Kelajuan</label>
@@ -296,27 +286,21 @@
             </div>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="normal-lawan-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="normal-lawan-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="normal-lawan-back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
-        </div>
+        <button id="normal-lawan-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
+
+        <button id="normal-lawan-back-btn" class="sub-back-btn">Kembali</button>
     </div>
 
     <!-- Scene 8: Sub-Menu Penjagaan -->
     <div id="scene8-overlay">
+        <button id="scene8-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                 <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="chapter-title-box">
             <h1 id="penjagaan-title">Penjagaan</h1>
         </div>
@@ -339,23 +323,11 @@
             </button>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="scene8-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene8-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="scene8-back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
-        </div>
+        <button id="scene8-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
+
+        <button id="scene8-back-btn" class="sub-back-btn">Kembali</button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -365,6 +337,12 @@
 
     <!-- Scene 9: Sub-Menu Kesihatan & Kesedaran -->
     <div id="scene9-overlay">
+        <button id="scene9-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="chapter-title-box">
             <h1 id="kesihatan-title">Kesihatan &<br>Kesedaran</h1>
         </div>
@@ -373,37 +351,21 @@
             <button class="sub-menu-btn yellow-btn" id="btn-haid-mental">
                 <span id="label-haid-mental">Haid & kesihatan mental</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-mitos-fakta">
                 <span id="label-mitos-fakta">Mitos & fakta</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-kesilapan-kebersihan">
                 <span id="label-kesilapan-kebersihan">Kesilapan kebersihan semasa haid</span>
             </button>
-
             <button class="sub-menu-btn yellow-btn" id="btn-sekeliling">
                 <span id="label-sekeliling">Penjagaan haid kepada orang sekeliling</span>
             </button>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="scene9-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene9-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="scene9-back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
-        </div>
+        <button id="scene9-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
+        <button id="scene9-back-btn" class="sub-back-btn">Kembali</button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -411,27 +373,27 @@
         </div>
     </div>
 
-    <!-- Scene 10: Quiz Sub-Menu Overlay (Hanya Setting + Home) -->
+    <!-- Scene 10: Quiz Sub-Menu Overlay -->
     <div id="scene10-overlay">
+        <button id="scene10-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
+
         <div class="chapter-title-box">
             <h1 id="quiz-title">Kuiz Penjagaan Haid</h1>
         </div>
 
         <div class="chapter-buttons-container">
             <button class="chapter-card-btn card-left" id="btn-quiz-asas">
-                <div class="card-icon-circle icon-bg-blue">
-                    <span class="card-emoji">📖</span>
-                </div>
+                <div class="card-icon-circle icon-bg-blue"><span class="card-emoji">📖</span></div>
                 <span class="card-label" id="label-quiz-asas">Asas</span>
             </button>
-
             <button class="chapter-card-btn card-right" id="btn-quiz-penjagaan">
-                <div class="card-icon-circle icon-bg-cyan">
-                    <span class="card-emoji">💖</span>
-                </div>
+                <div class="card-icon-circle icon-bg-cyan"><span class="card-emoji">💖</span></div>
                 <span class="card-label" id="label-quiz-penjagaan">Penjagaan</span>
             </button>
-
             <button class="chapter-card-btn card-center" id="btn-quiz-kesihatan">
                 <div class="card-icon-circle icon-bg-purple">
                     <svg class="health-svg-icon" viewBox="0 0 24 24">
@@ -442,18 +404,9 @@
             </button>
         </div>
 
-        <div class="bottom-controls-group">
-            <button id="scene10-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene10-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-        </div>
+        <button id="scene10-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -463,9 +416,23 @@
 
     <!-- Scene 11: Quiz Interface -->
     <div id="scene11-overlay">
-<div class="score-board">
-    <span id="label-score">Skor</span>: <span id="quiz-score">0</span> / 8
-</div>
+        <div class="score-board">
+            <span id="label-score">Skor</span>: <span id="quiz-score">0</span>
+        </div>
+
+        <div class="quiz-controls-group">
+            <button id="scene11-settings-btn" class="gear-btn" aria-label="Settings">
+                <svg class="gear-icon" viewBox="0 0 24 24">
+                    <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+                </svg>
+            </button>
+            <button id="scene11-quit-btn" class="circle-btn" aria-label="Quit Quiz">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+            <button id="scene11-hint-btn" class="circle-btn" aria-label="Hint">
+                <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+            </button>
+        </div>
 
         <div class="question-container">
             <h2 id="quiz-question-text">1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?</h2>
@@ -478,28 +445,10 @@
             <button class="option-btn" id="opt-d"></button>
         </div>
 
-        <div class="quiz-controls-group">
-            <button id="scene11-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene11-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="scene11-quit-btn" class="circle-btn" aria-label="Quit Quiz">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                </svg>
-            </button>
-            <button id="scene11-hint-btn" class="circle-btn" aria-label="Hint">
-                <svg viewBox="0 0 24 24">
-                    <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 017 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
-                </svg>
-            </button>
-        </div>
+        <button id="scene11-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
+        <button id="scene11-back-btn" class="sub-back-btn">Kembali</button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -507,36 +456,28 @@
         </div>
     </div>
 
-<!-- Scene 12: Quiz Result Screen -->
-<div id="scene12-overlay" class="notebook-bg">
-    <div class="result-box">
-        <h1 id="result-congrats">Tahniah!</h1>
-        <h2 id="result-motto">Usaha tangga kejayaan!</h2>
-        <div class="score-display-line">
-            <span id="result-score-label">Skor anda:</span>
-            <span id="final-score-val">0</span>
-            <span id="total-score-val"> / 8</span> <!-- Tambah baris ini -->
-        </div>
-    </div>
-    ...
+    <!-- Scene 12: Quiz Result Screen -->
+    <div id="scene12-overlay" class="notebook-bg">
+        <button id="scene12-settings-btn" class="gear-btn" aria-label="Settings">
+            <svg class="gear-icon" viewBox="0 0 24 24">
+                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z" />
+            </svg>
+        </button>
 
-        <div class="bottom-controls-group">
-            <button id="scene12-settings-btn" class="circle-btn" aria-label="Settings">
-                <svg viewBox="0 0 24 24">
-                <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
-                </svg>
-            </button>
-            <button id="scene12-home-btn" class="circle-btn" aria-label="Home">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </svg>
-            </button>
-            <button id="scene12-back-btn" class="circle-btn" aria-label="Kembali">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                </svg>
-            </button>
+        <div class="result-box">
+            <h1 id="result-congrats">Tahniah!</h1>
+            <h2 id="result-motto">Usaha tangga kejayaan!</h2>
+            <div class="score-display-line">
+                <span id="result-score-label">Skor anda:</span>
+                <span id="final-score-val">0</span>
+                <span id="total-score-val"></span>
+            </div>
         </div>
+
+        <button id="scene12-home-btn" class="home-circle-btn" aria-label="Home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+        </button>
+        <button id="scene12-back-btn" class="sub-back-btn">Kembali</button>
 
         <div class="footer-logo">
             <div class="footer-title">FLOW WITH</div>
@@ -544,21 +485,21 @@
         </div>
     </div>
 
-    <!-- Modal Feedback Kuis Popup -->
+    <!-- Modal Feedback -->
     <div id="quiz-modal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h2 id="modal-title"></h2>
-            <p id="modal-message"></p>
-            <button id="modal-next-btn" class="modal-btn">Seterusnya / Next</button>
+            <h2 id="modal-title">Betul!</h2>
+            <p id="modal-message">Penerangan jawapan akan dipaparkan di sini.</p>
+            <button id="modal-next-btn" class="modal-btn">Seterusnya</button>
         </div>
     </div>
 
-    <!-- Modal Hint Popup -->
+    <!-- Modal Hint -->
     <div id="hint-modal" class="modal-overlay hidden">
         <div class="modal-content hint-modal-content">
-            <h2 id="hint-modal-title">💡 Petunjuk / Hint</h2>
-            <p id="hint-modal-message"></p>
-            <button id="hint-modal-close-btn" class="modal-btn">Tutup / Close</button>
+            <h2 id="hint-modal-title">💡 Petunjuk</h2>
+            <p id="hint-modal-message">Petunjuk soalan dipaparkan di sini.</p>
+            <button id="hint-modal-close-btn" class="modal-btn">Tutup</button>
         </div>
     </div>
 
