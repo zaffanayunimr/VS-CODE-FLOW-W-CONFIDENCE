@@ -7,15 +7,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-html,
-body {
+html, body {
     width: 100vw;
     height: 100vh;
     background-color: #000;
@@ -32,14 +30,13 @@ body {
 }
 
 /* ==========================================
-   DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
+   DESAIN TOMBOL LINGKARAN (KONSISTEN SEMUA SCENE)
    ========================================== */
-.circle-icon-btn,
-#fullscreen-btn {
+.circle-icon-btn, #fullscreen-btn {
     width: 52px !important;
     height: 52px !important;
     background-color: #FFFFFF !important;
-    border: 3.5px solid #38B6FF !important; /* Garis lingkaran luar biru terang */
+    border: 3.5px solid #38B6FF !important;
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -50,45 +47,28 @@ body {
     padding: 0 !important;
     outline: none !important;
     flex-shrink: 0;
-    overflow: visible !important;
 }
 
-/* SIMBOL IKON BIRU DI TENGAH */
-.circle-icon-btn svg,
-#fullscreen-btn svg,
-.circle-icon-btn svg path,
-#fullscreen-btn svg path {
+.circle-icon-btn svg, #fullscreen-btn svg,
+.circle-icon-btn svg path, #fullscreen-btn svg path {
     width: 26px !important;
     height: 26px !important;
     fill: #38B6FF !important;
     stroke: none !important;
-    stroke-width: 0 !important;
-    fill-rule: evenodd !important;
-    transition: fill 0.2s ease !important;
     display: block !important;
     margin: auto !important;
 }
 
-/* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
-.circle-icon-btn:hover,
-#fullscreen-btn:hover {
-    background-color: #FFE6F2 !important; /* Light Pink Soft */
+.circle-icon-btn:hover, #fullscreen-btn:hover {
+    background-color: #FFE6F2 !important;
     border-color: #38B6FF !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
 
-.circle-icon-btn:hover svg,
-#fullscreen-btn:hover svg,
-.circle-icon-btn:hover svg path,
-#fullscreen-btn:hover svg path {
-    fill: #38B6FF !important;
-    stroke: none !important;
-}
-
-/* KONTROL KIRI BAWAH */
+/* KONTROL KIRI BAWAH (SETTING, HOME, BACK, QUIT, HINT) */
 .left-bottom-controls {
     position: absolute;
-    bottom: 4vh;
+    bottom: 5vh;
     left: 3vw;
     display: flex;
     flex-direction: row;
@@ -97,7 +77,6 @@ body {
     z-index: 310;
 }
 
-/* TOMBOL FULLSCREEN */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
@@ -107,7 +86,7 @@ body {
 }
 
 /* ==========================================
-   0. OVERLAY LAYAR MULA
+   OVERLAY MULA & INTRO
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -130,7 +109,7 @@ body {
 #start-app-btn {
     padding: 18px 50px;
     font-size: 1.8rem;
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-weight: bold;
     color: #990184;
     background-color: #CFE1F7;
@@ -158,7 +137,7 @@ body {
 
 .first-title {
     color: #990184;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "Palatino Linotype", serif;
     font-weight: bold;
     font-size: 4.5rem;
     letter-spacing: 5px;
@@ -168,15 +147,13 @@ body {
 
 .first-subtitle {
     color: #E70B90;
-    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-family: "Bell MT", serif;
     font-style: italic;
-    font-weight: normal;
     font-size: 8rem;
     margin-top: -20px;
     line-height: 0.9;
 }
 
-/* LAYER VIDEO */
 .video-layer {
     position: absolute;
     top: 0;
@@ -194,7 +171,6 @@ body {
     z-index: 2;
 }
 
-/* SCENE 2: PEMILIHAN BAHASA */
 #language-overlay {
     display: none;
     position: absolute;
@@ -218,14 +194,13 @@ body {
     color: #E70B90;
     height: 80px;
     font-size: 2rem;
-    font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     font-weight: 900;
     border-radius: 65px;
     cursor: pointer;
     width: 480px;
     max-width: 90vw;
     text-align: center;
-    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,25 +241,21 @@ body {
 
 .footer-title {
     color: #990184;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "Palatino Linotype", serif;
     font-weight: bold;
     font-size: 1.2rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    line-height: 0.9;
 }
 
 .footer-subtitle {
     color: #DC03A0;
-    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-family: "Bell MT", serif;
     font-style: italic;
-    font-weight: normal;
     font-size: 2.2rem;
     margin-top: 4px;
-    line-height: 0.5;
 }
 
-/* TOMBOL LANGKAU */
 #skip-btn {
     display: none;
     position: absolute;
@@ -295,7 +266,6 @@ body {
     height: 45px;
     justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: #FFFFCC;
     border: 4px solid #339933;
     color: #009966;
@@ -308,45 +278,30 @@ body {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-#skip-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCCFF !important;
-}
-
 /* ==========================================
    SCENE 4: UTAMA MENU
    ========================================== */
 #scene4-overlay {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/bg-homepage.jpg');
     background-size: cover;
     background-position: center;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     z-index: 200;
 }
 
-#scene4-overlay .gear-btn {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-}
-
 .menu-header {
     text-align: center;
-    margin-top: 12vh !important;
-    margin-bottom: 0px !important;
+    margin-top: 10vh !important;
 }
 
 .menu-title {
     color: #990184;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "Palatino Linotype", serif;
     font-weight: bold;
     font-size: 4.5rem;
     letter-spacing: 5px;
@@ -356,9 +311,8 @@ body {
 
 .menu-subtitle {
     color: #E70B90;
-    font-family: "Bell MT", "Garamond", "Georgia", serif;
+    font-family: "Bell MT", serif;
     font-style: italic;
-    font-weight: normal;
     font-size: 8rem;
     margin-top: -20px;
     line-height: 0.9;
@@ -369,7 +323,7 @@ body {
     flex-direction: column;
     gap: 18px;
     align-items: center;
-    margin-top: 25vh !important;
+    margin-top: 22vh !important;
 }
 
 .menu-btn {
@@ -385,7 +339,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
     transition: transform 0.2s ease, background-color 0.2s ease;
@@ -402,31 +355,22 @@ body {
 #settings-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/setting-page.png');
     background-size: cover;
     background-position: center;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 8vh;
+    padding-top: 6vh;
     z-index: 300;
 }
 
-/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
-#settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
-#settings-overlay .left-bottom-controls button[id*="setting"],
-#settings-overlay .left-bottom-controls .gear-btn {
-    display: none !important;
-}
-
 #settings-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     text-align: center;
 }
 
@@ -436,8 +380,8 @@ body {
     justify-content: center;
     align-items: stretch;
     width: 86%;
-    max-width: 1000px;
-    margin-top: 8vh !important;
+    max-width: 950px;
+    margin-top: 5vh !important;
 }
 
 .settings-box {
@@ -445,21 +389,22 @@ body {
     position: relative;
     border: 4px solid #CC3399;
     border-radius: 35px;
-    padding: 40px 25px 30px 25px;
+    padding: 35px 25px 25px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 290px;
+    min-height: 260px;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .box-header-badge {
     position: absolute;
-    top: -28px;
+    top: -26px;
     left: 50%;
     transform: translateX(-50%);
-    width: 230px;
-    height: 52px;
+    width: 210px;
+    height: 48px;
     border: 4px solid #CC3399;
     border-radius: 30px;
     display: flex;
@@ -467,7 +412,7 @@ body {
     align-items: center;
     color: #E70B90;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 2.1rem;
+    font-size: 1.9rem;
 }
 
 .header-audio { background-color: #E7F7A8; }
@@ -475,7 +420,7 @@ body {
 
 .audio-control-body {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -483,8 +428,8 @@ body {
 
 .volume-slider-container {
     position: relative;
-    width: 50px;
-    height: 180px;
+    width: 45px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -497,20 +442,19 @@ body {
     position: absolute;
     top: 40%;
     left: 50%;
-    width: 130px;
-    height: 18px;
+    width: 120px;
+    height: 16px;
     background: linear-gradient(to right, #E70B90 100%, #FFCCE5 0%);
     border-radius: 10px;
     outline: none;
     cursor: pointer;
     transform: translate(-50%, -50%) rotate(-90deg);
-    margin: 0;
 }
 
 #volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #FFFFCC;
     border: 3px solid #CC3399;
@@ -518,32 +462,31 @@ body {
 }
 
 #volume-percentage {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 10px;
 }
 
 .audio-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .settings-action-btn {
-    width: 240px;
-    height: 52px;
+    width: 220px;
+    height: 48px;
     background-color: #E7F7A8;
     border: 3.5px solid #CC3399;
     color: #E70B90;
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.45rem;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    font-size: 1.3rem;
     border-radius: 30px;
     display: grid;
-    grid-template-columns: 45px 1fr;
+    grid-template-columns: 40px 1fr;
     align-items: center;
-    padding-left: 18px;
+    padding-left: 15px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -553,91 +496,69 @@ body {
     background-color: #FFCCFF !important;
 }
 
-.btn-icon {
-    font-size: 1.4rem;
-    text-align: center;
-}
-
-.settings-action-btn span:not(.btn-icon) {
-    text-align: left;
-    padding-left: 5px;
-}
+.btn-icon { font-size: 1.3rem; text-align: center; }
+.settings-action-btn span:not(.btn-icon) { text-align: left; }
 
 .lang-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
     width: 100%;
     align-items: center;
 }
 
 .lang-option-btn {
     position: relative;
-    width: 270px;
-    height: 56px;
+    width: 250px;
+    height: 52px;
     background-color: #CFE1F7;
     border: 3.5px solid #CC3399;
     border-radius: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 50px;
-    padding-right: 15px;
+    padding-left: 45px;
+    cursor: pointer;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    color: #E70B90;
+    font-size: 1.3rem;
 }
 
 .flag-icon {
     position: absolute;
-    left: -8px;
-    top: 50%;
+    left: -6px; top: 50%;
     transform: translateY(-50%);
-    width: 54px;
-    height: 54px;
+    width: 50px; height: 50px;
     border-radius: 50%;
     border: 3.5px solid #CC3399;
     z-index: 5;
     background-size: cover;
-    background-position: center;
 }
 
-.flag-my {
-    background-image: url('assets/flag-malaysia.png');
-    background-size: cover;
-    background-position: 20% center;
-    background-color: #000066;
-}
-
-.flag-uk {
-    background-image: url('assets/flag-uk.png');
-    background-size: cover;
-    background-position: center;
-    background-color: #CC0000;
-}
+.flag-my { background-image: url('assets/flag-malaysia.png'); background-position: 20% center; }
+.flag-uk { background-image: url('assets/flag-uk.png'); background-position: center; }
 
 /* ==========================================
-   SCENE 6: MENU BAB & SCENE 10: QUIZ MENU
+   SCENE 6 & 10: MENU BAB DAN KUIZ (NAIKKAN POSISI)
    ========================================== */
 #scene6-overlay, #scene10-overlay {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/bg fyp.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 10vh;
     z-index: 200;
 }
 
 #chapter-title, #quiz-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -645,18 +566,18 @@ body {
 
 .chapter-grid-container {
     position: absolute;
-    top: 38vh;
+    top: 32vh; /* Dinaikkan sedikit */
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
-    max-width: 900px;
-    height: 380px;
+    max-width: 880px;
+    height: 340px;
 }
 
 .chapter-card-btn {
     position: absolute;
-    width: 360px;
-    height: 90px;
+    width: 340px;
+    height: 85px;
     background-color: #FABFD7;
     border: 3.5px solid #E680CC;
     border-radius: 45px;
@@ -672,92 +593,59 @@ body {
     background-color: #FFFF99 !important;
 }
 
-.card-left {
-    top: 0px;
-    left: 10px;
-}
-
-.card-right {
-    top: 0px;
-    right: 10px;
-}
-
-.card-center {
-    top: 180px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.card-center:hover {
-    transform: translate(-50%, -5px);
-}
+.card-left { top: 0px; left: 10px; }
+.card-right { top: 0px; right: 10px; }
+.card-center { top: 155px; left: 50%; transform: translateX(-50%); }
+.card-center:hover { transform: translate(-50%, -5px); }
 
 .card-icon-circle {
     position: absolute;
-    left: -12px;
-    width: 86px;
-    height: 86px;
+    left: -10px;
+    width: 80px; height: 80px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex; justify-content: center; align-items: center;
 }
 
 .icon-bg-blue { background-color: #CCFFFF; }
 .icon-bg-cyan { background-color: #CCEAFF; }
 .icon-bg-purple { background-color: #CFDEFC; }
 
-.card-emoji {
-    font-size: 2.2rem;
-    line-height: 1;
-}
-
-.health-svg-icon {
-    width: 38px;
-    height: 38px;
-    fill: #DC03A0;
-    display: block;
-    margin: auto;
-}
+.card-emoji { font-size: 2rem; }
+.health-svg-icon { width: 34px; height: 34px; fill: #DC03A0; display: block; margin: auto; }
 
 .card-label {
     flex: 1;
     text-align: center;
-    padding-left: 48px;
+    padding-left: 45px;
     padding-right: 15px;
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     font-weight: 900;
     line-height: 1.1;
 }
 
 /* ==========================================
-   SCENE 7, 8, 9: SUB-MENUS (ASAS, PENJAGAAN, KESIHATAN)
+   SCENE 7, 8, 9: SUB-MENUS
    ========================================== */
 #scene7-overlay, #scene8-overlay, #scene9-overlay {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/bg fyp.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 10vh;
     z-index: 200;
 }
 
 #asas-title, #penjagaan-title, #kesihatan-title {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 3.8rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -765,145 +653,96 @@ body {
 
 .sub-menu-grid {
     position: absolute;
-    top: 38vh;
+    top: 32vh; /* Dinaikkan */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px;
+    gap: 50px 50px;
     width: 84%;
-    max-width: 900px;
+    max-width: 880px;
 }
 
 .sub-menu-btn {
-    height: 85px;
+    height: 80px;
     background-color: #B4D4F0;
     border: 3.5px solid #E680CC;
     border-radius: 24px;
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     color: #E70B90;
-    font-size: 1.7rem;
+    font-size: 1.55rem;
     font-weight: 900;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 10px 18px;
+    padding: 10px 15px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.sub-menu-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCCFF !important;
-}
+.sub-menu-btn:hover { transform: translateY(-4px); background-color: #FFCCFF !important; }
+.sub-menu-btn.green-btn { background-color: #CFE4D1; }
+.sub-menu-btn.yellow-btn { background-color: #FFED96; }
 
-.sub-menu-btn.green-btn {
-    background-color: #CFE4D1;
-    border: 3.5px solid #E680CC;
-}
-
-.sub-menu-btn.green-btn:hover { background-color: #FFCCCC !important; }
-
-.sub-menu-btn.yellow-btn {
-    background-color: #FFED96;
-    border: 3.5px solid #EFA6CC;
-}
-
-.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
-
-/* OVERLAY PEMUTAR VIDEO */
+/* ==========================================
+   VIDEO PLAYER OVERLAY
+   ========================================== */
 #normal-lawan-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000000;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #000;
     z-index: 250;
-    overflow: hidden;
 }
 
 .video-display-area {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
 }
 
-.video-display-area video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: #000000;
-}
+.video-display-area video { width: 100%; height: 100%; object-fit: cover; }
 
 .video-controls-toolbar {
     position: absolute;
-    right: 30px;
-    top: 50%;
+    right: 25px; top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
+    gap: 14px;
+    z-index: 310;
 }
 
-.video-speed-control {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    width: 76px;
-}
-
-#videoSpeed {
-    width: 55px;
-    height: 38px;
-    padding: 0 3px;
-    background-color: #FFFFFF;
-    color: #52B2EC;
-    border: 2px solid #FFFFFF;
-    border-radius: 10px;
+.video-speed-control select {
+    width: 52px; height: 36px;
+    background-color: #FFF; color: #52B2EC;
+    border: 2px solid #FFF; border-radius: 10px;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
+    font-size: 11px; font-weight: bold;
+    text-align: center; cursor: pointer; outline: none;
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS
+   SCENE 11: INTERFASE KUIS (SELARAS GARIS)
    ========================================== */
 #scene11-overlay {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/quiz bg.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     z-index: 200;
 }
 
 .question-container {
     position: absolute;
-    top: 14.8vh;
+    top: 15vh; /* Dinaikkan & diselaraskan dengan garisan buku */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -913,62 +752,52 @@ body {
 }
 
 #quiz-question-text {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-family: "Franklin Gothic Heavy", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh;
+    line-height: 2.6rem;
     margin: 0;
 }
 
 .options-grid {
     position: absolute;
-    top: 42vh;
+    top: 40vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 90px 50px;
-    width: 88%;
-    max-width: 980px;
+    gap: 40px 40px;
+    width: 86%;
+    max-width: 950px;
     z-index: 210;
 }
 
 .option-btn {
-    min-height: 90px;
+    min-height: 80px;
     background-color: #FFED96;
     border: 3.5px solid #E680CC;
-    border-radius: 25px;
-    font-family: "Franklin Gothic Demi Cond", "Arial Narrow", sans-serif;
-    font-size: 1.45rem;
-    font-weight: normal;
+    border-radius: 22px;
+    font-family: "Franklin Gothic Demi Cond", sans-serif;
+    font-size: 1.4rem;
     color: #000;
-    padding: 14px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
+    padding: 12px 18px;
+    display: flex; justify-content: center; align-items: center;
+    text-align: center; cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.option-btn:hover {
-    transform: translateY(-4px);
-    background-color: #FFCC99 !important;
-}
+.option-btn:hover { transform: translateY(-4px); background-color: #FFCC99 !important; }
 
 .score-board {
     position: absolute;
-    top: 5vh;
-    left: 5vw;
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 1.8rem;
-    font-weight: bold;
+    top: 4vh; left: 5vw;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    font-size: 1.6rem; font-weight: bold;
     color: #FF0000;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 4px 18px;
-    border-radius: 12px;
+    padding: 4px 16px; border-radius: 12px;
     border: 2px solid #FF0000;
     z-index: 220;
 }
@@ -979,71 +808,50 @@ body {
 #scene12-overlay {
     display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
     background-image: url('assets/quiz bg.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     z-index: 200;
 }
 
 .result-box {
     position: absolute;
-    top: 36vh;
-    left: 50%;
+    top: 34vh; left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    width: 100%;
+    text-align: center; width: 100%;
 }
 
 #result-congrats {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 3.8rem;
-    color: #E70B90 !important;
-    font-weight: normal;
-    margin-bottom: 2.5vh;
-    line-height: 1;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    font-size: 3.6rem; color: #E70B90 !important;
+    margin-bottom: 2vh; line-height: 1;
 }
 
 #result-motto {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 2.8rem;
-    color: #E70B90 !important;
-    font-weight: normal;
-    margin-bottom: 3vh;
-    line-height: 1;
+    font-size: 2.5rem; color: #E70B90 !important;
+    margin-bottom: 2.5vh; line-height: 1;
 }
 
 .score-display-line {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.8rem;
-    color: #E70B90 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    line-height: 1;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    font-size: 2.5rem; color: #E70B90 !important;
+    display: flex; justify-content: center; align-items: center; gap: 12px;
 }
 
-#final-score-val {
-    font-weight: bold;
-}
-
-/* POP-UP DIALOG MODALS */
+/* ==========================================
+   POP-UP DIALOG MODALS (HINT & QUIT)
+   ========================================== */
 .modal-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.55);
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 99999;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; align-items: center;
 }
 
 .modal-box {
@@ -1051,522 +859,160 @@ body {
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px;
-    width: 90%;
-    max-width: 480px;
+    padding: 25px 35px;
+    width: 88%; max-width: 440px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
 }
 
 .modal-x-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #E70B90;
+    top: 12px; right: 18px;
+    background: transparent; border: none;
+    font-size: 1.5rem; font-weight: bold; color: #E70B90;
     cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    margin: 0;
-    z-index: 10;
-    transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.modal-x-btn:hover {
-    color: #CC0000;
-    transform: scale(1.2);
-}
-
-.modal-icon {
-    font-size: 3.2rem;
-    line-height: 1;
-    margin-bottom: 12px;
-}
+.modal-icon { font-size: 3rem; margin-bottom: 8px; }
 
 .modal-box h3 {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2.2rem;
-    color: #E70B90 !important;
-    margin-top: 0;
+    font-family: "Franklin Gothic Heavy", sans-serif;
+    font-size: 2rem; color: #E70B90 !important;
     margin-bottom: 8px;
-    line-height: 1.1;
 }
 
 .modal-box p {
     font-family: Arial, sans-serif;
-    font-size: 1.05rem;
-    color: #333333;
-    line-height: 1.4;
-    margin-top: 0;
-    margin-bottom: 20px;
-    white-space: pre-line;
+    font-size: 1.05rem; color: #333;
+    margin-bottom: 18px; line-height: 1.3;
 }
 
-#modal-close-btn {
-    background-color: #CFE1F7;
-    border: 3px solid #CC3399;
-    color: #990184;
+#modal-ok-btn, .modal-btn-confirm, .modal-btn-cancel {
+    padding: 8px 25px; border-radius: 25px;
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 8px 35px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    font-size: 1.1rem; font-weight: bold; cursor: pointer;
+    border: 3px solid #CC3399; transition: transform 0.2s ease;
 }
 
-#modal-close-btn:hover {
-    transform: translateY(-2px);
-    background-color: #FFFFCC !important;
-}
+#modal-ok-btn, .modal-btn-confirm { background-color: #CFE1F7; color: #990184; }
+.modal-btn-cancel { background-color: #FFCCCC; color: #CC0000; border-color: #CC0000; }
+
+.modal-actions { display: flex; gap: 15px; justify-content: center; }
 
 /* ==========================================
-   MOBILE LANDSCAPE RESPONSIVE DESIGN (PHONE)
-   IGUT YG SCRIPT 1 / STYLE DARI SCRIPT 2 (PHONE ONLY)
+   MOBILE PORTRAIT (SKRIN HP BERDIRI) - DIKECILKAN
    ========================================== */
+@media screen and (orientation: portrait) and (max-width: 600px) {
 
-@media screen and (orientation: landscape) and (max-height: 500px) {
-
-    html,
-    body,
-    #player-container {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+    .first-header, .menu-header {
+        top: 8vh;
     }
 
-    #fullscreen-btn {
-        top: 10px;
-        left: 10px;
-        width: 38px;
-        height: 38px;
+    .first-title, .menu-title {
+        font-size: 2.2rem !important;
+        letter-spacing: 2px;
     }
 
-    #fullscreen-btn svg {
-        width: 23px;
-        height: 23px;
-    }
-
-    /* START SCREEN */
-    #start-overlay {
-        padding: 0 0 25px;
-        justify-content: flex-end;
-    }
-
-    .first-header {
-        top: 5vh;
-    }
-
-    .first-title {
-        font-size: clamp(2rem, 5vw, 3rem);
-        letter-spacing: 3px;
-    }
-
-    .first-subtitle {
-        font-size: clamp(3rem, 9vw, 5rem);
-        margin-top: -8px;
+    .first-subtitle, .menu-subtitle {
+        font-size: 3.8rem !important;
+        margin-top: -10px;
     }
 
     #start-app-btn {
         padding: 12px 30px;
         font-size: 1.2rem;
-        border-width: 3px;
-    }
-
-    /* LANGUAGE SELECTION */
-    #language-overlay {
-        gap: 14px;
     }
 
     .lang-btn {
-        width: min(360px, 65vw);
-        height: 52px;
-        font-size: clamp(1rem, 2.8vw, 1.5rem);
-        border-width: 3px;
-        padding-left: 45px;
+        width: 85vw;
+        height: 56px;
+        font-size: 1.2rem;
+        padding-left: 40px;
     }
 
     #language-overlay .flag-icon {
         width: 52px;
         height: 52px;
-        border-width: 3px;
-        left: -3px;
-    }
-
-    .footer-logo {
-        bottom: 10px;
-    }
-
-    .footer-title {
-        font-size: 0.8rem;
-        letter-spacing: 2px;
-    }
-
-    .footer-subtitle {
-        font-size: 1.8rem;
-        margin-top: 3px;
-    }
-
-    /* MAIN MENU */
-    .menu-header {
-        margin-top: -5vh;
-        margin-bottom: 5vh;
-    }
-
-    .menu-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        letter-spacing: 3px;
-    }
-
-    .menu-subtitle {
-        font-size: clamp(3rem, 9vw, 5.5rem);
-        margin-top: -8px;
     }
 
     .menu-buttons-container {
-        gap: 10px;
+        margin-top: 18vh !important;
+        gap: 12px;
     }
 
     .menu-btn {
-        width: min(250px, 55vw);
-        height: 46px;
+        width: 220px;
+        height: 48px;
         font-size: 1.4rem;
-        border-width: 3px;
     }
 
-    .gear-btn {
-        top: 12px;
-        right: 15px;
-        width: 38px;
-        height: 38px;
-    }
-
-    .gear-btn .gear-icon {
-        width: 29px;
-        height: 29px;
-    }
-
-    /* SETTINGS SCREEN */
-    #settings-overlay {
-        padding-top: 8px;
-    }
-
-    #settings-title {
-        font-size: 2.2rem;
-        margin-bottom: 5px;
-    }
-
+    /* Tetapan / Settings di HP Portrait */
+    #settings-title { font-size: 2.4rem; }
     .settings-grid {
+        flex-direction: column;
+        gap: 35px;
+        margin-top: 4vh !important;
         width: 90%;
-        gap: 22px;
-        margin-top: 22px;
-        align-items: stretch;
+    }
+    .settings-box { min-height: 180px; padding: 25px 15px 15px 15px; }
+    .box-header-badge { width: 160px; height: 38px; font-size: 1.4rem; top: -20px; }
+    .settings-action-btn { width: 170px; height: 40px; font-size: 1rem; }
+    .lang-option-btn { width: 200px; height: 44px; font-size: 1rem; }
+
+    /* Bab & Sub-menu di HP Portrait */
+    #chapter-title, #quiz-title, #asas-title, #penjagaan-title, #kesihatan-title {
+        font-size: 2rem !important;
     }
 
-    .settings-box {
-        min-width: 0;
-        padding: 28px 12px 12px;
-        border-width: 3px;
-        border-radius: 22px;
-    }
-
-    .box-header-badge {
-        top: -19px;
-        width: min(180px, 75%);
-        height: 38px;
-        border-width: 3px;
-        font-size: 1.35rem;
-    }
-
-    .audio-control-body {
-        gap: 18px;
-    }
-
-    .volume-slider-container {
-        width: 35px;
-        height: 105px;
-    }
-
-    #volume-slider {
-        width: 85px;
-        height: 12px;
-    }
-
-    #volume-slider::-webkit-slider-thumb {
-        width: 23px;
-        height: 23px;
-        border-width: 3px;
-    }
-
-    #volume-percentage {
-        font-size: 1rem;
-    }
-
-    .audio-btn-group,
-    .lang-btn-group {
-        gap: 9px;
-    }
-
-    .settings-action-btn {
-        width: clamp(135px, 25vw, 220px);
-        height: 38px;
-        grid-template-columns: 28px 1fr;
-        padding: 0 7px;
-        border-width: 2px;
-        font-size: clamp(0.8rem, 2vw, 1.1rem);
-    }
-
-    .btn-icon {
-        font-size: 1rem;
-    }
-
-    .settings-action-btn span:not(.btn-icon) {
-        padding-left: 4px;
-    }
-
-    .lang-option-btn {
-        width: clamp(150px, 28vw, 230px);
-        height: 42px;
-        padding-left: 38px;
-        padding-right: 5px;
-    }
-
-    .lang-option-btn .flag-icon {
-        width: 40px;
-        height: 40px;
-        left: -7px;
-        border-width: 2px;
-    }
-
-    #home-btn {
-        bottom: 12px;
-        left: 12px;
-        width: 38px;
-        height: 38px;
-    }
-
-    #home-btn svg {
-        width: 32px;
-        height: 32px;
-    }
-
-    #back-btn {
-        bottom: 12px;
-        right: 12px;
-        width: 110px;
-        height: 36px;
-        font-size: 1rem;
-        border-width: 2px;
-    }
-
-    /* CHAPTER MENUS */
-    #scene6-overlay,
-    #scene7-overlay,
-    #scene8-overlay,
-    #scene9-overlay,
-    #scene10-overlay {
-        padding-top: 12px;
-    }
-
-    #chapter-title,
-    #asas-title,
-    #penjagaan-title,
-    #quiz-title {
-        font-size: clamp(1.6rem, 4vw, 2.5rem);
-    }
-
-    #kesihatan-title {
-        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-    }
-
-    .chapter-buttons-container {
-        width: 94%;
-        max-width: 850px;
-        height: 70vh;
-        margin-top: 5vh;
+    .chapter-grid-container {
+        top: 25vh;
+        width: 95%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
     .chapter-card-btn {
-        width: 37%;
-        height: 60px;
-        border-width: 3px;
+        position: relative !important;
+        left: auto !important; right: auto !important; top: auto !important;
+        transform: none !important;
+        width: 280px; height: 65px;
     }
+    .chapter-card-btn:hover { transform: none !important; }
 
-    .card-left {
-        top: 10px;
-        left: 20px;
-    }
+    .card-icon-circle { width: 60px; height: 60px; left: -8px; }
+    .card-label { font-size: 1.2rem; padding-left: 38px; }
 
-    .card-right {
-        top: 10px;
-        right: 20px;
-    }
-
-    .card-center {
-        bottom: 8px;
-    }
-
-    .card-icon-circle {
-        width: 60px;
-        height: 60px;
-        left: -10px;
-    }
-
-    .card-emoji {
-        font-size: 1.6rem;
-    }
-
-    .health-svg-icon {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card-label {
-        padding-left: 35px;
-        padding-right: 8px;
-        font-size: clamp(0.85rem, 2vw, 1.3rem);
-    }
-
-    /* Sub-menu buttons */
     .sub-menu-grid {
-        width: 88%;
-        max-width: 850px;
-        gap: 3vh 3vw;
-        margin-top: 6vh;
+        top: 24vh;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        width: 90%;
     }
 
-    .sub-menu-btn {
-        height: auto;
-        min-height: 58px;
-        padding: 8px 12px;
-        font-size: clamp(0.85rem, 2vw, 1.3rem);
-        border-width: 3px;
-        border-radius: 18px;
-    }
+    .sub-menu-btn { height: 58px; font-size: 1.15rem; }
 
-    .sub-back-btn,
-    #normal-lawan-back-btn {
-        bottom: 12px;
-        right: 12px;
-        width: 105px;
-        height: 35px;
-        font-size: 1rem;
-        border-width: 2px;
-    }
+    /* Kuiz di HP Portrait */
+    .question-container { top: 12vh; width: 90%; }
+    #quiz-question-text { font-size: 1.2rem; line-height: 1.8rem; }
+    .options-grid { top: 32vh; grid-template-columns: 1fr; gap: 10px; width: 90%; }
+    .option-btn { min-height: 52px; font-size: 1.05rem; padding: 8px 12px; }
 
-    .home-circle-btn,
-    #normal-lawan-home-btn {
-        bottom: 12px;
-        left: 12px;
-        width: 38px;
-        height: 38px;
-    }
-
-    .home-circle-btn svg {
-        width: 33px;
-        height: 33px;
-    }
-
-    /* VIDEO PLAYER */
-    .video-display-area video {
-        object-fit: contain;
-    }
-
-    .video-controls-toolbar {
-        right: 12px;
+    /* Tombol Kiri Bawah di HP Portrait */
+    .left-bottom-controls {
+        bottom: 3vh;
+        left: 4vw;
         gap: 8px;
     }
-
-    .vcontrol-btn {
-        width: 42px;
-        height: 42px;
-        border-width: 2px;
+    .circle-icon-btn, #fullscreen-btn {
+        width: 42px !important;
+        height: 42px !important;
     }
-
-    .vcontrol-btn svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .video-speed-control {
-        width: 52px;
-        gap: 0;
-        margin-top: 0;
-    }
-
-    #videoSpeed {
-        width: 52px;
-        height: 34px;
-        padding: 0 2px;
-        font-size: 11px;
-        border-width: 2px;
-        border-radius: 10px;
-    }
-
-    #normal-lawan-settings-btn {
-        top: 12px;
-        right: 15px;
-    }
-
-    /* QUIZ */
-    #scene11-overlay {
-        padding-top: 12px;
-    }
-
-    .score-board {
-        top: 12px;
-        left: 60px;
-        font-size: 1.2rem;
-        padding: 4px 10px;
-    }
-
-    .question-container {
-        width: 84%;
-        margin-top: 35px;
-    }
-
-    #quiz-question-text {
-        font-size: clamp(1rem, 2.7vw, 1.6rem);
-        line-height: 1.2;
-    }
-
-    .options-grid {
-        width: 86%;
-        gap: 10px 16px;
-        margin-top: 24px;
-    }
-
-    .option-btn {
-        min-height: 55px;
-        padding: 8px 12px;
-        font-size: clamp(0.8rem, 1.8vw, 1.1rem);
-        border-width: 2px;
-        border-radius: 15px;
-    }
-
-    /* QUIZ RESULT */
-    #result-congrats {
-        font-size: clamp(2rem, 5vw, 3rem);
-        margin-bottom: 20px;
-    }
-
-    #result-motto {
-        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-        margin-bottom: 20px;
-    }
-
-    .score-display-line {
-        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-        gap: 10px;
-    }
-
-    .result-box {
-        margin-bottom: 25px;
+    .circle-icon-btn svg, #fullscreen-btn svg {
+        width: 20px !important;
+        height: 20px !important;
     }
 }
