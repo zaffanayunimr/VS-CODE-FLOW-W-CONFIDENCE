@@ -338,6 +338,12 @@ body {
     z-index: 200;
 }
 
+#scene4-overlay .gear-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+}
+
 .menu-header {
     text-align: center;
     margin-top: 12vh !important;
@@ -416,7 +422,7 @@ body {
     z-index: 300;
 }
 
-/* SEMBUNYIKAN BUTANG SETTING PADA SKRIN TETAPAN */
+/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -913,7 +919,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (KEDUDUKAN GARISAN TEPAT)
+   SCENE 11: INTERFASE KUIS (POSISI TEKS PAS DI ATAS GARIS 1 & GARIS 2)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -929,14 +935,14 @@ body {
     z-index: 200;
 }
 
-/* BEKAS SOALAN KUIS */
+/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
 .question-container {
     position: absolute;
-    top: 6.2vh; /* Kedudukan Baris 1 tepat di atas Garis 1 */
+    top: 6.8vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 88%;
-    max-width: 1000px;
+    width: 82%;
+    max-width: 950px;
     text-align: center;
     z-index: 210;
 }
@@ -944,18 +950,10 @@ body {
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
-    font-weight: 900;
+    font-weight: normal;
     color: #E70B90 !important;
+    line-height: 5.8vh;
     margin: 0;
-    padding: 0;
-}
-
-/* KAWALAN BARIS TEKS TERPADU (GARIS 1, 2, DAN 3) */
-.q-line {
-    display: block;
-    height: 5.6vh;      /* Jarak antara garisan biru */
-    line-height: 5.2vh; /* Memastikan alas teks melekat di atas garisan */
-    white-space: nowrap;
 }
 
 .options-grid {
