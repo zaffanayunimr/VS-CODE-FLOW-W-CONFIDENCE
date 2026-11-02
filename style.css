@@ -32,13 +32,13 @@ body {
 }
 
 /* ==========================================
-   DESAIN BUTANG BULAT (ICON BUTTONS)
+   DESAIN BUTANG BULAT ORIGINAL (Screenshot 151003.png)
    ========================================== */
 .circle-icon-btn {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     background-color: #FFFFFF !important;
-    border: 2px solid #FFFFFF !important;
+    border: 3px solid #48B2EE !important; /* Border biru mengikut gambar asal */
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -52,20 +52,19 @@ body {
 }
 
 .circle-icon-btn svg {
-    width: 26px;
-    height: 26px;
-    fill: #52B2EC !important;
+    width: 28px;
+    height: 28px;
+    fill: #48B2EE !important;
     transition: fill 0.2s ease;
 }
 
 .circle-icon-btn:hover {
-    background-color: #FFE6F2 !important;
-    border-color: #FFE6F2 !important;
+    background-color: #E6F5FF !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
 
 .circle-icon-btn:hover svg {
-    fill: #52B2EC !important;
+    fill: #48B2EE !important;
 }
 
 /* KAWALAN KIRI BAWAH */
@@ -132,7 +131,7 @@ body {
 
 #start-app-btn:hover {
     transform: translateY(-4px) scale(1.02);
-    background-color: #FFFFCC;
+    background-color: #FFFFCC !important; /* Hover asal */
 }
 
 .first-header {
@@ -228,7 +227,7 @@ body {
 
 .lang-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF !important;
+    background-color: #FFFFCC !important; /* Hover asal */
 }
 
 #language-overlay .flag-icon {
@@ -273,7 +272,7 @@ body {
     line-height: 0.5;
 }
 
-/* SKIP BUTTON */
+/* BUTANG LANGKAU (HOVER ASAL) */
 #skip-btn {
     display: none;
     position: absolute;
@@ -294,6 +293,12 @@ body {
     border-radius: 30px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#skip-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFCCFF !important; /* Hover asal */
 }
 
 /* ==========================================
@@ -371,6 +376,12 @@ body {
     text-align: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-btn:hover {
+    transform: translateY(-4px);
+    background-color: #FFFFCC !important; /* Hover asal butang Bab & Kuiz */
 }
 
 /* ==========================================
@@ -639,7 +650,7 @@ body {
 
 .chapter-card-btn:hover {
     transform: translateY(-5px);
-    background-color: #FFFF99;
+    background-color: #FFFF99 !important; /* Hover asal */
 }
 
 .card-left {
@@ -766,7 +777,7 @@ body {
 
 .sub-menu-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF;
+    background-color: #FFCCFF !important;
 }
 
 .sub-menu-btn.green-btn {
@@ -774,14 +785,14 @@ body {
     border: 3.5px solid #E680CC;
 }
 
-.sub-menu-btn.green-btn:hover { background-color: #FFCCCC; }
+.sub-menu-btn.green-btn:hover { background-color: #FFCCCC !important; }
 
 .sub-menu-btn.yellow-btn {
     background-color: #FFED96;
     border: 3.5px solid #EFA6CC;
 }
 
-.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99; }
+.sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
 
 /* VIDEO PLAYER OVERLAY */
 #normal-lawan-overlay {
@@ -883,7 +894,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: QUIZ INTERFACE (DILARASKAN KE PETAK BIRU TERKINI 165301.PNG)
+   SCENE 11: QUIZ INTERFACE (DILARASKAN ATAS GARIS 1)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -899,10 +910,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOALAN DITOLAK TURUN SEDIKIT KEDUDUKAN TEKS DUDUK TEPAT DI ATAS GARISAN 1 */
+/* TEKS SOALAN DITARIK NAIK DUDUK TEPAT DI ATAS GARISAN 1 */
 .question-container {
     position: absolute;
-    top: 13vh; /* DILARASKAN DARI 10vh KE 13vh SUPAYA TEKS SOALAN DUDUK TEPAT DI ATAS GARIS 1 */
+    top: 10.5vh; /* DITARIK NAIK AGAR TEKS DUDUK ATAS GARIS 1 */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -916,19 +927,19 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 1.35;
+    line-height: 1.1; /* LINE HEIGHT DIKECILKAN SUPAYA TEKS BERADA TEPAT ATAS GARIS */
+    margin: 0;
 }
 
-/* BUTANG JAWAPAN A & B DITOLAK TURUN KE TOP 42VH (MASUK PETAK BIRU PERTENGAHAN A & B) */
-/* BUTANG JAWAPAN C & D DITOLAK TURUN KE PETAK BIRU BAWAH C & D */
+/* BUTANG JAWAPAN A, B, C & D */
 .options-grid {
     position: absolute;
-    top: 42vh; /* DITARIK TURUN KE PETAK BIRU A & B */
+    top: 42vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 90px 50px; /* GAP DIBESARKAN KE 90px SUPAYA C & D MASUK TEPAT KE PETAK BIRU BAWAH */
+    gap: 90px 50px;
     width: 88%;
     max-width: 980px;
     z-index: 210;
@@ -955,7 +966,7 @@ body {
 
 .option-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCC99;
+    background-color: #FFCC99 !important; /* Hover asal jawapan */
 }
 
 .score-board {
