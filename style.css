@@ -422,7 +422,7 @@ body {
     z-index: 300;
 }
 
-/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
+/* SEMBUNYIKAN BUTANG SETTING PADA SKRIN TETAPAN */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -919,7 +919,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (POSISI TEKS PAS DI ATAS GARIS 1 & GARIS 2)
+   SCENE 11: INTERFASE KUIS (LAKARAN BANYAK BARIS TEKS KEMAS DI ATAS GARIS 1, 2, 3)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -935,10 +935,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
+/* TEKS SOALAN DIFESTKAN AGAR SETIAP BARIS TEKS BERADA TEPAT DI ATAS GARISAN BIRU */
 .question-container {
     position: absolute;
-    top: 6.8vh;
+    top: 6.5vh; /* Menatap baris 1 di atas garisan 1 */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -952,7 +952,7 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 5.8vh;
+    line-height: 4.8vh; /* Jarak pas selari garisan biru supaya Baris 2 atas Garis 2, Baris 3 atas Garis 3 */
     margin: 0;
 }
 
