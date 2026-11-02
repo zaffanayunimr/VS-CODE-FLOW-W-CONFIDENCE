@@ -310,7 +310,7 @@ body {
     transform: translateY(-4px) scale(1.05);
 }
 
-/* CONTAINER KAWALAN DI BAWAH SEBELAH KIRI (HOME & KEMBALI SEBELAH-MENEBELAH) */
+/* SUSUNAN BAR KAWALAN DI SEBELAH KIRI BAWAH (SETTING, HOME, BACK) */
 .bottom-controls-group,
 .quiz-controls-group {
     position: absolute;
@@ -924,10 +924,6 @@ body {
     background-color: #FFFFFF;
     color: #52B2EC;
     font-weight: bold;
-}
-
-#normal-lawan-settings-btn {
-    z-index: 10;
 }
 
 /* SCENE 8: SUB-MENU PENJAGAAN OVERLAY SCREEN */
