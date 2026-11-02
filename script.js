@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene11SettingsBtn = document.getElementById("scene11-settings-btn");
 
     const finalScoreVal = document.getElementById("final-score-val");
+    const totalScoreVal = document.getElementById("total-score-val");
     const resultCongrats = document.getElementById("result-congrats");
     const resultMotto = document.getElementById("result-motto");
     const resultScoreLabel = document.getElementById("result-score-label");
@@ -627,7 +628,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function showQuizCompletion() {
         if (scene11Overlay) scene11Overlay.style.display = "none";
         if (scene12Overlay) scene12Overlay.style.display = "flex";
+
+        // Dapatkan jumlah soalan kategori aktif
+        const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
+        const totalQuestions = currentCategoryQuestions.length; // Mengambil jumlah soalan sebenar (atau boleh tetapkan 8)
+
         if (finalScoreVal) finalScoreVal.textContent = currentScore;
+        if (totalScoreVal) totalScoreVal.textContent = ` / ${totalQuestions}`;
 
         const isEn = selectedLang === "en";
         if (currentScore <= 0) {
