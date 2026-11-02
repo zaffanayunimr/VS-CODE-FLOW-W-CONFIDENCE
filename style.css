@@ -938,7 +938,7 @@ body {
 /* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
 .question-container {
     position: absolute;
-    top: 6.8vh;
+    top: 11vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -952,7 +952,7 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 5.8vh;
+    line-height: 6.2vh;
     margin: 0;
 }
 
