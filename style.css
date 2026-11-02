@@ -338,12 +338,6 @@ body {
     z-index: 200;
 }
 
-#scene4-overlay .gear-btn {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-}
-
 .menu-header {
     text-align: center;
     margin-top: 12vh !important;
@@ -919,7 +913,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (LAKARAN BANYAK BARIS TEKS KEMAS DI ATAS GARIS 1, 2, 3)
+   SCENE 11: INTERFASE KUIS (KEDUDUKAN GARISAN TEPAT)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -935,14 +929,14 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOALAN DIFESTKAN AGAR SETIAP BARIS TEKS BERADA TEPAT DI ATAS GARISAN BIRU */
+/* BEKAS SOALAN KUIS */
 .question-container {
     position: absolute;
-    top: 6.5vh; /* Menatap baris 1 di atas garisan 1 */
+    top: 6.2vh; /* Kedudukan Baris 1 tepat di atas Garis 1 */
     left: 50%;
     transform: translateX(-50%);
-    width: 82%;
-    max-width: 950px;
+    width: 88%;
+    max-width: 1000px;
     text-align: center;
     z-index: 210;
 }
@@ -950,10 +944,18 @@ body {
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
-    font-weight: normal;
+    font-weight: 900;
     color: #E70B90 !important;
-    line-height: 4.8vh; /* Jarak pas selari garisan biru supaya Baris 2 atas Garis 2, Baris 3 atas Garis 3 */
     margin: 0;
+    padding: 0;
+}
+
+/* KAWALAN BARIS TEKS TERPADU (GARIS 1, 2, DAN 3) */
+.q-line {
+    display: block;
+    height: 5.6vh;      /* Jarak antara garisan biru */
+    line-height: 5.2vh; /* Memastikan alas teks melekat di atas garisan */
+    white-space: nowrap;
 }
 
 .options-grid {
