@@ -1059,47 +1059,27 @@ body {
     align-items: center;
 }
 
+/* 1. KOTAK POP-UP (Dibesarkan sedikit tinggi & lebarnya supaya selesa) */
 .modal-box {
+    position: relative; /* Wajib supaya butang X melekat pada bucu kotak sahaja */
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 25px 35px;
+    padding: 30px 40px 25px 40px; /* Ditambah padding atas untuk ruang ikon & butang X */
     width: 90%;
-    max-width: 450px;
+    max-width: 480px;            /* Dibesarkan sedikit daripada 450px ke 480px */
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.modal-icon {
-    font-size: 3rem;
-    margin-bottom: 8px;
-}
-
-.modal-box h3 {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    font-size: 2rem;
-    color: #E70B90 !important;
-    margin-bottom: 10px;
-}
-
-/* 1. KOTAK POP-UP (Kekalkan saiz & padding asal supaya kandungan tidak bergerak) */
-.modal-box {
-    position: relative; /* Wajib ada supaya butang X melekat pada bucu kotak ini sahaja */
-    background-color: #FFFFFF;
-    border: 4px solid #E70B90;
-    border-radius: 25px;
-    padding: 25px 35px;
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* 2. BUTANG X (Ejas nilai top & right di sini untuk gerakkan butang X sahaja) */
+/* 2. BUTANG X (Diletakkan di bucu atas kanan tanpa menolak elemen lain) */
 .modal-x-btn {
-    position: absolute; /* Mengasingkan butang X supaya tidak menolak ikon/teks di bawahnya */
-    top: 12px;          /* Ejas nilai ini jika nak naikkan/turunkan butang X */
-    right: 18px;         /* Ejas nilai ini jika nak ke kirikan/kanankan butang X */
+    position: absolute;
+    top: 15px;
+    right: 20px;
     background: transparent;
     border: none;
     font-size: 1.6rem;
@@ -1110,6 +1090,7 @@ body {
     padding: 0;
     margin: 0;
     z-index: 10;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .modal-x-btn:hover {
@@ -1117,6 +1098,35 @@ body {
     transform: scale(1.2);
 }
 
+/* 3. IKON (Dolar/Pintu/Lampu) */
+.modal-icon {
+    font-size: 3.2rem;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+/* 4. TAJUK (Keluar Kuiz? / Petunjuk) */
+.modal-box h3 {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
+    font-size: 2.2rem;
+    color: #E70B90 !important;
+    margin-top: 0;
+    margin-bottom: 8px;
+    line-height: 1.1;
+}
+
+/* 5. TEKS PENERANGAN (Kembali ke menu pilihan kuiz) */
+.modal-box p {
+    font-family: Arial, sans-serif;
+    font-size: 1.05rem;
+    color: #333333;
+    line-height: 1.4;
+    margin-top: 0;
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+/* 6. BUTANG TERUSKAN */
 #modal-close-btn {
     background-color: #CFE1F7;
     border: 3px solid #CC3399;
@@ -1124,7 +1134,13 @@ body {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
-    padding: 8px 30px;
+    padding: 8px 35px;
     border-radius: 30px;
     cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#modal-close-btn:hover {
+    transform: translateY(-2px);
+    background-color: #FFFFCC !important;
 }
