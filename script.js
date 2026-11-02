@@ -566,7 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. QUIZ DATA & LOGIC WITH FEEDBACK AND HINTS
+    // 6. QUIZ DATA (FULL 8 QUESTIONS PER CATEGORY) & LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
@@ -591,6 +591,72 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "C) 12 tahun.", en: "C) 12 years old." }, isCorrect: true },
                     { text: { ms: "D) 18 tahun.", en: "D) 18 years old." }, isCorrect: false }
                 ]
+            },
+            {
+                question: { ms: "3. Berapa lamakah kitaran haid yang biasa?", en: "3. How long is a typical menstrual cycle?" },
+                explanation: { ms: "Kitaran haid secara purata berlangsung antara 21 hingga 35 hari.", en: "A typical menstrual cycle lasts between 21 to 35 days." },
+                hint: { ms: "Kira-kira sebulan sekali.", en: "Approximately once a month." },
+                options: [
+                    { text: { ms: "A) 7 hingga 10 hari.", en: "A) 7 to 10 days." }, isCorrect: false },
+                    { text: { ms: "B) 21 hingga 35 hari.", en: "B) 21 to 35 days." }, isCorrect: true },
+                    { text: { ms: "C) 40 hingga 50 hari.", en: "C) 40 to 50 days." }, isCorrect: false },
+                    { text: { ms: "D) 60 hari.", en: "D) 60 days." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "4. Apakah fungsi utama ovari?", en: "4. What is the main function of the ovaries?" },
+                explanation: { ms: "Ovari menyimpan dan melepaskan telur (ovum) serta menghasilkan hormon.", en: "Ovaries store and release eggs (ova) and produce hormones." },
+                hint: { ms: "Organ ini melepaskan telur setiap bulan.", en: "This organ releases an egg every month." },
+                options: [
+                    { text: { ms: "A) Menyimpan dan melepaskan telur.", en: "A) Store and release eggs." }, isCorrect: true },
+                    { text: { ms: "B) Memproses makanan.", en: "B) Process food." }, isCorrect: false },
+                    { text: { ms: "C) Menapis darah.", en: "C) Filter blood." }, isCorrect: false },
+                    { text: { ms: "D) Memompa darah ke seluruh badan.", en: "D) Pump blood to the body." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "5. Berapa hari lamanya pendarahan haid biasanya berlangsung?", en: "5. How many days does menstrual bleeding typically last?" },
+                explanation: { ms: "Pendarahan haid yang normal selalunya berlanjutan selama 3 hingga 7 hari.", en: "Normal menstrual bleeding usually lasts for 3 to 7 days." },
+                hint: { ms: "Biasanya kurang daripada seminggu.", en: "Usually less than a week." },
+                options: [
+                    { text: { ms: "A) 1 hingga 2 hari.", en: "A) 1 to 2 days." }, isCorrect: false },
+                    { text: { ms: "B) 3 hingga 7 hari.", en: "B) 3 to 7 days." }, isCorrect: true },
+                    { text: { ms: "C) 10 hingga 14 hari.", en: "C) 10 to 14 days." }, isCorrect: false },
+                    { text: { ms: "D) 20 hari.", en: "D) 20 days." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "6. Hormon utama yang mengawal kitaran haid ialah:", en: "6. The primary hormones regulating the menstrual cycle are:" },
+                explanation: { ms: "Estrogen dan progesteron adalah dua hormon utama yang mengawal kitaran haid.", en: "Estrogen and progesterone are the two main hormones regulating the cycle." },
+                hint: { ms: "Dua hormon wanita penting.", en: "Two important female hormones." },
+                options: [
+                    { text: { ms: "A) Estrogen dan Progesteron.", en: "A) Estrogen and Progesterone." }, isCorrect: true },
+                    { text: { ms: "B) Insulin dan Glukagon.", en: "B) Insulin and Glucagon." }, isCorrect: false },
+                    { text: { ms: "C) Adrenalina dan Kortisol.", en: "C) Adrenaline and Cortisol." }, isCorrect: false },
+                    { text: { ms: "D) Tiroksin dan Melatonin.", en: "D) Thyroxine and Melatonin." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "7. Apakah maksud proses ovulasi?", en: "7. What does the process of ovulation mean?" },
+                explanation: { ms: "Ovulasi ialah proses pelepasan telur matang dari ovari.", en: "Ovulation is the release of a mature egg from the ovary." },
+                hint: { ms: "Pelepasan telur matang.", en: "Release of a mature egg." },
+                options: [
+                    { text: { ms: "A) Pelepasan telur matang dari ovari.", en: "A) Release of a mature egg from the ovary." }, isCorrect: true },
+                    { text: { ms: "B) Peluruhan lapisan rahim.", en: "B) Shedding of the uterine lining." }, isCorrect: false },
+                    { text: { ms: "C) Pembentukan sel darah baharu.", en: "C) Formation of new blood cells." }, isCorrect: false },
+                    { text: { ms: "D) Pembersihan saluran kencing.", en: "D) Clearing of the urinary tract." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "8. Adakah haid merupakan tanda sistem pembiakan yang sihat?", en: "8. Is menstruation a sign of a healthy reproductive system?" },
+                explanation: { ms: "Ya, mengalami haid secara teratur menunjukkan sistem pembiakan berfungsi dengan sihat.", en: "Yes, regular periods indicate a healthy functioning reproductive system." },
+                hint: { ms: "Ia adalah proses fizikal semula jadi.", en: "It is a natural physical process." },
+                options: [
+                    { text: { ms: "A) Ya, ia proses semula jadi dan sihat.", en: "A) Yes, it is a natural and healthy process." }, isCorrect: true },
+                    { text: { ms: "B) Tidak, ia adalah tanda penyakit.", en: "B) No, it is a sign of illness." }, isCorrect: false },
+                    { text: { ms: "C) Hanya jika berlaku setiap hari.", en: "C) Only if it happens daily." }, isCorrect: false },
+                    { text: { ms: "D) Tidak pasti.", en: "D) Not sure." }, isCorrect: false }
+                ]
             }
         ],
         penjagaan: [
@@ -604,6 +670,83 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "C) Setiap 3 hingga 4 jam.", en: "C) Every 3 to 4 hours." }, isCorrect: true },
                     { text: { ms: "D) Hanya sekali sehari.", en: "D) Only once a day." }, isCorrect: false }
                 ]
+            },
+            {
+                question: { ms: "2. Bagaimanakah cara terbaik membuang tuala wanita terpakai?", en: "2. What is the best way to dispose of a used sanitary pad?" },
+                explanation: { ms: "Bungkus pad terpakai dengan kertas/plastik dan buang ke dalam tong sampah.", en: "Wrap the used pad in paper/plastic and throw it into a trash bin." },
+                hint: { ms: "Jangan sekali-kali pam ke dalam tandas.", en: "Never flush it down the toilet." },
+                options: [
+                    { text: { ms: "A) Pam ke dalam mangkuk tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
+                    { text: { ms: "B) Bungkus rapi dan buang ke dalam tong sampah.", en: "B) Wrap neatly and throw into a trash bin." }, isCorrect: true },
+                    { text: { ms: "C) Tinggalkan di atas lantai tandas.", en: "C) Leave it on the bathroom floor." }, isCorrect: false },
+                    { text: { ms: "D) Tanam di dalam tanah.", en: "D) Bury it in the soil." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "3. Mengapakah mandi semasa haid itu penting?", en: "3. Why is showering during your period important?" },
+                explanation: { ms: "Mandi membantu menjaga kebersihan diri, mengelakkan bau serta jangkitan bakteria.", en: "Showering maintains personal hygiene, prevents odor and bacterial infection." },
+                hint: { ms: "Kekal bersih dan segar.", en: "Keep clean and fresh." },
+                options: [
+                    { text: { ms: "A) Membantu menjaga kebersihan dan elak jangkitan.", en: "A) Helps maintain hygiene and prevent infections." }, isCorrect: true },
+                    { text: { ms: "B) Untuk menghentikan aliran haid.", en: "B) To stop the period flow." }, isCorrect: false },
+                    { text: { ms: "C) Ia tidak penting langsung.", en: "C) It is not important at all." }, isCorrect: false },
+                    { text: { ms: "D) Supaya tidak perlu menukar pad.", en: "D) So you don't need to change pads." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "4. Apakah cecair terbaik untuk membersihkan kawasan kewanitaan?", en: "4. What is the best liquid to clean the intimate area?" },
+                explanation: { ms: "Air bersih sudah mencukupi untuk membersihkan bahagian luar kawasan intim.", en: "Clean water is sufficient for washing the external intimate area." },
+                hint: { ms: "Gunakan cecair semula jadi tanpa bahan kimia keras.", en: "Use a natural liquid without harsh chemicals." },
+                options: [
+                    { text: { ms: "A) Sabun wangi berkimia tinggi.", en: "A) Highly fragranced chemical soap." }, isCorrect: false },
+                    { text: { ms: "B) Air bersih.", en: "B) Clean water." }, isCorrect: true },
+                    { text: { ms: "C) Alkohol pembersih.", en: "C) Rubbing alcohol." }, isCorrect: false },
+                    { text: { ms: "D) Peluntur berasaskan klorin.", en: "D) Chlorine-based bleach." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "5. Apakah amalan yang membantu melegakan kesakitan senggugut?", en: "5. What practice helps relieve menstrual cramps?" },
+                explanation: { ms: "Meletakkan tuaman hangat di bahagian bawah perut membantu melegakan otot rahim.", en: "Applying a warm compress on the lower abdomen helps relax uterine muscles." },
+                hint: { ms: "Menggunakan haba atau suam.", en: "Applying warmth." },
+                options: [
+                    { text: { ms: "A) Tuaman hangat pada bahagian perut.", en: "A) Warm compress on the abdomen." }, isCorrect: true },
+                    { text: { ms: "B) Minum air ais yang terlalu sejuk.", en: "B) Drinking extremely cold ice water." }, isCorrect: false },
+                    { text: { ms: "C) Berlari maraton.", en: "C) Running a marathon." }, isCorrect: false },
+                    { text: { ms: "D) Menahan diri daripada makan.", en: "D) Refraining from eating." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "6. Arah basuhan yang betul semasa membersihkan bahagian intim ialah:", en: "6. The correct wiping/washing direction for the intimate area is:" },
+                explanation: { ms: "Basuh dari depan ke belakang untuk mengelakkan bakteria dari dubur masuk ke faraj.", en: "Wipe from front to back to prevent bacteria from the anus entering the vagina." },
+                hint: { ms: "Daripada bahagian depan menuju ke belakang.", en: "From the front towards the back." },
+                options: [
+                    { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
+                    { text: { ms: "B) Dari depan ke belakang.", en: "B) From front to back." }, isCorrect: true },
+                    { text: { ms: "C) Dari tepi ke tepi.", en: "C) From side to side." }, isCorrect: false },
+                    { text: { ms: "D) Bebas ke mana-mana arah.", en: "D) Any random direction." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "7. Jenis seluar dalam yang manakah paling sesuai dipakai semasa haid?", en: "7. Which type of underwear is most suitable during periods?" },
+                explanation: { ms: "Seluar dalam kain kapas menyerap peluh dan memberi peredaran udara yang baik.", en: "Cotton underwear absorbs sweat and provides good breathability." },
+                hint: { ms: "Bahan semula jadi yang serap peluh.", en: "Natural sweat-absorbing material." },
+                options: [
+                    { text: { ms: "A) Kain kapas (cotton) yang serap peluh.", en: "A) Breathable cotton underwear." }, isCorrect: true },
+                    { text: { ms: "B) Kain sintetik yang terlalu ketat.", en: "B) Tight synthetic fabric." }, isCorrect: false },
+                    { text: { ms: "C) Seluar dalam plastik.", en: "C) Plastic underwear." }, isCorrect: false },
+                    { text: { ms: "D) Tidak perlu pakai seluar dalam.", en: "D) No underwear needed." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "8. Mengapa penting untuk membasuh tangan sebelum dan selepas menukar pad?", en: "8. Why is it important to wash hands before and after changing pads?" },
+                explanation: { ms: "Membasuh tangan mengelakkan pemindahan bakteria jahat ke kawasan intim dan persekitaran.", en: "Washing hands prevents transferring harmful bacteria to the intimate area and surroundings." },
+                hint: { ms: "Untuk mengelakkan kuman dan jangkitan.", en: "To prevent germs and infections." },
+                options: [
+                    { text: { ms: "A) Mencegah penyebaran kuman dan kotoran.", en: "A) Prevent the spread of germs and dirt." }, isCorrect: true },
+                    { text: { ms: "B) Supaya tangan kelihatan wangi sahaja.", en: "B) Just to make hands smell nice." }, isCorrect: false },
+                    { text: { ms: "C) Tidak penting, basuh selepas sahaja.", en: "C) Not important, wash after only." }, isCorrect: false },
+                    { text: { ms: "D) Hanya syarat formaliti.", en: "D) Just a formality." }, isCorrect: false }
+                ]
             }
         ],
         kesihatan: [
@@ -616,6 +759,83 @@ document.addEventListener("DOMContentLoaded", () => {
                     { text: { ms: "B) PMDD menyebabkan perubahan mood yang lebih melampau dan boleh menjejaskan kehidupan harian.", en: "B) PMDD causes more extreme mood changes that can disrupt daily life." }, isCorrect: true },
                     { text: { ms: "C) PMDD hanya berlaku selepas haid.", en: "C) PMDD only occurs after menstruation." }, isCorrect: false },
                     { text: { ms: "D) PMDD tidak berkaitan dengan perubahan hormon.", en: "D) PMDD is not related to hormonal changes." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "2. Adakah mitos bahawa seseorang tidak boleh bersukan semasa haid?", en: "2. Is it a myth that one should not exercise during periods?" },
+                explanation: { ms: "Ya! Senaman ringan sebenarnya membantu melegakan kesakitan senggugut.", en: "Yes! Light exercise actually helps relieve menstrual cramps." },
+                hint: { ms: "Senaman ringan adalah bagus.", en: "Light exercise is good." },
+                options: [
+                    { text: { ms: "A) Ya, ia mitos. Senaman ringan adalah digalakkan.", en: "A) Yes, it is a myth. Light exercise is encouraged." }, isCorrect: true },
+                    { text: { ms: "B) Tidak, bersukan berbahaya semasa haid.", en: "B) No, playing sports is dangerous during periods." }, isCorrect: false },
+                    { text: { ms: "C) Hanya sukan renang dibenarkan.", en: "C) Only swimming is allowed." }, isCorrect: false },
+                    { text: { ms: "D) Bersukan membuatkan haid berhenti.", en: "D) Exercise stops menstrual flow." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "3. Apakah simptom emosi yang biasa dialami semasa PMS?", en: "3. What is a common emotional symptom during PMS?" },
+                explanation: { ms: "Perubahan mood (mood swings) dan rasa cepat marah sering berlaku disebabkan perubahan hormon.", en: "Mood swings and irritability often happen due to hormonal changes." },
+                hint: { ms: "Emosi berubah-ubah.", en: "Fluctuating emotions." },
+                options: [
+                    { text: { ms: "A) Perubahan mood dan emosi sensitif.", en: "A) Mood swings and emotional sensitivity." }, isCorrect: true },
+                    { text: { ms: "B) Rasa terlalu gembira sepanjang masa.", en: "B) Feeling overjoyed all the time." }, isCorrect: false },
+                    { text: { ms: "C) Hilang ingatan ingatan jangka panjang.", en: "C) Long-term memory loss." }, isCorrect: false },
+                    { text: { ms: "D) Tiada sebarang kesan emosi.", en: "D) No emotional impact at all." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "4. Bolehkah memakan makanan sihat membantu mengurangkan rasa tidak selesa semasa haid?", en: "4. Can eating healthy food help reduce discomfort during periods?" },
+                explanation: { ms: "Ya, diet seimbang kaya dengan zat besi dan magnesium membantu badan kekal bertenaga.", en: "Yes, a balanced diet rich in iron and magnesium helps keep the body energized." },
+                hint: { ms: "Makanan berkhasiat membantu badan.", en: "Nutritious food helps the body." },
+                options: [
+                    { text: { ms: "A) Ya, nutrisi seimbang mengurangkan simptom tidak selesa.", en: "A) Yes, balanced nutrition reduces uncomfortable symptoms." }, isCorrect: true },
+                    { text: { ms: "B) Tidak, makanan tiada kaitan langsung.", en: "B) No, food has no connection." }, isCorrect: false },
+                    { text: { ms: "C) Hanya gula berlebihan yang membantu.", en: "C) Only excess sugar helps." }, isCorrect: false },
+                    { text: { ms: "D) Makan junk food paling digalakkan.", en: "D) Eating junk food is recommended." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "5. Mengapakah anemia boleh berlaku disebabkan haid yang terlalu berat?", en: "5. Why can anemia occur due to excessively heavy periods?" },
+                explanation: { ms: "Kehilangan darah yang banyak menyebabkan paras zat besi dan sel darah merah menurun.", en: "Losing a lot of blood causes a drop in iron levels and red blood cells." },
+                hint: { ms: "Kekurangan zat besi dalam darah.", en: "Lack of iron in the blood." },
+                options: [
+                    { text: { ms: "A) Kehilangan banyak darah mengurangkan zat besi.", en: "A) Heavy blood loss reduces body iron levels." }, isCorrect: true },
+                    { text: { ms: "B) Kerana terlalu banyak tidur.", en: "B) Because of sleeping too much." }, isCorrect: false },
+                    { text: { ms: "C) Anemia tidak berkaitan dengan darah.", en: "C) Anemia is not related to blood." }, isCorrect: false },
+                    { text: { ms: "D) Akibat minum air terlalu banyak.", en: "D) Due to drinking too much water." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "6. Apakah tindakan sewajarnya jika anda mengalami sakit senggugut yang teruk sehingga pengsan?", en: "6. What is the appropriate action if you experience period pain so severe that you faint?" },
+                explanation: { ms: "Kesakitan ekstrem sehingga pengsan adalah tidak normal dan memerlukan pemeriksaan doktor.", en: "Extreme pain causing fainting is abnormal and requires a doctor's examination." },
+                hint: { ms: "Dapatkan bantuan pakar perubatan.", en: "Seek medical professional help." },
+                options: [
+                    { text: { ms: "A) Jumpa doktor untuk pemeriksaan kesihatan.", en: "A) See a doctor for a health examination." }, isCorrect: true },
+                    { text: { ms: "B) Biarkan sahaja kerana itu perkara biasa.", en: "B) Ignore it as it is completely normal." }, isCorrect: false },
+                    { text: { ms: "C) Hanya makan gula-gula.", en: "C) Just eat candy." }, isCorrect: false },
+                    { text: { ms: "D) Berhenti mandi selama seminggu.", en: "D) Stop showering for a week." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "7. Adakah meminum air yang cukup penting semasa haid?", en: "7. Is drinking enough water important during menstruation?" },
+                explanation: { ms: "Minum air yang cukup mengelakkan kembung perut dan kekejangan otot.", en: "Drinking sufficient water prevents bloating and muscle cramps." },
+                hint: { ms: "Hidrasi badan amat penting.", en: "Body hydration is very important." },
+                options: [
+                    { text: { ms: "A) Ya, air membantu mengurangkan kembung dan senggugut.", en: "A) Yes, water helps reduce bloating and cramps." }, isCorrect: true },
+                    { text: { ms: "B) Tidak, air menambah pendarahan.", en: "B) No, water increases bleeding." }, isCorrect: false },
+                    { text: { ms: "C) Hanya perlu minum apabila dahaga sangat.", en: "C) Only drink when extremely thirsty." }, isCorrect: false },
+                    { text: { ms: "D) Minuman bersoda lebih baik.", en: "D) Carbonated drinks are better." }, isCorrect: false }
+                ]
+            },
+            {
+                question: { ms: "8. Apakah matlamat utama meningkatkan kesedaran tentang kesihatan haid?", en: "8. What is the main goal of raising awareness about menstrual health?" },
+                explanation: { ms: "Tujuannya adalah membendung stigma serta memastikan kebersihan dan kesihatan terjaga.", en: "The goal is to eliminate stigma and ensure proper hygiene and health care." },
+                hint: { ms: "Menghapuskan rasa malu dan stigma jahil.", en: "Eliminating shame and ignorant stigma." },
+                options: [
+                    { text: { ms: "A) Menghapuskan stigma dan memupuk amalan sihat.", en: "A) Eliminate stigma and promote healthy practices." }, isCorrect: true },
+                    { text: { ms: "B) Menyembunyikan topik ini daripada masyarakat.", en: "B) Hide this topic from society." }, isCorrect: false },
+                    { text: { ms: "C) Memaksa semua orang berhenti sekolah.", en: "C) Force everyone to drop out of school." }, isCorrect: false },
+                    { text: { ms: "D) Mengurangkan jualan pad di pasaran.", en: "D) Reduce pad sales in the market." }, isCorrect: false }
                 ]
             }
         ]
@@ -631,7 +851,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Dapatkan jumlah soalan kategori aktif
         const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
-        const totalQuestions = currentCategoryQuestions.length; // Mengambil jumlah soalan sebenar (atau boleh tetapkan 8)
+        const totalQuestions = currentCategoryQuestions.length; // 8 soalan
 
         if (finalScoreVal) finalScoreVal.textContent = currentScore;
         if (totalScoreVal) totalScoreVal.textContent = ` / ${totalQuestions}`;
