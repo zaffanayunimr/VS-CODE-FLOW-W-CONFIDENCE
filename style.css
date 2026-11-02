@@ -32,7 +32,7 @@ body {
 }
 
 /* ==========================================
-   REKABENTUK PUSAT UNTUK BUTANG BULAT (ICON BUTTONS)
+   REKABENTUK PUSAT UNTUK BUTANG BULAT
    ========================================== */
 .circle-icon-btn {
     width: 48px;
@@ -91,7 +91,7 @@ body {
 
 @media screen and (max-width: 768px) {
     #fullscreen-btn {
-        display: none !important; /* Tersembunyi pada telefon bimbit */
+        display: none !important;
     }
 }
 
@@ -250,6 +250,8 @@ body {
 .footer-logo {
     position: absolute;
     bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     pointer-events: none;
 }
@@ -419,7 +421,7 @@ body {
     align-items: stretch;
     width: 86%;
     max-width: 1000px;
-    margin-top: 35px; /* Ditingkatkan mengikut kawasan petak biru cth5.jpg */
+    margin-top: 130px !important; /* Ditolak ke bawah mengikut kawasan kotak biru cth5.jpg */
 }
 
 .settings-box {
@@ -633,12 +635,14 @@ body {
     margin: 0;
 }
 
-.chapter-buttons-container {
-    position: relative;
-    width: 100%;
+.chapter-grid-container {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     max-width: 950px;
-    height: 350px;
-    margin-top: 60px !important; /* Ditolak mengikut susunan garisan cth3.jpg */
+    height: 360px;
 }
 
 .chapter-card-btn {
@@ -660,19 +664,19 @@ body {
     background-color: #FFFF99;
 }
 
-/* Kedudukan Kad Mengikut Garis Biru cth3.jpg */
+/* Kedudukan Kad mengikut 3 Petak Biru cth3.jpg */
 .card-left {
     top: 10px;
-    left: 30px;
+    left: 20px;
 }
 
 .card-right {
     top: 10px;
-    right: 30px;
+    right: 20px;
 }
 
 .card-center {
-    top: 165px;
+    top: 180px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -763,13 +767,17 @@ body {
     margin: 0;
 }
 
+/* Susunan Butang Tepat Pada 4 Petak Biru Bawah cth2.jpg */
 .sub-menu-grid {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px 60px;
+    gap: 30px 60px;
     width: 82%;
     max-width: 880px;
-    margin-top: 175px !important; /* Ditanam rendah tepat pada 4 petak biru cth2.jpg */
 }
 
 .sub-menu-btn {
@@ -870,10 +878,6 @@ body {
     margin-top: 2px;
 }
 
-#video-speed-label {
-    display: none;
-}
-
 #videoSpeed {
     width: 55px;
     height: 38px;
@@ -889,21 +893,9 @@ body {
     cursor: pointer;
     outline: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-#videoSpeed:hover {
-    transform: scale(1.05);
-    background-color: #FFE6F2;
-}
-
-#videoSpeed option {
-    background-color: #FFFFFF;
-    color: #52B2EC;
-    font-weight: bold;
-}
-
-/* SCENE 10: QUIZ MENU OVERLAY SCREEN */
+/* SCENE 10: QUIZ MENU OVERLAY */
 #scene10-overlay {
     display: none;
     position: absolute;
@@ -945,20 +937,19 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 20px;
     z-index: 200;
 }
 
+/* Tajuk Soalan Tepat Pada Garisan Atas Buku (cth1.png) */
 .question-container {
-    position: relative;
-    z-index: 210;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 82%;
     max-width: 950px;
-    margin-top: 0px;
     text-align: center;
+    z-index: 210;
 }
 
 #quiz-question-text {
@@ -967,18 +958,20 @@ body {
     font-weight: normal;
     color: #E70B90 !important;
     line-height: 1.35;
-    margin-top: 85px; /* Ditetapkan tinggi pada garisan atas mengikut anak panah cth1.png */
 }
 
+/* 4 Butang Jawapan Tepat Dalam 2 Petak Biru Bawah (cth1.png) */
 .options-grid {
-    position: relative;
-    z-index: 210;
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px 45px;
     width: 84%;
     max-width: 900px;
-    margin-top: 135px !important; /* Ditanam ke bawah mengikut kawasan petak biru cth1.png */
+    z-index: 210;
 }
 
 .option-btn {
@@ -1031,25 +1024,25 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 200;
 }
 
+/* Teks Keputusan Tepat Pada 3 Garisan Biru cth4.png */
 .result-box {
+    position: absolute;
+    top: 190px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    width: 100%;
 }
 
-/* Teks bertingkat rapat pada garisan buku cth4.png */
 #result-congrats {
     font-family: "Franklin Gothic Heavy", "Franklin Gothic Medium", "Arial Black", sans-serif;
     font-size: 3.8rem;
     color: #E70B90 !important;
     font-weight: normal;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1;
 }
 
@@ -1058,7 +1051,7 @@ body {
     font-size: 2.8rem;
     color: #E70B90 !important;
     font-weight: normal;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     line-height: 1;
 }
 
@@ -1077,7 +1070,7 @@ body {
     font-weight: bold;
 }
 
-/* POP-UP DIALOG MODAL STYLES */
+/* POP-UP DIALOG MODALS */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1100,18 +1093,6 @@ body {
     max-width: 480px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    animation: popupAnim 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes popupAnim {
-    from {
-        transform: scale(0.7);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
 }
 
 .modal-icon {
@@ -1145,12 +1126,6 @@ body {
     padding: 10px 35px;
     border-radius: 30px;
     cursor: pointer;
-    transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-#modal-close-btn:hover {
-    transform: scale(1.05);
-    background-color: #FFE6F2;
 }
 
 /* PELARASAN MOBILE LANDSCAPE */
@@ -1171,42 +1146,22 @@ body {
         height: 22px !important;
     }
 
+    .question-container {
+        top: 30px !important;
+    }
+
     #quiz-question-text {
         font-size: clamp(0.95rem, 2.3vw, 1.4rem) !important;
-        margin-top: 45px !important;
     }
 
     .options-grid {
+        top: 150px !important;
         gap: 12px 18px !important;
-        margin-top: 50px !important;
     }
 
     .option-btn {
         min-height: 48px !important;
         font-size: clamp(0.75rem, 1.6vw, 1rem) !important;
         padding: 6px 10px !important;
-    }
-
-    .modal-box {
-        padding: 15px 25px !important;
-        max-width: 380px !important;
-    }
-
-    .modal-icon {
-        font-size: 2.2rem !important;
-    }
-
-    .modal-box h3 {
-        font-size: 1.5rem !important;
-    }
-
-    .modal-box p {
-        font-size: 0.95rem !important;
-        margin-bottom: 15px !important;
-    }
-
-    #modal-close-btn {
-        padding: 6px 20px !important;
-        font-size: 1rem !important;
     }
 }
