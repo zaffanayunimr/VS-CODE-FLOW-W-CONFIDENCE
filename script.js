@@ -28,12 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalLawanVideo = document.getElementById("normalLawanVideo");
     const normalLawanSource = document.getElementById("normalLawanSource");
 
-    
     const vbtnPause = document.getElementById("vbtn-pause");
     const vbtnPlay = document.getElementById("vbtn-play");
     const vbtnRestart = document.getElementById("vbtn-restart");
     const videoSpeed = document.getElementById("videoSpeed");
-const videoSpeedLabel = document.getElementById("video-speed-label");
+
     const normalLawanHomeBtn = document.getElementById("normal-lawan-home-btn");
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
@@ -48,7 +47,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const homeBtn = document.getElementById("home-btn");
     const backBtn = document.getElementById("back-btn");
 
-    // Scene 6 DOM Elements
+    // Scene 6 DOM
     const chapterTitle = document.getElementById("chapter-title");
     const labelAsas = document.getElementById("label-asas");
     const labelPenjagaan = document.getElementById("label-penjagaan");
@@ -56,7 +55,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const scene6HomeBtn = document.getElementById("scene6-home-btn");
     const scene6SettingsBtn = document.getElementById("scene6-settings-btn");
 
-    // Scene 7 DOM Elements
+    // Scene 7 DOM
     const btnAsas = document.getElementById("btn-asas");
     const scene7HomeBtn = document.getElementById("scene7-home-btn");
     const scene7BackBtn = document.getElementById("scene7-back-btn");
@@ -67,7 +66,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const labelBerapaLama = document.getElementById("label-berapa-lama");
     const labelNormalLawan = document.getElementById("label-normal-lawan");
 
-    // Scene 8 DOM Elements
+    // Scene 8 DOM
     const btnPenjagaan = document.getElementById("btn-penjagaan");
     const scene8HomeBtn = document.getElementById("scene8-home-btn");
     const scene8BackBtn = document.getElementById("scene8-back-btn");
@@ -78,7 +77,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const labelJenis = document.getElementById("label-jenis");
     const labelCara = document.getElementById("label-cara");
 
-    // Scene 9 DOM Elements
+    // Scene 9 DOM
     const btnKesihatan = document.getElementById("btn-kesihatan");
     const scene9HomeBtn = document.getElementById("scene9-home-btn");
     const scene9BackBtn = document.getElementById("scene9-back-btn");
@@ -89,7 +88,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const labelKesilapanKebersihan = document.getElementById("label-kesilapan-kebersihan");
     const labelSekeliling = document.getElementById("label-sekeliling");
 
-    // Settings UI Text & Audio Controls
+    // Settings Audio & Text
     const settingsTitle = document.getElementById("settings-title");
     const labelAudio = document.getElementById("label-audio");
     const labelLanguage = document.getElementById("label-language");
@@ -107,7 +106,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const btnSetBm = document.getElementById("btn-set-bm");
     const btnSetEn = document.getElementById("btn-set-en");
 
-    // Quiz DOM Elements
+    // Quiz DOM
     const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
     const scene10HomeBtn = document.getElementById("scene10-home-btn");
     const quizTitle = document.getElementById("quiz-title");
@@ -127,8 +126,9 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const labelScore = document.getElementById("label-score");
 
     const scene11HomeBtn = document.getElementById("scene11-home-btn");
-    const scene11BackBtn = document.getElementById("scene11-back-btn");
     const scene11SettingsBtn = document.getElementById("scene11-settings-btn");
+    const scene11QuitBtn = document.getElementById("scene11-quit-btn");
+    const scene11HintBtn = document.getElementById("scene11-hint-btn");
 
     const finalScoreVal = document.getElementById("final-score-val");
     const resultCongrats = document.getElementById("result-congrats");
@@ -138,8 +138,19 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
+    // Pop-up Modals DOM
+    const hintModal = document.getElementById("hint-modal");
+    const hintModalClose = document.getElementById("hint-modal-close");
+    const hintModalText = document.getElementById("hint-modal-text");
+    const modalOkBtn = document.getElementById("modal-ok-btn");
+
+    const quitModal = document.getElementById("quit-modal");
+    const quitModalClose = document.getElementById("quit-modal-close");
+    const quitConfirmBtn = document.getElementById("quit-confirm-btn");
+    const quitCancelBtn = document.getElementById("quit-cancel-btn");
+
     // ==========================================
-    // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
+    // 2. STATE MANAGEMENT & BGM LOGIC
     // ==========================================
     let selectedLang = "ms";
     let introAudio = null;
@@ -151,23 +162,17 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     let currentQuestionIndex = 0;
     let activeQuizCategory = "asas";
 
-    // Initialize Background Music
     const bgMusic = new Audio("assets/bgm.mp3");
     bgMusic.loop = true;
 
-    // VOLUME SLIDER ONLY ADJUSTS BGM VOLUME
     function setBgmVolume(val) {
         let clampedVal = Math.max(0, Math.min(100, val));
-
         if (volumeSlider) {
             volumeSlider.value = clampedVal;
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
-
-        if (bgMusic) {
-            bgMusic.volume = clampedVal / 100;
-        }
+        if (bgMusic) bgMusic.volume = clampedVal / 100;
     }
 
     if (volumeSlider) {
@@ -180,7 +185,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN & ORIENTATION LOCK
+    // FULLSCREEN CONTROL
     // ==========================================
     async function toggleFullscreen() {
         try {
@@ -188,46 +193,25 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
                 const elem = document.documentElement;
                 if (elem.requestFullscreen) await elem.requestFullscreen();
                 else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
-
-                if (screen.orientation && screen.orientation.lock) {
-                    await screen.orientation.lock("landscape").catch(err => console.log(err));
-                }
             } else {
                 if (document.exitFullscreen) await document.exitFullscreen();
                 else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
-
-                if (screen.orientation && screen.orientation.unlock) {
-                    screen.orientation.unlock();
-                }
             }
         } catch (err) {
             console.error("Fullscreen error:", err);
         }
     }
 
-    function updateFullscreenIcon() {
-        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-        if (fullscreenIcon) {
-            if (isFullscreen) {
-                fullscreenIcon.innerHTML = `<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>`;
-            } else {
-                fullscreenIcon.innerHTML = `<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>`;
-            }
-        }
-    }
-
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
-    document.addEventListener("fullscreenchange", updateFullscreenIcon);
-    document.addEventListener("webkitfullscreenchange", updateFullscreenIcon);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW
+    // 3. START & INTRO SCENE
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", () => {
             if (startOverlay) startOverlay.style.display = "none";
-            bgMusic.play().catch(err => console.error("BGM error:", err));
-            if (video1) video1.play().catch(err => console.error("Video1 error:", err));
+            bgMusic.play().catch(err => console.log("BGM error:", err));
+            if (video1) video1.play().catch(err => console.log("Video1 error:", err));
         });
     }
 
@@ -248,7 +232,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
         if (langOverlay) langOverlay.style.display = "none";
         if (skipBtn) skipBtn.style.display = "flex";
 
-        stopIntroAudio();
+        if (introAudio) introAudio.pause();
 
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
@@ -256,29 +240,16 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
         if (video2) {
             video2.currentTime = 0;
             video2.classList.add("active");
+            video2.play();
         }
-
-        const playback = [];
-        if (video2) playback.push(video2.play());
-        playback.push(introAudio.play());
-        Promise.allSettled(playback).then(results => {
-            results.filter(result => result.status === "rejected")
-                .forEach(result => console.error("Intro playback error:", result.reason));
-        });
+        introAudio.play();
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
     if (skipBtn) skipBtn.addEventListener("click", goToScene4);
 
-    function stopIntroAudio() {
-        if (introAudio) {
-            introAudio.pause();
-            introAudio = null;
-        }
-    }
-
     function goToScene4() {
-        stopIntroAudio();
+        if (introAudio) introAudio.pause();
         if (video2) {
             video2.pause();
             video2.classList.remove("active");
@@ -290,7 +261,7 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER (24 VIDEOS)
+    // 4. VIDEO PLAYER ROUTING
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -298,21 +269,15 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
 
         const parentOverlay = document.getElementById(parentSceneId + "-overlay");
         if (parentOverlay) parentOverlay.style.display = "none";
-
         if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
 
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
-        
-        if (normalLawanSource) normalLawanSource.src = videoFile;
 
-       if (normalLawanVideo) {
-            normalLawanVideo.volume = 1.0;
+        if (normalLawanSource) normalLawanSource.src = videoFile;
+        if (normalLawanVideo) {
             normalLawanVideo.load();
-            applyVideoSpeed();
-            normalLawanVideo.play().catch(err => {
-                console.log("Video auto-play prevented:", err);
-            });
+            normalLawanVideo.play().catch(err => console.log(err));
         }
     }
 
@@ -321,12 +286,10 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
         { btnId: "btn-mengapa-haid", videoName: "Kenapa-haid", parentScene: "scene7" },
         { btnId: "btn-berapa-lama", videoName: "Berapa-lama", parentScene: "scene7" },
         { btnId: "btn-normal-lawan", videoName: "Normal-lawan", parentScene: "scene7" },
-
         { btnId: "btn-penjagaan-asas", videoName: "Basic-care", parentScene: "scene8" },
         { btnId: "btn-penjagaan-haid", videoName: "Basic-sekolah", parentScene: "scene8" },
         { btnId: "btn-jenis-produk", videoName: "Jenis-pad", parentScene: "scene8" },
         { btnId: "btn-cara-guna", videoName: "reduce", parentScene: "scene8" },
-
         { btnId: "btn-haid-mental", videoName: "Mental", parentScene: "scene9" },
         { btnId: "btn-mitos-fakta", videoName: "Mitos-fakta", parentScene: "scene9" },
         { btnId: "btn-kesilapan-kebersihan", videoName: "Kesalahan", parentScene: "scene9" },
@@ -336,61 +299,18 @@ const videoSpeedLabel = document.getElementById("video-speed-label");
     videoButtonsMap.forEach(item => {
         const btnElem = document.getElementById(item.btnId);
         if (btnElem) {
-            btnElem.addEventListener("click", () => {
-                playChapterVideo(item.videoName, item.parentScene);
-            });
+            btnElem.addEventListener("click", () => playChapterVideo(item.videoName, item.parentScene));
         }
     });
 
-// ==========================================
-// VIDEO PLAYER CONTROLS
-// ==========================================
-function applyVideoSpeed() {
-    if (!normalLawanVideo || !videoSpeed) return;
-    normalLawanVideo.playbackRate = Number(videoSpeed.value);
-}
-
-if (videoSpeed) {
-    videoSpeed.addEventListener("change", () => {
-        applyVideoSpeed();
-    });
-}
-
-if (normalLawanVideo) {
-    normalLawanVideo.addEventListener(
-        "loadedmetadata",
-        applyVideoSpeed
-    );
-}
-
-if (vbtnPlay && normalLawanVideo) {
-    vbtnPlay.addEventListener("click", () => {
-        normalLawanVideo.play().catch(err => {
-            console.error("Video play error:", err);
-        });
-    });
-}
-
-if (vbtnPause && normalLawanVideo) {
-    vbtnPause.addEventListener("click", () => {
-        normalLawanVideo.pause();
-    });
-}
-
-if (vbtnRestart && normalLawanVideo) {
-    vbtnRestart.addEventListener("click", () => {
-        normalLawanVideo.currentTime = 0;
-        normalLawanVideo.play().catch(err => {
-            console.error("Video restart error:", err);
-        });
-    });
-}
+    if (vbtnPlay && normalLawanVideo) vbtnPlay.addEventListener("click", () => normalLawanVideo.play());
+    if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
+    if (vbtnRestart && normalLawanVideo) vbtnRestart.addEventListener("click", () => { normalLawanVideo.currentTime = 0; normalLawanVideo.play(); });
 
     if (normalLawanBackBtn) {
         normalLawanBackBtn.addEventListener("click", () => {
             if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
-            
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
             if (parentOverlay) parentOverlay.style.display = "flex";
         });
@@ -414,229 +334,70 @@ if (vbtnRestart && normalLawanVideo) {
     }
 
     // ==========================================
-    // 5. NAVIGATION & SCENE ROUTING
+    // 5. NAVIGATION ROUTING
     // ==========================================
-    if (btnChapter) {
-        btnChapter.addEventListener("click", () => {
-            if (scene4Overlay) scene4Overlay.style.display = "none";
-            if (scene6Overlay) scene6Overlay.style.display = "flex";
-        });
-    }
+    if (btnChapter) btnChapter.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; if (scene4Overlay) scene4Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; if (scene6Overlay) scene6Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
 
-    if (settingsBtn) {
-        settingsBtn.addEventListener("click", () => {
-            previousScene = "scene4";
-            if (scene4Overlay) scene4Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
+    if (btnAsas) btnAsas.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene7Overlay) scene7Overlay.style.display = "flex"; });
+    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { if (scene7Overlay) scene7Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { if (scene7Overlay) scene7Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; if (scene7Overlay) scene7Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
-    if (scene6SettingsBtn) {
-        scene6SettingsBtn.addEventListener("click", () => {
-            previousScene = "scene6";
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
+    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene8Overlay) scene8Overlay.style.display = "flex"; });
+    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { if (scene8Overlay) scene8Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { if (scene8Overlay) scene8Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; if (scene8Overlay) scene8Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
-    if (scene6HomeBtn) {
-        scene6HomeBtn.addEventListener("click", () => {
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
+    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene9Overlay) scene9Overlay.style.display = "flex"; });
+    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { if (scene9Overlay) scene9Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { if (scene9Overlay) scene9Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; if (scene9Overlay) scene9Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
-    if (btnAsas) {
-        btnAsas.addEventListener("click", () => {
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene7Overlay) scene7Overlay.style.display = "flex";
-        });
-    }
+    if (btnSetBm) btnSetBm.addEventListener("click", () => { selectedLang = "ms"; updateLocalizationUI(); });
+    if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
 
-    if (scene7BackBtn) {
-        scene7BackBtn.addEventListener("click", () => {
-            if (scene7Overlay) scene7Overlay.style.display = "none";
-            if (scene6Overlay) scene6Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene7HomeBtn) {
-        scene7HomeBtn.addEventListener("click", () => {
-            if (scene7Overlay) scene7Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene7SettingsBtn) {
-        scene7SettingsBtn.addEventListener("click", () => {
-            previousScene = "scene7";
-            if (scene7Overlay) scene7Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
-
-    if (btnPenjagaan) {
-        btnPenjagaan.addEventListener("click", () => {
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene8Overlay) scene8Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene8BackBtn) {
-        scene8BackBtn.addEventListener("click", () => {
-            if (scene8Overlay) scene8Overlay.style.display = "none";
-            if (scene6Overlay) scene6Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene8HomeBtn) {
-        scene8HomeBtn.addEventListener("click", () => {
-            if (scene8Overlay) scene8Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene8SettingsBtn) {
-        scene8SettingsBtn.addEventListener("click", () => {
-            previousScene = "scene8";
-            if (scene8Overlay) scene8Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
-
-    if (btnKesihatan) {
-        btnKesihatan.addEventListener("click", () => {
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene9Overlay) scene9Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene9BackBtn) {
-        scene9BackBtn.addEventListener("click", () => {
-            if (scene9Overlay) scene9Overlay.style.display = "none";
-            if (scene6Overlay) scene6Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene9HomeBtn) {
-        scene9HomeBtn.addEventListener("click", () => {
-            if (scene9Overlay) scene9Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene9SettingsBtn) {
-        scene9SettingsBtn.addEventListener("click", () => {
-            previousScene = "scene9";
-            if (scene9Overlay) scene9Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
-
-    if (btnSetBm) {
-        btnSetBm.addEventListener("click", () => {
-            selectedLang = "ms";
-            updateLocalizationUI();
-        });
-    }
-
-    if (btnSetEn) {
-        btnSetEn.addEventListener("click", () => {
-            selectedLang = "en";
-            updateLocalizationUI();
-        });
-    }
-
-    if (btnQuiz) {
-        btnQuiz.addEventListener("click", () => {
-            if (scene4Overlay) scene4Overlay.style.display = "none";
-            if (scene10Overlay) scene10Overlay.style.display = "flex";
-        });
-    }
-
-    if (scene10SettingsBtn) {
-        scene10SettingsBtn.addEventListener("click", () => {
-            previousScene = "scene10";
-            if (scene10Overlay) scene10Overlay.style.display = "none";
-            if (settingsOverlay) settingsOverlay.style.display = "flex";
-        });
-    }
-
-    if (scene10HomeBtn) {
-        scene10HomeBtn.addEventListener("click", () => {
-            if (scene10Overlay) scene10Overlay.style.display = "none";
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-        });
-    }
+    if (btnQuiz) btnQuiz.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene10Overlay) scene10Overlay.style.display = "flex"; });
+    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; if (scene10Overlay) scene10Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { if (scene10Overlay) scene10Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
 
     if (backBtn) {
         backBtn.addEventListener("click", () => {
             if (settingsOverlay) settingsOverlay.style.display = "none";
-
-            if (previousScene === "normal-lawan") {
-                if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
-
-                if (normalLawanVideo && currentVideoBaseName) {
-                    const langSuffix = selectedLang === "en" ? "bi" : "bm";
-                    const newVideoFile = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
-
-                    if (!normalLawanSource.src.endsWith(newVideoFile)) {
-                        const currentTime = normalLawanVideo.currentTime;
-
-                        normalLawanSource.src = newVideoFile;
-                        normalLawanVideo.load();
-
-                        normalLawanVideo.currentTime = currentTime;
-                        normalLawanVideo.play().catch(err => console.log("Video resume error:", err));
-                    } else {
-                        normalLawanVideo.play().catch(err => console.log("Video play error:", err));
-                    }
-                }
-            } else if (previousScene === "scene12") {
-                if (scene12Overlay) scene12Overlay.style.display = "flex";
-            } else if (previousScene === "scene11") {
-                if (scene11Overlay) scene11Overlay.style.display = "flex";
-            } else if (previousScene === "scene10") {
-                if (scene10Overlay) scene10Overlay.style.display = "flex";
-            } else if (previousScene === "scene9") {
-                if (scene9Overlay) scene9Overlay.style.display = "flex";
-            } else if (previousScene === "scene8") {
-                if (scene8Overlay) scene8Overlay.style.display = "flex";
-            } else if (previousScene === "scene7") {
-                if (scene7Overlay) scene7Overlay.style.display = "flex";
-            } else if (previousScene === "scene6") {
-                if (scene6Overlay) scene6Overlay.style.display = "flex";
-            } else {
-                if (scene4Overlay) scene4Overlay.style.display = "flex";
-            }
+            const sceneMap = {
+                "normal-lawan": normalLawanOverlay,
+                "scene12": scene12Overlay,
+                "scene11": scene11Overlay,
+                "scene10": scene10Overlay,
+                "scene9": scene9Overlay,
+                "scene8": scene8Overlay,
+                "scene7": scene7Overlay,
+                "scene6": scene6Overlay
+            };
+            const target = sceneMap[previousScene] || scene4Overlay;
+            if (target) target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
         });
     }
 
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
-            if (settingsOverlay) settingsOverlay.style.display = "none";
-            if (scene6Overlay) scene6Overlay.style.display = "none";
-            if (scene7Overlay) scene7Overlay.style.display = "none";
-            if (scene8Overlay) scene8Overlay.style.display = "none";
-            if (scene9Overlay) scene9Overlay.style.display = "none";
-            if (scene10Overlay) scene10Overlay.style.display = "none";
-            if (scene11Overlay) scene11Overlay.style.display = "none";
-            if (scene12Overlay) scene12Overlay.style.display = "none";
-            if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
+            [settingsOverlay, scene6Overlay, scene7Overlay, scene8Overlay, scene9Overlay, scene10Overlay, scene11Overlay, scene12Overlay, normalLawanOverlay].forEach(el => {
+                if (el) el.style.display = "none";
+            });
             if (scene4Overlay) scene4Overlay.style.display = "flex";
         });
     }
 
     // ==========================================
-    // 6. QUIZ DATA
+    // 6. KUIZ & POP-UP HINT/QUIT LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
             {
-                question: {
-                    ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?",
-                    en: "1. What happens when a girl gets her period?"
-                },
+                question: { ms: "1. Apakah yang berlaku semasa seseorang perempuan mengalami haid?", en: "1. What happens when a girl gets her period?" },
+                hint: { ms: "Darah dan tisu rahim akan keluar dari badan.", en: "Blood and uterine tissue leave the body." },
                 options: [
                     { text: { ms: "A) Darah dan tisu dari rahim keluar melalui faraj.", en: "A) Blood and tissue leave the body through the vagina." }, isCorrect: true },
                     { text: { ms: "B) Badan menghasilkan lebih banyak tenaga.", en: "B) The body produces extra energy." }, isCorrect: false },
@@ -645,283 +406,37 @@ if (vbtnRestart && normalLawanVideo) {
                 ]
             },
             {
-                question: {
-                    ms: "2. Purata umur kebanyakan orang mendapat haid pertama mereka ialah sekitar umur berapa?",
-                    en: "2. Around what age do most people get their first period?"
-                },
+                question: { ms: "2. Purata umur kebanyakan orang mendapat haid pertama mereka ialah sekitar umur berapa?", en: "2. Around what age do most people get their first period?" },
+                hint: { ms: "Fikirkan umur awal remaja sekolah rendah/menengah.", en: "Think of early teenage school age." },
                 options: [
                     { text: { ms: "A) 6 tahun.", en: "A) 6 years old." }, isCorrect: false },
                     { text: { ms: "B) 8 tahun.", en: "B) 8 years old." }, isCorrect: false },
                     { text: { ms: "C) 12 tahun.", en: "C) 12 years old." }, isCorrect: true },
                     { text: { ms: "D) 18 tahun.", en: "D) 18 years old." }, isCorrect: false }
                 ]
-            },
-            {
-                question: {
-                    ms: "3. Mengapakah badan membina lapisan lembut di dalam rahim setiap bulan?",
-                    en: "3. Why does the body build a soft lining inside the uterus every month?"
-                },
-                options: [
-                    { text: { ms: "A) Untuk melindungi rahim daripada jangkitan.", en: "A) To protect the uterus from infection." }, isCorrect: false },
-                    { text: { ms: "B) Sebagai persediaan bagi menghadapi kehamilan.", en: "B) To prepare the body for a possible pregnancy." }, isCorrect: true },
-                    { text: { ms: "C) Untuk menyimpan cecair badan berlebihan.", en: "C) To store excess body fluids." }, isCorrect: false },
-                    { text: { ms: "D) Bagi membantu proses pencernaan makanan.", en: "D) To help digest food." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "4. Apakah yang berlaku kepada lapisan rahim jika kehamilan tidak berlaku?",
-                    en: "4. What happens to the uterus lining if pregnancy does not occur?"
-                },
-                options: [
-                    { text: { ms: "A) Lapisan tersebut diserap semula secara kekal oleh hati.", en: "A) The lining is permanently reabsorbed by the liver." }, isCorrect: false },
-                    { text: { ms: "B) Lapisan tersebut akan bertambah tebal setiap bulan.", en: "B) The lining continues to thicken every month." }, isCorrect: false },
-                    { text: { ms: "C) Lapisan tersebut luruh dan keluar melalui faraj bersama darah.", en: "C) The lining breaks down and leaves through the vagina as blood." }, isCorrect: true },
-                    { text: { ms: "D) Lapisan tersebut bertukar menjadi otot rahim.", en: "D) The lining turns into uterine muscle." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "5. Berapakah tempoh julat kitaran haid yang normal bagi kebanyakan orang?",
-                    en: "5. What is the normal menstrual cycle length range for most people?"
-                },
-                options: [
-                    { text: { ms: "A) 5 hingga 10 hari.", en: "A) 5 to 10 days." }, isCorrect: false },
-                    { text: { ms: "B) 10 hingga 15 hari.", en: "B) 10 to 15 days." }, isCorrect: false },
-                    { text: { ms: "C) 21 hingga 35 hari.", en: "C) 21 to 35 days." }, isCorrect: true },
-                    { text: { ms: "D) 40 hingga 50 hari.", en: "D) 40 to 50 days." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "6. Apakah yang berlaku semasa fasa ketiga iaitu fasa ovulasi?",
-                    en: "6. What occurs during the third phase, known as ovulation?"
-                },
-                options: [
-                    { text: { ms: "A) Lapisan rahim mula luruh dan keluar sebagai darah.", en: "A) The lining of the uterus breaks down and leaves as blood." }, isCorrect: false },
-                    { text: { ms: "B) Ovari melepaskan telur yang telah matang.", en: "B) An ovary releases a mature egg." }, isCorrect: true },
-                    { text: { ms: "C) Badan berhenti menghasilkan hormon secara lengkap.", en: "C) The body completely stops producing hormones." }, isCorrect: false },
-                    { text: { ms: "D) Fasa pendarahan menstruasi baru bermula.", en: "D) The menstrual bleeding phase begins." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "7. Manakah antara warna darah haid berikut yang masih dianggap normal?",
-                    en: "7. Which of the following period blood colors is considered normal?"
-                },
-                options: [
-                    { text: { ms: "A) Hijau terang, kuning, atau oren.", en: "A) Bright green, yellow, or orange." }, isCorrect: false },
-                    { text: { ms: "B) Kelabu.", en: "B) Grey." }, isCorrect: false },
-                    { text: { ms: "C) Biru pekat, atau ungu.", en: "C) Deep blue, or purple." }, isCorrect: false },
-                    { text: { ms: "D) Merah, merah jambu, atau coklat.", en: "D) Red, pink, or brown." }, isCorrect: true }
-                ]
-            },
-            {
-                question: {
-                    ms: "8. Tanda manakah yang menunjukkan anda perlu meminta bantuan atau berjumpa dengan doktor?",
-                    en: "8. Which sign indicates that you should ask for help or speak to a doctor?"
-                },
-                options: [
-                    { text: { ms: "A) Haid berlangsung selama 3 hingga 5 hari.", en: "A) A period that lasts for 3 to 5 days." }, isCorrect: false },
-                    { text: { ms: "B) Warna darah bertukar menjadi coklat pada akhir haid.", en: "B) Blood turning brown near the end of your period." }, isCorrect: false },
-                    { text: { ms: "C) Perlu menukar pad setiap 1 hingga 2 jam kerana terlalu penuh.", en: "C) Needing to change your pad every 1 to 2 hours because it is full." }, isCorrect: true },
-                    { text: { ms: "D) Rasa sedikit perubahan emosi semasa haid.", en: "D) Experiencing slight mood changes during your period." }, isCorrect: false }
-                ]
             }
         ],
         penjagaan: [
             {
-                question: {
-                    ms: "1. Berapa kerapkah anda perlu menukar pad jika aliran darah haid anda adalah banyak?",
-                    en: "1. How often should you change your pad if your period flow is heavy?"
-                },
+                question: { ms: "1. Berapa kerapkah anda perlu menukar pad jika aliran darah haid anda adalah banyak?", en: "1. How often should you change your pad if your period flow is heavy?" },
+                hint: { ms: "Jangan biarkan pad dipakai lebih dari 4-5 jam.", en: "Do not wear a pad for more than 4-5 hours." },
                 options: [
                     { text: { ms: "A) Setiap 12 jam.", en: "A) Every 12 hours." }, isCorrect: false },
                     { text: { ms: "B) Setiap 8 hingga 10 jam.", en: "B) Every 8 to 10 hours." }, isCorrect: false },
                     { text: { ms: "C) Setiap 3 hingga 4 jam.", en: "C) Every 3 to 4 hours." }, isCorrect: true },
                     { text: { ms: "D) Hanya sekali sehari.", en: "D) Only once a day." }, isCorrect: false }
                 ]
-            },
-            {
-                question: {
-                    ms: "2. Bagaimanakah cara yang betul untuk membuang pad yang telah digunakan?",
-                    en: "2. What is the proper way to dispose of a used pad?"
-                },
-                options: [
-                    { text: { ms: "A) Pam masuk ke dalam lubang tandas.", en: "A) Flush it down the toilet." }, isCorrect: false },
-                    { text: { ms: "B) Bungkus dan buang ke dalam tong sampah.", en: "B) Wrap it up and throw it in the bin." }, isCorrect: true },
-                    { text: { ms: "C) Cuci dengan sabun lalu simpan semula.", en: "C) Wash it with soap and keep it." }, isCorrect: false },
-                    { text: { ms: "D) Tanam di kawasan tanah luar rumah.", en: "D) Bury it in the dirt outside." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "3. Antara berikut, manakah barang yang digalakkan untuk disimpan di dalam kit kecemasan haid di sekolah?",
-                    en: "3. Which of the following items is recommended to keep in your school period emergency kit?"
-                },
-                options: [
-                    { text: { ms: "A) Pad, pantyliner, dan seluar dalam tambahan.", en: "A) Pads, pantyliners, and a spare pair of underwear." }, isCorrect: true },
-                    { text: { ms: "B) Mainan.", en: "B) Toys." }, isCorrect: false },
-                    { text: { ms: "C) Buku cerita tambahan.", en: "C) Additional storybooks." }, isCorrect: false },
-                    { text: { ms: "D) Botol penyembur minyak wangi bersaiz besar.", en: "D) Large-sized perfume spray bottle." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "4. Apakah arah yang betul semasa mengelap atau membersihkan kawasan sulit selepas menggunakan tandas?",
-                    en: "4. What is the correct direction to wipe or clean your private area after using the toilet?"
-                },
-                options: [
-                    { text: { ms: "A) Dari belakang ke depan.", en: "A) From back to front." }, isCorrect: false },
-                    { text: { ms: "B) Dari depan ke belakang.", en: "B) From front to back." }, isCorrect: true },
-                    { text: { ms: "C) Dari kiri ke kanan.", en: "C) From left to right." }, isCorrect: false },
-                    { text: { ms: "D) Tidak perlu dielap sama sekali.", en: "D) It does not need to be wiped at all." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "5. Jenis produk haid manakah yang paling sesuai digunakan untuk aliran darah yang sangat ringan atau pada penghujung haid?",
-                    en: "5. Which period product is best suited for very light flow or toward the end of your period?"
-                },
-                options: [
-                    { text: { ms: "A) Pad maxi malam.", en: "A) Overnight maxi pad." }, isCorrect: false },
-                    { text: { ms: "B) Pantyliner atau pad ringan.", en: "B) Pantyliner or light pad." }, isCorrect: true },
-                    { text: { ms: "C) Pad aliran sangat banyak.", en: "C) Very heavy flow pad." }, isCorrect: false },
-                    { text: { ms: "D) Pad bersaiz paling panjang.", en: "D) The longest size pad available." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "6. Apakah kelebihan pad malam (overnight) atau pad maxi untuk aliran darah yang sangat banyak?",
-                    en: "6. What is the advantage of using an overnight or maxi pad for very heavy flow?"
-                },
-                options: [
-                    { text: { ms: "A) Ia bersaiz lebih pendek dan nipis.", en: "A) It is shorter and thinner." }, isCorrect: false },
-                    { text: { ms: "B) Ia tidak perlu ditukar langsung.", en: "B) It never needs to be changed." }, isCorrect: false },
-                    { text: { ms: "C) Ia biasanya lebih panjang dan mempunyai bahagian belakang lebih lebar untuk mengelakkan kebocoran.", en: "C) It is usually longer and has a wider back to help prevent leaks." }, isCorrect: true },
-                    { text: { ms: "D) Ia menukar warna darah haid secara automatik.", en: "D) It automatically changes the color of the blood." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?",
-                    en: "7. What can you apply to your lower tummy to help ease period cramps?"
-                },
-                options: [
-                    { text: { ms: "A) Letakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
-                    { text: { ms: "B) Letakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
-                    { text: { ms: "C) Ditekan dengan objek keras dan berat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
-                    { text: { ms: "D) Dibiarkan terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "8. Apakah tindakan yang perlu diambil sebelum mengambil sebarang ubat tahan sakit seperti Paracetamol untuk mengurangkan sakit haid??",
-                    en: "8. What should you do before taking pain relief medication like Paracetamol for period pain?"
-                },
-                options: [
-                    { text: { ms: "A) Ambil sahaja mengikut gerak hati sendiri.", en: "A) Take it based on your own guess." }, isCorrect: false },
-                    { text: { ms: "B) Minum air berkafein yang tinggi terlebih dahulu.", en: "B) Drink a highly caffeinated beverage first." }, isCorrect: false },
-                    { text: { ms: "C) Bertanya atau mendapat kebenaran daripada ibu bapa, penjaga, atau doktor.", en: "C) Ask a parent, guardian, or doctor for advice." }, isCorrect: true },
-                    { text: { ms: "D) Sentiasa mengambil ubat melebihi dos yang disyorkan.", en: "D) Always take more than the recommended dose." }, isCorrect: false }
-                ]
             }
         ],
         kesihatan: [
             {
-                question: {
-                    ms: "1. Apakah yang membezakan PMDD daripada PMS?",
-                    en: "1. What differentiates PMDD from PMS?"
-                },
+                question: { ms: "1. Apakah yang membezakan PMDD daripada PMS?", en: "1. What differentiates PMDD from PMS?" },
+                hint: { ms: "PMDD adalah bentuk perubahan emosi yang jauh lebih teruk.", en: "PMDD is a much more severe form of emotional shift." },
                 options: [
                     { text: { ms: "A) PMDD hanya menyebabkan sakit kepala.", en: "A) PMDD only causes headaches." }, isCorrect: false },
                     { text: { ms: "B) PMDD menyebabkan perubahan mood yang lebih melampau dan boleh menjejaskan kehidupan harian.", en: "B) PMDD causes more extreme mood changes that can disrupt daily life." }, isCorrect: true },
                     { text: { ms: "C) PMDD hanya berlaku selepas haid.", en: "C) PMDD only occurs after menstruation." }, isCorrect: false },
                     { text: { ms: "D) PMDD tidak berkaitan dengan perubahan hormon.", en: "D) PMDD is not related to hormonal changes." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "2. Apakah maksud Peningkatan Prahaid (PME)?",
-                    en: "2. What is the meaning of Premenstrual Exacerbation (PME)?"
-                },
-                options: [
-                    { text: { ms: "A) Haid berlaku lebih awal daripada biasa.", en: "A) Period occurs earlier than usual." }, isCorrect: false },
-                    { text: { ms: "B) Kesihatan fizikal menjadi lebih baik sebelum haid.", en: "B) Physical health improves before period." }, isCorrect: false },
-                    { text: { ms: "C) Keadaan kesihatan mental sedia ada menjadi lebih teruk sebelum haid.", en: "C) Pre-existing mental health conditions become worse before period." }, isCorrect: true },
-                    { text: { ms: "D) Haid berhenti selama beberapa bulan.", en: "D) Period stops for several months." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "3. Yang manakah merupakan fakta tentang bersenam ketika haid?",
-                    en: "3. Which of the following is a fact about exercising during menstruation?"
-                },
-                options: [
-                    { text: { ms: "A) Senaman mesti dielakkan ketika haid.", en: "A) Exercise must be avoided during period." }, isCorrect: false },
-                    { text: { ms: "B) Senaman boleh memburukkan senggugut.", en: "B) Exercise can worsen menstrual cramps." }, isCorrect: false },
-                    { text: { ms: "C) Aktiviti fizikal adalah selamat dan boleh membantu mengurangkan senggugut serta perubahan mood.", en: "C) Physical activity is safe and can help reduce cramps as well as mood changes." }, isCorrect: true },
-                    { text: { ms: "D) Hanya atlet boleh bersenam ketika haid.", en: "D) Only athletes can exercise during period." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "4. Apakah yang boleh digunakan untuk berenang dengan selamat semasa datang haid?",
-                    en: "4. What can be used to swim safely while on your period?"
-                },
-                options: [
-                    { text: { ms: "A) Pad biasa atau pantyliner.", en: "A) Regular pads or pantyliners." }, isCorrect: false },
-                    { text: { ms: "B) Produk haid yang sesuai seperti tampon, cawan haid, atau pakaian renang khas haid.", en: "B) Appropriate period products such as tampons, menstrual cups, or period swimwear." }, isCorrect: true },
-                    { text: { ms: "C) Tisu kering yang dilipat.", en: "C) Folded dry tissues." }, isCorrect: false },
-                    { text: { ms: "D) Berenang tidak memerlukan sebarang produk haid.", en: "D) Swimming does not require any period products." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "5. Apakah jenis pakaian yang sepatutnya dielakkan semasa haid kerana boleh memerangkap haba dan kelembapan serta menggalakkan pertumbuhan bakteria dan kulat?",
-                    en: "5. What type of clothing should be avoided during your period because it can trap heat and moisture, promoting bacteria and fungal growth?"
-                },
-                options: [
-                    { text: { ms: "A) Pakaian daripada fabrik kapas yang longgar.", en: "A) Loose cotton fabric clothing." }, isCorrect: false },
-                    { text: { ms: "B) Pakaian yang selesa dan mempunyai pengudaraan baik.", en: "B) Comfortable and breathable clothing." }, isCorrect: false },
-                    { text: { ms: "C) Pakaian sintetik yang terlalu ketat.", en: "C) Overly tight synthetic clothing." }, isCorrect: true },
-                    { text: { ms: "D) Pakaian yang diperbuat daripada kain benang semula jadi.", en: "D) Clothing made from natural fiber fabrics." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "6. Mengapakah produk haid berpewangi boleh menyebabkan masalah?",
-                    en: "6. Why can scented menstrual products cause issues?"
-                },
-                options: [
-                    { text: { ms: "A) Ia menyebabkan darah haid berhenti.", en: "A) They cause period blood to stop." }, isCorrect: false },
-                    { text: { ms: "B) Ia meningkatkan tempoh haid.", en: "B) They increase the duration of period." }, isCorrect: false },
-                    { text: { ms: "C) Ia boleh mengganggu keseimbangan pH semula jadi dan menyebabkan kerengsaan.", en: "C) They can disrupt the natural pH balance and cause irritation." }, isCorrect: true },
-                    { text: { ms: "D) Ia menyebabkan haid datang lebih kerap.", en: "D) They cause period to occur more frequently." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "7. Apakah yang boleh dilakukan untuk membantu seseorang yang mengalami senggugut?",
-                    en: "7. What can be done to help someone experiencing period cramps?"
-                },
-                options: [
-                    { text: { ms: "A) Menyuruh mereka mengabaikan kesakitan.", en: "A) Telling them to ignore the pain." }, isCorrect: false },
-                    { text: { ms: "B) Memberikan pad pemanas atau botol air panas.", en: "B) Providing a heating pad or hot water bottle." }, isCorrect: true },
-                    { text: { ms: "C) Menghalang mereka daripada berehat.", en: "C) Preventing them from resting." }, isCorrect: false },
-                    { text: { ms: "D) Menyuruh mereka melakukan kerja berat.", en: "D) Asking them to do heavy work." }, isCorrect: false }
-                ]
-            },
-            {
-                question: {
-                    ms: "8. Bagaimanakah cara terbaik untuk menyokong seseorang yang mengalami perubahan mood ketika haid?",
-                    en: "8. What is the best way to support someone experiencing mood swings during their period?"
-                },
-                options: [
-                    { text: { ms: "A) Menyalahkan emosi mereka sepenuhnya kepada haid.", en: "A) Blaming their emotions entirely on their period." }, isCorrect: false },
-                    { text: { ms: "B) Mengabaikan perasaan mereka.", en: "B) Ignoring their feelings." }, isCorrect: false },
-                    { text: { ms: "C) Mendengar tanpa menghakimi dan mengiktiraf perasaan mereka.", en: "C) Listening without judgment and acknowledging their feelings." }, isCorrect: true },
-                    { text: { ms: "D) Memberitahu mereka bahawa mereka terlalu sensitif.", en: "D) Telling them that they are being overly sensitive." }, isCorrect: false }
                 ]
             }
         ]
@@ -995,8 +510,32 @@ if (vbtnRestart && normalLawanVideo) {
     if (btnQuizPenjagaan) btnQuizPenjagaan.addEventListener("click", () => startCategoryQuiz("penjagaan"));
     if (btnQuizKesihatan) btnQuizKesihatan.addEventListener("click", () => startCategoryQuiz("kesihatan"));
 
-    if (scene11BackBtn) {
-        scene11BackBtn.addEventListener("click", () => {
+    // EVENT LISENTER POP-UP HINT & QUIT KUIZ
+    if (scene11HintBtn) {
+        scene11HintBtn.addEventListener("click", () => {
+            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
+            const currentQ = currentCategoryQuestions[currentQuestionIndex];
+            const lang = selectedLang || "ms";
+
+            if (hintModalText) hintModalText.textContent = currentQ.hint ? currentQ.hint[lang] : "Tiada petunjuk.";
+            if (hintModal) hintModal.style.display = "flex";
+        });
+    }
+
+    if (hintModalClose) hintModalClose.addEventListener("click", () => { if (hintModal) hintModal.style.display = "none"; });
+    if (modalOkBtn) modalOkBtn.addEventListener("click", () => { if (hintModal) hintModal.style.display = "none"; });
+
+    if (scene11QuitBtn) {
+        scene11QuitBtn.addEventListener("click", () => {
+            if (quitModal) quitModal.style.display = "flex";
+        });
+    }
+
+    if (quitModalClose) quitModalClose.addEventListener("click", () => { if (quitModal) quitModal.style.display = "none"; });
+    if (quitCancelBtn) quitCancelBtn.addEventListener("click", () => { if (quitModal) quitModal.style.display = "none"; });
+    if (quitConfirmBtn) {
+        quitConfirmBtn.addEventListener("click", () => {
+            if (quitModal) quitModal.style.display = "none";
             if (scene11Overlay) scene11Overlay.style.display = "none";
             if (scene10Overlay) scene10Overlay.style.display = "flex";
         });
@@ -1045,13 +584,6 @@ if (vbtnRestart && normalLawanVideo) {
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
-        if (normalLawanBackBtn) normalLawanBackBtn.textContent = isEn ? "Back" : "Kembali";
-        if (scene7BackBtn) scene7BackBtn.textContent = isEn ? "Back" : "Kembali";
-        if (scene8BackBtn) scene8BackBtn.textContent = isEn ? "Back" : "Kembali";
-        if (scene9BackBtn) scene9BackBtn.textContent = isEn ? "Back" : "Kembali";
-        if (scene11BackBtn) scene11BackBtn.textContent = isEn ? "Back" : "Kembali";
-        if (scene12BackBtn) scene12BackBtn.textContent = isEn ? "Back" : "Kembali";
-
         if (isEn) {
             if (settingsTitle) settingsTitle.textContent = "Setting";
             if (labelAudio) labelAudio.textContent = "Sound";
@@ -1061,7 +593,6 @@ if (vbtnRestart && normalLawanVideo) {
             if (textMute) textMute.textContent = "Mute";
             if (textLangBm) textLangBm.textContent = "Malay";
             if (textLangEn) textLangEn.textContent = "English";
-            if (backBtn) backBtn.textContent = "Back";
 
             if (btnChapter) btnChapter.textContent = "Chapter";
             if (btnQuiz) btnQuiz.textContent = "Quiz";
@@ -1095,16 +626,7 @@ if (vbtnRestart && normalLawanVideo) {
             if (labelQuizPenjagaan) labelQuizPenjagaan.textContent = "Care Quiz";
             if (labelQuizKesihatan) labelQuizKesihatan.innerHTML = "Health &amp;<br>Awareness Quiz";
             if (labelScore) labelScore.textContent = "Score";
-
-            if (currentScore <= 0) {
-                if (resultCongrats) resultCongrats.textContent = "Oh no!";
-                if (resultMotto) resultMotto.textContent = "Keep up the effort";
-            } else {
-                if (resultCongrats) resultCongrats.textContent = "Congratulations!";
-                if (resultMotto) resultMotto.textContent = "Effort is the key to success!";
-            }
             if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
-
         } else {
             if (settingsTitle) settingsTitle.textContent = "Tetapan";
             if (labelAudio) labelAudio.textContent = "Audio";
@@ -1114,7 +636,6 @@ if (vbtnRestart && normalLawanVideo) {
             if (textMute) textMute.textContent = "Senyap";
             if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
             if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
-            if (backBtn) backBtn.textContent = "Kembali";
 
             if (btnChapter) btnChapter.textContent = "Bab";
             if (btnQuiz) btnQuiz.textContent = "Kuiz";
@@ -1135,7 +656,7 @@ if (vbtnRestart && normalLawanVideo) {
             if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Penjagaan asas semasa haid";
             if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Penjagaan haid di sekolah";
             if (labelJenis) labelJenis.textContent = "Jenis-jenis tuala wanita";
-            if (labelCara) labelCara.textContent = "Cara menggurangkan sakit senggugut";
+            if (labelCara) labelCara.textContent = "Cara mengurangkan sakit senggugut";
 
             if (kesihatanTitle) kesihatanTitle.innerHTML = "Kesihatan &amp;<br>Kesedaran";
             if (labelHaidMental) labelHaidMental.textContent = "Haid & kesihatan mental";
@@ -1148,14 +669,6 @@ if (vbtnRestart && normalLawanVideo) {
             if (labelQuizPenjagaan) labelQuizPenjagaan.textContent = "Kuiz Penjagaan";
             if (labelQuizKesihatan) labelQuizKesihatan.innerHTML = "Kuiz Kesihatan &amp;<br>Kesedaran";
             if (labelScore) labelScore.textContent = "Skor";
-
-            if (currentScore <= 0) {
-                if (resultCongrats) resultCongrats.textContent = "Ohh tidak!";
-                if (resultMotto) resultMotto.textContent = "Teruskan usaha!";
-            } else {
-                if (resultCongrats) resultCongrats.textContent = "Tahniah!";
-                if (resultMotto) resultMotto.textContent = "Usaha tangga kejayaan!";
-            }
             if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
         }
 
