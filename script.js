@@ -137,6 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
+        // Dapatkan elemen DOM
+const quizModal = document.getElementById('quiz-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalMessage = document.getElementById('modal-message');
+const modalNextBtn = document.getElementById('modal-next-btn');
+
+
     // ==========================================
     // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
     // ==========================================
@@ -1236,6 +1243,39 @@ document.addEventListener("DOMContentLoaded", () => {
             loadQuestion();
         }
     }
+
+// Fungsi untuk menampilkan Popup Feedback
+function showFeedbackModal(isCorrect, explanation = '') {
+  if (isCorrect) {
+    modalTitle.textContent = "Betul! / Correct!";
+    modalTitle.style.color = "#28a745"; // Warna Hijau
+    modalMessage.textContent = explanation || "Tahniah, jawapan anda tepat!";
+  } else {
+    modalTitle.textContent = "Salah! / Incorrect!";
+    modalTitle.style.color = "#dc3545"; // Warna Merah
+    modalMessage.textContent = explanation || "Sila cuba lagi untuk soalan seterusnya.";
+  }
+  
+  // Tampilkan modal
+  quizModal.classList.remove('hidden');
+}
+
+// Logika ketika pengguna memilih jawaban
+function checkAnswer(selectedOption, currentQuestion) {
+  const isCorrect = selectedOption === currentQuestion.correctAnswer;
+  
+  // Tampilkan popup feedback
+  showFeedbackModal(isCorrect, currentQuestion.explanation);
+}
+
+// Event Listener pada tombol Next di Modal Popup
+modalNextBtn.addEventListener('click', () => {
+  // Sembunyikan modal
+  quizModal.classList.add('hidden');
+  
+  // Panggil fungsi untuk berpindah ke soalan seterusnya
+  goToNextQuestion(); 
+});
 
     // ==========================================
     // 8. AUTO RE-LOCK LANDSCAPE BILA SKRIN DIBUKA SEMULA
