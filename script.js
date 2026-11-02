@@ -1,25 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ==========================================
-    // AUTOMATIK: HILANGKAN WARNA HOVER DITEKAN PADA PERANTI SENTUH
-    // ==========================================
+    // Hilangkan warna hover dikekalkan pada peranti sentuh
     document.querySelectorAll("button").forEach(btn => {
-        btn.addEventListener("touchend", () => {
-            btn.blur();
-        });
+        btn.addEventListener("touchend", () => btn.blur());
     });
 
     // ==========================================
-    // 1. DOM ELEMENT SELECTION
+    // DOM ELEMENT SELECTION
     // ==========================================
     const fullscreenBtn = document.getElementById("fullscreen-btn");
-
     const startOverlay = document.getElementById("start-overlay");
     const startAppBtn = document.getElementById("start-app-btn");
 
     const video1 = document.getElementById("videoPlayer1");
     const video2 = document.getElementById("videoPlayer2");
 
-    // Overlays
     const langOverlay = document.getElementById("language-overlay");
     const scene4Overlay = document.getElementById("scene4-overlay");
     const settingsOverlay = document.getElementById("settings-overlay");
@@ -32,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12Overlay = document.getElementById("scene12-overlay");
     const normalLawanOverlay = document.getElementById("normal-lawan-overlay");
 
-    // Video Player & Controls Elements
     const normalLawanVideo = document.getElementById("normalLawanVideo");
     const normalLawanSource = document.getElementById("normalLawanSource");
 
@@ -44,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
     const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
 
-    // Navigation Buttons
     const btnBm = document.getElementById("btn-bm");
     const btnEn = document.getElementById("btn-en");
     const skipBtn = document.getElementById("skip-btn");
@@ -55,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById("home-btn");
     const backBtn = document.getElementById("back-btn");
 
-    // Scene 6 DOM Elements
     const chapterTitle = document.getElementById("chapter-title");
     const labelAsas = document.getElementById("label-asas");
     const labelPenjagaan = document.getElementById("label-penjagaan");
@@ -63,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene6HomeBtn = document.getElementById("scene6-home-btn");
     const scene6SettingsBtn = document.getElementById("scene6-settings-btn");
 
-    // Scene 7 DOM Elements
     const btnAsas = document.getElementById("btn-asas");
     const scene7HomeBtn = document.getElementById("scene7-home-btn");
     const scene7BackBtn = document.getElementById("scene7-back-btn");
@@ -74,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelBerapaLama = document.getElementById("label-berapa-lama");
     const labelNormalLawan = document.getElementById("label-normal-lawan");
 
-    // Scene 8 DOM Elements
     const btnPenjagaan = document.getElementById("btn-penjagaan");
     const scene8HomeBtn = document.getElementById("scene8-home-btn");
     const scene8BackBtn = document.getElementById("scene8-back-btn");
@@ -85,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelJenis = document.getElementById("label-jenis");
     const labelCara = document.getElementById("label-cara");
 
-    // Scene 9 DOM Elements
     const btnKesihatan = document.getElementById("btn-kesihatan");
     const scene9HomeBtn = document.getElementById("scene9-home-btn");
     const scene9BackBtn = document.getElementById("scene9-back-btn");
@@ -96,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const labelKesilapanKebersihan = document.getElementById("label-kesilapan-kebersihan");
     const labelSekeliling = document.getElementById("label-sekeliling");
 
-    // Settings UI Text & Audio Controls
     const settingsTitle = document.getElementById("settings-title");
     const labelAudio = document.getElementById("label-audio");
     const labelLanguage = document.getElementById("label-language");
@@ -114,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSetBm = document.getElementById("btn-set-bm");
     const btnSetEn = document.getElementById("btn-set-en");
 
-    // Quiz DOM Elements
     const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
     const scene10HomeBtn = document.getElementById("scene10-home-btn");
     const quizTitle = document.getElementById("quiz-title");
@@ -142,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-    // Modal Pop-Up Elements
     const quizModalOverlay = document.getElementById("quiz-modal-overlay");
     const modalIconElem = document.getElementById("modal-icon-elem");
     const modalTitleElem = document.getElementById("modal-title-elem");
@@ -152,11 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let pendingNextQuestionCall = null;
 
     // ==========================================
-    // KAWALAN FULLSCREEN KHAS UNTUK TELEFON (PHONE ONLY)
-    // (Muncul di Scene 1 sahaja, sembunyikan di scene lain)
+    // KAWALAN FULLSCREEN KHAS UNTUK PHONE ONLY
     // ==========================================
     function checkFullscreenVisibility(sceneId) {
         if (fullscreenBtn) {
+            // HANYA BENARKAN DI SCENE 1 (START OVERLAY)
             if (sceneId === "start") {
                 fullscreenBtn.classList.add("show-on-phone");
             } else {
@@ -165,11 +150,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Setkan paparan awal semasa mula-mula aplikasi dibuka (Scene 1)
+    // PAKSA SERTA-MERTA BILAMANA MULA-MULA BUKA APLIKASI
     checkFullscreenVisibility("start");
 
     // ==========================================
-    // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
+    // STATE MANAGEMENT & BGM AUDIO LOGIC
     // ==========================================
     let selectedLang = "ms";
     let introAudio = null;
@@ -203,9 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnVolumeDown) btnVolumeDown.addEventListener("click", () => setBgmVolume(parseInt(volumeSlider.value) - 10));
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
-    // ==========================================
     // FULLSCREEN LOGIC
-    // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
         if (docEl.requestFullscreen) {
@@ -235,14 +218,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW
+    // START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
             e.preventDefault();
             requestLandscapeFullscreen();
 
-            // Sembunyikan butang fullscreen di telefon selepas tekan MULA / START
+            // Sembunyikan butang fullscreen di telefon bila tekan MULA / START
             checkFullscreenVisibility("other");
 
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
@@ -308,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (skipBtn) skipBtn.style.display = "none";
 
-        // Pastikan butang fullscreen kekal tersembunyi di telefon
         checkFullscreenVisibility("scene4");
 
         updateLocalizationUI();
@@ -316,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 4. DYNAMIC VIDEO PLAYER
+    // DYNAMIC VIDEO PLAYER
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
@@ -399,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 5. NAVIGATION & ROUTING
+    // NAVIGATION & ROUTING
     // ==========================================
     if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
     if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
@@ -456,7 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. POP-UP MODAL FUNCTIONALITY
+    // POP-UP MODAL FUNCTIONALITY
     // ==========================================
     function showModal(icon, title, message, onComplete, showXBtn = true) {
         if (!quizModalOverlay) return;
@@ -492,7 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC
+    // QUIZ DATA & LOGIC
     // ==========================================
     const quizCategories = {
         asas: [
@@ -1068,7 +1050,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 8. LOCALIZATION (UI Language Toggle)
+    // LOCALIZATION (UI Language Toggle)
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
