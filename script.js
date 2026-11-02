@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
+    // FULLSCREEN LOGIC
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO FLOW
+    // 3. START OVERLAY & INTRO FLOW (VIDEO 1 & VIDEO 2)
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
@@ -223,10 +223,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 video1.style.display = "block";
                 video1.classList.add("active");
                 video1.currentTime = 0;
-                video1.play().catch(() => {
+                video1.play().catch((err) => {
+                    console.log("Video1 Play Error:", err);
                     video1.style.display = "none";
                     if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
                 });
+            } else {
+                if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
             }
         });
     }
@@ -254,11 +257,12 @@ document.addEventListener("DOMContentLoaded", () => {
         introAudio = new Audio(audioFile);
 
         if (video2) {
+            video2.style.display = "block";
             video2.currentTime = 0;
             video2.classList.add("active");
-            video2.play();
+            video2.play().catch(err => console.log("Video2 Play Error:", err));
         }
-        if (introAudio) introAudio.play();
+        if (introAudio) introAudio.play().catch(err => console.log("Intro Audio Error:", err));
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
@@ -276,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (video2) {
             video2.pause();
             video2.classList.remove("active");
+            video2.style.display = "none";
         }
         if (skipBtn) skipBtn.style.display = "none";
 
@@ -369,33 +374,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 5. NAVIGATION & ROUTING
     // ==========================================
-    if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (settingsGearBtn) settingsGearBtn.addEventListener("click", () => { previousScene = "scene4"; settingsOverlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; scene6Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (btnChapter) btnChapter.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; if (scene4Overlay) scene4Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (settingsGearBtn) settingsGearBtn.addEventListener("click", () => { previousScene = "scene4"; if (settingsOverlay) settingsOverlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; if (scene6Overlay) scene6Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
 
-    if (btnAsas) btnAsas.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene7Overlay.style.display = "flex"; });
-    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; scene7Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnAsas) btnAsas.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene7Overlay) scene7Overlay.style.display = "flex"; });
+    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { if (scene7Overlay) scene7Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { if (scene7Overlay) scene7Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; if (scene7Overlay) scene7Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
-    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene8Overlay.style.display = "flex"; });
-    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; scene8Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene8Overlay) scene8Overlay.style.display = "flex"; });
+    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { if (scene8Overlay) scene8Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { if (scene8Overlay) scene8Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; if (scene8Overlay) scene8Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
-    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene9Overlay.style.display = "flex"; });
-    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; scene9Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene9Overlay) scene9Overlay.style.display = "flex"; });
+    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { if (scene9Overlay) scene9Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
+    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { if (scene9Overlay) scene9Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
+    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; if (scene9Overlay) scene9Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
 
     if (btnSetBm) btnSetBm.addEventListener("click", () => { selectedLang = "ms"; updateLocalizationUI(); });
     if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
 
-    if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; });
-    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; scene10Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { scene10Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (btnQuiz) btnQuiz.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene10Overlay) scene10Overlay.style.display = "flex"; });
+    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; if (scene10Overlay) scene10Overlay.style.display = "none"; if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { if (scene10Overlay) scene10Overlay.style.display = "none"; if (scene4Overlay) scene4Overlay.style.display = "flex"; });
 
     if (backBtn) {
         backBtn.addEventListener("click", () => {
@@ -411,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "scene6": scene6Overlay
             };
             const target = sceneMap[previousScene] || scene4Overlay;
-            target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
+            if (target) target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
         });
     }
 
@@ -448,7 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (DIBETULKAN UNTUK BARISAN GARISAN)
+    // 7. QUIZ DATA & LOGIC (DENGAN BARISAN GARISAN DILINDUNGI)
     // ==========================================
     const quizCategories = {
         asas: [
@@ -894,6 +899,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // MEMALUT SETIAP BARIS TEKS DALAM <span class="q-line"> SUPAYA MELEKAT PADA GARISAN BUKU
     function loadQuestion() {
         if (!quizQuestionText || !optA || !optB || !optC || !optD) return;
         const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
@@ -905,12 +911,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const q = currentCategoryQuestions[currentQuestionIndex];
         const lang = selectedLang || "ms";
-        const lineArray = q.lines[lang];
-
+        
         let formattedHTML = "";
-        lineArray.forEach(lineStr => {
-            formattedHTML += `<span class="q-line">${lineStr}</span>`;
-        });
+
+        if (q.lines && q.lines[lang]) {
+            q.lines[lang].forEach(lineStr => {
+                if (lineStr.trim() !== "") {
+                    formattedHTML += `<span class="q-line">${lineStr}</span>`;
+                }
+            });
+        } else if (q.question && q.question[lang]) {
+            formattedHTML = `<span class="q-line">${q.question[lang]}</span>`;
+        }
 
         quizQuestionText.innerHTML = formattedHTML;
         optA.textContent = q.options[0].text[lang];
