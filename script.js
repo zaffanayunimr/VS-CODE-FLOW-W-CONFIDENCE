@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const vbtnPlay = document.getElementById("vbtn-play");
     const vbtnRestart = document.getElementById("vbtn-restart");
     const videoSpeed = document.getElementById("videoSpeed");
+    const normalLawanHomeBtn = document.getElementById("normal-lawan-home-btn");
+    const normalLawanBackBtn = document.getElementById("normal-lawan-back-btn");
+    const normalLawanSettingsBtn = document.getElementById("normal-lawan-settings-btn");
 
     // Navigation Buttons
     const btnBm = document.getElementById("btn-bm");
@@ -38,20 +41,53 @@ document.addEventListener("DOMContentLoaded", () => {
     const skipBtn = document.getElementById("skip-btn");
     const btnChapter = document.getElementById("btn-chapter");
     const btnQuiz = document.getElementById("btn-quiz");
+    const settingsBtn = document.getElementById("settings-btn");
+    const settingsGearBtn = document.getElementById("settings-gear-btn");
+    const homeBtn = document.getElementById("home-btn");
+    const backBtn = document.getElementById("back-btn");
 
-    // Scene Buttons
+    // Scene 6 DOM Elements
+    const chapterTitle = document.getElementById("chapter-title");
+    const labelAsas = document.getElementById("label-asas");
+    const labelPenjagaan = document.getElementById("label-penjagaan");
+    const labelKesihatan = document.getElementById("label-kesihatan");
+    const scene6HomeBtn = document.getElementById("scene6-home-btn");
+    const scene6SettingsBtn = document.getElementById("scene6-settings-btn");
+
+    // Scene 7 DOM Elements
     const btnAsas = document.getElementById("btn-asas");
+    const scene7HomeBtn = document.getElementById("scene7-home-btn");
+    const scene7BackBtn = document.getElementById("scene7-back-btn");
+    const scene7SettingsBtn = document.getElementById("scene7-settings-btn");
+    const asasTitle = document.getElementById("asas-title");
+    const labelApaHaid = document.getElementById("label-apa-haid");
+    const labelMengapaHaid = document.getElementById("label-mengapa-haid");
+    const labelBerapaLama = document.getElementById("label-berapa-lama");
+    const labelNormalLawan = document.getElementById("label-normal-lawan");
+
+    // Scene 8 DOM Elements
     const btnPenjagaan = document.getElementById("btn-penjagaan");
+    const scene8HomeBtn = document.getElementById("scene8-home-btn");
+    const scene8BackBtn = document.getElementById("scene8-back-btn");
+    const scene8SettingsBtn = document.getElementById("scene8-settings-btn");
+    const penjagaanTitle = document.getElementById("penjagaan-title");
+    const labelPenjagaanAsas = document.getElementById("label-penjagaan-asas");
+    const labelPenjagaanHaid = document.getElementById("label-penjagaan-haid");
+    const labelJenis = document.getElementById("label-jenis");
+    const labelCara = document.getElementById("label-cara");
+
+    // Scene 9 DOM Elements
     const btnKesihatan = document.getElementById("btn-kesihatan");
+    const scene9HomeBtn = document.getElementById("scene9-home-btn");
+    const scene9BackBtn = document.getElementById("scene9-back-btn");
+    const scene9SettingsBtn = document.getElementById("scene9-settings-btn");
+    const kesihatanTitle = document.getElementById("kesihatan-title");
+    const labelHaidMental = document.getElementById("label-haid-mental");
+    const labelMitosFakta = document.getElementById("label-mitos-fakta");
+    const labelKesilapanKebersihan = document.getElementById("label-kesilapan-kebersihan");
+    const labelSekeliling = document.getElementById("label-sekeliling");
 
-    // Global Controls
-    const globalControls = document.getElementById("global-controls");
-    const btnGlobalHome = document.getElementById("btn-global-home");
-    const btnGlobalBack = document.getElementById("btn-global-back");
-    const btnGlobalSettings = document.getElementById("btn-global-settings");
-    const btnGlobalHint = document.getElementById("btn-global-hint");
-
-    // Settings Controls
+    // Settings UI Text & Audio Controls
     const settingsTitle = document.getElementById("settings-title");
     const labelAudio = document.getElementById("label-audio");
     const labelLanguage = document.getElementById("label-language");
@@ -69,7 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSetBm = document.getElementById("btn-set-bm");
     const btnSetEn = document.getElementById("btn-set-en");
 
-    // Quiz Elements
+    // Quiz DOM Elements
+    const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
+    const scene10HomeBtn = document.getElementById("scene10-home-btn");
     const quizTitle = document.getElementById("quiz-title");
     const btnQuizAsas = document.getElementById("btn-quiz-asas");
     const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
@@ -82,12 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const optD = document.getElementById("opt-d");
     const quizScoreElem = document.getElementById("quiz-score");
 
+    const scene11HomeBtn = document.getElementById("scene11-home-btn");
+    const scene11QuitBtn = document.getElementById("scene11-quit-btn");
+    const scene11HintBtn = document.getElementById("scene11-hint-btn");
+    const scene11SettingsBtn = document.getElementById("scene11-settings-btn");
+
     const finalScoreVal = document.getElementById("final-score-val");
     const resultCongrats = document.getElementById("result-congrats");
     const resultMotto = document.getElementById("result-motto");
     const resultScoreLabel = document.getElementById("result-score-label");
+    const scene12HomeBtn = document.getElementById("scene12-home-btn");
+    const scene12BackBtn = document.getElementById("scene12-back-btn");
+    const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-    // Modal Elements
+    // Modal Pop-Up Elements
     const quizModalOverlay = document.getElementById("quiz-modal-overlay");
     const modalIconElem = document.getElementById("modal-icon-elem");
     const modalTitleElem = document.getElementById("modal-title-elem");
@@ -97,10 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let pendingNextQuestionCall = null;
 
     // ==========================================
-    // 2. STATE MANAGEMENT & BGM AUDIO
+    // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
     // ==========================================
     let selectedLang = "ms";
     let introAudio = null;
+    let previousScene = "scene4";
     let currentVideoParentScene = "scene7";
 
     let currentScore = 0;
@@ -131,21 +178,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN LOGIC
+    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
         if (docEl.requestFullscreen) {
-            docEl.requestFullscreen().catch(err => console.log(err));
+            docEl.requestFullscreen().then(() => lockOrientationLandscape()).catch(err => console.log(err));
         } else if (docEl.webkitRequestFullscreen) {
             docEl.webkitRequestFullscreen();
+            lockOrientationLandscape();
         }
     }
 
-    if (fullscreenBtn) fullscreenBtn.addEventListener("click", requestLandscapeFullscreen);
+    function lockOrientationLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(err => console.log("Orientation lock:", err));
+        }
+    }
+
+    function toggleFullscreen() {
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+        if (!isFullscreen) {
+            requestLandscapeFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
 
     // ==========================================
-    // 3. START OVERLAY & INTRO VIDEO LOGIC (COMP1 & INTRO)
+    // 3. START OVERLAY & INTRO FLOW
     // ==========================================
     if (startAppBtn) {
         startAppBtn.addEventListener("click", (e) => {
@@ -155,22 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
 
-            // ROTASI UNTUK VIDEO PLAYER 1 (COMP1)
             if (video1) {
                 video1.style.display = "block";
                 video1.classList.add("active");
                 video1.currentTime = 0;
-                
-                const playPromise = video1.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(err => {
-                        console.log("Video1 Play Failed, skipping to language selection:", err);
-                        video1.style.display = "none";
-                        if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
-                    });
-                }
-            } else {
-                if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
+                video1.play().catch(() => {
+                    video1.style.display = "none";
+                    if (langOverlay) langOverlay.style.setProperty("display", "flex", "important");
+                });
             }
         });
     }
@@ -197,14 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioFile = (selectedLang === "en") ? "assets/intro eng.MP3" : "assets/intro.MP3";
         introAudio = new Audio(audioFile);
 
-        // ROTASI UNTUK VIDEO PLAYER 2 (INTRO)
         if (video2) {
-            video2.style.display = "block";
             video2.currentTime = 0;
             video2.classList.add("active");
-            video2.play().catch(err => console.log("Video2 Play Failed:", err));
+            video2.play();
         }
-        if (introAudio) introAudio.play().catch(err => console.log("Audio Intro Failed:", err));
+        if (introAudio) introAudio.play();
     }
 
     if (video2) video2.addEventListener("ended", goToScene4);
@@ -222,13 +276,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (video2) {
             video2.pause();
             video2.classList.remove("active");
-            video2.style.display = "none";
         }
         if (skipBtn) skipBtn.style.display = "none";
 
         updateLocalizationUI();
         if (scene4Overlay) scene4Overlay.style.display = "flex";
-        if (globalControls) globalControls.style.display = "flex";
     }
 
     // ==========================================
@@ -288,67 +340,91 @@ document.addEventListener("DOMContentLoaded", () => {
     if (vbtnPause && normalLawanVideo) vbtnPause.addEventListener("click", () => normalLawanVideo.pause());
     if (vbtnRestart && normalLawanVideo) vbtnRestart.addEventListener("click", () => { normalLawanVideo.currentTime = 0; normalLawanVideo.play(); });
 
-    // ==========================================
-    // 5. ROUTING & NAVIGASI
-    // ==========================================
-    if (btnChapter) btnChapter.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene6Overlay) scene6Overlay.style.display = "flex"; });
-    if (btnQuiz) btnQuiz.addEventListener("click", () => { if (scene4Overlay) scene4Overlay.style.display = "none"; if (scene10Overlay) scene10Overlay.style.display = "flex"; });
+    if (normalLawanBackBtn) {
+        normalLawanBackBtn.addEventListener("click", () => {
+            if (normalLawanVideo) normalLawanVideo.pause();
+            if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
+            const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
+            if (parentOverlay) parentOverlay.style.display = "flex";
+        });
+    }
 
-    if (btnAsas) btnAsas.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene7Overlay) scene7Overlay.style.display = "flex"; });
-    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene8Overlay) scene8Overlay.style.display = "flex"; });
-    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { if (scene6Overlay) scene6Overlay.style.display = "none"; if (scene9Overlay) scene9Overlay.style.display = "flex"; });
+    if (normalLawanHomeBtn) {
+        normalLawanHomeBtn.addEventListener("click", () => {
+            if (normalLawanVideo) normalLawanVideo.pause();
+            if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
+            if (scene4Overlay) scene4Overlay.style.display = "flex";
+        });
+    }
+
+    if (normalLawanSettingsBtn) {
+        normalLawanSettingsBtn.addEventListener("click", () => {
+            if (normalLawanVideo) normalLawanVideo.pause();
+            previousScene = "normal-lawan";
+            if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
+            if (settingsOverlay) settingsOverlay.style.display = "flex";
+        });
+    }
+
+    // ==========================================
+    // 5. NAVIGATION & ROUTING
+    // ==========================================
+    if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
+    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (settingsGearBtn) settingsGearBtn.addEventListener("click", () => { previousScene = "scene4"; settingsOverlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; scene6Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+
+    if (btnAsas) btnAsas.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene7Overlay.style.display = "flex"; });
+    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
+    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; scene7Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+
+    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene8Overlay.style.display = "flex"; });
+    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
+    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; scene8Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+
+    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene9Overlay.style.display = "flex"; });
+    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
+    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; scene9Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
 
     if (btnSetBm) btnSetBm.addEventListener("click", () => { selectedLang = "ms"; updateLocalizationUI(); });
     if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
 
-    if (btnGlobalSettings) btnGlobalSettings.addEventListener("click", () => { if (settingsOverlay) settingsOverlay.style.display = "flex"; });
+    if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; });
+    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; scene10Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { scene10Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
 
-    if (btnGlobalHome) {
-        btnGlobalHome.addEventListener("click", () => {
-            if (normalLawanVideo) normalLawanVideo.pause();
-            const overlays = [settingsOverlay, scene6Overlay, scene7Overlay, scene8Overlay, scene9Overlay, scene10Overlay, scene11Overlay, scene12Overlay, normalLawanOverlay];
-            overlays.forEach(ov => { if (ov) ov.style.display = "none"; });
-            if (scene4Overlay) scene4Overlay.style.display = "flex";
-            if (btnGlobalHint) btnGlobalHint.style.display = "none";
+    if (backBtn) {
+        backBtn.addEventListener("click", () => {
+            if (settingsOverlay) settingsOverlay.style.display = "none";
+            const sceneMap = {
+                "normal-lawan": normalLawanOverlay,
+                "scene12": scene12Overlay,
+                "scene11": scene11Overlay,
+                "scene10": scene10Overlay,
+                "scene9": scene9Overlay,
+                "scene8": scene8Overlay,
+                "scene7": scene7Overlay,
+                "scene6": scene6Overlay
+            };
+            const target = sceneMap[previousScene] || scene4Overlay;
+            target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
         });
     }
 
-    if (btnGlobalBack) {
-        btnGlobalBack.addEventListener("click", () => {
-            if (normalLawanOverlay && normalLawanOverlay.style.display === "block") {
-                if (normalLawanVideo) normalLawanVideo.pause();
-                normalLawanOverlay.style.display = "none";
-                const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
-                if (parentOverlay) parentOverlay.style.display = "flex";
-                return;
-            }
-
-            if (settingsOverlay && settingsOverlay.style.display === "flex") {
-                settingsOverlay.style.display = "none";
-                return;
-            }
-
-            if (scene11Overlay && scene11Overlay.style.display === "flex") {
-                scene11Overlay.style.display = "none";
-                if (scene10Overlay) scene10Overlay.style.display = "flex";
-                if (btnGlobalHint) btnGlobalHint.style.display = "none";
-            } else if (scene10Overlay && scene10Overlay.style.display === "flex") {
-                scene10Overlay.style.display = "none";
-                if (scene4Overlay) scene4Overlay.style.display = "flex";
-            } else if ((scene7Overlay && scene7Overlay.style.display === "flex") || (scene8Overlay && scene8Overlay.style.display === "flex") || (scene9Overlay && scene9Overlay.style.display === "flex")) {
-                if (scene7Overlay) scene7Overlay.style.display = "none";
-                if (scene8Overlay) scene8Overlay.style.display = "none";
-                if (scene9Overlay) scene9Overlay.style.display = "none";
-                if (scene6Overlay) scene6Overlay.style.display = "flex";
-            } else if (scene6Overlay && scene6Overlay.style.display === "flex") {
-                scene6Overlay.style.display = "none";
-                if (scene4Overlay) scene4Overlay.style.display = "flex";
-            }
+    if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+            const overlays = [settingsOverlay, scene6Overlay, scene7Overlay, scene8Overlay, scene9Overlay, scene10Overlay, scene11Overlay, scene12Overlay, normalLawanOverlay];
+            overlays.forEach(ov => { if (ov) ov.style.display = "none"; });
+            if (scene4Overlay) scene4Overlay.style.display = "flex";
         });
     }
 
     // ==========================================
-    // 6. MODAL POP-UP
+    // 6. POP-UP MODAL FUNCTIONALITY
     // ==========================================
     function showModal(icon, title, message, onComplete) {
         if (!quizModalOverlay) return;
@@ -372,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 7. KUIZ & SOALAN DENGAN GARISAN LATIHAN
+    // 7. QUIZ DATA & LOGIC (DIBETULKAN UNTUK BARISAN GARISAN)
     // ==========================================
     const quizCategories = {
         asas: [
@@ -829,16 +905,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const q = currentCategoryQuestions[currentQuestionIndex];
         const lang = selectedLang || "ms";
-        
-        let formattedHTML = "";
+        const lineArray = q.lines[lang];
 
-        if (q.lines && q.lines[lang]) {
-            q.lines[lang].forEach(lineStr => {
-                if (lineStr.trim() !== "") {
-                    formattedHTML += `<span class="q-line">${lineStr}</span>`;
-                }
-            });
-        }
+        let formattedHTML = "";
+        lineArray.forEach(lineStr => {
+            formattedHTML += `<span class="q-line">${lineStr}</span>`;
+        });
 
         quizQuestionText.innerHTML = formattedHTML;
         optA.textContent = q.options[0].text[lang];
@@ -896,15 +968,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (scene10Overlay) scene10Overlay.style.display = "none";
         if (scene11Overlay) scene11Overlay.style.display = "flex";
-        if (btnGlobalHint) btnGlobalHint.style.display = "flex";
     }
 
     if (btnQuizAsas) btnQuizAsas.addEventListener("click", () => startCategoryQuiz("asas"));
     if (btnQuizPenjagaan) btnQuizPenjagaan.addEventListener("click", () => startCategoryQuiz("penjagaan"));
     if (btnQuizKesihatan) btnQuizKesihatan.addEventListener("click", () => startCategoryQuiz("kesihatan"));
 
-    if (btnGlobalHint) {
-        btnGlobalHint.addEventListener("click", () => {
+    if (scene11QuitBtn) {
+        scene11QuitBtn.addEventListener("click", () => {
+            const isEn = selectedLang === "en";
+            showModal(
+                "🚪",
+                isEn ? "Quit Quiz?" : "Keluar Kuiz?",
+                isEn ? "Returning to Quiz Selection menu." : "Kembali ke menu pilihan kuiz.",
+                () => {
+                    if (scene11Overlay) scene11Overlay.style.display = "none";
+                    if (scene10Overlay) scene10Overlay.style.display = "flex";
+                }
+            );
+        });
+    }
+
+    if (scene11HintBtn) {
+        scene11HintBtn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
             const isEn = selectedLang === "en";
@@ -914,8 +1000,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    if (scene11HomeBtn) {
+        scene11HomeBtn.addEventListener("click", () => {
+            if (scene11Overlay) scene11Overlay.style.display = "none";
+            if (scene4Overlay) scene4Overlay.style.display = "flex";
+        });
+    }
+
+    if (scene11SettingsBtn) {
+        scene11SettingsBtn.addEventListener("click", () => {
+            previousScene = "scene11";
+            if (scene11Overlay) scene11Overlay.style.display = "none";
+            if (settingsOverlay) settingsOverlay.style.display = "flex";
+        });
+    }
+
+    if (scene12HomeBtn) {
+        scene12HomeBtn.addEventListener("click", () => {
+            if (scene12Overlay) scene12Overlay.style.display = "none";
+            if (scene4Overlay) scene4Overlay.style.display = "flex";
+        });
+    }
+
+    if (scene12BackBtn) {
+        scene12BackBtn.addEventListener("click", () => {
+            if (scene12Overlay) scene12Overlay.style.display = "none";
+            if (scene10Overlay) scene10Overlay.style.display = "flex";
+        });
+    }
+
+    if (scene12SettingsBtn) {
+        scene12SettingsBtn.addEventListener("click", () => {
+            previousScene = "scene12";
+            if (scene12Overlay) scene12Overlay.style.display = "none";
+            if (settingsOverlay) settingsOverlay.style.display = "flex";
+        });
+    }
+
     // ==========================================
-    // 8. LOCALIZATION (DWIBAHASA)
+    // 8. LOCALIZATION
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
@@ -933,6 +1056,30 @@ document.addEventListener("DOMContentLoaded", () => {
             if (btnChapter) btnChapter.textContent = "Chapter";
             if (btnQuiz) btnQuiz.textContent = "Quiz";
             if (skipBtn) skipBtn.textContent = "Skip";
+
+            if (chapterTitle) chapterTitle.textContent = "Menstrual Care Chapter";
+            if (labelAsas) labelAsas.textContent = "Basic";
+            if (labelPenjagaan) labelPenjagaan.textContent = "Care";
+            if (labelKesihatan) labelKesihatan.innerHTML = "Health &amp;<br>Awareness";
+
+            if (asasTitle) asasTitle.textContent = "Basic";
+            if (labelApaHaid) labelApaHaid.textContent = "What is period?";
+            if (labelMengapaHaid) labelMengapaHaid.textContent = "Why do periods happen?";
+            if (labelBerapaLama) labelBerapaLama.textContent = "How long is a normal period cycle?";
+            if (labelNormalLawan) labelNormalLawan.textContent = "Normal vs. not normal";
+
+            if (penjagaanTitle) penjagaanTitle.textContent = "Care";
+            if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Basic period care";
+            if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Period care at school";
+            if (labelJenis) labelJenis.textContent = "Types of sanitary pads";
+            if (labelCara) labelCara.textContent = "How to reduce period pain";
+
+            if (kesihatanTitle) kesihatanTitle.innerHTML = "Health &amp;<br>Awareness";
+            if (labelHaidMental) labelHaidMental.textContent = "Menstruation & mental health";
+            if (labelMitosFakta) labelMitosFakta.textContent = "Myths & facts";
+            if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Hygiene mistakes during menstruation";
+            if (labelSekeliling) labelSekeliling.textContent = "Period care for those around you";
+
             if (quizTitle) quizTitle.textContent = "Menstrual Care Quiz";
             if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
             if (modalCloseBtn) modalCloseBtn.textContent = "CONTINUE";
@@ -950,6 +1097,30 @@ document.addEventListener("DOMContentLoaded", () => {
             if (btnChapter) btnChapter.textContent = "Bab";
             if (btnQuiz) btnQuiz.textContent = "Kuiz";
             if (skipBtn) skipBtn.textContent = "Langkau";
+
+            if (chapterTitle) chapterTitle.textContent = "Bab Penjagaan Haid";
+            if (labelAsas) labelAsas.textContent = "Asas";
+            if (labelPenjagaan) labelPenjagaan.textContent = "Penjagaan";
+            if (labelKesihatan) labelKesihatan.innerHTML = "Kesihatan &amp;<br>Kesedaran";
+
+            if (asasTitle) asasTitle.textContent = "Asas";
+            if (labelApaHaid) labelApaHaid.textContent = "Apakah itu haid?";
+            if (labelMengapaHaid) labelMengapaHaid.textContent = "Mengapa haid berlaku?";
+            if (labelBerapaLama) labelBerapaLama.textContent = "Berapa lamakah kitaran haid?";
+            if (labelNormalLawan) labelNormalLawan.textContent = "Normal lawan tidak normal";
+
+            if (penjagaanTitle) penjagaanTitle.textContent = "Penjagaan";
+            if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Penjagaan asas semasa haid";
+            if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Penjagaan haid di sekolah";
+            if (labelJenis) labelJenis.textContent = "Jenis-jenis tuala wanita";
+            if (labelCara) labelCara.textContent = "Cara menggurangkan sakit senggugut";
+
+            if (kesihatanTitle) kesihatanTitle.innerHTML = "Kesihatan &amp;<br>Kesedaran";
+            if (labelHaidMental) labelHaidMental.textContent = "Haid & kesihatan mental";
+            if (labelMitosFakta) labelMitosFakta.textContent = "Mitos & fakta";
+            if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Kesilapan kebersihan semasa haid";
+            if (labelSekeliling) labelSekeliling.textContent = "Penjagaan haid kepada orang sekeliling";
+
             if (quizTitle) quizTitle.textContent = "Kuiz Penjagaan Haid";
             if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
             if (modalCloseBtn) modalCloseBtn.textContent = "TERUSKAN";
