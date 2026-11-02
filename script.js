@@ -917,15 +917,16 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             );
         });
     }
-
-    if (scene11HintBtn) {
+    
+if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null);
+            // Hantar false pada parameter ke-5 supaya butang X disembunyikan
+            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
         });
     }
 
