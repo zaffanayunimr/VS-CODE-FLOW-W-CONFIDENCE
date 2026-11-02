@@ -32,45 +32,57 @@ body {
 }
 
 /* ==========================================
-   DESAIN SEMUA TOMBOL LINGKARAN (IKON SETTING, HOME, FULLSCREEN, DLL)
+   DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
    ========================================== */
 .circle-icon-btn,
 #fullscreen-btn {
-    width: 50px !important;
-    height: 50px !important;
+    width: 52px !important;
+    height: 52px !important;
     background-color: #FFFFFF !important;
-    border: 3px solid #48B2EE !important; /* Border biru terang sesuai gambar ikon setting */
+    border: 3.5px solid #38B6FF !important; /* Garis lingkaran luar biru terang */
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     cursor: pointer !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
     transition: transform 0.2s ease, background-color 0.2s ease !important;
     padding: 0 !important;
     outline: none !important;
     flex-shrink: 0;
+    overflow: visible !important;
 }
 
+/* SIMBOL IKON BIRU DI TENGAH (BERSIH DARI BERCAK/GARIS INTERNAL) */
 .circle-icon-btn svg,
-#fullscreen-btn svg {
-    width: 28px !important;
-    height: 28px !important;
-    fill: #48B2EE !important;
+#fullscreen-btn svg,
+.circle-icon-btn svg path,
+#fullscreen-btn svg path {
+    width: 26px !important;
+    height: 26px !important;
+    fill: #38B6FF !important; /* Warna simbol biru terang murni */
+    stroke: none !important; /* Menghapus semua garis tepi/garis potong di dalam simbol */
+    stroke-width: 0 !important;
+    fill-rule: evenodd !important;
     transition: fill 0.2s ease !important;
+    display: block !important;
+    margin: auto !important;
 }
 
-/* SAMA UNTUK EFEK HOVER TOMBOL FULLSCREEN & LAINNYA */
+/* EFEK HOVER SERAGAM UNTUK SEMUA TOMBOL LINGKARAN */
 .circle-icon-btn:hover,
 #fullscreen-btn:hover {
     background-color: #E6F5FF !important;
-    border-color: #48B2EE !important;
+    border-color: #38B6FF !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
 
 .circle-icon-btn:hover svg,
-#fullscreen-btn:hover svg {
-    fill: #48B2EE !important;
+#fullscreen-btn:hover svg,
+.circle-icon-btn:hover svg path,
+#fullscreen-btn:hover svg path {
+    fill: #38B6FF !important;
+    stroke: none !important;
 }
 
 /* KONTROL KIRI BAWAH */
@@ -101,7 +113,7 @@ body {
 }
 
 /* ==========================================
-   0. OVERLAY SKRIN MULA
+   0. OVERLAY LAYAR MULA
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -188,7 +200,7 @@ body {
     z-index: 2;
 }
 
-/* SCENE 2: SELEKSI BAHASA */
+/* SCENE 2: PEMILIHAN BAHASA */
 #language-overlay {
     display: none;
     position: absolute;
@@ -900,7 +912,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (BARIS 1 PAS ATAS GARIS 1, BARIS 2 PAS ATAS GARIS 2)
+   SCENE 11: INTERFASE KUIS
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -916,10 +928,9 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
 .question-container {
     position: absolute;
-    top: 7vh; /* Menaikkan posisi sehingga baris pertama duduk pas di atas garis 1 */
+    top: 7vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -933,11 +944,10 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 5.5vh; /* Menyesuaikan jarak tinggi antar garis agar baris 2 pas di atas garis 2 */
+    line-height: 5.5vh;
     margin: 0;
 }
 
-/* TOMBOL JAWABAN A, B, C & D */
 .options-grid {
     position: absolute;
     top: 42vh;
