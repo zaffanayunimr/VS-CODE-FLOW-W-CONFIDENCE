@@ -919,7 +919,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (POSISI TEKS PAS DI ATAS GARIS 1 & GARIS 2)
+   SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -935,10 +935,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
+/* WADAH SOALAN: DILETAKKAN PADU SUPAYA MENDUDUKI TEPAT DI ATAS GARIS LATAR BELAKANG */
 .question-container {
     position: absolute;
-    top: 11vh;
+    top: 6.8vh; /* Titik mula garisan pertama */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -947,12 +947,13 @@ body {
     z-index: 210;
 }
 
+/* LINE-HEIGHT 8vh MENYESUAIKAN DENGAN JARAK GARISAN BIRU PADA LATAR BELAKANG */
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 6.2vh;
+    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru */
     margin: 0;
 }
 
