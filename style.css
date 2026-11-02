@@ -32,13 +32,14 @@ body {
 }
 
 /* ==========================================
-   DESAIN BUTANG BULAT ORIGINAL (Screenshot 151003.png)
+   DESAIN SEMUA TOMBOL LINGKARAN (IKON SETTING, HOME, FULLSCREEN, DLL)
    ========================================== */
-.circle-icon-btn {
-    width: 50px;
-    height: 50px;
+.circle-icon-btn,
+#fullscreen-btn {
+    width: 50px !important;
+    height: 50px !important;
     background-color: #FFFFFF !important;
-    border: 3px solid #48B2EE !important; /* Border biru mengikut gambar asal */
+    border: 3px solid #48B2EE !important; /* Border biru terang sesuai gambar ikon setting */
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -51,23 +52,28 @@ body {
     flex-shrink: 0;
 }
 
-.circle-icon-btn svg {
-    width: 28px;
-    height: 28px;
+.circle-icon-btn svg,
+#fullscreen-btn svg {
+    width: 28px !important;
+    height: 28px !important;
     fill: #48B2EE !important;
-    transition: fill 0.2s ease;
+    transition: fill 0.2s ease !important;
 }
 
-.circle-icon-btn:hover {
+/* SAMA UNTUK EFEK HOVER TOMBOL FULLSCREEN & LAINNYA */
+.circle-icon-btn:hover,
+#fullscreen-btn:hover {
     background-color: #E6F5FF !important;
+    border-color: #48B2EE !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
 
-.circle-icon-btn:hover svg {
+.circle-icon-btn:hover svg,
+#fullscreen-btn:hover svg {
     fill: #48B2EE !important;
 }
 
-/* KAWALAN KIRI BAWAH */
+/* KONTROL KIRI BAWAH */
 .left-bottom-controls {
     position: absolute;
     bottom: 4vh;
@@ -79,7 +85,7 @@ body {
     z-index: 310;
 }
 
-/* BUTANG FULLSCREEN */
+/* TOMBOL FULLSCREEN */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
@@ -95,7 +101,7 @@ body {
 }
 
 /* ==========================================
-   0. START SCREEN OVERLAY
+   0. OVERLAY SKRIN MULA
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -131,7 +137,7 @@ body {
 
 #start-app-btn:hover {
     transform: translateY(-4px) scale(1.02);
-    background-color: #FFFFCC !important; /* Hover asal */
+    background-color: #FFFFCC !important;
 }
 
 .first-header {
@@ -164,7 +170,7 @@ body {
     line-height: 0.9;
 }
 
-/* VIDEO LAYERS */
+/* LAYER VIDEO */
 .video-layer {
     position: absolute;
     top: 0;
@@ -182,7 +188,7 @@ body {
     z-index: 2;
 }
 
-/* SCENE 2: LANGUAGE SELECTION OVERLAY */
+/* SCENE 2: SELEKSI BAHASA */
 #language-overlay {
     display: none;
     position: absolute;
@@ -227,7 +233,7 @@ body {
 
 .lang-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFFFCC !important; /* Hover asal */
+    background-color: #FFFFCC !important;
 }
 
 #language-overlay .flag-icon {
@@ -272,7 +278,7 @@ body {
     line-height: 0.5;
 }
 
-/* BUTANG LANGKAU (HOVER ASAL) */
+/* TOMBOL LANGKAU */
 #skip-btn {
     display: none;
     position: absolute;
@@ -298,11 +304,11 @@ body {
 
 #skip-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCCFF !important; /* Hover asal */
+    background-color: #FFCCFF !important;
 }
 
 /* ==========================================
-   SCENE 4: MAIN MENU STYLING
+   SCENE 4: UTAMA MENU
    ========================================== */
 #scene4-overlay {
     display: none;
@@ -381,7 +387,7 @@ body {
 
 .menu-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFFFCC !important; /* Hover asal butang Bab & Kuiz */
+    background-color: #FFFFCC !important;
 }
 
 /* ==========================================
@@ -595,7 +601,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 6: CHAPTER MENU
+   SCENE 6: MENU BAB
    ========================================== */
 #scene6-overlay {
     display: none;
@@ -650,7 +656,7 @@ body {
 
 .chapter-card-btn:hover {
     transform: translateY(-5px);
-    background-color: #FFFF99 !important; /* Hover asal */
+    background-color: #FFFF99 !important;
 }
 
 .card-left {
@@ -794,7 +800,7 @@ body {
 
 .sub-menu-btn.yellow-btn:hover { background-color: #CCFF99 !important; }
 
-/* VIDEO PLAYER OVERLAY */
+/* OVERLAY PEMUTAR VIDEO */
 #normal-lawan-overlay {
     display: none;
     position: fixed;
@@ -894,7 +900,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: QUIZ INTERFACE (DILARASKAN ATAS GARIS 1)
+   SCENE 11: INTERFASE KUIS (BARIS 1 PAS ATAS GARIS 1, BARIS 2 PAS ATAS GARIS 2)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -910,10 +916,10 @@ body {
     z-index: 200;
 }
 
-/* TEKS SOALAN DITARIK NAIK DUDUK TEPAT DI ATAS GARISAN 1 */
+/* TEKS SOAL: BARIS 1 PAS DI ATAS GARIS 1, BARIS 2 PAS DI ATAS GARIS 2 */
 .question-container {
     position: absolute;
-    top: 10.5vh; /* DITARIK NAIK AGAR TEKS DUDUK ATAS GARIS 1 */
+    top: 7vh; /* Menaikkan posisi sehingga baris pertama duduk pas di atas garis 1 */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -927,11 +933,11 @@ body {
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 1.1; /* LINE HEIGHT DIKECILKAN SUPAYA TEKS BERADA TEPAT ATAS GARIS */
+    line-height: 5.5vh; /* Menyesuaikan jarak tinggi antar garis agar baris 2 pas di atas garis 2 */
     margin: 0;
 }
 
-/* BUTANG JAWAPAN A, B, C & D */
+/* TOMBOL JAWABAN A, B, C & D */
 .options-grid {
     position: absolute;
     top: 42vh;
@@ -966,7 +972,7 @@ body {
 
 .option-btn:hover {
     transform: translateY(-4px);
-    background-color: #FFCC99 !important; /* Hover asal jawapan */
+    background-color: #FFCC99 !important;
 }
 
 .score-board {
@@ -985,7 +991,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 12: QUIZ RESULT
+   SCENE 12: SKRIN HASIL KUIS
    ========================================== */
 #scene12-overlay {
     display: none;
