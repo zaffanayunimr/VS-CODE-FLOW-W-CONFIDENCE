@@ -32,14 +32,16 @@ body {
 }
 
 /* ==========================================
-   DESAIN TOMBOL LINGKARAN (SETTING, HOME, FULLSCREEN, DLL)
+   REKABENTUK BUTANG BULAT (SETTING, HOME, FULLSCREEN, DLL)
    ========================================== */
 .circle-icon-btn,
-#fullscreen-btn {
+#fullscreen-btn,
+.home-circle-btn,
+.gear-btn {
     width: 52px !important;
     height: 52px !important;
     background-color: #FFFFFF !important;
-    border: 3.5px solid #38B6FF !important; /* Garis lingkaran luar biru terang */
+    border: 3.5px solid #38B6FF !important;
     border-radius: 50% !important;
     display: flex !important;
     justify-content: center !important;
@@ -56,6 +58,9 @@ body {
 /* SIMBOL IKON BIRU DI TENGAH */
 .circle-icon-btn svg,
 #fullscreen-btn svg,
+.home-circle-btn svg,
+.gear-btn svg,
+.gear-btn .gear-icon,
 .circle-icon-btn svg path,
 #fullscreen-btn svg path {
     width: 26px !important;
@@ -69,24 +74,29 @@ body {
     margin: auto !important;
 }
 
-/* EFEK HOVER TOMBOL LINGKARAN (LIGHT PINK) */
+/* EFEK HOVER BUTANG BULAT (LIGHT PINK) */
 .circle-icon-btn:hover,
-#fullscreen-btn:hover {
-    background-color: #FFE6F2 !important; /* Light Pink Soft */
+#fullscreen-btn:hover,
+.home-circle-btn:hover,
+.gear-btn:hover {
+    background-color: #FFE6F2 !important;
     border-color: #38B6FF !important;
     transform: translateY(-3px) scale(1.05) !important;
 }
 
 .circle-icon-btn:hover svg,
 #fullscreen-btn:hover svg,
-.circle-icon-btn:hover svg path,
-#fullscreen-btn:hover svg path {
+.home-circle-btn:hover svg,
+.gear-btn:hover svg,
+.gear-btn:hover .gear-icon {
     fill: #38B6FF !important;
-    stroke: none !important;
 }
 
-/* KONTROL KIRI BAWAH */
-.left-bottom-controls {
+/* KAWALAN KIRI BAWAH (SETTING, HOME, BACK ARROW) */
+.left-bottom-controls,
+#home-btn,
+.home-circle-btn,
+#normal-lawan-home-btn {
     position: absolute;
     bottom: 4vh;
     left: 3vw;
@@ -97,7 +107,47 @@ body {
     z-index: 310;
 }
 
-/* TOMBOL FULLSCREEN */
+/* REKABENTUK BUTANG KEMBALI ANAPAH ARROW (BULAT) */
+.back-arrow-btn,
+#back-btn,
+.sub-back-btn,
+#normal-lawan-back-btn {
+    position: absolute;
+    bottom: 4vh;
+    left: calc(3vw + 65px); /* Terletak bersebelahan di kiri bawah selepas butang Home/Setting */
+    width: 52px !important;
+    height: 52px !important;
+    background-color: #FFFFFF !important;
+    border: 3.5px solid #38B6FF !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    padding: 0 !important;
+    z-index: 310;
+}
+
+.back-arrow-btn:hover,
+#back-btn:hover,
+.sub-back-btn:hover,
+#normal-lawan-back-btn:hover {
+    background-color: #FFE6F2 !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+.back-arrow-btn svg,
+#back-btn svg,
+.sub-back-btn svg,
+#normal-lawan-back-btn svg {
+    width: 26px !important;
+    height: 26px !important;
+    fill: #38B6FF !important;
+}
+
+/* BUTANG FULLSCREEN */
 #fullscreen-btn {
     display: flex !important;
     position: fixed !important;
@@ -106,14 +156,8 @@ body {
     z-index: 9999999 !important;
 }
 
-@media screen and (max-width: 768px) {
-    #fullscreen-btn {
-        display: none !important;
-    }
-}
-
 /* ==========================================
-   0. OVERLAY LAYAR MULA
+   0. OVERLAY SKRIN MULA
    ========================================== */
 #start-overlay {
     position: fixed;
@@ -290,7 +334,7 @@ body {
     line-height: 0.5;
 }
 
-/* TOMBOL LANGKAU */
+/* BUTANG LANGKAU */
 #skip-btn {
     display: none;
     position: absolute;
@@ -340,8 +384,8 @@ body {
 
 #scene4-overlay .gear-btn {
     position: absolute;
-    bottom: 25px;
-    left: 25px;
+    bottom: 4vh;
+    left: 3vw;
 }
 
 .menu-header {
@@ -422,7 +466,6 @@ body {
     z-index: 300;
 }
 
-/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -636,24 +679,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan lagi supaya tajuk berada tepat di atas garisan biru */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK DIBESARKAN & DITURUNKAN SAMAN DENGAN SEMUA HALAMAN */
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 38vh; /* Kekal di kedudukan selari petak biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -690,7 +731,6 @@ body {
     right: 10px;
 }
 
-/* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
     top: 180px;
     left: 50%;
@@ -759,29 +799,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh; /* Diturunkan selari dengan tajuk Kuiz & Bab */
+    padding-top: 13vh;
     z-index: 200;
 }
 
-/* TAJUK ASAS, PENJAGAAN, KESIHATAN DIBESARKAN & DITURUNKAN */
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem; /* Dibesarkan sama dengan tajuk Kuiz & Bab */
+    font-size: 4.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
-/* GRID BUTANG SUB-MENU DITURUNKAN KE PETAK LAKARAN BIRU (JARAK ANTARA KOTAK KEKAL) */
 .sub-menu-grid {
     position: absolute;
-    top: 38vh; /* Diturunkan supaya baris atas & bawah berada di dalam petak lakaran biru */
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px; /* Jarak antara kotak dikekalkan */
+    gap: 80px 60px;
     width: 84%;
     max-width: 900px;
 }
@@ -896,7 +934,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
+   SCENE 11: INTERFASE KUIS
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -912,10 +950,9 @@ body {
     z-index: 200;
 }
 
-/* WADAH SOALAN: top: 14.8vh MENUNJUKKAN TITIK MULA BARIS PERTAMA DUDUK TEPAT DI ATAS GARISAN BIRU KEDUA */
 .question-container {
     position: absolute;
-    top: 14.8vh; /* Menurunkan baris pertama soalan tepat ke garisan biru */
+    top: 14.8vh;
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -924,13 +961,12 @@ body {
     z-index: 210;
 }
 
-/* LINE-HEIGHT 8vh MENYESUAIKAN DENGAN JARAK GARISAN BIRU PADA LATAR BELAKANG */
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru seterusnya */
+    line-height: 8vh;
     margin: 0;
 }
 
@@ -1059,15 +1095,14 @@ body {
     align-items: center;
 }
 
-/* 1. KOTAK POP-UP (Dibesarkan sedikit tinggi & lebarnya supaya selesa) */
 .modal-box {
-    position: relative; /* Wajib supaya butang X melekat pada bucu kotak sahaja */
+    position: relative;
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px; /* Ditambah padding atas untuk ruang ikon & butang X */
+    padding: 30px 40px 25px 40px;
     width: 90%;
-    max-width: 480px;            /* Dibesarkan sedikit daripada 450px ke 480px */
+    max-width: 480px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -1075,7 +1110,6 @@ body {
     align-items: center;
 }
 
-/* 2. BUTANG X (Diletakkan di bucu atas kanan tanpa menolak elemen lain) */
 .modal-x-btn {
     position: absolute;
     top: 15px;
@@ -1098,14 +1132,12 @@ body {
     transform: scale(1.2);
 }
 
-/* 3. IKON (Dolar/Pintu/Lampu) */
 .modal-icon {
     font-size: 3.2rem;
     line-height: 1;
     margin-bottom: 12px;
 }
 
-/* 4. TAJUK (Keluar Kuiz? / Petunjuk) */
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.2rem;
@@ -1115,7 +1147,6 @@ body {
     line-height: 1.1;
 }
 
-/* 5. TEKS PENERANGAN (Kembali ke menu pilihan kuiz) */
 .modal-box p {
     font-family: Arial, sans-serif;
     font-size: 1.05rem;
@@ -1126,7 +1157,6 @@ body {
     white-space: pre-line;
 }
 
-/* 6. BUTANG TERUSKAN */
 #modal-close-btn {
     background-color: #CFE1F7;
     border: 3px solid #CC3399;
@@ -1143,4 +1173,145 @@ body {
 #modal-close-btn:hover {
     transform: translateY(-2px);
     background-color: #FFFFCC !important;
+}
+
+/* ==========================================
+   KECERASAN SKRIN TELEFON BIMBIT (MOBILE RESPONSIVE)
+   LOGIK DIBAWA DARI STYLE LAMA KE STYLE BARU
+   ========================================== */
+
+@media screen and (max-width: 768px), screen and (orientation: landscape) and (max-height: 500px) {
+
+    /* Sembunyikan Butang Skrin Penuh Pada Telefon Bimbit */
+    #fullscreen-btn {
+        display: none !important;
+    }
+
+    /* Pengecilan Saiz Butang Bulat Navigasi (Settings & Home) */
+    .circle-icon-btn,
+    .home-circle-btn,
+    .gear-btn {
+        width: 38px !important;
+        height: 38px !important;
+        border-width: 2px !important;
+    }
+
+    .circle-icon-btn svg,
+    .home-circle-btn svg,
+    .gear-btn svg,
+    .gear-btn .gear-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /* Pengecilan Butang Kembali (Arrow Back) */
+    .back-arrow-btn,
+    #back-btn,
+    .sub-back-btn,
+    #normal-lawan-back-btn {
+        width: 38px !important;
+        height: 38px !important;
+        border-width: 2px !important;
+        left: calc(3vw + 48px) !important; /* Kekal diletakkan bersebelahan butang utama di Kiri Bawah */
+        bottom: 12px !important;
+    }
+
+    .back-arrow-btn svg,
+    #back-btn svg,
+    .sub-back-btn svg,
+    #normal-lawan-back-btn svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /* Penetapan Kedudukan Kiri Bawah pada Telefon Bimbit */
+    .left-bottom-controls,
+    #home-btn,
+    .home-circle-btn,
+    #normal-lawan-home-btn,
+    #scene4-overlay .gear-btn {
+        bottom: 12px !important;
+        left: 12px !important;
+    }
+
+    /* Penyesuaian Skrin Mula & Tajuk */
+    .first-header {
+        top: 5vh;
+    }
+
+    .first-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .first-subtitle {
+        font-size: clamp(3rem, 9vw, 5rem);
+    }
+
+    #start-app-btn {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+    }
+
+    /* Tajuk Bab, Kuiz & Tetapan */
+    #chapter-title, #quiz-title, #asas-title, #penjagaan-title, #kesihatan-title, #settings-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    /* Penyesuaian Grid Butang Utama & Sub-Menu */
+    .menu-btn {
+        width: min(240px, 60vw);
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .chapter-grid-container {
+        top: 25vh;
+        width: 95%;
+        height: 280px;
+    }
+
+    .chapter-card-btn {
+        width: min(300px, 80vw);
+        height: 65px;
+    }
+
+    .sub-menu-grid {
+        top: 25vh;
+        gap: 15px 20px;
+        width: 92%;
+    }
+
+    .sub-menu-btn {
+        height: 60px;
+        font-size: 1.1rem;
+    }
+
+    /* Penyesuaian Soalan & Pilihan Kuiz Pada Telefon Bimbit */
+    .question-container {
+        top: 10vh;
+        width: 90%;
+    }
+
+    #quiz-question-text {
+        font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+        line-height: 1.3;
+    }
+
+    .options-grid {
+        top: 35vh;
+        gap: 12px 15px;
+        width: 92%;
+    }
+
+    .option-btn {
+        min-height: 55px;
+        font-size: 1rem;
+        padding: 8px 10px;
+    }
+
+    /* Kedudukan Toolbar Pemutar Video Pada Telefon Bimbit */
+    .video-controls-toolbar {
+        right: 12px;
+        gap: 10px;
+    }
 }
