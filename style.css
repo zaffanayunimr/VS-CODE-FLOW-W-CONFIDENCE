@@ -416,7 +416,7 @@ body {
     z-index: 300;
 }
 
-/* SEMBUYIKAN BUTTON SETTING PADA SKRIN SETTING */
+/* SEMBUYIKAN/SEMBAFIKAN BUTTON SETTING PADA SKRIN SETTING */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -517,13 +517,12 @@ body {
     cursor: pointer;
 }
 
-/* FIX 1: PERATUSAN AUDIO DI BAWAH SLIDER DENGAN JARAK SELISA */
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-top: 35px !important;
+    margin-top: 10px;
 }
 
 .audio-btn-group {
@@ -631,22 +630,24 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 13vh; /* Diturunkan lagi supaya tajuk berada tepat di atas garisan biru */
     z-index: 200;
 }
 
+/* TAJUK DIBESARKAN & DITURUNKAN SAMAN DENGAN SEMUA HALAMAN */
 #chapter-title, #quiz-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 4.2rem; /* Dibesarkan */
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
+/* CONTAINER UNTUK KAD ASAS, PENJAGAAN, DAN KESIHATAN */
 .chapter-grid-container {
     position: absolute;
-    top: 38vh;
+    top: 38vh; /* Kekal di kedudukan selari petak biru */
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -673,26 +674,25 @@ body {
     background-color: #FFFF99 !important;
 }
 
-/* FIX 2: BUTANG ASAS DAN PENJAGAAN DITURUNKAN SEDIKIT */
 .card-left {
-    top: 35px !important;
+    top: 0px;
     left: 10px;
 }
 
 .card-right {
-    top: 35px !important;
+    top: 0px;
     right: 10px;
 }
 
-/* FIX 2: BUTANG KESIHATAN & KESEDARAN DINAIKKAN SEDIKIT & TEPAT DI TENGAH (CENTER) */
+/* KAD CENTER (KESIHATAN & KESEDARAN) DITURUNKAN SELARI PETAK BIRU BAWAH */
 .card-center {
-    top: 140px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .card-center:hover {
-    transform: translate(-50%, -5px) !important;
+    transform: translate(-50%, -5px);
 }
 
 .card-icon-circle {
@@ -753,27 +753,29 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 13vh; /* Diturunkan selari dengan tajuk Kuiz & Bab */
     z-index: 200;
 }
 
+/* TAJUK ASAS, PENJAGAAN, KESIHATAN DIBESARKAN & DITURUNKAN */
 #asas-title, #penjagaan-title, #kesihatan-title {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
-    font-size: 4.2rem;
+    font-size: 4.2rem; /* Dibesarkan sama dengan tajuk Kuiz & Bab */
     font-weight: 900;
     text-align: center;
     margin: 0;
 }
 
+/* GRID BUTANG SUB-MENU DITURUNKAN KE PETAK LAKARAN BIRU (JARAK ANTARA KOTAK KEKAL) */
 .sub-menu-grid {
     position: absolute;
-    top: 38vh;
+    top: 38vh; /* Diturunkan supaya baris atas & bawah berada di dalam petak lakaran biru */
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px 60px;
+    gap: 80px 60px; /* Jarak antara kotak dikekalkan */
     width: 84%;
     max-width: 900px;
 }
@@ -888,7 +890,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 11: INTERFASE KUIZ
+   SCENE 11: INTERFASE KUIS (MAMPU DUDUK TEPAT DI ATAS GARISAN)
    ========================================== */
 #scene11-overlay {
     display: none;
@@ -904,9 +906,10 @@ body {
     z-index: 200;
 }
 
+/* WADAH SOALAN: top: 14.8vh MENUNJUKKAN TITIK MULA BARIS PERTAMA DUDUK TEPAT DI ATAS GARISAN BIRU KEDUA */
 .question-container {
     position: absolute;
-    top: 14.8vh;
+    top: 14.8vh; /* Menurunkan baris pertama soalan tepat ke garisan biru */
     left: 50%;
     transform: translateX(-50%);
     width: 82%;
@@ -915,12 +918,13 @@ body {
     z-index: 210;
 }
 
+/* LINE-HEIGHT 8vh MENYESUAIKAN DENGAN JARAK GARISAN BIRU PADA LATAR BELAKANG */
 #quiz-question-text {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.1rem;
     font-weight: normal;
     color: #E70B90 !important;
-    line-height: 8vh;
+    line-height: 8vh; /* Menyesuaikan jarak setiap baris teks dengan garisan biru seterusnya */
     margin: 0;
 }
 
@@ -977,7 +981,7 @@ body {
 }
 
 /* ==========================================
-   SCENE 12: SKRIN HASIL KUIZ
+   SCENE 12: SKRIN HASIL KUIS
    ========================================== */
 #scene12-overlay {
     display: none;
@@ -1049,14 +1053,15 @@ body {
     align-items: center;
 }
 
+/* 1. KOTAK POP-UP (Dibesarkan sedikit tinggi & lebarnya supaya selesa) */
 .modal-box {
-    position: relative;
+    position: relative; /* Wajib supaya butang X melekat pada bucu kotak sahaja */
     background-color: #FFFFFF;
     border: 4px solid #E70B90;
     border-radius: 25px;
-    padding: 30px 40px 25px 40px;
+    padding: 30px 40px 25px 40px; /* Ditambah padding atas untuk ruang ikon & butang X */
     width: 90%;
-    max-width: 480px;
+    max-width: 480px;            /* Dibesarkan sedikit daripada 450px ke 480px */
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -1064,6 +1069,7 @@ body {
     align-items: center;
 }
 
+/* 2. BUTANG X (Diletakkan di bucu atas kanan tanpa menolak elemen lain) */
 .modal-x-btn {
     position: absolute;
     top: 15px;
@@ -1086,12 +1092,14 @@ body {
     transform: scale(1.2);
 }
 
+/* 3. IKON (Dolar/Pintu/Lampu) */
 .modal-icon {
     font-size: 3.2rem;
     line-height: 1;
     margin-bottom: 12px;
 }
 
+/* 4. TAJUK (Keluar Kuiz? / Petunjuk) */
 .modal-box h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     font-size: 2.2rem;
@@ -1101,6 +1109,7 @@ body {
     line-height: 1.1;
 }
 
+/* 5. TEKS PENERANGAN (Kembali ke menu pilihan kuiz) */
 .modal-box p {
     font-family: Arial, sans-serif;
     font-size: 1.05rem;
@@ -1111,6 +1120,7 @@ body {
     white-space: pre-line;
 }
 
+/* 6. BUTANG TERUSKAN */
 #modal-close-btn {
     background-color: #CFE1F7;
     border: 3px solid #CC3399;
@@ -1223,13 +1233,12 @@ body {
         overflow: hidden;
     }
 
-    /* 2.1 TAJUK UTAMA (PAGETITLE) DIKECILKAN KEMAS */
+    /* 2.1 TAJUK UTAMA (PAGE TITLE) DIKECILKAN KEMAS */
     #asas-title, 
     #penjagaan-title, 
     #kesihatan-title, 
     #chapter-title, 
-    #quiz-title, 
-    #settings-title {
+    #quiz-title {
         font-size: clamp(2.2rem, 5.5vw, 3rem) !important;
         line-height: 1.1 !important;
     }
@@ -1332,7 +1341,7 @@ body {
         font-size: clamp(0.8rem, 1.7vw, 1.05rem) !important;
     }
 
-    /* 2.2 SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN - TIDAK NIPIS) */
+    /* SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN - KEMAS & TEBAL) */
     .sub-menu-grid {
         top: 32vh !important;
         width: 86% !important;
@@ -1347,61 +1356,73 @@ body {
         border-radius: 20px !important;
     }
 
-    /* 2.3 TETAPAN (SETTINGS OVERLAY & AUDIO PERCENTAGE) */
+    /* 2.2 TETAPAN (SETTINGS OVERLAY & KOTAK DIKECILKAN / DINAIKKAN) */
     #settings-overlay {
-        padding-top: 4vh !important;
-    }
-    .settings-grid {
-        width: 84% !important;
-        gap: 20px !important;
-        margin-top: 5vh !important;
-    }
-    .settings-box {
-        padding: 30px 15px 20px 15px !important;
-        min-height: 220px !important;
-        border-width: 3px !important;
-        border-radius: 24px !important;
-    }
-    .box-header-badge {
-        width: 170px !important;
-        height: 38px !important;
-        top: -20px !important;
-        font-size: 1.2rem !important;
-        border-width: 3px !important;
+        padding-top: 1vh !important; /* Rapatkan ke atas */
     }
 
-    /* Peratusan audio turun selesa ke bawah slider */
-    .audio-control-body {
-        gap: 20px !important;
+    #settings-overlay #settings-title {
+        font-size: clamp(1.8rem, 4vw, 2.3rem) !important; /* Tajuk dikecilkan */
+        margin-bottom: 0 !important;
     }
-    .volume-slider-container {
-        height: 140px !important;
+
+    .settings-grid {
+        width: 78% !important; /* Dikecilkan lebar kotak */
+        gap: 15px !important;
+        margin-top: 2.5vh !important; /* Dinaikkan ke atas supaya tidak bertindih dengan kepala watak */
     }
-    #volume-slider {
-        width: 100px !important;
+
+    .settings-box {
+        padding: 20px 12px 14px 12px !important;
+        min-height: 170px !important; /* Ketinggian kotak dikecilkan */
+        max-height: 200px !important;
+        border-width: 2.5px !important;
+        border-radius: 20px !important;
     }
-    #volume-percentage {
+
+    .box-header-badge {
+        width: 140px !important;
+        height: 32px !important;
+        top: -16px !important;
         font-size: 1rem !important;
-        margin-top: 45px !important;
+        border-width: 2.5px !important;
+    }
+
+    .audio-control-body {
+        gap: 12px !important;
+    }
+
+    .volume-slider-container {
+        height: 100px !important;
+    }
+
+    #volume-slider {
+        width: 80px !important;
+    }
+
+    #volume-percentage {
+        font-size: 0.85rem !important;
+        margin-top: 32px !important; /* Kekal di bawah slider secara selesa */
     }
 
     .settings-action-btn, 
     .lang-option-btn {
-        width: clamp(190px, 30vw, 240px) !important;
-        height: clamp(44px, 9vh, 50px) !important;
-        font-size: clamp(0.85rem, 1.6vw, 1.05rem) !important;
-        padding-left: 12px !important;
-        border-width: 3px !important;
+        width: clamp(160px, 25vw, 200px) !important;
+        height: clamp(34px, 7vh, 40px) !important;
+        font-size: clamp(0.75rem, 1.3vw, 0.9rem) !important;
+        padding-left: 10px !important;
+        border-width: 2.5px !important;
     }
 
     .lang-option-btn {
-        padding-left: 45px !important;
+        padding-left: 38px !important;
     }
+
     .lang-option-btn .flag-icon {
-        width: 42px !important;
-        height: 42px !important;
-        left: -6px !important;
-        border-width: 2.5px !important;
+        width: 34px !important;
+        height: 34px !important;
+        left: -5px !important;
+        border-width: 2px !important;
     }
 
     /* Soalan & Pilihan Kuiz */
