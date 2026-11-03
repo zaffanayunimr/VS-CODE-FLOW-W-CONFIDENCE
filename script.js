@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Helper untuk mengawal paparan butang Fullscreen (Telefon vs Laptop)
     function updateFullscreenBtnVisibility(sceneId) {
         if (!fullscreenBtn) return;
-        const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || 'ontouchstart' in window;
+        const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
         
         if (isMobileDevice) {
             if (sceneId === "scene1" || sceneId === "start-overlay") {
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-// =========================================================
-    // LOGIK AUTO-RELOAD (PASTIKAN KEMBALI KE SCENE 1 SELEPAS RELOAD)
+    // =========================================================
+    // LOGIK AUTO-RELOAD (KEMBALI KE SCENE 1 TANPA ERROR)
     // =========================================================
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
@@ -52,30 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("appWasHidden", "true");
     });
 
-// BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1 TANPA DELAY KETARA
+    // BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
-            // 1. Tunjuk maklum balas serta-merta pada butang supaya pengguna tahu sistem bertindak balas
             reloadBtn.textContent = "MEMUAT SEMULA...";
             reloadBtn.style.opacity = "0.7";
             reloadBtn.style.pointerEvents = "none";
 
-            // 2. Bersihkan simpanan memori
             sessionStorage.removeItem("appWasHidden");
             sessionStorage.clear();
 
-            // 3. Gunakan replace() untuk muat semula halaman lebih pantas tanpa simpan sejarah cache lama
             window.location.replace(window.location.origin + window.location.pathname);
-        });
-    }
-            
-            // 2. Sembunyikan pop-up reload serta merta
-            if (reloadOverlay) {
-                reloadOverlay.style.setProperty("display", "none", "important");
-            }
-
-            // 3. Muat semula halaman dari awal (Scene 1)
-            window.location.href = window.location.pathname; 
         });
     }
 
