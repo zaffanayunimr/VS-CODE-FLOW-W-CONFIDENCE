@@ -516,13 +516,13 @@ body {
     cursor: pointer;
 }
 
-/* MEMBERI JARAK SEBAB SAMA DI BAWAH SLIDER */
+/* KEDUDUKAN TEKS PERATUSAN (10%) ADA JARAK DI BAWAH SLIDER */
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-top: 24px !important;
+    margin-top: 35px !important;
 }
 
 .audio-btn-group {
@@ -643,7 +643,6 @@ body {
     margin: 0;
 }
 
-/* CONTAINER KAD BAB */
 .chapter-grid-container {
     position: absolute;
     top: 38vh;
@@ -673,26 +672,26 @@ body {
     background-color: #FFFF99 !important;
 }
 
-/* TURUNKAN SEDIKIT BUTANG ASAS DAN PENJAGAAN (15px DARI ASAL) */
+/* KEDUDUKAN BUTANG ASAS DAN PENJAGAAN DITURUNKAN SEDIKIT */
 .card-left {
-    top: 15px;
+    top: 35px !important;
     left: 10px;
 }
 
 .card-right {
-    top: 15px;
+    top: 35px !important;
     right: 10px;
 }
 
-/* BUTANG KESIHATAN & KESEDARAN: NAIKKAN SEDIKIT (DARI 180px KE 155px) DAN KE CENTER */
+/* KEDUDUKAN BUTANG KESIHATAN & KESEDARAN DINAIKKAN SEDIKIT & TEPAT DI TENGAH (CENTER) */
 .card-center {
-    top: 155px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 140px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 
 .card-center:hover {
-    transform: translate(-50%, -5px);
+    transform: translate(-50%, -5px) !important;
 }
 
 .card-icon-circle {
@@ -1322,41 +1321,4 @@ body {
     button:active, .circle-icon-btn:active, #fullscreen-btn:active {
         transform: scale(0.97) !important;
     }
-}
-
-/* =========================================================
-   PELARASAN PERATUSAN AUDIO & SKRIN BAB UNTUK TELEFON
-   ========================================================= */
-@media screen and (max-width: 1024px) and (orientation: landscape) {
-
-    /* Peratusan audio di bawah slider dengan jarak yang mencukupi */
-    #settings-overlay .audio-control-body {
-        grid-template-columns: 74px minmax(125px, 1fr) !important;
-        grid-template-rows: 116px auto !important;
-        row-gap: 16px !important;
-    }
-    #settings-overlay .volume-slider-container {
-        grid-row: 1 !important; height: 116px !important; align-self: center !important;
-    }
-    #settings-overlay #volume-percentage {
-        grid-column: 1 !important; grid-row: 2 !important;
-        margin-top: 14px !important; font-size: 0.85rem !important;
-        justify-self: center !important;
-    }
-
-    /* Skrin 6: Butang Asas & Penjagaan diturunkan, Butang Kesihatan dinaikkan & berada di tengah */
-    #scene6-overlay .chapter-grid-container {
-        top: 29vh !important; height: 56vh !important;
-    }
-    #scene6-overlay .chapter-grid-container .chapter-card-btn:last-child {
-        transform: translate(-50%, -1vh) !important;
-        left: 50% !important;
-    }
-    #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(1),
-    #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(2) {
-        transform: translateY(2vh) !important;
-    }
-
-    .menu-buttons-container { margin-top: 21vh !important; gap: 8px !important; }
-    .menu-btn { width: clamp(158px, 26vw, 205px) !important; height: clamp(38px, 7.6vh, 45px) !important; }
 }
