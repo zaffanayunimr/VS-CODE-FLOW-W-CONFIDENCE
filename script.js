@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function forceShowReloadOverlay() {
         if (reloadOverlay) {
-            // Pindahkan reloadOverlay keluar terus ke <body> supaya menutupi 100% skrin telefon (tanpa terikat dengan nisbah landskap player-container)
+            // Pindahkan reloadOverlay terus di bawah <body> jika belum dipindah
             if (reloadOverlay.parentNode !== document.body) {
                 document.body.appendChild(reloadOverlay);
             }
@@ -37,6 +37,8 @@ function forceShowReloadOverlay() {
             reloadOverlay.style.setProperty("position", "fixed", "important");
             reloadOverlay.style.setProperty("top", "0", "important");
             reloadOverlay.style.setProperty("left", "0", "important");
+            reloadOverlay.style.setProperty("right", "0", "important");
+            reloadOverlay.style.setProperty("bottom", "0", "important");
             reloadOverlay.style.setProperty("width", "100vw", "important");
             reloadOverlay.style.setProperty("height", "100dvh", "important");
         }
