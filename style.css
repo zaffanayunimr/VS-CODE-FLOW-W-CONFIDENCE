@@ -1827,3 +1827,44 @@ body {
     max-width: 100% !important; max-height: 100% !important;
   }
 }
+
+
+/* User refinement: landscape phone only; portrait and laptop remain original. */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  /* Audio percentage sits below the slider with a clearer breathing space. */
+  #settings-overlay .audio-control-body {
+    grid-template-columns: 74px minmax(125px, 1fr) !important;
+    grid-template-rows: 116px auto !important;
+    row-gap: 12px !important;
+  }
+  #settings-overlay .volume-slider-container {
+    grid-row: 1 !important; height: 116px !important; align-self: center !important;
+  }
+  #settings-overlay #volume-percentage {
+    grid-column: 1 !important; grid-row: 2 !important;
+    margin-top: 2px !important; font-size: 0.76rem !important;
+    justify-self: center !important;
+  }
+
+  /* Scene 6 category page: move Asas/Penjagaan down; center the bottom card. */
+  #scene6-overlay .chapter-grid-container {
+    top: 29vh !important; height: 56vh !important;
+  }
+  #scene6-overlay .chapter-grid-container .chapter-card-btn:last-child {
+    transform: translate(-50%, -1vh) !important;
+    left: 50% !important;
+  }
+  #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(1),
+  #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(2) {
+    transform: translateY(2vh) !important;
+  }
+
+  /* Slightly lower and smaller main Bab/Kuiz buttons. */
+  .menu-buttons-container { margin-top: 21vh !important; gap: 8px !important; }
+  .menu-btn { width: clamp(158px, 26vw, 205px) !important; height: clamp(38px, 7.6vh, 45px) !important; }
+}
+
+/* Desktop/laptop fullscreen stays visible; phone visibility is controlled by JS. */
+@media screen and (min-width: 1025px), screen and (orientation: portrait) {
+  #fullscreen-btn { display: flex !important; }
+}
