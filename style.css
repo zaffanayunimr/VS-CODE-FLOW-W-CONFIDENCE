@@ -1506,34 +1506,6 @@ body {
         font-size: clamp(0.85rem, 2vw, 1.1rem) !important;
         border-width: 2px !important;
     }
-
-    #settings-overlay .flag-icon {
-        width: 35px !important;
-        height: 35px !important;
-        object-fit: contain !important;
-}
-
-    #settings-overlay input[type="range"] {
-        width: 70% !important;
-        height: 20px !important;
-        transform: scale(1);
-        transform-origin: center;
-    }
-
-    #settings-overlay input[type="range"]::-webkit-slider-thumb {
-        width: 35px !important;
-        height: 35px !important;
-    }
-
-    #settings-overlay input[type="range"]::-moz-range-thumb {
-        width: 35px !important;
-        height: 35px !important;
-    }
-
-    #settings-overlay .volume-percentage {
-        font-size: 9px !important;
-    }
-    
     /* Skor lebih kecil. */
     .score-board {
         top: 2.5vh !important;
@@ -1663,43 +1635,197 @@ body {
         border-width: 3px !important;
     }
 
-    /* Main menu: lower the title/buttons into the gap between both characters.
-       Keep the Bab/Kuiz buttons visibly large and comfortable to tap. */
-    .menu-header {
-        margin-top: 8vh !important;
-    }
-    .menu-buttons-container {
-        margin-top: 17vh !important;
-        gap: 12px !important;
-    }
-    .menu-btn {
-        width: clamp(190px, 31vw, 245px) !important;
-        height: clamp(46px, 9.5vh, 56px) !important;
-        font-size: clamp(1.05rem, 2.4vw, 1.35rem) !important;
-        border-width: 3px !important;
+* =====================================
+       QUIZ RESULT
+       ===================================== */
+
+    #result-congrats {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 20px;
     }
 
-    /* Asas/Care topic buttons: move down below their heading. */
-    .sub-menu-grid {
-        top: 33vh !important;
-        width: 82% !important;
-        gap: 3vh 3vw !important;
-    }
-    .sub-menu-btn {
-        height: clamp(52px, 12vh, 64px) !important;
-        min-height: 52px !important;
-        font-size: clamp(0.76rem, 1.65vw, 1rem) !important;
-        padding: 6px 10px !important;
+    #result-motto {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        margin-bottom: 20px;
     }
 
-    /* Bab Penjagaan page: lift all three cards, especially Kesihatan,
-       so the bottom card no longer overlaps the footer logo. */
-    .chapter-grid-container {
-        top: 23vh !important;
-        height: 62vh !important;
+    .score-display-line {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        gap: 10px;
     }
+
+    .result-box {
+        margin-bottom: 25px;
+    }
+
+    /* =====================================
+       SETTINGS SCREEN
+       ===================================== */
+
+    #settings-overlay {
+        padding-top: 8px;
+    }
+
+    #settings-title {
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+    }
+
+    .settings-grid {
+        width: 90%;
+        gap: 22px;
+        margin-top: 22px;
+        align-items: stretch;
+    }
+
+    .settings-box {
+        min-width: 0;
+        padding: 28px 12px 12px;
+        border-width: 3px;
+        border-radius: 22px;
+    }
+
+    .box-header-badge {
+        top: -19px;
+        width: min(180px, 75%);
+        height: 38px;
+        border-width: 3px;
+        font-size: 1.35rem;
+    }
+
+    .audio-control-body {
+        gap: 18px;
+    }
+
+    .volume-slider-container {
+        width: 35px;
+        height: 105px;
+    }
+
+    #volume-slider {
+        width: 85px;
+        height: 12px;
+    }
+
+    #volume-slider::-webkit-slider-thumb {
+        width: 23px;
+        height: 23px;
+        border-width: 3px;
+    }
+
+    #volume-percentage {
+        font-size: 1rem;
+    }
+
+    /* =====================================
+       CHAPTER MENUS
+       ===================================== */
+
+    #scene6-overlay,
+    #scene7-overlay,
+    #scene8-overlay,
+    #scene9-overlay,
+    #scene10-overlay {
+        padding-top: 12px;
+    }
+
+    #chapter-title,
+    #asas-title,
+    #penjagaan-title,
+    #quiz-title {
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    #kesihatan-title {
+        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    }
+
+    .chapter-buttons-container {
+        width: 94%;
+        max-width: 850px;
+        height: 70vh;
+        margin-top: 5vh;
+    }
+
     .chapter-card-btn {
-        height: clamp(50px, 12vh, 62px) !important;
+        width: 37%;
+        height: 60px;
+        border-width: 3px;
+    }
+
+    .card-left {
+        top: 10px;
+        left: 20px;
+    }
+
+    .card-right {
+        top: 10px;
+        right: 20px;
+    }
+
+    .card-center {
+        bottom: 8px;
+    }
+
+    .card-icon-circle {
+        width: 60px;
+        height: 60px;
+        left: -10px;
+    }
+
+    .card-emoji {
+        font-size: 1.6rem;
+    }
+
+    .health-svg-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-label {
+        padding-left: 35px;
+        padding-right: 8px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+    }
+
+    /* Sub-menu buttons */
+    .sub-menu-grid {
+        width: 88%;
+        max-width: 850px;
+        gap: 3vh 3vw;
+        margin-top: 6vh;
+    }
+
+    .sub-menu-btn {
+        height: auto;
+        min-height: 58px;
+        padding: 8px 12px;
+        font-size: clamp(0.85rem, 2vw, 1.3rem);
+        border-width: 3px;
+        border-radius: 18px;
+    }
+
+    .sub-back-btn,
+    #normal-lawan-back-btn {
+        bottom: 12px;
+        right: 12px;
+        width: 105px;
+        height: 35px;
+        font-size: 1rem;
+        border-width: 2px;
+    }
+
+    .home-circle-btn,
+    #normal-lawan-home-btn {
+        bottom: 12px;
+        left: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .home-circle-btn svg {
+        width: 33px;
+        height: 33px;
     }
 
     /* Hint / quit / correct-wrong popup: compact box and controls. */
