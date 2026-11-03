@@ -1143,7 +1143,6 @@ body {
    MEDIA QUERIES (PELARASAN KHAS UNTUK PHONE & TABLET SAHAJA)
    ========================================================= */
 
-/* Arahan rotate (iPhone sahaja) */
 #rotate-device-overlay { display: none !important; }
 
 @media only screen and (max-device-width: 932px) and (orientation: portrait) {
@@ -1315,7 +1314,7 @@ body {
         border-width: 3px !important;
     }
 
-    /* LAYOUT BAB (#scene6) & KUIZ (#scene10) */
+    /* KUIZ PAGE (#scene10) & BAB PAGE (#scene6) - PENYESUAIAN IKON KEKAL SAMA SEPERTI LAPTOP */
     #scene10-overlay .chapter-grid-container,
     #scene6-overlay .chapter-grid-container {
         top: 28vh !important;
@@ -1342,36 +1341,26 @@ body {
         border-width: 3px !important;
     }
 
-    /* =========================================================
-       IKON & EMOJI 100% PERSIS LAPTOP (PENAMBAHAN RENDERING NATIVE)
-       ========================================================= */
+    /* KEKALKAN BULATAN IKON & EMOJI PERSIS LAPTOP */
     .card-icon-circle {
         position: absolute !important;
-        left: -12px !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        width: 86px !important;
-        height: 86px !important;
+        left: -10px !important;
+        width: clamp(48px, 10vh, 60px) !important;
+        height: clamp(48px, 10vh, 60px) !important;
         border-radius: 50% !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1) !important;
-        z-index: 10 !important;
     }
 
     .card-emoji {
-        font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
-        font-size: 2.2rem !important;
+        font-size: clamp(1.4rem, 3vh, 1.8rem) !important;
         line-height: 1 !important;
-        display: block !important;
-        margin: auto !important;
-        text-shadow: none !important;
     }
 
     .health-svg-icon {
-        width: 38px !important;
-        height: 38px !important;
+        width: clamp(24px, 5vh, 30px) !important;
+        height: clamp(24px, 5vh, 30px) !important;
         fill: #DC03A0 !important;
         display: block !important;
         margin: auto !important;
@@ -1381,7 +1370,7 @@ body {
     #scene6-overlay .card-label {
         font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
         line-height: 1.1 !important;
-        padding-left: 48px !important;
+        padding-left: 40px !important;
     }
 
     /* SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN) */
@@ -1399,7 +1388,7 @@ body {
         border-radius: 20px !important;
     }
 
-    /* TETAPAN (SETTINGS OVERLAY & KOTAK DIKECILKAN / DINAIKKAN) */
+    /* TETAPAN (SETTINGS OVERLAY) */
     #settings-overlay {
         padding-top: 1vh !important;
     }
@@ -1531,21 +1520,19 @@ body {
         font-size: 1.4rem !important;
     }
 
-    /* Ikon Bawah Kiri PERSIS LAPTOP */
+    /* Ikon Bawah Kiri Kekal Persis Laptop */
     .left-bottom-controls {
         bottom: max(10px, env(safe-area-inset-bottom)) !important;
         left: max(10px, env(safe-area-inset-left)) !important;
         gap: 8px !important;
     }
     .circle-icon-btn {
-        width: 52px !important;
-        height: 52px !important;
-        border: 3.5px solid #38B6FF !important;
+        width: 42px !important;
+        height: 42px !important;
     }
     .circle-icon-btn svg {
-        width: 26px !important;
-        height: 26px !important;
-        fill: #38B6FF !important;
+        width: 20px !important;
+        height: 20px !important;
     }
 
     /* Video Player Fit */
