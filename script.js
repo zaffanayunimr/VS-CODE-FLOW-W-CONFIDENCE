@@ -21,6 +21,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // =========================================================
+// LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
+// =========================================================
+const reloadOverlay = document.getElementById("phone-reload-overlay");
+const reloadBtn = document.getElementById("phone-reload-btn");
+
+// Semak jika peranti adalah skrin mudah alih/telefon
+function isMobileDevice() {
+    return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
+}
+
+// Mengesan apabila pengguna tutup skrin atau keluar dari tab browser
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden" && isMobileDevice()) {
+        // Tanda bahawa aplikasi telah ditarik ke latar belakang (background)
+        sessionStorage.setItem("appWasHidden", "true");
+    } else if (document.visibilityState === "visible" && isMobileDevice()) {
+        // Apabila pengguna buka balik telefon/tab, tunjuk butang Reload
+        if (sessionStorage.getItem("appWasHidden") === "true") {
+            if (reloadOverlay) {
+                reloadOverlay.style.setProperty("display", "flex", "important");
+            }
+        }
+    }
+});
+
+// Event listener untuk butang Reload
+if (reloadBtn) {
+    reloadBtn.addEventListener("click", () => {
+        sessionStorage.removeItem("appWasHidden");
+        window.location.reload(); // Muat semula halaman dari awal
+    });
+}
+
     // ==========================================
     // 1. DOM ELEMENT SELECTION
     // ==========================================
