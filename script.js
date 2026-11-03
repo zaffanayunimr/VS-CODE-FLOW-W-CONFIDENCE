@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // =========================================================
-    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
+// =========================================================
+    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERHENTI (PHONE ONLY)
     // =========================================================
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
@@ -29,11 +29,40 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
     }
 
+    // Fungsi khas untuk HENTIKAN SEMUA AUDIO & VIDEO
+    function stopAllMedia() {
+        if (bgMusic) {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+        }
+        if (introAudio) {
+            introAudio.pause();
+            introAudio = null;
+        }
+        if (video1) {
+            video1.pause();
+            video1.currentTime = 0;
+        }
+        if (video2) {
+            video2.pause();
+            video2.currentTime = 0;
+        }
+        if (normalLawanVideo) {
+            normalLawanVideo.pause();
+            normalLawanVideo.currentTime = 0;
+        }
+    }
+
+    // Mengesan apabila pengguna tutup skrin atau keluar dari tab browser
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden" && isMobileDevice()) {
+            // Hentikan semua media serta merta apabila aplikasi masuk ke background
+            stopAllMedia();
             sessionStorage.setItem("appWasHidden", "true");
         } else if (document.visibilityState === "visible" && isMobileDevice()) {
             if (sessionStorage.getItem("appWasHidden") === "true") {
+                // Pastikan media kekal terhenti semasa pop-up reload muncul
+                stopAllMedia();
                 if (reloadOverlay) {
                     reloadOverlay.style.setProperty("display", "flex", "important");
                 }
@@ -44,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
             sessionStorage.removeItem("appWasHidden");
-            window.location.reload();
+            window.location.reload(); // Muat semula halaman dari awal
         });
     }
 
