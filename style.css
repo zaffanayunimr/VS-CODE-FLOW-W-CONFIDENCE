@@ -1254,30 +1254,6 @@ body {
 }
 
 /* ---------------------------------------------------------
-   PENYELARASAN NISBAH SKRIN SERAGAM (MOD LANDSKAP TELEFON)
-   --------------------------------------------------------- */
-@media screen and (max-width: 932px) and (orientation: landscape) {
-
-    /* KUNCI RATIO 100% UNTUK SEMUA SCENE & RELOAD OVERLAY */
-    html, body, #player-container,
-    #start-overlay, .video-layer, #language-overlay, 
-    #scene4-overlay, #settings-overlay, #scene6-overlay, 
-    #scene7-overlay, #scene8-overlay, #scene9-overlay, 
-    #scene10-overlay, #scene11-overlay, #scene12-overlay, 
-    #normal-lawan-overlay, #phone-reload-overlay {
-        width: 100vw !important;
-        height: 100vh !important;
-        height: 100dvh !important;
-        max-width: 100vw !important;
-        max-height: 100vh !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-        background-size: 100% 100% !important; /* Nisbah dipaksa tepat mengikut skrin */
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-    }
-}
-/* ---------------------------------------------------------
    1. PHONE (PORTRAIT MODE)
    --------------------------------------------------------- */
 @media screen and (max-width: 600px) and (orientation: portrait) {
