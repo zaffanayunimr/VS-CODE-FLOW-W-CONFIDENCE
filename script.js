@@ -34,7 +34,6 @@ function forceShowReloadOverlay() {
             reloadOverlay.style.setProperty("z-index", "9999999999", "important");
         }
     }
-    }
 
     // Mengesan bila pengguna keluar dari skrin/tab
     document.addEventListener("visibilitychange", () => {
