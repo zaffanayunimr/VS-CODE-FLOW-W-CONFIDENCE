@@ -1130,10 +1130,10 @@ body {
 }
 
 /* =========================================================
-   MEDIA QUERIES (PELARASAN UNTUK PHONE & TABLET SAHAJA)
+   MEDIA QUERIES (PELARASAN KHAS UNTUK PHONE & TABLET SAHAJA)
    ========================================================= */
 
-/* Arahan rotate hanya untuk iPhone */
+/* Arahan rotate (iPhone sahaja) */
 #rotate-device-overlay { display: none !important; }
 
 @media only screen and (max-device-width: 932px) and (orientation: portrait) {
@@ -1151,7 +1151,9 @@ body {
     }
 }
 
-/* 1. SKRIN PHONE (PORTRAIT) */
+/* ---------------------------------------------------------
+   1. PHONE (PORTRAIT MODE)
+   --------------------------------------------------------- */
 @media screen and (max-width: 600px) and (orientation: portrait) {
     #start-overlay {
         width: 100%;
@@ -1206,9 +1208,22 @@ body {
     }
 }
 
+/* ---------------------------------------------------------
+   2. PHONE & TABLET (LANDSCAPE MODE)
+   --------------------------------------------------------- */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
+    html, body, #player-container,
+    .video-layer, #language-overlay, #scene4-overlay,
+    #settings-overlay, #scene6-overlay, #scene7-overlay,
+    #scene8-overlay, #scene9-overlay, #scene10-overlay,
+    #scene11-overlay, #scene12-overlay, #normal-lawan-overlay {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
+    }
 
-    /* 1. KECILKAN TAJUK UTAMA (PAGETITLE) */
+    /* 2.1 TAJUK UTAMA (PAGETITLE) DIKECILKAN KEMAS */
     #asas-title, 
     #penjagaan-title, 
     #kesihatan-title, 
@@ -1219,95 +1234,277 @@ body {
         line-height: 1.1 !important;
     }
 
-    #settings-overlay {
-        padding-top: 4vh !important;
+    .footer-logo {
+        bottom: max(8px, env(safe-area-inset-bottom)) !important;
+    }
+    .footer-title {
+        font-size: clamp(0.72rem, 1.7vw, 0.95rem) !important;
+        letter-spacing: 2px !important;
+    }
+    .footer-subtitle {
+        font-size: clamp(1.25rem, 3vw, 1.65rem) !important;
+        margin-top: 2px !important;
     }
 
-    /* 2. BAIKI BUTANG SUB-MENU (SUPAYA TIDAK NIPIS & TEKS MUAT KEMAS) */
+    #start-overlay {
+        padding-bottom: 27vh !important;
+    }
+    #start-app-btn {
+        margin-bottom: 0 !important;
+        transform: translateY(-8vh);
+        padding: 10px 25px !important;
+        min-height: 44px !important;
+        font-size: 1rem !important;
+    }
+
+    /* Pemilihan Bahasa Intro */
+    #language-overlay .lang-btn {
+        width: min(360px, 55vw) !important;
+        height: clamp(52px, 11vh, 62px) !important;
+        padding-left: 50px !important;
+        padding-right: 15px !important;
+        font-size: clamp(0.9rem, 2vw, 1.15rem) !important;
+        border-width: 3.5px !important;
+    }
+    #language-overlay .flag-icon {
+        width: clamp(50px, 10vh, 60px) !important;
+        height: clamp(50px, 10vh, 60px) !important;
+        left: -7px !important;
+        border-width: 3px !important;
+    }
+
+    #skip-btn {
+        width: 88px !important;
+        height: 32px !important;
+        top: 10px !important;
+        right: 12px !important;
+        font-size: 0.8rem !important;
+        border-width: 2px !important;
+    }
+
+    /* Menu Utama (Scene 4) */
+    .menu-header {
+        margin-top: 6vh !important;
+    }
+    .menu-title {
+        font-size: clamp(1.35rem, 3.8vw, 2.2rem) !important;
+    }
+    .menu-subtitle {
+        font-size: clamp(2.3rem, 6.8vw, 3.8rem) !important;
+        margin-top: 0 !important;
+        line-height: 0.95 !important;
+    }
+    .menu-buttons-container {
+        margin-top: 20vh !important;
+        gap: 10px !important;
+    }
+    .menu-btn {
+        width: clamp(170px, 28vw, 220px) !important;
+        height: clamp(42px, 8.5vh, 50px) !important;
+        font-size: clamp(0.95rem, 2vw, 1.2rem) !important;
+        border-width: 3px !important;
+    }
+
+    /* Menu Bab (#scene6-overlay) */
+    #scene6-overlay .chapter-grid-container {
+        top: 30vh !important;
+        height: 56vh !important;
+    }
+    #scene6-overlay .chapter-grid-container .chapter-card-btn:last-child {
+        transform: translate(-50%, 0) !important;
+        left: 50% !important;
+        top: 130px !important;
+    }
+    #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(1),
+    #scene6-overlay .chapter-grid-container .chapter-card-btn:nth-child(2) {
+        top: 25px !important;
+    }
+    .chapter-card-btn {
+        width: min(38vw, 260px) !important;
+        height: clamp(50px, 11vh, 62px) !important;
+        border-width: 3px !important;
+    }
+    .card-icon-circle {
+        width: clamp(46px, 9.5vh, 58px) !important;
+        height: clamp(46px, 9.5vh, 58px) !important;
+    }
+    .card-label {
+        font-size: clamp(0.8rem, 1.7vw, 1.05rem) !important;
+    }
+
+    /* 2.2 SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN - TIDAK NIPIS) */
     .sub-menu-grid {
         top: 32vh !important;
         width: 86% !important;
         gap: 16px 24px !important;
     }
-
     .sub-menu-btn {
         height: clamp(54px, 12.5vh, 68px) !important;
         min-height: 54px !important;
         font-size: clamp(0.9rem, 1.8vw, 1.15rem) !important;
         padding: 8px 14px !important;
+        border-width: 3px !important;
         border-radius: 20px !important;
     }
 
-    /* 3. PELARASAN TETAPAN (SETTINGS OVERLAY) */
+    /* 2.3 TETAPAN (SETTINGS OVERLAY & AUDIO PERCENTAGE) */
+    #settings-overlay {
+        padding-top: 4vh !important;
+    }
     .settings-grid {
         width: 84% !important;
         gap: 20px !important;
         margin-top: 5vh !important;
     }
-
     .settings-box {
         padding: 30px 15px 20px 15px !important;
         min-height: 220px !important;
+        border-width: 3px !important;
+        border-radius: 24px !important;
     }
-
     .box-header-badge {
         width: 170px !important;
         height: 38px !important;
         top: -20px !important;
         font-size: 1.2rem !important;
+        border-width: 3px !important;
     }
 
-    /* BUTANG BAHASA & AUDIO DALAM TETAPAN (DITAMBAH TEBAL & KEMAS) */
+    /* Peratusan audio turun selesa ke bawah slider */
+    .audio-control-body {
+        gap: 20px !important;
+    }
+    .volume-slider-container {
+        height: 140px !important;
+    }
+    #volume-slider {
+        width: 100px !important;
+    }
+    #volume-percentage {
+        font-size: 1rem !important;
+        margin-top: 45px !important;
+    }
+
     .settings-action-btn, 
     .lang-option-btn {
         width: clamp(190px, 30vw, 240px) !important;
         height: clamp(44px, 9vh, 50px) !important;
         font-size: clamp(0.85rem, 1.6vw, 1.05rem) !important;
         padding-left: 12px !important;
+        border-width: 3px !important;
     }
 
     .lang-option-btn {
         padding-left: 45px !important;
     }
-
     .lang-option-btn .flag-icon {
         width: 42px !important;
         height: 42px !important;
         left: -6px !important;
+        border-width: 2.5px !important;
     }
 
-    /* 4. PERATUSAN AUDIO (100%) DITURUNKAN KE BAWAH SLIDER */
-    .audio-control-body {
-        gap: 20px !important;
+    /* Soalan & Pilihan Kuiz */
+    .question-container {
+        top: 10vh !important;
+        width: 86% !important;
+    }
+    #quiz-question-text {
+        font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
+        line-height: 5vh !important;
+    }
+    .options-grid {
+        top: 36vh !important;
+        width: 86% !important;
+        gap: 14px 20px !important;
+    }
+    .option-btn {
+        min-height: 52px !important;
+        height: auto !important;
+        padding: 8px 12px !important;
+        font-size: clamp(0.72rem, 1.5vw, 0.95rem) !important;
+        border-width: 2.5px !important;
+    }
+    .score-board {
+        top: 3vh !important;
+        left: 3vw !important;
+        font-size: clamp(0.75rem, 1.4vw, 0.9rem) !important;
+        padding: 3px 10px !important;
+        border-width: 2px !important;
+        border-radius: 8px !important;
     }
 
-    .volume-slider-container {
-        height: 140px !important;
+    /* Dialog Pop-up (Modal) */
+    .modal-box {
+        width: 80% !important;
+        max-width: 440px !important;
+        padding: 20px 24px 18px !important;
+        border-width: 3px !important;
+        border-radius: 20px !important;
+    }
+    .modal-icon {
+        font-size: 2.5rem !important;
+        margin-bottom: 8px !important;
+    }
+    .modal-box h3 {
+        font-size: clamp(1.4rem, 3.2vw, 1.85rem) !important;
+        margin-bottom: 6px !important;
+    }
+    .modal-box p {
+        font-size: clamp(0.82rem, 1.65vw, 0.98rem) !important;
+        line-height: 1.35 !important;
+        margin-bottom: 14px !important;
+    }
+    #modal-close-btn {
+        min-height: 40px !important;
+        padding: 6px 28px !important;
+        font-size: clamp(0.85rem, 1.8vw, 1rem) !important;
+        border-width: 2.5px !important;
+    }
+    .modal-x-btn {
+        top: 10px !important;
+        right: 14px !important;
+        font-size: 1.4rem !important;
     }
 
-    #volume-slider {
-        width: 100px !important;
-    }
-
-    #volume-percentage {
-        font-size: 1rem !important;
-        margin-top: 45px !important; /* Turunkan kedudukan % ke bawah */
-    }
-
-    /* KONTROL BUTANG IKON KIRI BAWAH */
+    /* Ikon Kawalan Kiri Bawah */
     .left-bottom-controls {
-        bottom: max(12px, env(safe-area-inset-bottom)) !important;
-        left: max(12px, env(safe-area-inset-left)) !important;
+        bottom: max(10px, env(safe-area-inset-bottom)) !important;
+        left: max(10px, env(safe-area-inset-left)) !important;
         gap: 8px !important;
     }
-
     .circle-icon-btn {
         width: 42px !important;
         height: 42px !important;
     }
-
     .circle-icon-btn svg {
         width: 20px !important;
         height: 20px !important;
+    }
+
+    /* Video Player Fit */
+    .video-display-area {
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .video-display-area video, .video-layer video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+}
+
+/* ---------------------------------------------------------
+   3. KAWALAN PERANTI SENTUH (TOUCH DEVICES)
+   --------------------------------------------------------- */
+@media (hover: none), (pointer: coarse) {
+    button:hover, .circle-icon-btn:hover, #fullscreen-btn:hover {
+        transform: none !important;
+    }
+    button:active, .circle-icon-btn:active, #fullscreen-btn:active {
+        transform: scale(0.97) !important;
     }
 }
