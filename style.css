@@ -1160,12 +1160,102 @@ body {
     }
 }
 
+/* =========================================================
+   POP-UP RELOAD TELEFON (STYLING ASAS + RATIO 100%)
+   ========================================================= */
+#phone-reload-overlay {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background-color: #FFB6C1 !important; /* Latar belakang Pink Solid */
+    z-index: 999999999 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+}
+
+#phone-reload-overlay .modal-box {
+    position: relative !important;
+    background-color: #FFFFCC !important; /* Kotak dalam warna Kuning Soft */
+    border: 5px solid #CC3399 !important;   /* Garis tepi Pink Gelap */
+    border-radius: 25px !important;
+    padding: 20px 15px !important;
+    width: 85% !important;
+    max-width: 420px !important;
+    text-align: center !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+
+#phone-reload-overlay .modal-icon {
+    font-size: 2.5rem !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+}
+
+#phone-reload-overlay h3 {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif !important;
+    color: #990184 !important;
+    font-size: clamp(1rem, 3.2vw, 1.3rem) !important;
+    margin: 0 !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase !important;
+}
+
+#phone-reload-overlay .sub-heading-en {
+    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif !important;
+    color: #CC3399 !important;
+    font-size: clamp(0.85rem, 2.5vw, 1.05rem) !important;
+    margin: 2px 0 8px 0 !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase !important;
+}
+
+#phone-reload-overlay .desc-ms {
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
+    font-size: clamp(0.75rem, 1.8vw, 0.88rem) !important;
+    color: #E70B90 !important;
+    line-height: 1.2 !important;
+    margin: 0 0 4px 0 !important;
+}
+
+#phone-reload-overlay .desc-en {
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
+    font-size: clamp(0.7rem, 1.6vw, 0.82rem) !important;
+    color: #666666 !important;
+    line-height: 1.2 !important;
+    font-style: italic !important;
+    margin: 0 0 14px 0 !important;
+}
+
+#phone-reload-btn {
+    padding: 8px 22px !important;
+    font-size: clamp(0.85rem, 2vw, 1.05rem) !important;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
+    font-weight: bold !important;
+    color: #990184 !important;
+    background-color: #CFE1F7 !important;
+    border: 3px solid #CC3399 !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    outline: none !important;
+}
+
 /* ---------------------------------------------------------
-   TELEFON MOD LANDSKAP (LANDSCAPE MODE: SERAGAM UNTUK SEMUA SCENE & RELOAD)
+   PENYELARASAN NISBAH SKRIN SERAGAM (MOD LANDSKAP TELEFON)
    --------------------------------------------------------- */
 @media screen and (max-width: 932px) and (orientation: landscape) {
 
-    /* KUNCI NISBAH SKRIN SERAGAM 100% UNTUK SEMUA SCENE TERMASUK OVERLAY RELOAD */
+    /* KUNCI RATIO 100% UNTUK SEMUA SCENE & RELOAD OVERLAY */
     html, body, #player-container,
     #start-overlay, .video-layer, #language-overlay, 
     #scene4-overlay, #settings-overlay, #scene6-overlay, 
@@ -1179,56 +1269,11 @@ body {
         max-height: 100vh !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
-        background-size: 100% 100% !important; /* Nisbah skrin dipaksa tepat 100% pada semua skrin */
+        background-size: 100% 100% !important; /* Nisbah dipaksa tepat mengikut skrin */
         background-position: center center !important;
         background-repeat: no-repeat !important;
     }
-
-    /* POP-UP RELOAD TELEFON DI MOD LANDSKAP */
-    #phone-reload-overlay {
-        display: none;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        z-index: 99999999 !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-
-    #phone-reload-overlay .modal-box {
-        width: 85% !important;
-        max-width: 420px !important;
-        padding: 18px 20px !important;
-        border-width: 4px !important;
-        border-radius: 20px !important;
-    }
-
-    #phone-reload-overlay .modal-icon {
-        font-size: 2.2rem !important;
-        margin-bottom: 4px !important;
-    }
-
-    #phone-reload-overlay h3 {
-        font-size: clamp(1rem, 2.8vw, 1.25rem) !important;
-    }
-
-    #phone-reload-overlay .sub-heading-en {
-        font-size: clamp(0.85rem, 2.2vw, 1rem) !important;
-        margin: 2px 0 8px 0 !important;
-    }
-
-    #phone-reload-overlay .desc-ms,
-    #phone-reload-overlay .desc-en {
-        font-size: clamp(0.72rem, 1.6vw, 0.85rem) !important;
-        margin-bottom: 4px !important;
-    }
-
-    #phone-reload-btn {
-        padding: 8px 20px !important;
-        font-size: clamp(0.85rem, 1.8vw, 1rem) !important;
-    }
 }
-
 /* ---------------------------------------------------------
    1. PHONE (PORTRAIT MODE)
    --------------------------------------------------------- */
