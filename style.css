@@ -1669,50 +1669,47 @@ body {
         max-height: 100% !important;
     }
 
-    /* Bekas kandungan keputusan kuiz */
+/* Bekas utama diposisikan dengan selesa dari atas */
     .quiz-result-container,
     #quiz-result-overlay,
     .result-content {
-        padding-top: 4vh !important;
-        gap: 8px !important;
+        top: 22vh !important; /* Turunkan sedikit supaya tidak terlalu atas */
+        transform: translateY(0) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0 !important; /* Buang jarak asas untuk kawalan jarak garisan */
     }
 
-    /* Tajuk Keputusan (cth: "Ohh tidak!", "Tahniah!", "Congratulations!") */
+    /* Tajuk Keputusan (cth: "Ohh tidak!", "Tahniah!") */
     .quiz-result-title,
     #result-title,
     .result-heading {
-        font-size: clamp(1.6rem, 4vw, 2.2rem) !important;
-        line-height: 1.1 !important;
-        margin-bottom: 4px !important;
+        font-size: clamp(1.3rem, 3.2vw, 1.8rem) !important; /* Dikecilkan */
+        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    /* Teks Mesej / Galakan (cth: "Teruskan usaha!") */
+    /* Mesej Galakan (cth: "Teruskan usaha!") */
     .quiz-result-message,
     #result-message,
     .result-subtext {
-        font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important;
-        line-height: 1.2 !important;
-        margin-bottom: 6px !important;
+        font-size: clamp(1rem, 2.3vw, 1.3rem) !important;   /* Dikecilkan */
+        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     /* Teks Skor (cth: "Skor anda: 2/8") */
     .quiz-result-score,
     #result-score,
     .score-text {
-        font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
-        line-height: 1.2 !important;
-        margin-top: 4px !important;
+        font-size: clamp(1.1rem, 2.6vw, 1.4rem) !important; /* Dikecilkan */
+        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
-
-/* ---------------------------------------------------------
-   3. KAWALAN PERANTI SENTUH (TOUCH DEVICES)
-   --------------------------------------------------------- */
-@media (hover: none), (pointer: coarse) {
-    button:hover, .circle-icon-btn:hover, #fullscreen-btn:hover {
-        transform: none !important;
-    }
-    button:active, .circle-icon-btn:active, #fullscreen-btn:active {
-        transform: scale(0.97) !important;
-    }
 }
