@@ -1161,86 +1161,6 @@ body {
     }
 }
 
-/* =========================================================
-   POP-UP RELOAD TELEFON (BACKGROUND PINK & KOTAK YELLOW)
-   ========================================================= */
-#phone-reload-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(255, 182, 193, 0.85); /* Latar belakang overlay warna Pink */
-    z-index: 99999999 !important;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(4px);
-}
-
-#phone-reload-overlay .modal-box {
-    position: relative;
-    background-color: #FFFFCC; /* Kotak di dalam warna Yellow / Kuning Soft */
-    border: 5px solid #CC3399;  /* Garisan luar Pink Gelap */
-    border-radius: 35px;
-    padding: 25px 30px;
-    width: 88%;
-    max-width: 420px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#phone-reload-overlay .modal-icon {
-    font-size: 3rem;
-    line-height: 1;
-    margin-bottom: 10px;
-}
-
-#phone-reload-overlay h3 {
-    font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    color: #990184 !important;
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
-    margin-top: 0;
-    margin-bottom: 10px;
-    line-height: 1.1;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#phone-reload-overlay p {
-    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
-    font-size: clamp(0.85rem, 2vw, 1.05rem);
-    color: #E70B90;
-    line-height: 1.35;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-/* BUTANG RELOAD */
-#phone-reload-btn {
-    padding: 10px 32px !important;
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important;
-    font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif !important;
-    font-weight: bold !important;
-    color: #990184 !important;
-    background-color: #CFE1F7 !important;
-    border: 4px solid #CC3399 !important;
-    border-radius: 50px !important;
-    cursor: pointer !important;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15) !important;
-    transition: transform 0.2s ease, background-color 0.2s ease !important;
-    outline: none !important;
-}
-
-#phone-reload-btn:hover,
-#phone-reload-btn:active {
-    transform: translateY(-3px) scale(1.03) !important;
-    background-color: #FFCCFF !important;
-}
-
 /* ---------------------------------------------------------
    1. PHONE (PORTRAIT MODE)
    --------------------------------------------------------- */
@@ -1422,7 +1342,9 @@ body {
         border-width: 3px !important;
     }
 
-    /* IKON & BULATAN (MENGIKUT GAYA ASAL LAPTOP) */
+    /* =========================================================
+       IKON & EMOJI 100% PERSIS LAPTOP (PENAMBAHAN RENDERING NATIVE)
+       ========================================================= */
     .card-icon-circle {
         position: absolute !important;
         left: -12px !important;
@@ -1439,10 +1361,12 @@ body {
     }
 
     .card-emoji {
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
         font-size: 2.2rem !important;
         line-height: 1 !important;
         display: block !important;
         margin: auto !important;
+        text-shadow: none !important;
     }
 
     .health-svg-icon {
@@ -1475,7 +1399,7 @@ body {
         border-radius: 20px !important;
     }
 
-    /* TETAPAN (SETTINGS OVERLAY) */
+    /* TETAPAN (SETTINGS OVERLAY & KOTAK DIKECILKAN / DINAIKKAN) */
     #settings-overlay {
         padding-top: 1vh !important;
     }
@@ -1607,7 +1531,7 @@ body {
         font-size: 1.4rem !important;
     }
 
-    /* Ikon Bawah Kiri */
+    /* Ikon Bawah Kiri PERSIS LAPTOP */
     .left-bottom-controls {
         bottom: max(10px, env(safe-area-inset-bottom)) !important;
         left: max(10px, env(safe-area-inset-left)) !important;
