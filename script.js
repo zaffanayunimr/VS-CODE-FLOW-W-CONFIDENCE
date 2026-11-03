@@ -25,10 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
 
-    function forceShowReloadOverlay() {
+function forceShowReloadOverlay() {
         if (reloadOverlay) {
+            // Pindahkan reloadOverlay keluar terus ke <body> supaya menutupi 100% skrin telefon (tanpa terikat dengan nisbah landskap player-container)
+            if (reloadOverlay.parentNode !== document.body) {
+                document.body.appendChild(reloadOverlay);
+            }
+
             reloadOverlay.style.setProperty("display", "flex", "important");
-            reloadOverlay.style.setProperty("z-index", "999999999", "important");
+            reloadOverlay.style.setProperty("z-index", "9999999999", "important");
             reloadOverlay.style.setProperty("position", "fixed", "important");
             reloadOverlay.style.setProperty("top", "0", "important");
             reloadOverlay.style.setProperty("left", "0", "important");
