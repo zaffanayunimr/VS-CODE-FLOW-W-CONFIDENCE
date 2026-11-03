@@ -1653,14 +1653,14 @@ body {
         max-height: 100% !important;
     }
 
-    /* =========================================================
-       PELARASAN KEPUTUSAN KUIZ (PEMBETULAN DENGAN LINE-HEIGHT 42PX)
+/* =========================================================
+       PELARASAN KEPUTUSAN KUIZ (UKURAN LEBIH KECIL & SELARAS)
        ========================================================= */
     .quiz-result-container,
     #quiz-result-overlay,
     .result-content {
         position: absolute !important;
-        top: 18vh !important; /* Duduk selari dari atas */
+        top: 25vh !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         display: flex !important;
@@ -1671,24 +1671,36 @@ body {
         width: 100% !important;
     }
 
-    .quiz-result-title, #result-title {
-        font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
-        line-height: 42px !important; /* Tepat pada garisan buku */
+    /* Tajuk (contoh: "Ohh tidak!") - Dikecilkan */
+    .quiz-result-container h1,
+    .quiz-result-container h2,
+    .quiz-result-title, 
+    #result-title {
+        font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
+        line-height: 42px !important; /* Pas pada garis buku */
         margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .quiz-result-message, #result-message {
-        font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
-        line-height: 42px !important; /* Tepat pada garisan buku */
+    /* Mesej (contoh: "Teruskan usaha!") - Dikecilkan */
+    .quiz-result-container p,
+    .quiz-result-message, 
+    #result-message {
+        font-size: clamp(0.7rem, 1.3vw, 0.88rem) !important;
+        line-height: 42px !important; /* Pas pada garis buku */
         margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .quiz-result-score, #result-score {
-        font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
-        line-height: 42px !important; /* Tepat pada garisan buku */
+    /* Skor (contoh: "Skor anda: 2/8") - Dikecilkan */
+    .quiz-result-container div,
+    .quiz-result-score, 
+    #result-score {
+        font-size: clamp(0.75rem, 1.4vw, 0.9rem) !important;
+        line-height: 42px !important; /* Pas pada garis buku */
         margin: 0 !important;
+        padding: 0 !important;
     }
-}
 
 /* ---------------------------------------------------------
    3. KAWALAN PERANTI SENTUH (TOUCH DEVICES)
