@@ -264,7 +264,6 @@ if (reloadBtn) {
             else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         }
     }
-
     if (fullscreenBtn) fullscreenBtn.addEventListener("click", toggleFullscreen);
 
     // ==========================================
