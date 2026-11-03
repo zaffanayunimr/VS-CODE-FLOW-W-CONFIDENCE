@@ -1571,7 +1571,7 @@ body {
     }
     #start-app-btn {
         margin-bottom: 0 !important;
-        transform: translateY(-10vh);
+        transform: translateY(-40vh);
         padding: 10px 25px !important;
         min-height: 44px !important;
         font-size: 1rem !important;
@@ -1586,7 +1586,7 @@ body {
     }
     #start-app-btn {
         margin-bottom: 0 !important;
-        transform: translateY(-40vh);
+        transform: translateY(-10vh);
         padding: 10px 25px !important;
         min-height: 44px !important;
         font-size: 1rem !important;
@@ -1594,7 +1594,7 @@ body {
 
     .first-header {
     position: absolute;
-    top: 25vh;
+    top: 15vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
