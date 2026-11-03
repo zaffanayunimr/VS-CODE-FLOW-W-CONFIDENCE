@@ -27,21 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function forceShowReloadOverlay() {
         if (reloadOverlay) {
-            // Pindahkan reloadOverlay terus di bawah <body> jika belum dipindah
-            if (reloadOverlay.parentNode !== document.body) {
-                document.body.appendChild(reloadOverlay);
-            }
+            // Memindahkan reloadOverlay ke luar container aplikasi terus di bawah <body>
+            document.body.appendChild(reloadOverlay);
 
             reloadOverlay.style.setProperty("display", "flex", "important");
             reloadOverlay.style.setProperty("z-index", "9999999999", "important");
-            reloadOverlay.style.setProperty("position", "fixed", "important");
-            reloadOverlay.style.setProperty("top", "0", "important");
-            reloadOverlay.style.setProperty("left", "0", "important");
-            reloadOverlay.style.setProperty("right", "0", "important");
-            reloadOverlay.style.setProperty("bottom", "0", "important");
-            reloadOverlay.style.setProperty("width", "100vw", "important");
-            reloadOverlay.style.setProperty("height", "100dvh", "important");
         }
+    }
     }
 
     // Mengesan bila pengguna keluar dari skrin/tab
