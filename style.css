@@ -1518,9 +1518,9 @@ body {
 }
 
     #settings-overlay input[type="range"] {
-        width: 160% !important;
-        height: 5px !important;
-        transform: scale(20);
+        width: 70% !important;
+        height: 20px !important;
+        transform: scale(2);
         transform-origin: center;
     }
 
