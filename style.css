@@ -1161,8 +1161,17 @@ body {
 }
 
 /* =========================================================
-   POP-UP RELOAD TELEFON (FULLSCREEN 100% PORTRAIT & LANDSCAPE)
+   PENYELESAIAN MUKTAMAD: POP-UP RELOAD MENUTUPI 100% SKRIN (FULLSCREEN)
    ========================================================= */
+
+/* Apabila reload overlay aktif, paksa html & body buka lebar penuh */
+html:has(#phone-reload-overlay[style*="display: flex"]),
+body:has(#phone-reload-overlay[style*="display: flex"]) {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+}
+
 #phone-reload-overlay {
     display: none;
     position: fixed !important;
@@ -1173,12 +1182,16 @@ body {
     width: 100vw !important;
     height: 100vh !important;
     height: 100dvh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
     background-color: #FFB6C1 !important; /* Latar belakang pink menutupi 100% skrin */
-    z-index: 999999999 !important;
+    z-index: 9999999999 !important;
     justify-content: center !important;
     align-items: center !important;
+    margin: 0 !important;
     padding: 20px !important;
     box-sizing: border-box !important;
+    transform: none !important;
 }
 
 #phone-reload-overlay .modal-box {
@@ -1187,8 +1200,8 @@ body {
     border: 5px solid #CC3399 !important;   /* Garis tepi pink gelap */
     border-radius: 25px !important;
     padding: 25px 20px !important;
-    width: 85% !important;
-    max-width: 380px !important;
+    width: 90% !important;
+    max-width: 360px !important;
     text-align: center !important;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
     display: flex !important;
@@ -1232,10 +1245,10 @@ body {
 
 #phone-reload-overlay .desc-en {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
+    font-style: italic !important;
     font-size: clamp(0.72rem, 2.2vw, 0.82rem) !important;
     color: #666666 !important;
     line-height: 1.3 !important;
-    font-style: italic !important;
     margin: 0 0 16px 0 !important;
 }
 
