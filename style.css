@@ -1171,7 +1171,7 @@ body {
     width: 100vw !important;
     height: 100vh !important;
     height: 100dvh !important;
-    background-color: #FFB6C1 !important; /* Latar belakang solid warna Pink (TIDAK TRANSPARAN) */
+    background-color: #FFB6C1 !important; /* Latar belakang solid warna Pink */
     z-index: 99999999 !important;
     justify-content: center;
     align-items: center;
@@ -1200,7 +1200,6 @@ body {
     margin-bottom: 8px !important;
 }
 
-/* Tajuk Utama (Bahasa Melayu) */
 #phone-reload-overlay h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif !important;
     color: #990184 !important;
@@ -1210,7 +1209,6 @@ body {
     text-transform: uppercase !important;
 }
 
-/* Sub-tajuk (English) */
 #phone-reload-overlay .sub-heading-en {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif !important;
     color: #CC3399 !important;
@@ -1220,7 +1218,6 @@ body {
     text-transform: uppercase !important;
 }
 
-/* Teks Penerangan Bahasa Melayu */
 #phone-reload-overlay .desc-ms {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
     font-size: clamp(0.8rem, 2vw, 0.92rem) !important;
@@ -1229,7 +1226,6 @@ body {
     margin: 0 0 6px 0 !important;
 }
 
-/* Teks Penerangan English */
 #phone-reload-overlay .desc-en {
     font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
     font-size: clamp(0.75rem, 1.8vw, 0.88rem) !important;
@@ -1239,7 +1235,6 @@ body {
     margin: 0 0 18px 0 !important;
 }
 
-/* Butang Reload Dwibahasa */
 #phone-reload-btn {
     padding: 10px 24px !important;
     font-size: clamp(0.95rem, 2.2vw, 1.15rem) !important;
@@ -1318,9 +1313,9 @@ body {
     }
 }
 
-    /* =========================================================
-   PENYESUAIAN SCENE 1 (START SCREEN) LANDSCAPE
-   ========================================================= */
+/* ---------------------------------------------------------
+   2. PHONE & TABLET (LANDSCAPE MODE)
+   --------------------------------------------------------- */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
 
     /* 1. KECILKAN UKURAN JUDUL UTAMA SCENE 1 */
@@ -1330,13 +1325,13 @@ body {
     }
 
     #start-overlay .first-title {
-        font-size: clamp(1.1rem, 3vw, 1.6rem) !important; /* Dikecilkan dari ukuran asal */
+        font-size: clamp(1.1rem, 3vw, 1.6rem) !important;
         letter-spacing: 2px !important;
         line-height: 1 !important;
     }
 
     #start-overlay .first-subtitle {
-        font-size: clamp(2rem, 5.5vw, 3rem) !important; /* Dikecilkan dari ukuran asal */
+        font-size: clamp(2rem, 5.5vw, 3rem) !important;
         margin-top: -2px !important;
         line-height: 0.95 !important;
     }
@@ -1352,7 +1347,6 @@ body {
         overflow: hidden;
     }
 
-    /* TAJUK UTAMA DIKECILKAN KEMAS */
     #asas-title, 
     #penjagaan-title, 
     #kesihatan-title, 
@@ -1386,7 +1380,6 @@ body {
         font-size: 1rem !important;
     }
 
-    /* Pemilihan Bahasa Intro */
     #language-overlay .lang-btn {
         width: min(360px, 55vw) !important;
         height: clamp(52px, 11vh, 62px) !important;
@@ -1411,7 +1404,6 @@ body {
         border-width: 2px !important;
     }
 
-    /* Menu Utama (Scene 4) */
     .menu-header {
         margin-top: 6vh !important;
     }
@@ -1434,7 +1426,6 @@ body {
         border-width: 3px !important;
     }
 
-    /* KUIZ PAGE (#scene10) & BAB PAGE (#scene6) - PENYESUAIAN IKON KEKAL SAMA SEPERTI LAPTOP */
     #scene10-overlay .chapter-grid-container,
     #scene6-overlay .chapter-grid-container {
         top: 28vh !important;
@@ -1461,7 +1452,6 @@ body {
         border-width: 3px !important;
     }
 
-    /* KEKALKAN BULATAN IKON & EMOJI PERSIS LAPTOP */
     .card-icon-circle {
         position: absolute !important;
         left: -10px !important;
@@ -1493,7 +1483,6 @@ body {
         padding-left: 40px !important;
     }
 
-    /* SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN) */
     .sub-menu-grid {
         top: 36vh !important;
         width: 86% !important;
@@ -1508,7 +1497,6 @@ body {
         border-radius: 20px !important;
     }
 
-    /* TETAPAN (SETTINGS OVERLAY) */
     #settings-overlay {
         padding-top: 1vh !important;
     }
@@ -1577,7 +1565,6 @@ body {
         border-width: 2px !important;
     }
 
-    /* Soalan & Pilihan Kuiz */
     .question-container {
         top: 10vh !important;
         width: 86% !important;
@@ -1607,7 +1594,6 @@ body {
         border-radius: 8px !important;
     }
 
-    /* Dialog Pop-up (Modal) */
     .modal-box {
         width: 80% !important;
         max-width: 440px !important;
@@ -1640,7 +1626,6 @@ body {
         font-size: 1.4rem !important;
     }
 
-    /* Ikon Bawah Kiri Kekal Persis Laptop */
     .left-bottom-controls {
         bottom: max(10px, env(safe-area-inset-bottom)) !important;
         left: max(10px, env(safe-area-inset-left)) !important;
@@ -1655,7 +1640,6 @@ body {
         height: 20px !important;
     }
 
-    /* Video Player Fit */
     .video-display-area {
         inset: 0 !important;
         width: 100% !important;
@@ -1669,37 +1653,39 @@ body {
         max-height: 100% !important;
     }
 
-/* Bekas utama diposisikan dengan selesa dari atas */
+    /* =========================================================
+       PELARASAN KEPUTUSAN KUIZ (PEMBETULAN DENGAN LINE-HEIGHT 42PX)
+       ========================================================= */
     .quiz-result-container,
     #quiz-result-overlay,
     .result-content {
-        top: 30vh !important; /* Turunkan sedikit supaya tidak terlalu atas */
-        transform: translateY(0) !important;
+        position: absolute !important;
+        top: 18vh !important; /* Duduk selari dari atas */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 0 !important; /* Buang jarak asas untuk kawalan jarak garisan */
+        gap: 0 !important;
+        width: 100% !important;
     }
 
-    /* Tajuk (cth: "Ohh tidak!") */
     .quiz-result-title, #result-title {
         font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
-        line-height: 42px !important; /* Duduk tepat atas garisan buku */
+        line-height: 42px !important; /* Tepat pada garisan buku */
         margin: 0 !important;
     }
 
-    /* Mesej (cth: "Teruskan usaha!") */
     .quiz-result-message, #result-message {
         font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
-        line-height: 42px !important; /* Duduk tepat atas garisan buku */
+        line-height: 42px !important; /* Tepat pada garisan buku */
         margin: 0 !important;
     }
 
-    /* Skor (cth: "Skor anda: 2/8") */
     .quiz-result-score, #result-score {
-        font-size: clamp(0.9rem, 1.9vw, 1.15rem)important;
-        line-height: 42px !important; /* Duduk tepat atas garisan buku */
+        font-size: clamp(0.9rem, 1.9vw, 1.15rem) !important;
+        line-height: 42px !important; /* Tepat pada garisan buku */
         margin: 0 !important;
     }
 }
