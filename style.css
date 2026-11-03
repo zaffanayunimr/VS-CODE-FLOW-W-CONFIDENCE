@@ -1162,7 +1162,7 @@ body {
 }
 
 /* =========================================================
-   POP-UP RELOAD TELEFON (TEMA & GAYA PERSIS SCENE 1 / START)
+   POP-UP RELOAD TELEFON (BACKGROUND PINK & KOTAK YELLOW)
    ========================================================= */
 #phone-reload-overlay {
     display: none;
@@ -1171,7 +1171,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(255, 182, 193, 0.85); /* Latar belakang overlay warna Pink */
     z-index: 99999999 !important;
     justify-content: center;
     align-items: center;
@@ -1180,14 +1180,14 @@ body {
 
 #phone-reload-overlay .modal-box {
     position: relative;
-    background-color: #A6F2EB; /* Warna tema latar ceria asal player-container */
-    border: 5px solid #CC3399;  /* Border pink gelap Scene 1 */
+    background-color: #FFFFCC; /* Kotak di dalam warna Yellow / Kuning Soft */
+    border: 5px solid #CC3399;  /* Garisan luar Pink Gelap */
     border-radius: 35px;
     padding: 25px 30px;
     width: 88%;
     max-width: 420px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1201,7 +1201,7 @@ body {
 
 #phone-reload-overlay h3 {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
-    color: #990184 !important; /* Warna tajuk Scene 1 */
+    color: #990184 !important;
     font-size: clamp(1.4rem, 4vw, 1.8rem);
     margin-top: 0;
     margin-bottom: 10px;
@@ -1219,7 +1219,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* BUTANG RELOAD (GAYA BUTANG START APP SCENE 1) */
+/* BUTANG RELOAD */
 #phone-reload-btn {
     padding: 10px 32px !important;
     font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important;
@@ -1238,7 +1238,7 @@ body {
 #phone-reload-btn:hover,
 #phone-reload-btn:active {
     transform: translateY(-3px) scale(1.03) !important;
-    background-color: #FFFFCC !important; /* Bertukar warna kuning Scene 1 */
+    background-color: #FFCCFF !important; /* Efek hover bertukar warna Soft Pink */
 }
 
 /* ---------------------------------------------------------
