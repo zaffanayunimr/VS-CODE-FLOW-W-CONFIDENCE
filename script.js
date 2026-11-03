@@ -9,51 +9,44 @@ document.addEventListener("DOMContentLoaded", () => {
         const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || 'ontouchstart' in window;
         
         if (isMobileDevice) {
-            // Pada telefon, hanya paparkan pada Scene 1 (start-overlay)
             if (sceneId === "scene1" || sceneId === "start-overlay") {
                 fullscreenBtn.style.setProperty("display", "flex", "important");
             } else {
                 fullscreenBtn.style.setProperty("display", "none", "important");
             }
         } else {
-            // Pada Laptop/PC, kekal paparkan di semua scene
             fullscreenBtn.style.setProperty("display", "flex", "important");
         }
     }
 
     // =========================================================
-// LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
-// =========================================================
-const reloadOverlay = document.getElementById("phone-reload-overlay");
-const reloadBtn = document.getElementById("phone-reload-btn");
+    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
+    // =========================================================
+    const reloadOverlay = document.getElementById("phone-reload-overlay");
+    const reloadBtn = document.getElementById("phone-reload-btn");
 
-// Semak jika peranti adalah skrin mudah alih/telefon
-function isMobileDevice() {
-    return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
-}
+    function isMobileDevice() {
+        return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
+    }
 
-// Mengesan apabila pengguna tutup skrin atau keluar dari tab browser
-document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden" && isMobileDevice()) {
-        // Tanda bahawa aplikasi telah ditarik ke latar belakang (background)
-        sessionStorage.setItem("appWasHidden", "true");
-    } else if (document.visibilityState === "visible" && isMobileDevice()) {
-        // Apabila pengguna buka balik telefon/tab, tunjuk butang Reload
-        if (sessionStorage.getItem("appWasHidden") === "true") {
-            if (reloadOverlay) {
-                reloadOverlay.style.setProperty("display", "flex", "important");
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden" && isMobileDevice()) {
+            sessionStorage.setItem("appWasHidden", "true");
+        } else if (document.visibilityState === "visible" && isMobileDevice()) {
+            if (sessionStorage.getItem("appWasHidden") === "true") {
+                if (reloadOverlay) {
+                    reloadOverlay.style.setProperty("display", "flex", "important");
+                }
             }
         }
-    }
-});
-
-// Event listener untuk butang Reload
-if (reloadBtn) {
-    reloadBtn.addEventListener("click", () => {
-        sessionStorage.removeItem("appWasHidden");
-        window.location.reload(); // Muat semula halaman dari awal
     });
-}
+
+    if (reloadBtn) {
+        reloadBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("appWasHidden");
+            window.location.reload();
+        });
+    }
 
     // ==========================================
     // 1. DOM ELEMENT SELECTION
@@ -198,7 +191,6 @@ if (reloadBtn) {
     const modalXBtn = document.getElementById("modal-x-btn");
     let pendingNextQuestionCall = null;
 
-    // Pastikan status butang fullscreen awal disemak
     updateFullscreenBtnVisibility("scene1");
 
     // ==========================================
@@ -277,7 +269,6 @@ if (reloadBtn) {
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
 
-            // Sembunyikan butang fullscreen di telefon sebaik sahaja melepasi Scene 1
             updateFullscreenBtnVisibility("scene2");
 
             if (video1) {
@@ -957,19 +948,7 @@ if (reloadBtn) {
         updateFullscreenBtnVisibility("scene12");
 
         if (finalScoreVal) finalScoreVal.textContent = `${currentScore}/${totalQuestions}`;
-
-        // Kemaskini terus teks ucapan & motto mengikut bahasa semasa
         updateLocalizationUI();
-    }
-
-        const isEn = selectedLang === "en";
-        if (currentScore <= 3) {
-            if (resultCongrats) resultCongrats.textContent = isEn ? "Oh no!" : "Ohh tidak!";
-            if (resultMotto) resultMotto.textContent = isEn ? "Keep up the effort" : "Teruskan usaha!";
-        } else {
-            if (resultCongrats) resultCongrats.textContent = isEn ? "Congratulations!" : "Tahniah!";
-            if (resultMotto) resultMotto.textContent = isEn ? "Effort is the key to success!" : "Usaha tangga kejayaan!";
-        }
     }
 
     function loadQuestion() {
@@ -1116,25 +1095,13 @@ if (reloadBtn) {
         });
     }
 
-function showQuizCompletion() {
-        if (scene11Overlay) scene11Overlay.style.display = "none";
-        if (scene12Overlay) scene12Overlay.style.display = "flex";
-        updateFullscreenBtnVisibility("scene12");
-
-        if (finalScoreVal) finalScoreVal.textContent = `${currentScore}/${totalQuestions}`;
-
-        // Kemaskini terus teks ucapan & motto mengikut bahasa semasa
-        updateLocalizationUI();
-    }
-
     // ==========================================
-    // 8. LOCALIZATION (UI Language Toggle - SEMUA SCENE)
+    // 8. LOCALIZATION (UI Language Toggle - ALL SCENES)
     // ==========================================
     function updateLocalizationUI() {
         const isEn = selectedLang === "en";
 
         if (isEn) {
-            // SETTINGS
             if (settingsTitle) settingsTitle.textContent = "Setting";
             if (labelAudio) labelAudio.textContent = "Sound";
             if (labelLanguage) labelLanguage.textContent = "Language";
@@ -1144,44 +1111,37 @@ function showQuizCompletion() {
             if (textLangBm) textLangBm.textContent = "Malay";
             if (textLangEn) textLangEn.textContent = "English";
 
-            // SCENE 4: MAIN MENU & INTRO
             if (btnChapter) btnChapter.textContent = "Chapter";
             if (btnQuiz) btnQuiz.textContent = "Quiz";
             if (skipBtn) skipBtn.textContent = "Skip";
 
-            // SCENE 6: MENU BAB
             if (chapterTitle) chapterTitle.textContent = "Menstrual Care Chapter";
             if (labelAsas) labelAsas.textContent = "Basic";
             if (labelPenjagaan) labelPenjagaan.textContent = "Care";
             if (labelKesihatan) labelKesihatan.innerHTML = "Health &amp;<br>Awareness";
 
-            // SCENE 7: SUB-MENU ASAS
             if (asasTitle) asasTitle.textContent = "Basic";
             if (labelApaHaid) labelApaHaid.textContent = "What is period?";
             if (labelMengapaHaid) labelMengapaHaid.textContent = "Why do periods happen?";
             if (labelBerapaLama) labelBerapaLama.textContent = "How long is a normal period cycle?";
             if (labelNormalLawan) labelNormalLawan.textContent = "Normal vs. not normal";
 
-            // SCENE 8: SUB-MENU PENJAGAAN
             if (penjagaanTitle) penjagaanTitle.textContent = "Care";
             if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Basic period care";
             if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Period care at school";
             if (labelJenis) labelJenis.textContent = "Types of sanitary pads";
             if (labelCara) labelCara.textContent = "How to reduce period pain";
 
-            // SCENE 9: SUB-MENU KESIHATAN
             if (kesihatanTitle) kesihatanTitle.innerHTML = "Health &amp;<br>Awareness";
             if (labelHaidMental) labelHaidMental.textContent = "Menstruation & mental health";
             if (labelMitosFakta) labelMitosFakta.textContent = "Myths & facts";
             if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Hygiene mistakes during menstruation";
             if (labelSekeliling) labelSekeliling.textContent = "Period care for those around you";
 
-            // SCENE 10: KUIZ MENU
             if (quizTitle) quizTitle.textContent = "Menstrual Care Quiz";
             if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
             if (modalCloseBtn) modalCloseBtn.textContent = "CONTINUE";
 
-            // SCENE 12: KEPUTUSAN KUIZ
             if (currentScore <= 3) {
                 if (resultCongrats) resultCongrats.textContent = "Oh no!";
                 if (resultMotto) resultMotto.textContent = "Keep up the effort";
@@ -1191,7 +1151,6 @@ function showQuizCompletion() {
             }
 
         } else {
-            // SETTINGS
             if (settingsTitle) settingsTitle.textContent = "Tetapan";
             if (labelAudio) labelAudio.textContent = "Audio";
             if (labelLanguage) labelLanguage.textContent = "Bahasa";
@@ -1201,44 +1160,37 @@ function showQuizCompletion() {
             if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
             if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
 
-            // SCENE 4: MAIN MENU & INTRO
             if (btnChapter) btnChapter.textContent = "Bab";
             if (btnQuiz) btnQuiz.textContent = "Kuiz";
             if (skipBtn) skipBtn.textContent = "Langkau";
 
-            // SCENE 6: MENU BAB
             if (chapterTitle) chapterTitle.textContent = "Bab Penjagaan Haid";
             if (labelAsas) labelAsas.textContent = "Asas";
             if (labelPenjagaan) labelPenjagaan.textContent = "Penjagaan";
             if (labelKesihatan) labelKesihatan.innerHTML = "Kesihatan &amp;<br>Kesedaran";
 
-            // SCENE 7: SUB-MENU ASAS
             if (asasTitle) asasTitle.textContent = "Asas";
             if (labelApaHaid) labelApaHaid.textContent = "Apakah itu haid?";
             if (labelMengapaHaid) labelMengapaHaid.textContent = "Mengapa haid berlaku?";
             if (labelBerapaLama) labelBerapaLama.textContent = "Berapa lamakah kitaran haid?";
             if (labelNormalLawan) labelNormalLawan.textContent = "Normal berbanding tidak normal";
 
-            // SCENE 8: SUB-MENU PENJAGAAN
             if (penjagaanTitle) penjagaanTitle.textContent = "Penjagaan";
             if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Penjagaan asas semasa haid";
             if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Penjagaan haid di sekolah";
             if (labelJenis) labelJenis.textContent = "Jenis-jenis tuala wanita";
             if (labelCara) labelCara.textContent = "Cara mengurangkan sakit senggugut";
 
-            // SCENE 9: SUB-MENU KESIHATAN
             if (kesihatanTitle) kesihatanTitle.innerHTML = "Kesihatan &amp;<br>Kesedaran";
             if (labelHaidMental) labelHaidMental.textContent = "Haid & kesihatan mental";
             if (labelMitosFakta) labelMitosFakta.textContent = "Mitos & fakta";
             if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Kesilapan kebersihan semasa haid";
             if (labelSekeliling) labelSekeliling.textContent = "Penjagaan haid kepada orang sekeliling";
 
-            // SCENE 10: KUIZ MENU
             if (quizTitle) quizTitle.textContent = "Kuiz Penjagaan Haid";
             if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
             if (modalCloseBtn) modalCloseBtn.textContent = "TERUSKAN";
 
-            // SCENE 12: KEPUTUSAN KUIZ
             if (currentScore <= 3) {
                 if (resultCongrats) resultCongrats.textContent = "Ohh tidak!";
                 if (resultMotto) resultMotto.textContent = "Teruskan usaha!";
@@ -1248,7 +1200,6 @@ function showQuizCompletion() {
             }
         }
 
-        // Kemaskini soalan kuis automatik sekiranya kuis sedang berlangsung
         loadQuestion();
     }
 });
