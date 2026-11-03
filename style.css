@@ -1348,3 +1348,195 @@ body {
         transform: scale(0.97) !important;
     }
 }
+
+
+/* =========================================================
+   MOBILE/TABLET LAYOUT REFINEMENT V3
+   Hanya mengubah skrin kecil; layout laptop kekal.
+   ========================================================= */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+
+    /* SCREEN 1: naikkan butang MULA dan letakkan tajuk di tengah. */
+    #start-overlay {
+        justify-content: flex-end !important;
+        padding-bottom: 20vh !important;
+    }
+    .first-header {
+        top: 31vh !important;
+        width: 94% !important;
+    }
+    .first-title {
+        font-size: clamp(1.2rem, 3.8vw, 2rem) !important;
+        letter-spacing: 2px !important;
+    }
+    .first-subtitle {
+        font-size: clamp(2.2rem, 7vw, 3.8rem) !important;
+        margin-top: -3px !important;
+    }
+    #start-app-btn {
+        padding: 9px 24px !important;
+        font-size: clamp(0.85rem, 2vw, 1.1rem) !important;
+        min-height: 40px !important;
+    }
+
+    /* Language: kurangkan lebar, kekalkan ketinggian supaya tidak nampak nipis. */
+    .lang-btn {
+        width: min(390px, 64vw) !important;
+        height: clamp(48px, 11vh, 60px) !important;
+        font-size: clamp(0.9rem, 2.2vw, 1.25rem) !important;
+        padding-left: 48px !important;
+        border-width: 3px !important;
+    }
+    .lang-btn .flag-icon {
+        width: clamp(34px, 7vh, 44px) !important;
+        height: clamp(34px, 7vh, 44px) !important;
+    }
+
+    /* Skip: lebih kecil tetapi masih mudah disentuh. */
+    #skip-btn {
+        width: 88px !important;
+        height: 32px !important;
+        top: 10px !important;
+        right: 12px !important;
+        font-size: 0.8rem !important;
+        border-width: 2px !important;
+    }
+
+    /* Main menu: turunkan perkataan Confidence dan pilihan menu
+       supaya lebih hampir ke bahagian tengah badan ilustrasi. */
+    .menu-header {
+        margin-top: 8vh !important;
+    }
+    .menu-title {
+        font-size: clamp(1.35rem, 3.8vw, 2.2rem) !important;
+    }
+    .menu-subtitle {
+        font-size: clamp(2.3rem, 6.8vw, 3.8rem) !important;
+        margin-top: 0 !important;
+        line-height: 0.95 !important;
+    }
+    .menu-buttons-container {
+        margin-top: 12vh !important;
+        gap: 9px !important;
+    }
+    .menu-btn {
+        width: clamp(165px, 28vw, 215px) !important;
+        height: clamp(42px, 8.5vh, 49px) !important;
+        font-size: clamp(0.95rem, 2.2vw, 1.25rem) !important;
+        border-width: 3px !important;
+    }
+
+    /* Tajuk bab / kuiz / Asas / Penjagaan / Kesihatan. */
+    .chapter-title-box {
+        top: 4vh !important;
+    }
+    .chapter-title-box h1,
+    #chapter-title,
+    #quiz-title,
+    #asas-title,
+    #penjagaan-title,
+    #kesihatan-title,
+    .chapter-title,
+    .quiz-title {
+        font-size: clamp(1.35rem, 3.6vw, 2.15rem) !important;
+        line-height: 1.05 !important;
+    }
+
+    /* Turunkan kad dan butang ke bawah tajuk, bukan bertindih dengannya.
+       Kekalkan saiz tinggi yang selesa disentuh; kecilkan lebar dan teks. */
+    .chapter-grid-container {
+        top: 29vh !important;
+        height: 64vh !important;
+        width: 84% !important;
+    }
+    .chapter-card-btn {
+        width: min(35vw, 245px) !important;
+        height: clamp(52px, 13vh, 65px) !important;
+        border-width: 2.5px !important;
+    }
+    .card-icon-circle {
+        width: clamp(42px, 9vh, 54px) !important;
+        height: clamp(42px, 9vh, 54px) !important;
+    }
+    .card-label {
+        font-size: clamp(0.75rem, 1.7vw, 1rem) !important;
+    }
+
+    .sub-menu-grid {
+        top: 29vh !important;
+        width: 82% !important;
+        gap: 3.5vh 3vw !important;
+    }
+    .sub-menu-btn {
+        width: 100% !important;
+        min-height: 52px !important;
+        height: clamp(52px, 13vh, 66px) !important;
+        padding: 6px 10px !important;
+        font-size: clamp(0.72rem, 1.55vw, 0.98rem) !important;
+        border-width: 2.5px !important;
+        border-radius: 18px !important;
+    }
+
+    /* Settings: rapatkan panel dan kawalan tanpa meratakan bentuk butang. */
+    #settings-overlay {
+        padding-top: 3vh !important;
+    }
+    #settings-overlay #settings-title,
+    #settings-overlay h1 {
+        font-size: clamp(1.35rem, 3.5vw, 2.1rem) !important;
+    }
+    .settings-grid {
+        width: 82% !important;
+        gap: 12px !important;
+        margin-top: 4vh !important;
+    }
+    .settings-box {
+        min-height: 0 !important;
+        padding: 26px 10px 12px !important;
+        border-width: 2.5px !important;
+        border-radius: 22px !important;
+    }
+    .box-header-badge {
+        width: min(155px, 30vw) !important;
+        height: 32px !important;
+        font-size: 1rem !important;
+    }
+    .settings-action-btn,
+    .lang-option-btn {
+        width: min(170px, 28vw) !important;
+        height: 34px !important;
+        font-size: clamp(0.65rem, 1.35vw, 0.82rem) !important;
+        border-width: 2px !important;
+    }
+
+    /* Skor lebih kecil. */
+    .score-board {
+        top: 2.5vh !important;
+        left: 2.5vw !important;
+        font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
+        padding: 3px 9px !important;
+        border-radius: 8px !important;
+    }
+
+    /* Naikkan soalan supaya sejajar dengan garisan rujukan.
+       Saiz teks dan jarak baris dikawal agar tidak terlalu besar. */
+    .question-container {
+        top: 8vh !important;
+        width: 86% !important;
+    }
+    #quiz-question-text {
+        font-size: clamp(0.85rem, 1.8vw, 1.1rem) !important;
+        line-height: 4.8vh !important;
+    }
+    .options-grid {
+        top: 34vh !important;
+        width: 86% !important;
+        gap: 3.5vh 3vw !important;
+    }
+    .option-btn {
+        min-height: 48px !important;
+        padding: 6px 10px !important;
+        font-size: clamp(0.68rem, 1.4vw, 0.9rem) !important;
+        border-width: 2px !important;
+    }
+}
