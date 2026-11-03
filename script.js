@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Detect iPhone only: Android phones and tablets will not show rotate instructions.
+
     const isIPhone = /iPhone/i.test(navigator.userAgent);
     if (isIPhone) document.documentElement.classList.add("iphone-device");
 
