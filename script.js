@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
     }
 
-    // Fungsi khas untuk HENTIKAN SEMUA AUDIO & VIDEO
+    // Fungsi untuk HENTIKAN SEMUA AUDIO & VIDEO
     function stopAllMedia() {
         if (bgMusic) {
             bgMusic.pause();
@@ -52,27 +52,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Mengesan apabila pengguna tutup skrin atau keluar dari tab browser
-    document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden" && isMobileDevice()) {
-            // Hentikan semua media serta merta apabila aplikasi masuk ke background
+    // 1. Saat aplikasi ditinggalkan/tutup skrin (Background)
+    function handleAppHide() {
+        if (isMobileDevice()) {
             stopAllMedia();
             sessionStorage.setItem("appWasHidden", "true");
-        } else if (document.visibilityState === "visible" && isMobileDevice()) {
-            if (sessionStorage.getItem("appWasHidden") === "true") {
-                // Pastikan media kekal terhenti semasa pop-up reload muncul
-                stopAllMedia();
-                if (reloadOverlay) {
-                    reloadOverlay.style.setProperty("display", "flex", "important");
-                }
+        }
+    }
+
+    // 2. Saat aplikasi dibuka kembali (Foreground)
+    function handleAppShow() {
+        if (isMobileDevice() && sessionStorage.getItem("appWasHidden") === "true") {
+            stopAllMedia();
+            if (reloadOverlay) {
+                // Paksa tampilkan pop-up reload dengan style paling tinggi
+                reloadOverlay.style.setProperty("display", "flex", "important");
+                reloadOverlay.style.setProperty("z-index", "999999999", "important");
             }
+        }
+    }
+
+    // Guna gabungan event 'visibilitychange' & 'pagehide' / 'pageshow' supaya sentiasa dikesan di telefon
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+            handleAppHide();
+        } else if (document.visibilityState === "visible") {
+            handleAppShow();
         }
     });
 
+    window.addEventListener("pagehide", handleAppHide);
+    window.addEventListener("pageshow", handleAppShow);
+
+    // Event listener untuk tombol Reload
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
             sessionStorage.removeItem("appWasHidden");
-            window.location.reload(); // Muat semula halaman dari awal
+            window.location.reload(); // Muat ulang halaman dari awal
         });
     }
 
