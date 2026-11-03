@@ -1520,7 +1520,7 @@ body {
     #settings-overlay input[type="range"] {
         width: 70% !important;
         height: 20px !important;
-        transform: scale(2);
+        transform: scale(1);
         transform-origin: center;
     }
 
