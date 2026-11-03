@@ -1362,7 +1362,7 @@ body {
         padding-bottom: 20vh !important;
     }
     .first-header {
-        top: 31vh !important;
+        top: 20vh !important;
         width: 94% !important;
     }
     .first-title {
@@ -1571,7 +1571,7 @@ body {
     }
     #start-app-btn {
         margin-bottom: 0 !important;
-        transform: translateY(-25vh);
+        transform: translateY(-20vh);
         padding: 10px 25px !important;
         min-height: 44px !important;
         font-size: 1rem !important;
@@ -1591,36 +1591,6 @@ body {
         min-height: 44px !important;
         font-size: 1rem !important;
     }
-
-    .first-header {
-    position: absolute;
-    top: 40vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 9999;
-    width: 100%;
-}
-
-.first-title {
-    color: #990184;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-weight: bold;
-    font-size: 4.5rem;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    line-height: 0.9;
-}
-
-.first-subtitle {
-    color: #E70B90;
-    font-family: "Bell MT", "Garamond", "Georgia", serif;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 8rem;
-    margin-top: -20px;
-    line-height: 0.9;
-}
 
     /* Settings page: reduce the panel boxes and controls slightly. */
     #settings-overlay {
