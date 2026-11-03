@@ -19,28 +19,53 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // =========================================================
-    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
+// =========================================================
+    // LOGIK AUTO-RELOAD (PASTIKAN POP-UP RELOAD KELUAR)
     // =========================================================
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
 
-    function isMobileDevice() {
-        return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
+    // Fungsi untuk memaparkan Pop-up Reload di bahagian paling atas
+    function forceShowReloadOverlay() {
+        if (reloadOverlay) {
+            reloadOverlay.style.setProperty("display", "flex", "important");
+            reloadOverlay.style.setProperty("z-index", "999999999", "important");
+            reloadOverlay.style.setProperty("position", "fixed", "important");
+            reloadOverlay.style.setProperty("top", "0", "important");
+            reloadOverlay.style.setProperty("left", "0", "important");
+            reloadOverlay.style.setProperty("width", "100vw", "important");
+            reloadOverlay.style.setProperty("height", "100dvh", "important");
+        }
     }
 
+    // Mengesan apabila pengguna keluar dari aplikasi (tutup skrin / tukar tab)
     document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden" && isMobileDevice()) {
+        if (document.visibilityState === "hidden") {
             sessionStorage.setItem("appWasHidden", "true");
-        } else if (document.visibilityState === "visible" && isMobileDevice()) {
+        } else if (document.visibilityState === "visible") {
             if (sessionStorage.getItem("appWasHidden") === "true") {
-                if (reloadOverlay) {
-                    reloadOverlay.style.setProperty("display", "flex", "important");
-                }
+                forceShowReloadOverlay();
             }
         }
     });
 
+    // Tambahan kesan untuk pelayar telefon (iOS Safari & Chrome Mobile)
+    window.addEventListener("pagehide", () => {
+        sessionStorage.setItem("appWasHidden", "true");
+    });
+
+    window.addEventListener("pageshow", () => {
+        if (sessionStorage.getItem("appWasHidden") === "true") {
+            forceShowReloadOverlay();
+        }
+    });
+
+    // Semakan terus semasa skrin dimuatkan semula
+    if (sessionStorage.getItem("appWasHidden") === "true") {
+        forceShowReloadOverlay();
+    }
+
+    // Butang Reload untuk muat semula skrin dari awal
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
             sessionStorage.removeItem("appWasHidden");
