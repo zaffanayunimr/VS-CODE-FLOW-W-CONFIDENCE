@@ -1519,23 +1519,23 @@ body {
 
     #settings-overlay input[type="range"] {
         width: 200% !important;
-        height: 20px !important;
-        transform: scale(0.85);
+        height: 6px !important;
+        transform: scale(20%);
         transform-origin: center;
     }
 
     #settings-overlay input[type="range"]::-webkit-slider-thumb {
-        width: 12px !important;
-        height: 12px !important;
+        width: 35px !important;
+        height: 35px !important;
     }
 
     #settings-overlay input[type="range"]::-moz-range-thumb {
-        width: 12px !important;
-        height: 12px !important;
+        width: 35px !important;
+        height: 35px !important;
     }
 
     #settings-overlay .volume-percentage {
-        font-size: 12px !important;
+        font-size: 9px !important;
     }
     
     /* Skor lebih kecil. */
