@@ -20,12 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 // =========================================================
-    // LOGIK AUTO-RELOAD (PASTIKAN POP-UP RELOAD KELUAR)
+    // LOGIK AUTO-RELOAD (PASTIKAN KEMBALI KE SCENE 1 SELEPAS RELOAD)
     // =========================================================
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
 
-    // Fungsi untuk memaparkan Pop-up Reload di bahagian paling atas
     function forceShowReloadOverlay() {
         if (reloadOverlay) {
             reloadOverlay.style.setProperty("display", "flex", "important");
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Mengesan apabila pengguna keluar dari aplikasi (tutup skrin / tukar tab)
+    // Mengesan bila pengguna keluar dari skrin/tab
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") {
             sessionStorage.setItem("appWasHidden", "true");
@@ -49,27 +48,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Tambahan kesan untuk pelayar telefon (iOS Safari & Chrome Mobile)
     window.addEventListener("pagehide", () => {
         sessionStorage.setItem("appWasHidden", "true");
     });
 
-    window.addEventListener("pageshow", () => {
-        if (sessionStorage.getItem("appWasHidden") === "true") {
-            forceShowReloadOverlay();
-        }
-    });
-
-    // Semakan terus semasa skrin dimuatkan semula
-    if (sessionStorage.getItem("appWasHidden") === "true") {
-        forceShowReloadOverlay();
-    }
-
-    // Butang Reload untuk muat semula skrin dari awal
+    // BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
+            // 1. Buang tanda hidden supaya pop-up tidak muncul lagi selepas reload
             sessionStorage.removeItem("appWasHidden");
-            window.location.reload();
+            sessionStorage.clear();
+            
+            // 2. Sembunyikan pop-up reload serta merta
+            if (reloadOverlay) {
+                reloadOverlay.style.setProperty("display", "none", "important");
+            }
+
+            // 3. Muat semula halaman dari awal (Scene 1)
+            window.location.href = window.location.pathname; 
         });
     }
 
