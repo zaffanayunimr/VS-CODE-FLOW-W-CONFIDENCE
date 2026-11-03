@@ -1512,13 +1512,13 @@ body {
     }
 
     #settings-overlay .flag-icon {
-        width: 24px !important;
-        height: 24px !important;
+        width: 35px !important;
+        height: 35px !important;
         object-fit: contain !important;
 }
 
         #settings-overlay input[type="range"] {
-        width: 70% !important;
+        width: 140% !important;
         height: 5px !important;
     }
     /* Skor lebih kecil. */
