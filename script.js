@@ -292,6 +292,27 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         if (scene4Overlay) scene4Overlay.style.display = "flex";
     }
 
+    
+function updateFullscreenVisibility(currentScene) {
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+
+    if (!fullscreenBtn) return;
+
+    const isPhone = window.matchMedia(
+        "(max-width: 1024px)"
+    ).matches;
+
+    if (!isPhone) {
+        // Laptop: fullscreen on every scene
+        fullscreenBtn.style.display = "flex";
+    } else {
+        // Phone: fullscreen only on Scene 1
+        fullscreenBtn.style.display =
+            currentScene === 1 ? "flex" : "none";
+    }
+}
+
+
     // ==========================================
     // 4. DYNAMIC VIDEO PLAYER
     // ==========================================
