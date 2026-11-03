@@ -606,7 +606,7 @@ if (reloadBtn) {
                     ms: "💡 Petunjuk: Kitaran biasa berlaku antara 3 hingga 5 minggu (21-35 hari).", 
                     en: "💡 Hint: A normal cycle lasts about 3 to 5 weeks (21-35 days)." 
                 },
-                question: { ms: "5. Berapakah tempoh julat kitaran haid yang normal bagi kebanyakan orang?", en: "5. What is the normal menstrual cycle length range for most people?" },
+                question: { ms: "5. Berapa lamakah tempoh kitaran sehingga haid seterusnya?", en: "5. How long is the menstrual cycle until next period?" },
                 options: [
                     { text: { ms: "A) 5 hingga 10 hari.", en: "A) 5 to 10 days." }, isCorrect: false },
                     { text: { ms: "B) 10 hingga 15 hari.", en: "B) 10 to 15 days." }, isCorrect: false },
