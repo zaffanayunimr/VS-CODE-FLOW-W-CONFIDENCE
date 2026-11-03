@@ -52,12 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("appWasHidden", "true");
     });
 
-    // BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1
+// BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1 TANPA DELAY KETARA
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
-            // 1. Buang tanda hidden supaya pop-up tidak muncul lagi selepas reload
+            // 1. Tunjuk maklum balas serta-merta pada butang supaya pengguna tahu sistem bertindak balas
+            reloadBtn.textContent = "MEMUAT SEMULA...";
+            reloadBtn.style.opacity = "0.7";
+            reloadBtn.style.pointerEvents = "none";
+
+            // 2. Bersihkan simpanan memori
             sessionStorage.removeItem("appWasHidden");
             sessionStorage.clear();
+
+            // 3. Gunakan replace() untuk muat semula halaman lebih pantas tanpa simpan sejarah cache lama
+            window.location.replace(window.location.origin + window.location.pathname);
+        });
+    }
             
             // 2. Sembunyikan pop-up reload serta merta
             if (reloadOverlay) {
