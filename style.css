@@ -1143,7 +1143,6 @@ body {
    MEDIA QUERIES (PELARASAN KHAS UNTUK PHONE & TABLET SAHAJA)
    ========================================================= */
 
-/* Arahan rotate (iPhone sahaja) */
 #rotate-device-overlay { display: none !important; }
 
 @media only screen and (max-device-width: 932px) and (orientation: portrait) {
@@ -1233,7 +1232,7 @@ body {
         overflow: hidden;
     }
 
-    /* 2.1 TAJUK UTAMA (PAGE TITLE) DIKECILKAN SUPAYA TIDAK BERTABRAKAN DENGAN TOMBOL */
+    /* TAJUK UTAMA DIKECILKAN KEMAS */
     #asas-title, 
     #penjagaan-title, 
     #kesihatan-title, 
@@ -1315,7 +1314,7 @@ body {
         border-width: 3px !important;
     }
 
-    /* 2.2 KUIZ PAGE (#scene10-overlay) MENGIKUTI BAB PAGE (#scene6-overlay) */
+    /* KUIZ PAGE (#scene10) & BAB PAGE (#scene6) - PENYESUAIAN IKON KEKAL SAMA SEPERTI LAPTOP */
     #scene10-overlay .chapter-grid-container,
     #scene6-overlay .chapter-grid-container {
         top: 28vh !important;
@@ -1331,14 +1330,9 @@ body {
 
     #scene10-overlay .card-center,
     #scene6-overlay .card-center {
-        top: 110px !important; /* Dinaikkan supaya tidak kena logo bawah */
+        top: 110px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-    }
-
-    #scene10-overlay .card-center:hover,
-    #scene6-overlay .card-center:hover {
-        transform: translate(-50%, -5px) !important;
     }
 
     .chapter-card-btn {
@@ -1346,17 +1340,40 @@ body {
         height: clamp(50px, 11vh, 62px) !important;
         border-width: 3px !important;
     }
+
+    /* KEKALKAN BULATAN IKON & EMOJI PERSIS LAPTOP */
     .card-icon-circle {
-        width: clamp(46px, 9.5vh, 58px) !important;
-        height: clamp(46px, 9.5vh, 58px) !important;
+        position: absolute !important;
+        left: -10px !important;
+        width: clamp(48px, 10vh, 60px) !important;
+        height: clamp(48px, 10vh, 60px) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
+
+    .card-emoji {
+        font-size: clamp(1.4rem, 3vh, 1.8rem) !important;
+        line-height: 1 !important;
+    }
+
+    .health-svg-icon {
+        width: clamp(24px, 5vh, 30px) !important;
+        height: clamp(24px, 5vh, 30px) !important;
+        fill: #DC03A0 !important;
+        display: block !important;
+        margin: auto !important;
+    }
+
     #scene10-overlay .card-label,
     #scene6-overlay .card-label {
         font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
         line-height: 1.1 !important;
+        padding-left: 40px !important;
     }
 
-    /* 2.3 SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN - DITURUNKAN DARI TAJUK) */
+    /* SUB-MENU BUTTONS (ASAS, PENJAGAAN, KESIHATAN) */
     .sub-menu-grid {
         top: 36vh !important;
         width: 86% !important;
@@ -1371,7 +1388,7 @@ body {
         border-radius: 20px !important;
     }
 
-    /* 2.4 TETAPAN (SETTINGS OVERLAY & KOTAK DIKECILKAN / DINAIKKAN) */
+    /* TETAPAN (SETTINGS OVERLAY) */
     #settings-overlay {
         padding-top: 1vh !important;
     }
@@ -1384,7 +1401,7 @@ body {
     .settings-grid {
         width: 78% !important;
         gap: 15px !important;
-        margin-top: 2.5vh !important; /* Dinaikkan supaya tidak kena kepala watak */
+        margin-top: 2.5vh !important;
     }
 
     .settings-box {
@@ -1503,7 +1520,7 @@ body {
         font-size: 1.4rem !important;
     }
 
-    /* Ikon Kawalan Kiri Bawah */
+    /* Ikon Bawah Kiri Kekal Persis Laptop */
     .left-bottom-controls {
         bottom: max(10px, env(safe-area-inset-bottom)) !important;
         left: max(10px, env(safe-area-inset-left)) !important;
