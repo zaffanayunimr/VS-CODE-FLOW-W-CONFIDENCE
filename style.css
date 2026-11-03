@@ -1571,7 +1571,7 @@ body {
     }
     #start-app-btn {
         margin-bottom: 0 !important;
-        transform: translateY(-1vh);
+        transform: translateY(-5vh);
         padding: 10px 25px !important;
         min-height: 44px !important;
         font-size: 1rem !important;
@@ -1580,6 +1580,17 @@ body {
 
 /* Landscape phone and tablet adjustments. */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
+
+        #start-overlay {
+        padding-bottom: 27vh !important;
+    }
+    #start-app-btn {
+        margin-bottom: 0 !important;
+        transform: translateY(-5vh);
+        padding: 10px 25px !important;
+        min-height: 44px !important;
+        font-size: 1rem !important;
+    }
 
     /* Settings page: reduce the panel boxes and controls slightly. */
     #settings-overlay {
