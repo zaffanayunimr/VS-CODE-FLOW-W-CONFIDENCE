@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    // Detect iPhone only: Android phones and tablets will not show rotate instructions.
     const isIPhone = /iPhone/i.test(navigator.userAgent);
     if (isIPhone) document.documentElement.classList.add("iphone-device");
 
+    // Helper untuk mengawal paparan butang Fullscreen (Telefon vs Laptop)
     function updateFullscreenBtnVisibility(sceneId) {
         if (!fullscreenBtn) return;
         const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || 'ontouchstart' in window;
@@ -18,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-// =========================================================
-    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERHENTI (PHONE ONLY)
+    // =========================================================
+    // LOGIK AUTO-RELOAD BILA KELUAR APP / SKRIN TERKERTI (PHONE ONLY)
     // =========================================================
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
@@ -28,67 +29,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.matchMedia("(max-width: 1024px)").matches || ('ontouchstart' in window);
     }
 
-    // Fungsi untuk HENTIKAN SEMUA AUDIO & VIDEO
-    function stopAllMedia() {
-        if (bgMusic) {
-            bgMusic.pause();
-            bgMusic.currentTime = 0;
-        }
-        if (introAudio) {
-            introAudio.pause();
-            introAudio = null;
-        }
-        if (video1) {
-            video1.pause();
-            video1.currentTime = 0;
-        }
-        if (video2) {
-            video2.pause();
-            video2.currentTime = 0;
-        }
-        if (normalLawanVideo) {
-            normalLawanVideo.pause();
-            normalLawanVideo.currentTime = 0;
-        }
-    }
-
-    // 1. Saat aplikasi ditinggalkan/tutup skrin (Background)
-    function handleAppHide() {
-        if (isMobileDevice()) {
-            stopAllMedia();
-            sessionStorage.setItem("appWasHidden", "true");
-        }
-    }
-
-    // 2. Saat aplikasi dibuka kembali (Foreground)
-    function handleAppShow() {
-        if (isMobileDevice() && sessionStorage.getItem("appWasHidden") === "true") {
-            stopAllMedia();
-            if (reloadOverlay) {
-                // Paksa tampilkan pop-up reload dengan style paling tinggi
-                reloadOverlay.style.setProperty("display", "flex", "important");
-                reloadOverlay.style.setProperty("z-index", "999999999", "important");
-            }
-        }
-    }
-
-    // Guna gabungan event 'visibilitychange' & 'pagehide' / 'pageshow' supaya sentiasa dikesan di telefon
     document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden") {
-            handleAppHide();
-        } else if (document.visibilityState === "visible") {
-            handleAppShow();
+        if (document.visibilityState === "hidden" && isMobileDevice()) {
+            sessionStorage.setItem("appWasHidden", "true");
+        } else if (document.visibilityState === "visible" && isMobileDevice()) {
+            if (sessionStorage.getItem("appWasHidden") === "true") {
+                if (reloadOverlay) {
+                    reloadOverlay.style.setProperty("display", "flex", "important");
+                }
+            }
         }
     });
 
-    window.addEventListener("pagehide", handleAppHide);
-    window.addEventListener("pageshow", handleAppShow);
-
-    // Event listener untuk tombol Reload
     if (reloadBtn) {
         reloadBtn.addEventListener("click", () => {
             sessionStorage.removeItem("appWasHidden");
-            window.location.reload(); // Muat ulang halaman dari awal
+            window.location.reload();
         });
     }
 
