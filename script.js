@@ -3,6 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const isIPhone = /iPhone/i.test(navigator.userAgent);
     if (isIPhone) document.documentElement.classList.add("iphone-device");
 
+    // Helper untuk mengawal paparan butang Fullscreen (Telefon vs Laptop)
+    function updateFullscreenBtnVisibility(sceneId) {
+        if (!fullscreenBtn) return;
+        const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || 'ontouchstart' in window;
+        
+        if (isMobileDevice) {
+            // Pada telefon, hanya paparkan pada Scene 1 (start-overlay)
+            if (sceneId === "scene1" || sceneId === "start-overlay") {
+                fullscreenBtn.style.setProperty("display", "flex", "important");
+            } else {
+                fullscreenBtn.style.setProperty("display", "none", "important");
+            }
+        } else {
+            // Pada Laptop/PC, kekal paparkan di semua scene
+            fullscreenBtn.style.setProperty("display", "flex", "important");
+        }
+    }
+
     // ==========================================
     // 1. DOM ELEMENT SELECTION
     // ==========================================
@@ -137,14 +155,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const scene12BackBtn = document.getElementById("scene12-back-btn");
     const scene12SettingsBtn = document.getElementById("scene12-settings-btn");
 
-// Modal Pop-Up Elements
-const quizModalOverlay = document.getElementById("quiz-modal-overlay");
-const modalIconElem = document.getElementById("modal-icon-elem");
-const modalTitleElem = document.getElementById("modal-title-elem");
-const modalMsgElem = document.getElementById("modal-msg-elem");
-const modalCloseBtn = document.getElementById("modal-close-btn");
-const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris ini
+    // Modal Pop-Up Elements
+    const quizModalOverlay = document.getElementById("quiz-modal-overlay");
+    const modalIconElem = document.getElementById("modal-icon-elem");
+    const modalTitleElem = document.getElementById("modal-title-elem");
+    const modalMsgElem = document.getElementById("modal-msg-elem");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const modalXBtn = document.getElementById("modal-x-btn");
     let pendingNextQuestionCall = null;
+
+    // Pastikan status butang fullscreen awal disemak
+    updateFullscreenBtnVisibility("scene1");
 
     // ==========================================
     // 2. STATE MANAGEMENT & BGM AUDIO LOGIC
@@ -182,7 +203,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
     if (btnMute) btnMute.addEventListener("click", () => setBgmVolume(0));
 
     // ==========================================
-    // FULLSCREEN LOGIC (PC/LAPTOP ONLY)
+    // FULLSCREEN LOGIC
     // ==========================================
     function requestLandscapeFullscreen() {
         const docEl = document.documentElement;
@@ -220,13 +241,11 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             e.preventDefault();
             requestLandscapeFullscreen();
 
-            // Phone: fullscreen is only available on Scene 1.
-            // Laptop: keep the button visible on every scene. Portrait remains unchanged.
-            if (fullscreenBtn && window.matchMedia("(max-width: 1024px) and (orientation: landscape)").matches) {
-                fullscreenBtn.style.setProperty("display", "flex", "important");
-            }
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
+
+            // Sembunyikan butang fullscreen di telefon sebaik sahaja melepasi Scene 1
+            updateFullscreenBtnVisibility("scene2");
 
             if (video1) {
                 video1.style.display = "block";
@@ -290,6 +309,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
 
         updateLocalizationUI();
         if (scene4Overlay) scene4Overlay.style.display = "flex";
+        updateFullscreenBtnVisibility("scene4");
     }
 
     // ==========================================
@@ -302,6 +322,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         if (parentOverlay) parentOverlay.style.display = "none";
 
         if (normalLawanOverlay) normalLawanOverlay.style.display = "block";
+        updateFullscreenBtnVisibility("normal-lawan");
 
         const langSuffix = selectedLang === "en" ? "bi" : "bm";
         const videoFile = `assets/${videoBaseName}-${langSuffix}.mp4`;
@@ -355,6 +376,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             const parentOverlay = document.getElementById(currentVideoParentScene + "-overlay");
             if (parentOverlay) parentOverlay.style.display = "flex";
+            updateFullscreenBtnVisibility(currentVideoParentScene);
         });
     }
 
@@ -363,6 +385,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             if (normalLawanVideo) normalLawanVideo.pause();
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
+            updateFullscreenBtnVisibility("scene4");
         });
     }
 
@@ -372,39 +395,40 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             previousScene = "normal-lawan";
             if (normalLawanOverlay) normalLawanOverlay.style.display = "none";
             if (settingsOverlay) settingsOverlay.style.display = "flex";
+            updateFullscreenBtnVisibility("settings");
         });
     }
 
     // ==========================================
     // 5. NAVIGATION & ROUTING
     // ==========================================
-    if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (settingsGearBtn) settingsGearBtn.addEventListener("click", () => { previousScene = "scene4"; settingsOverlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; scene6Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (btnChapter) btnChapter.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene6"); });
+    if (settingsBtn) settingsBtn.addEventListener("click", () => { previousScene = "scene4"; scene4Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
+    if (settingsGearBtn) settingsGearBtn.addEventListener("click", () => { previousScene = "scene4"; settingsOverlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
+    if (scene6SettingsBtn) scene6SettingsBtn.addEventListener("click", () => { previousScene = "scene6"; scene6Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
+    if (scene6HomeBtn) scene6HomeBtn.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
 
-    if (btnAsas) btnAsas.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene7Overlay.style.display = "flex"; });
-    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; scene7Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnAsas) btnAsas.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene7Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene7"); });
+    if (scene7BackBtn) scene7BackBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene6"); });
+    if (scene7HomeBtn) scene7HomeBtn.addEventListener("click", () => { scene7Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
+    if (scene7SettingsBtn) scene7SettingsBtn.addEventListener("click", () => { previousScene = "scene7"; scene7Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
 
-    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene8Overlay.style.display = "flex"; });
-    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; scene8Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnPenjagaan) btnPenjagaan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene8Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene8"); });
+    if (scene8BackBtn) scene8BackBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene6"); });
+    if (scene8HomeBtn) scene8HomeBtn.addEventListener("click", () => { scene8Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
+    if (scene8SettingsBtn) scene8SettingsBtn.addEventListener("click", () => { previousScene = "scene8"; scene8Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
 
-    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene9Overlay.style.display = "flex"; });
-    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; });
-    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
-    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; scene9Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
+    if (btnKesihatan) btnKesihatan.addEventListener("click", () => { scene6Overlay.style.display = "none"; scene9Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene9"); });
+    if (scene9BackBtn) scene9BackBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene6Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene6"); });
+    if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
+    if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; scene9Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
 
     if (btnSetBm) btnSetBm.addEventListener("click", () => { selectedLang = "ms"; updateLocalizationUI(); });
     if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
 
-    if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; });
-    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; scene10Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; });
-    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { scene10Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; });
+    if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene10"); });
+    if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; scene10Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
+    if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { scene10Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
 
     if (backBtn) {
         backBtn.addEventListener("click", () => {
@@ -421,6 +445,7 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             };
             const target = sceneMap[previousScene] || scene4Overlay;
             target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
+            updateFullscreenBtnVisibility(previousScene);
         });
     }
 
@@ -429,10 +454,11 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             const overlays = [settingsOverlay, scene6Overlay, scene7Overlay, scene8Overlay, scene9Overlay, scene10Overlay, scene11Overlay, scene12Overlay, normalLawanOverlay];
             overlays.forEach(ov => { if (ov) ov.style.display = "none"; });
             if (scene4Overlay) scene4Overlay.style.display = "flex";
+            updateFullscreenBtnVisibility("scene4");
         });
     }
 
-// ==========================================
+    // ==========================================
     // 6. POP-UP MODAL FUNCTIONALITY
     // ==========================================
     function showModal(icon, title, message, onComplete, showXBtn = true) {
@@ -443,7 +469,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
 
         pendingNextQuestionCall = onComplete || null;
 
-        // Kawal paparan butang X (Sembunyikan untuk Hint/Petunjuk jika showXBtn = false)
         if (modalXBtn) {
             modalXBtn.style.display = showXBtn ? "block" : "none";
         }
@@ -451,7 +476,6 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         quizModalOverlay.style.display = "flex";
     }
 
-    // Fungsi bila tekan butang utama (TERUSKAN) -> Jalankan tindakan lanjut
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
@@ -463,18 +487,17 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
         });
     }
 
-    // Fungsi bila tekan butang X -> Hanya tutup pop-up sahaja (Bukan keluar kuiz)
     if (modalXBtn) {
         modalXBtn.addEventListener("click", () => {
             if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            pendingNextQuestionCall = null; // Batalkan sebarang fungsi keluar/lanjut
+            pendingNextQuestionCall = null;
         });
     }
 
     // ==========================================
-    // 7. QUIZ DATA & LOGIC (Bahasa Melayu Piawai & English)
+    // 7. QUIZ DATA & LOGIC
     // ==========================================
-const quizCategories = {
+    const quizCategories = {
         asas: [
             {
                 hint: { 
@@ -724,7 +747,7 @@ const quizCategories = {
                 question: { ms: "7. Apakah yang boleh dilakukan pada bahagian bawah perut untuk mengurangkan sakit senggugut?", en: "7. What can you apply to your lower tummy to help ease period cramps?" },
                 options: [
                     { text: { ms: "A) Meletakkan ais batu secara terus selama 1 jam.", en: "A) Ice cubes directly for 1 hour." }, isCorrect: false },
-                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 15 to 20 minutes." }, isCorrect: true },
+                    { text: { ms: "B) Meletakkan pek pemanas atau botol air suam selama 15 hingga 20 minit.", en: "B) A heating pad or hot-water bottle for 15 to 20 minutes." }, isCorrect: true },
                     { text: { ms: "C) Menekan dengan objek keras dan berat secara kuat.", en: "C) Heavy, hard objects pressed down firmly." }, isCorrect: false },
                     { text: { ms: "D) Membiarkan kawasan perut terdedah pada kipas angin berkuasa tinggi.", en: "D) Direct cold air from a high-speed fan." }, isCorrect: false }
                 ],
@@ -898,6 +921,8 @@ const quizCategories = {
     function showQuizCompletion() {
         if (scene11Overlay) scene11Overlay.style.display = "none";
         if (scene12Overlay) scene12Overlay.style.display = "flex";
+        updateFullscreenBtnVisibility("scene12");
+
         if (finalScoreVal) finalScoreVal.textContent = `${currentScore}/${totalQuestions}`;
 
         const isEn = selectedLang === "en";
@@ -978,6 +1003,7 @@ const quizCategories = {
 
         if (scene10Overlay) scene10Overlay.style.display = "none";
         if (scene11Overlay) scene11Overlay.style.display = "flex";
+        updateFullscreenBtnVisibility("scene11");
     }
 
     if (btnQuizAsas) btnQuizAsas.addEventListener("click", () => startCategoryQuiz("asas"));
@@ -994,19 +1020,19 @@ const quizCategories = {
                 () => {
                     if (scene11Overlay) scene11Overlay.style.display = "none";
                     if (scene10Overlay) scene10Overlay.style.display = "flex";
+                    updateFullscreenBtnVisibility("scene10");
                 }
             );
         });
     }
-    
-if (scene11HintBtn) {
+
+    if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
             const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
             const currentQ = currentCategoryQuestions[currentQuestionIndex];
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            // Hantar false pada parameter ke-5 supaya butang X disembunyikan
             showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
         });
     }
@@ -1015,6 +1041,7 @@ if (scene11HintBtn) {
         scene11HomeBtn.addEventListener("click", () => {
             if (scene11Overlay) scene11Overlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
+            updateFullscreenBtnVisibility("scene4");
         });
     }
 
@@ -1023,6 +1050,7 @@ if (scene11HintBtn) {
             previousScene = "scene11";
             if (scene11Overlay) scene11Overlay.style.display = "none";
             if (settingsOverlay) settingsOverlay.style.display = "flex";
+            updateFullscreenBtnVisibility("settings");
         });
     }
 
@@ -1030,6 +1058,7 @@ if (scene11HintBtn) {
         scene12HomeBtn.addEventListener("click", () => {
             if (scene12Overlay) scene12Overlay.style.display = "none";
             if (scene4Overlay) scene4Overlay.style.display = "flex";
+            updateFullscreenBtnVisibility("scene4");
         });
     }
 
@@ -1037,6 +1066,7 @@ if (scene11HintBtn) {
         scene12BackBtn.addEventListener("click", () => {
             if (scene12Overlay) scene12Overlay.style.display = "none";
             if (scene10Overlay) scene10Overlay.style.display = "flex";
+            updateFullscreenBtnVisibility("scene10");
         });
     }
 
@@ -1045,6 +1075,7 @@ if (scene11HintBtn) {
             previousScene = "scene12";
             if (scene12Overlay) scene12Overlay.style.display = "none";
             if (settingsOverlay) settingsOverlay.style.display = "flex";
+            updateFullscreenBtnVisibility("settings");
         });
     }
 
