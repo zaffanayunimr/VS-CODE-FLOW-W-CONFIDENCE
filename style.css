@@ -1682,34 +1682,27 @@ body {
         gap: 0 !important; /* Buang jarak asas untuk kawalan jarak garisan */
     }
 
-    /* Tajuk Keputusan (cth: "Ohh tidak!", "Tahniah!") */
-    .quiz-result-title,
-    #result-title,
-    .result-heading {
-        font-size: clamp(1.3rem, 3.2vw, 1.8rem) !important; /* Dikecilkan */
-        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+/* PELARASAN KECILKAN FONT & SELARAS GARISAN KEPUTUSAN KUIZ */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+
+    /* Tajuk (cth: "Ohh tidak!") */
+    .quiz-result-title, #result-title {
+        font-size: clamp(1.2rem, 2.8vw, 1.5rem) !important;
+        line-height: 42px !important; /* Duduk tepat atas garisan buku */
         margin: 0 !important;
-        padding: 0 !important;
     }
 
-    /* Mesej Galakan (cth: "Teruskan usaha!") */
-    .quiz-result-message,
-    #result-message,
-    .result-subtext {
-        font-size: clamp(1rem, 2.3vw, 1.3rem) !important;   /* Dikecilkan */
-        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+    /* Mesej (cth: "Teruskan usaha!") */
+    .quiz-result-message, #result-message {
+        font-size: clamp(0.95rem, 2.2vw, 1.2rem) !important;
+        line-height: 42px !important; /* Duduk tepat atas garisan buku */
         margin: 0 !important;
-        padding: 0 !important;
     }
 
-    /* Teks Skor (cth: "Skor anda: 2/8") */
-    .quiz-result-score,
-    #result-score,
-    .score-text {
-        font-size: clamp(1.1rem, 2.6vw, 1.4rem) !important; /* Dikecilkan */
-        line-height: 40px !important;                       /* Mengikut ketinggian garisan buku */
+    /* Skor (cth: "Skor anda: 2/8") */
+    .quiz-result-score, #result-score {
+        font-size: clamp(1rem, 2.4vw, 1.3rem) !important;
+        line-height: 42px !important; /* Duduk tepat atas garisan buku */
         margin: 0 !important;
-        padding: 0 !important;
     }
-}
 }
