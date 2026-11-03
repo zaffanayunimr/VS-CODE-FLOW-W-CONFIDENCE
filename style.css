@@ -1318,10 +1318,29 @@ body {
     }
 }
 
-/* ---------------------------------------------------------
-   2. PHONE & TABLET (LANDSCAPE MODE)
-   --------------------------------------------------------- */
+    /* =========================================================
+   PENYESUAIAN SCENE 1 (START SCREEN) LANDSCAPE
+   ========================================================= */
 @media screen and (max-width: 1024px) and (orientation: landscape) {
+
+    /* 1. KECILKAN UKURAN JUDUL UTAMA SCENE 1 */
+    #start-overlay .first-header {
+        top: 6vh !important;
+        width: 85% !important;
+    }
+
+    #start-overlay .first-title {
+        font-size: clamp(1.1rem, 3vw, 1.6rem) !important; /* Dikecilkan dari ukuran asal */
+        letter-spacing: 2px !important;
+        line-height: 1 !important;
+    }
+
+    #start-overlay .first-subtitle {
+        font-size: clamp(2rem, 5.5vw, 3rem) !important; /* Dikecilkan dari ukuran asal */
+        margin-top: -2px !important;
+        line-height: 0.95 !important;
+    }
+    
     html, body, #player-container,
     .video-layer, #language-overlay, #scene4-overlay,
     #settings-overlay, #scene6-overlay, #scene7-overlay,
@@ -1648,6 +1667,41 @@ body {
         object-fit: contain !important;
         max-width: 100% !important;
         max-height: 100% !important;
+    }
+
+    /* Bekas kandungan keputusan kuiz */
+    .quiz-result-container,
+    #quiz-result-overlay,
+    .result-content {
+        padding-top: 4vh !important;
+        gap: 8px !important;
+    }
+
+    /* Tajuk Keputusan (cth: "Ohh tidak!", "Tahniah!", "Congratulations!") */
+    .quiz-result-title,
+    #result-title,
+    .result-heading {
+        font-size: clamp(1.6rem, 4vw, 2.2rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* Teks Mesej / Galakan (cth: "Teruskan usaha!") */
+    .quiz-result-message,
+    #result-message,
+    .result-subtext {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important;
+        line-height: 1.2 !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Teks Skor (cth: "Skor anda: 2/8") */
+    .quiz-result-score,
+    #result-score,
+    .score-text {
+        font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+        line-height: 1.2 !important;
+        margin-top: 4px !important;
     }
 }
 
