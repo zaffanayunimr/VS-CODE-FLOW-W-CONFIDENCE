@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Detect iPhone only: Android phones and tablets will not show rotate instructions.
+    const isIPhone = /iPhone/i.test(navigator.userAgent);
+    if (isIPhone) document.documentElement.classList.add("iphone-device");
+
     // ==========================================
     // 1. DOM ELEMENT SELECTION
     // ==========================================
@@ -216,6 +220,8 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             e.preventDefault();
             requestLandscapeFullscreen();
 
+            // Fullscreen button is only for the first/start screen.
+            if (fullscreenBtn) fullscreenBtn.style.setProperty("display", "none", "important");
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
 
