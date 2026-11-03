@@ -1325,7 +1325,7 @@ body {
 
     /* 1. KECILKAN UKURAN JUDUL UTAMA SCENE 1 */
     #start-overlay .first-header {
-        top: 6vh !important;
+        top: 2vh !important;
         width: 85% !important;
     }
 
