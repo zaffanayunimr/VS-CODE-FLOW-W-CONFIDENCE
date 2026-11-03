@@ -1673,7 +1673,7 @@ body {
     .quiz-result-container,
     #quiz-result-overlay,
     .result-content {
-        top: 22vh !important; /* Turunkan sedikit supaya tidak terlalu atas */
+        top: 30vh !important; /* Turunkan sedikit supaya tidak terlalu atas */
         transform: translateY(0) !important;
         display: flex !important;
         flex-direction: column !important;
@@ -1681,9 +1681,6 @@ body {
         justify-content: center !important;
         gap: 0 !important; /* Buang jarak asas untuk kawalan jarak garisan */
     }
-
-/* PELARASAN KECILKAN FONT & SELARAS GARISAN KEPUTUSAN KUIZ */
-@media screen and (max-width: 1024px) and (orientation: landscape) {
 
     /* Tajuk (cth: "Ohh tidak!") */
     .quiz-result-title, #result-title {
@@ -1704,5 +1701,17 @@ body {
         font-size: clamp(1rem, 2.4vw, 1.3rem) !important;
         line-height: 42px !important; /* Duduk tepat atas garisan buku */
         margin: 0 !important;
+    }
+}
+
+/* ---------------------------------------------------------
+   3. KAWALAN PERANTI SENTUH (TOUCH DEVICES)
+   --------------------------------------------------------- */
+@media (hover: none), (pointer: coarse) {
+    button:hover, .circle-icon-btn:hover, #fullscreen-btn:hover {
+        transform: none !important;
+    }
+    button:active, .circle-icon-btn:active, #fullscreen-btn:active {
+        transform: scale(0.97) !important;
     }
 }
