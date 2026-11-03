@@ -416,6 +416,7 @@ body {
     z-index: 300;
 }
 
+/* SEMBUYIKAN BUTTON SETTING PADA SKRIN SETTING */
 #settings-overlay .left-bottom-controls .circle-icon-btn:first-child,
 #settings-overlay .left-bottom-controls button[id*="setting"],
 #settings-overlay .left-bottom-controls .gear-btn {
@@ -516,7 +517,7 @@ body {
     cursor: pointer;
 }
 
-/* KEDUDUKAN TEKS PERATUSAN (10%) ADA JARAK DI BAWAH SLIDER */
+/* FIX 1: PERATUSAN AUDIO DI BAWAH SLIDER DENGAN JARAK SELISA */
 #volume-percentage {
     font-family: "Franklin Gothic Heavy", "Arial Black", sans-serif;
     color: #E70B90;
@@ -672,7 +673,7 @@ body {
     background-color: #FFFF99 !important;
 }
 
-/* KEDUDUKAN BUTANG ASAS DAN PENJAGAAN DITURUNKAN SEDIKIT */
+/* FIX 2: BUTANG ASAS DAN PENJAGAAN DITURUNKAN SEDIKIT */
 .card-left {
     top: 35px !important;
     left: 10px;
@@ -683,7 +684,7 @@ body {
     right: 10px;
 }
 
-/* KEDUDUKAN BUTANG KESIHATAN & KESEDARAN DINAIKKAN SEDIKIT & TEPAT DI TENGAH (CENTER) */
+/* FIX 2: BUTANG KESIHATAN & KESEDARAN DINAIKKAN SEDIKIT & TEPAT DI TENGAH (CENTER) */
 .card-center {
     top: 140px !important;
     left: 50% !important;
@@ -1126,199 +1127,4 @@ body {
 #modal-close-btn:hover {
     transform: translateY(-2px);
     background-color: #FFFFCC !important;
-}
-
-/* =========================================================
-   PHONE & TABLET RESPONSIVE PATCH
-   ========================================================= */
-#rotate-device-overlay { display: none !important; }
-
-@media only screen and (max-device-width: 932px) and (orientation: portrait) {
-    html.iphone-device #rotate-device-overlay {
-        display: flex !important;
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        background: #FFF0F7;
-        z-index: 10000000;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-}
-
-@media screen and (max-width: 600px) and (orientation: portrait) {
-    #start-overlay {
-        width: 100%;
-        height: 100%;
-        height: 100dvh;
-        padding: 0 12px 12vh;
-        justify-content: flex-end;
-        background-size: cover;
-        background-position: center center;
-    }
-
-    .first-header {
-        top: 9vh;
-        width: 96%;
-    }
-
-    .first-title {
-        font-size: clamp(1.35rem, 7vw, 2.4rem);
-        letter-spacing: 2px;
-        line-height: 1;
-    }
-
-    .first-subtitle {
-        font-size: clamp(2.5rem, 13vw, 4.2rem);
-        margin-top: -5px;
-        line-height: 0.95;
-    }
-
-    #start-app-btn {
-        padding: 10px 26px;
-        font-size: clamp(0.9rem, 4vw, 1.2rem);
-        border-width: 3px;
-        max-width: 85%;
-    }
-
-    #fullscreen-btn {
-        position: fixed !important;
-        top: max(12px, env(safe-area-inset-top)) !important;
-        left: max(12px, env(safe-area-inset-left)) !important;
-        width: 42px !important;
-        height: 42px !important;
-        z-index: 10000001 !important;
-    }
-
-    #fullscreen-btn svg {
-        width: 21px !important;
-        height: 21px !important;
-    }
-}
-
-@media screen and (max-width: 1024px) and (orientation: landscape) {
-    html, body, #player-container {
-        width: 100%;
-        height: 100%;
-        height: 100dvh;
-        overflow: hidden;
-    }
-
-    #player-container,
-    .video-layer,
-    #language-overlay,
-    #scene4-overlay,
-    #settings-overlay,
-    #scene6-overlay,
-    #scene7-overlay,
-    #scene8-overlay,
-    #scene9-overlay,
-    #scene10-overlay,
-    #scene11-overlay,
-    #scene12-overlay,
-    #normal-lawan-overlay {
-        width: 100%;
-        height: 100%;
-        height: 100dvh;
-    }
-
-    .first-title, .menu-title {
-        font-size: clamp(1.5rem, 4.5vw, 2.7rem);
-        letter-spacing: 2px;
-    }
-
-    .first-subtitle, .menu-subtitle {
-        font-size: clamp(2.6rem, 8vw, 4.8rem);
-    }
-
-    #start-app-btn {
-        padding: 9px 26px;
-        font-size: clamp(0.9rem, 2.4vw, 1.25rem);
-    }
-
-    .lang-btn {
-        height: clamp(44px, 11vh, 62px);
-        font-size: clamp(1rem, 2.5vw, 1.45rem);
-    }
-
-    .menu-header { margin-top: 5vh !important; }
-    .menu-buttons-container { margin-top: 7vh !important; gap: 10px; }
-    .menu-btn {
-        width: clamp(160px, 32vw, 230px);
-        height: clamp(40px, 9vh, 50px);
-        font-size: clamp(1rem, 2.5vw, 1.35rem);
-    }
-
-    .chapter-grid-container {
-        top: 25vh;
-        width: 88%;
-        height: 68vh;
-    }
-
-    .chapter-card-btn {
-        width: min(39vw, 280px);
-        height: clamp(48px, 14vh, 68px);
-    }
-
-    .sub-menu-grid {
-        top: 22vh;
-        width: 86%;
-        gap: 4vh 3vw;
-    }
-
-    .sub-menu-btn {
-        min-height: 48px;
-        height: 11vh;
-        padding: 5px 9px;
-        font-size: clamp(0.75rem, 1.8vw, 1.05rem);
-    }
-
-    .settings-grid { width: 86%; gap: 14px; margin-top: 4vh !important; }
-    .settings-box { padding: 24px 10px 12px; }
-    .settings-action-btn, .lang-option-btn {
-        width: min(190px, 32vw);
-        height: 34px;
-        font-size: clamp(0.65rem, 1.5vw, 0.85rem);
-    }
-
-    .question-container { top: 11vh; width: 88%; }
-    #quiz-question-text {
-        font-size: clamp(0.85rem, 2vw, 1.2rem);
-        line-height: 5vh;
-    }
-    .options-grid {
-        top: 37vh;
-        width: 88%;
-        gap: 4vh 3vw;
-    }
-    .option-btn {
-        min-height: 48px;
-        padding: 7px 10px;
-        font-size: clamp(0.7rem, 1.6vw, 0.95rem);
-    }
-
-    .left-bottom-controls {
-        bottom: max(8px, env(safe-area-inset-bottom));
-        left: max(8px, env(safe-area-inset-left));
-        gap: 6px;
-    }
-    .circle-icon-btn {
-        width: 38px !important;
-        height: 38px !important;
-    }
-    .circle-icon-btn svg {
-        width: 19px !important;
-        height: 19px !important;
-    }
-}
-
-@media (hover: none), (pointer: coarse) {
-    button:hover, .circle-icon-btn:hover, #fullscreen-btn:hover {
-        transform: none !important;
-    }
-    button:active, .circle-icon-btn:active, #fullscreen-btn:active {
-        transform: scale(0.97) !important;
-    }
 }
