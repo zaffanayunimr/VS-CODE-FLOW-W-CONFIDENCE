@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const isIPhone = /iPhone/i.test(navigator.userAgent);
     if (isIPhone) document.documentElement.classList.add("iphone-device");
 
-    // Helper untuk mengawal paparan butang Fullscreen (Telefon vs Laptop)
     function updateFullscreenBtnVisibility(sceneId) {
         if (!fullscreenBtn) return;
         const isMobileDevice = window.matchMedia("(max-width: 1024px)").matches || 'ontouchstart' in window;
