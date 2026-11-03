@@ -220,8 +220,11 @@ const modalXBtn = document.getElementById("modal-x-btn"); // <--- Tambah baris i
             e.preventDefault();
             requestLandscapeFullscreen();
 
-            // Fullscreen button is only for the first/start screen.
-            if (fullscreenBtn) fullscreenBtn.style.setProperty("display", "none", "important");
+            // Laptop: keep fullscreen button available on every scene.
+            // Landscape phone: hide it after leaving Scene 1; portrait behavior is unchanged.
+            if (fullscreenBtn && window.matchMedia("(max-width: 1024px) and (orientation: landscape)").matches) {
+                fullscreenBtn.style.setProperty("display", "none", "important");
+            }
             if (startOverlay) startOverlay.style.setProperty("display", "none", "important");
             if (bgMusic) bgMusic.play().catch(err => console.log(err));
 
