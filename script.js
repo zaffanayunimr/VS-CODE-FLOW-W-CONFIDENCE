@@ -174,6 +174,7 @@ function forceShowReloadOverlay() {
     const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
     const scene10HomeBtn = document.getElementById("scene10-home-btn");
     const quizTitle = document.getElementById("quiz-title");
+    const quizChapter = document.getElementById("quiz-chapter");
     const btnQuizAsas = document.getElementById("btn-quiz-asas");
     const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
     const btnQuizKesihatan = document.getElementById("btn-quiz-kesihatan");
