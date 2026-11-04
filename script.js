@@ -512,6 +512,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             const target = sceneMap[previousScene] || scene4Overlay;
             target.style.display = (target === normalLawanOverlay) ? "block" : "flex";
             updateFullscreenBtnVisibility(previousScene);
+            if (previousScene === "normal-lawan") reloadCurrentVideoForLanguage();
         });
     }
 
