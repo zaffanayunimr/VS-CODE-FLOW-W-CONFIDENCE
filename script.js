@@ -174,6 +174,9 @@ function forceShowReloadOverlay() {
 const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
 const scene10HomeBtn = document.getElementById("scene10-home-btn");
 const quizTitle = document.getElementById("quiz-title");
+const btnQuizAsas = document.getElementById("btn-quiz-asas");
+const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
+const btnQuizKesihatan = document.getElementById("btn-quiz-kesihatan");
 
 const labelQuizAsas = document.getElementById("label-quiz-asas");
 const labelQuizPenjagaan = document.getElementById("label-quiz-penjagaan");
@@ -468,6 +471,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
 
     if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene10"); });
+    
     if (scene10SettingsBtn) scene10SettingsBtn.addEventListener("click", () => { previousScene = "scene10"; scene10Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
     if (scene10HomeBtn) scene10HomeBtn.addEventListener("click", () => { scene10Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
 
