@@ -1154,6 +1154,11 @@ function forceShowReloadOverlay() {
             if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Hygiene mistakes during menstruation";
             if (labelSekeliling) labelSekeliling.textContent = "Period care for those around you";
 
+            if (quizChapter) quizChapter.textContent = "Quiz Penjagaan Haid";
+            if (labelAsas) labelAsas.textContent = "Basic";
+            if (labelPenjagaan) labelPenjagaan.textContent = "Care";
+            if (labelKesihatan) labelKesihatan.innerHTML = "Health &amp;<br>Awareness";
+
             if (quizTitle) quizTitle.textContent = "Menstrual Care Quiz";
             if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
             if (modalCloseBtn) modalCloseBtn.textContent = "CONTINUE";
@@ -1202,6 +1207,11 @@ function forceShowReloadOverlay() {
             if (labelMitosFakta) labelMitosFakta.textContent = "Mitos & fakta";
             if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Kesilapan kebersihan semasa haid";
             if (labelSekeliling) labelSekeliling.textContent = "Penjagaan haid kepada orang sekeliling";
+
+            if (quizChapter) quizChapter.textContent = "Kuiz Penjagaan Haid";
+            if (labelAsas) labelAsas.textContent = "Asas";
+            if (labelPenjagaan) labelPenjagaan.textContent = "Penjagaan";
+            if (labelKesihatan) labelKesihatan.innerHTML = "Kesihatan &amp;<br>Kesedaran";
 
             if (quizTitle) quizTitle.textContent = "Kuiz Penjagaan Haid";
             if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
