@@ -1031,6 +1031,77 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         });
     });
 
+    // ==========================================
+    // 6. POP-UP MODAL FUNCTIONALITY (FIX HINT & BACK)
+    // ==========================================
+    function showModal(icon, title, message, onComplete, showXBtn = true) {
+        if (!quizModalOverlay) return;
+        if (modalIconElem) modalIconElem.textContent = icon;
+        if (modalTitleElem) modalTitleElem.textContent = title;
+        if (modalMsgElem) modalMsgElem.textContent = message;
+
+        pendingNextQuestionCall = onComplete || null;
+
+        if (modalXBtn) {
+            modalXBtn.style.display = showXBtn ? "block" : "none";
+        }
+
+        // Paksa paparan flex & z-index tinggi
+        quizModalOverlay.style.setProperty("display", "flex", "important");
+        quizModalOverlay.style.setProperty("z-index", "99999999", "important");
+        
+        // Pindahkan ke body jika terlindung
+        if (quizModalOverlay.parentNode !== document.body) {
+            document.body.appendChild(quizModalOverlay);
+        }
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener("click", () => {
+            if (quizModalOverlay) quizModalOverlay.style.setProperty("display", "none", "important");
+            if (pendingNextQuestionCall) {
+                const action = pendingNextQuestionCall;
+                pendingNextQuestionCall = null;
+                action();
+            }
+        });
+    }
+
+    if (modalXBtn) {
+        modalXBtn.addEventListener("click", () => {
+            if (quizModalOverlay) quizModalOverlay.style.setProperty("display", "none", "important");
+            pendingNextQuestionCall = null;
+        });
+    }
+
+    // ==========================================
+    // LOGIK BUTANG QUIT & HINT (SCENE 11)
+    // ==========================================
+    if (scene11QuitBtn) {
+        scene11QuitBtn.addEventListener("click", () => {
+            // Kembali terus ke Menu Pilihan Kuiz (Scene 10)
+            if (scene11Overlay) scene11Overlay.style.setProperty("display", "none", "important");
+            if (scene10Overlay) scene10Overlay.style.setProperty("display", "flex", "important");
+            updateFullscreenBtnVisibility("scene10");
+        });
+    }
+
+    if (scene11HintBtn) {
+        scene11HintBtn.addEventListener("click", () => {
+            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
+            const currentQ = currentCategoryQuestions[currentQuestionIndex];
+            const isEn = selectedLang === "en";
+            
+            // Dapatkan teks hint mengikut soalan semasa
+            const hintText = (currentQ && currentQ.hint) 
+                ? currentQ.hint[selectedLang || "ms"] 
+                : (isEn ? "Read the question carefully!" : "Baca soalan dengan teliti!");
+
+            // Tunjukkan modal pop-up hint
+            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
+        });
+    }
+
     function startCategoryQuiz(categoryKey) {
         activeQuizCategory = categoryKey;
         currentScore = 0;
