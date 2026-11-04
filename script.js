@@ -220,6 +220,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     let introAudio = null;
     let previousScene = "scene4";
     let currentVideoParentScene = "scene7";
+    let currentVideoBaseName = null;
 
     let currentScore = 0;
     let currentQuestionIndex = 0;
@@ -361,6 +362,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     // ==========================================
     function playChapterVideo(videoBaseName, parentSceneId) {
         currentVideoParentScene = parentSceneId;
+        currentVideoBaseName = videoBaseName;
 
         const parentOverlay = document.getElementById(parentSceneId + "-overlay");
         if (parentOverlay) parentOverlay.style.display = "none";
@@ -407,6 +409,25 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         if (normalLawanVideo && videoSpeed) {
             normalLawanVideo.playbackRate = Number(videoSpeed.value);
         }
+    }
+
+    function reloadCurrentVideoForLanguage() {
+        if (!currentVideoBaseName || !normalLawanVideo || !normalLawanSource) return;
+
+        const langSuffix = selectedLang === "en" ? "bi" : "bm";
+        const newSrc = `assets/${currentVideoBaseName}-${langSuffix}.mp4`;
+
+        // Language did not change, so leave the video as it is
+        if (normalLawanSource.getAttribute("src") === newSrc) return;
+
+        const savedTime = normalLawanVideo.currentTime;
+        normalLawanSource.src = newSrc;
+        normalLawanVideo.load();
+        normalLawanVideo.addEventListener("loadedmetadata", () => {
+            normalLawanVideo.currentTime = savedTime;
+            applyVideoSpeed();
+            normalLawanVideo.play().catch(err => console.log(err));
+        }, { once: true });
     }
 
     if (videoSpeed) videoSpeed.addEventListener("change", applyVideoSpeed);
@@ -1371,4 +1392,3 @@ function updateLocalizationUI() {
     loadQuestion();
 }
 });
-
