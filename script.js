@@ -1077,30 +1077,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     // ==========================================
     // LOGIK BUTANG QUIT & HINT (SCENE 11)
     // ==========================================
-    if (scene11QuitBtn) {
-        scene11QuitBtn.addEventListener("click", () => {
-            // Kembali terus ke Menu Pilihan Kuiz (Scene 10)
-            if (scene11Overlay) scene11Overlay.style.setProperty("display", "none", "important");
-            if (scene10Overlay) scene10Overlay.style.setProperty("display", "flex", "important");
-            updateFullscreenBtnVisibility("scene10");
-        });
-    }
-
-    if (scene11HintBtn) {
-        scene11HintBtn.addEventListener("click", () => {
-            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
-            const currentQ = currentCategoryQuestions[currentQuestionIndex];
-            const isEn = selectedLang === "en";
-            
-            // Dapatkan teks hint mengikut soalan semasa
-            const hintText = (currentQ && currentQ.hint) 
-                ? currentQ.hint[selectedLang || "ms"] 
-                : (isEn ? "Read the question carefully!" : "Baca soalan dengan teliti!");
-
-            // Tunjukkan modal pop-up hint
-            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
-        });
-    }
+    
 
         function startCategoryQuiz(categoryKey) {
         activeQuizCategory = categoryKey;
@@ -1134,16 +1111,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         });
     }
 
-    if (scene11HintBtn) {
-        scene11HintBtn.addEventListener("click", () => {
-            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
-            const currentQ = currentCategoryQuestions[currentQuestionIndex];
-            const isEn = selectedLang === "en";
-            const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
-
-            showModal("ð¡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
-        });
-    }
+    
 
     if (scene11HomeBtn) {
         scene11HomeBtn.addEventListener("click", () => {
@@ -1345,13 +1313,15 @@ function updateLocalizationUI() {
     // ==========================================
     // SCENE 11 - QUIZ QUESTIONS
     // ==========================================
-    if (scene11QuitBtn) {
-        scene11QuitBtn.textContent = isEn ? "Quit" : "Keluar";
-    }
+    // SCENE 11 - QUIZ QUESTIONS
+if (scene11QuitBtn) {
+    scene11QuitBtn.textContent = isEn ? "🚪 Quit" : "🚪 Keluar";
+}
+    
 
-    if (scene11HintBtn) {
-        scene11HintBtn.textContent = isEn ? "Hint" : "Petunjuk";
-    }
+if (scene11HintBtn) {
+    scene11HintBtn.textContent = isEn ? "💡 Hint" : "💡 Petunjuk";
+}
 
     // ==========================================
     // SCENE 12 - QUIZ RESULT
