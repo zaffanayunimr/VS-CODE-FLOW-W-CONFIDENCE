@@ -170,15 +170,15 @@ function forceShowReloadOverlay() {
     const btnSetBm = document.getElementById("btn-set-bm");
     const btnSetEn = document.getElementById("btn-set-en");
 
-    // Quiz DOM Elements
-    const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
-    const scene10HomeBtn = document.getElementById("scene10-home-btn");
-    const quizTitle = document.getElementById("quiz-title");
-    const quizChapter = document.getElementById("quiz-chapter");
-    const btnQuizAsas = document.getElementById("btn-quiz-asas");
-    const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
-    const btnQuizKesihatan = document.getElementById("btn-quiz-kesihatan");
+    // // Quiz DOM Elements
+const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
+const scene10HomeBtn = document.getElementById("scene10-home-btn");
+const quizTitle = document.getElementById("quiz-title");
 
+const btnQuizAsas = document.getElementById("btn-quiz-asas");
+const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
+const btnQuizKesihatan = document.getElementById("btn-quiz-kesihatan");
+    
     const quizQuestionText = document.getElementById("quiz-question-text");
     const optA = document.getElementById("opt-a");
     const optB = document.getElementById("opt-b");
@@ -1112,121 +1112,216 @@ function forceShowReloadOverlay() {
         });
     }
 
+function updateLocalizationUI() {
+    const isEn = selectedLang === "en";
+
     // ==========================================
-    // 8. LOCALIZATION (UI Language Toggle - ALL SCENES)
+    // SETTINGS
     // ==========================================
-    function updateLocalizationUI() {
-        const isEn = selectedLang === "en";
+    if (settingsTitle) settingsTitle.textContent = isEn ? "Settings" : "Tetapan";
+    if (labelAudio) labelAudio.textContent = isEn ? "Sound" : "Audio";
+    if (labelLanguage) labelLanguage.textContent = isEn ? "Language" : "Bahasa";
 
-        if (isEn) {
-            if (settingsTitle) settingsTitle.textContent = "Setting";
-            if (labelAudio) labelAudio.textContent = "Sound";
-            if (labelLanguage) labelLanguage.textContent = "Language";
-            if (textVolumeUp) textVolumeUp.textContent = "Volume Up";
-            if (textVolumeDown) textVolumeDown.textContent = "Volume Down";
-            if (textMute) textMute.textContent = "Mute";
-            if (textLangBm) textLangBm.textContent = "Malay";
-            if (textLangEn) textLangEn.textContent = "English";
+    if (textVolumeUp) textVolumeUp.textContent = isEn ? "Volume Up" : "Kuatkan";
+    if (textVolumeDown) textVolumeDown.textContent = isEn ? "Volume Down" : "Perlahankan";
+    if (textMute) textMute.textContent = isEn ? "Mute" : "Senyap";
 
-            if (btnChapter) btnChapter.textContent = "Chapter";
-            if (btnQuiz) btnQuiz.textContent = "Quiz";
-            if (skipBtn) skipBtn.textContent = "Skip";
+    if (textLangBm) textLangBm.textContent = isEn ? "Malay" : "Bahasa Melayu";
+    if (textLangEn) textLangEn.textContent = isEn ? "English" : "Bahasa Inggeris";
 
-            if (chapterTitle) chapterTitle.textContent = "Menstrual Care Chapter";
-            if (labelAsas) labelAsas.textContent = "Basic";
-            if (labelPenjagaan) labelPenjagaan.textContent = "Care";
-            if (labelKesihatan) labelKesihatan.innerHTML = "Health &amp;<br>Awareness";
+    // ==========================================
+    // MAIN NAVIGATION BUTTONS
+    // ==========================================
+    if (btnChapter) btnChapter.textContent = isEn ? "Chapter" : "Bab";
+    if (btnQuiz) btnQuiz.textContent = isEn ? "Quiz" : "Kuiz";
+    if (skipBtn) skipBtn.textContent = isEn ? "Skip" : "Langkau";
 
-            if (asasTitle) asasTitle.textContent = "Basic";
-            if (labelApaHaid) labelApaHaid.textContent = "What is period?";
-            if (labelMengapaHaid) labelMengapaHaid.textContent = "Why do periods happen?";
-            if (labelBerapaLama) labelBerapaLama.textContent = "How long is a normal period cycle?";
-            if (labelNormalLawan) labelNormalLawan.textContent = "Normal vs. not normal";
+    // ==========================================
+    // SCENE 6 - CHAPTER MENU
+    // ==========================================
+    if (chapterTitle) {
+        chapterTitle.textContent = isEn
+            ? "Menstrual Care Chapter"
+            : "Bab Penjagaan Haid";
+    }
 
-            if (penjagaanTitle) penjagaanTitle.textContent = "Care";
-            if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Basic period care";
-            if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Period care at school";
-            if (labelJenis) labelJenis.textContent = "Types of sanitary pads";
-            if (labelCara) labelCara.textContent = "How to reduce period pain";
+    if (labelAsas) labelAsas.textContent = isEn ? "Basic" : "Asas";
+    if (labelPenjagaan) labelPenjagaan.textContent = isEn ? "Care" : "Penjagaan";
 
-            if (kesihatanTitle) kesihatanTitle.innerHTML = "Health &amp;<br>Awareness";
-            if (labelHaidMental) labelHaidMental.textContent = "Menstruation & mental health";
-            if (labelMitosFakta) labelMitosFakta.textContent = "Myths & facts";
-            if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Hygiene mistakes during menstruation";
-            if (labelSekeliling) labelSekeliling.textContent = "Period care for those around you";
+    if (labelKesihatan) {
+        labelKesihatan.innerHTML = isEn
+            ? "Health &amp;<br>Awareness"
+            : "Kesihatan &amp;<br>Kesedaran";
+    }
 
-            if (quizChapter) quizChapter.textContent = "Quiz Penjagaan Haid";
-            if (labelAsas) labelAsas.textContent = "Basic";
-            if (labelPenjagaan) labelPenjagaan.textContent = "Care";
-            if (labelKesihatan) labelKesihatan.innerHTML = "Health &amp;<br>Awareness";
+    // ==========================================
+    // SCENE 7 - BASIC
+    // ==========================================
+    if (asasTitle) asasTitle.textContent = isEn ? "Basic" : "Asas";
 
-            if (quizTitle) quizTitle.textContent = "Menstrual Care Quiz";
-            if (resultScoreLabel) resultScoreLabel.textContent = "Your score:";
-            if (modalCloseBtn) modalCloseBtn.textContent = "CONTINUE";
+    if (labelApaHaid) {
+        labelApaHaid.textContent = isEn
+            ? "What is a period?"
+            : "Apakah itu haid?";
+    }
 
-            if (currentScore <= 3) {
-                if (resultCongrats) resultCongrats.textContent = "Oh no!";
-                if (resultMotto) resultMotto.textContent = "Keep up the effort";
-            } else {
-                if (resultCongrats) resultCongrats.textContent = "Congratulations!";
-                if (resultMotto) resultMotto.textContent = "Effort is the key to success!";
-            }
+    if (labelMengapaHaid) {
+        labelMengapaHaid.textContent = isEn
+            ? "Why do periods happen?"
+            : "Mengapa haid berlaku?";
+    }
 
-        } else {
-            if (settingsTitle) settingsTitle.textContent = "Tetapan";
-            if (labelAudio) labelAudio.textContent = "Audio";
-            if (labelLanguage) labelLanguage.textContent = "Bahasa";
-            if (textVolumeUp) textVolumeUp.textContent = "Kuatkan";
-            if (textVolumeDown) textVolumeDown.textContent = "Perlahankan";
-            if (textMute) textMute.textContent = "Senyap";
-            if (textLangBm) textLangBm.textContent = "Bahasa Melayu";
-            if (textLangEn) textLangEn.textContent = "Bahasa Inggeris";
+    if (labelBerapaLama) {
+        labelBerapaLama.textContent = isEn
+            ? "How long is a normal period cycle?"
+            : "Berapa lamakah kitaran haid?";
+    }
 
-            if (btnChapter) btnChapter.textContent = "Bab";
-            if (btnQuiz) btnQuiz.textContent = "Kuiz";
-            if (skipBtn) skipBtn.textContent = "Langkau";
+    if (labelNormalLawan) {
+        labelNormalLawan.textContent = isEn
+            ? "Normal vs. not normal"
+            : "Normal berbanding tidak normal";
+    }
 
-            if (chapterTitle) chapterTitle.textContent = "Bab Penjagaan Haid";
-            if (labelAsas) labelAsas.textContent = "Asas";
-            if (labelPenjagaan) labelPenjagaan.textContent = "Penjagaan";
-            if (labelKesihatan) labelKesihatan.innerHTML = "Kesihatan &amp;<br>Kesedaran";
+    // ==========================================
+    // SCENE 8 - CARE
+    // ==========================================
+    if (penjagaanTitle) {
+        penjagaanTitle.textContent = isEn ? "Care" : "Penjagaan";
+    }
 
-            if (asasTitle) asasTitle.textContent = "Asas";
-            if (labelApaHaid) labelApaHaid.textContent = "Apakah itu haid?";
-            if (labelMengapaHaid) labelMengapaHaid.textContent = "Mengapa haid berlaku?";
-            if (labelBerapaLama) labelBerapaLama.textContent = "Berapa lamakah kitaran haid?";
-            if (labelNormalLawan) labelNormalLawan.textContent = "Normal berbanding tidak normal";
+    if (labelPenjagaanAsas) {
+        labelPenjagaanAsas.textContent = isEn
+            ? "Basic period care"
+            : "Penjagaan asas semasa haid";
+    }
 
-            if (penjagaanTitle) penjagaanTitle.textContent = "Penjagaan";
-            if (labelPenjagaanAsas) labelPenjagaanAsas.textContent = "Penjagaan asas semasa haid";
-            if (labelPenjagaanHaid) labelPenjagaanHaid.textContent = "Penjagaan haid di sekolah";
-            if (labelJenis) labelJenis.textContent = "Jenis-jenis tuala wanita";
-            if (labelCara) labelCara.textContent = "Cara mengurangkan sakit senggugut";
+    if (labelPenjagaanHaid) {
+        labelPenjagaanHaid.textContent = isEn
+            ? "Period care at school"
+            : "Penjagaan haid di sekolah";
+    }
 
-            if (kesihatanTitle) kesihatanTitle.innerHTML = "Kesihatan &amp;<br>Kesedaran";
-            if (labelHaidMental) labelHaidMental.textContent = "Haid & kesihatan mental";
-            if (labelMitosFakta) labelMitosFakta.textContent = "Mitos & fakta";
-            if (labelKesilapanKebersihan) labelKesilapanKebersihan.textContent = "Kesilapan kebersihan semasa haid";
-            if (labelSekeliling) labelSekeliling.textContent = "Penjagaan haid kepada orang sekeliling";
+    if (labelJenis) {
+        labelJenis.textContent = isEn
+            ? "Types of sanitary pads"
+            : "Jenis-jenis tuala wanita";
+    }
 
-            if (quizChapter) quizChapter.textContent = "Kuiz Penjagaan Haid";
-            if (labelAsas) labelAsas.textContent = "Asas";
-            if (labelPenjagaan) labelPenjagaan.textContent = "Penjagaan";
-            if (labelKesihatan) labelKesihatan.innerHTML = "Kesihatan &amp;<br>Kesedaran";
+    if (labelCara) {
+        labelCara.textContent = isEn
+            ? "How to reduce period pain"
+            : "Cara mengurangkan sakit senggugut";
+    }
 
-            if (quizTitle) quizTitle.textContent = "Kuiz Penjagaan Haid";
-            if (resultScoreLabel) resultScoreLabel.textContent = "Skor anda:";
-            if (modalCloseBtn) modalCloseBtn.textContent = "TERUSKAN";
+    // ==========================================
+    // SCENE 9 - HEALTH & AWARENESS
+    // ==========================================
+    if (kesihatanTitle) {
+        kesihatanTitle.innerHTML = isEn
+            ? "Health &amp;<br>Awareness"
+            : "Kesihatan &amp;<br>Kesedaran";
+    }
 
-            if (currentScore <= 3) {
-                if (resultCongrats) resultCongrats.textContent = "Ohh tidak!";
-                if (resultMotto) resultMotto.textContent = "Teruskan usaha!";
-            } else {
-                if (resultCongrats) resultCongrats.textContent = "Tahniah!";
-                if (resultMotto) resultMotto.textContent = "Usaha tangga kejayaan!";
-            }
+    if (labelHaidMental) {
+        labelHaidMental.textContent = isEn
+            ? "Menstruation & mental health"
+            : "Haid & kesihatan mental";
+    }
+
+    if (labelMitosFakta) {
+        labelMitosFakta.textContent = isEn
+            ? "Myths & facts"
+            : "Mitos & fakta";
+    }
+
+    if (labelKesilapanKebersihan) {
+        labelKesilapanKebersihan.textContent = isEn
+            ? "Hygiene mistakes during menstruation"
+            : "Kesilapan kebersihan semasa haid";
+    }
+
+    if (labelSekeliling) {
+        labelSekeliling.textContent = isEn
+            ? "Period care for those around you"
+            : "Penjagaan haid kepada orang sekeliling";
+    }
+
+    // ==========================================
+    // SCENE 10 - QUIZ MENU
+    // ==========================================
+    if (quizTitle) {
+        quizTitle.textContent = isEn
+            ? "Menstrual Care Quiz"
+            : "Kuiz Penjagaan Haid";
+    }
+
+
+    // Quiz category labels use the same label elements
+    if (labelAsas) labelAsas.textContent = isEn ? "Basic" : "Asas";
+    if (labelPenjagaan) labelPenjagaan.textContent = isEn ? "Care" : "Penjagaan";
+
+    if (labelKesihatan) {
+        labelKesihatan.innerHTML = isEn
+            ? "Health &amp;<br>Awareness"
+            : "Kesihatan &amp;<br>Kesedaran";
+    }
+
+    // ==========================================
+    // SCENE 11 - QUIZ QUESTIONS
+    // ==========================================
+    if (scene11QuitBtn) {
+        scene11QuitBtn.textContent = isEn ? "Quit" : "Keluar";
+    }
+
+    if (scene11HintBtn) {
+        scene11HintBtn.textContent = isEn ? "Hint" : "Petunjuk";
+    }
+
+    // ==========================================
+    // SCENE 12 - QUIZ RESULT
+    // ==========================================
+    if (resultScoreLabel) {
+        resultScoreLabel.textContent = isEn ? "Your score:" : "Skor anda:";
+    }
+
+    if (currentScore <= 3) {
+        if (resultCongrats) {
+            resultCongrats.textContent = isEn ? "Oh no!" : "Ohh tidak!";
         }
 
-        loadQuestion();
+        if (resultMotto) {
+            resultMotto.textContent = isEn
+                ? "Keep up the effort!"
+                : "Teruskan usaha!";
+        }
+    } else {
+        if (resultCongrats) {
+            resultCongrats.textContent = isEn ? "Congratulations!" : "Tahniah!";
+        }
+
+        if (resultMotto) {
+            resultMotto.textContent = isEn
+                ? "Effort is the key to success!"
+                : "Usaha tangga kejayaan!";
+        }
     }
+
+    // ==========================================
+    // QUIZ MODAL BUTTON
+    // ==========================================
+    if (modalCloseBtn) {
+        modalCloseBtn.textContent = isEn ? "CONTINUE" : "TERUSKAN";
+    }
+
+    // Reload button
+    if (reloadBtn) {
+        reloadBtn.textContent = isEn ? "RELOAD" : "MUAT SEMULA";
+    }
+
+    // ==========================================
+    // REFRESH QUIZ QUESTION LANGUAGE
+    // ==========================================
+    loadQuestion();
+}
 });
