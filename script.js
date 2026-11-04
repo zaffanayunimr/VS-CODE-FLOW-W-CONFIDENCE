@@ -1102,7 +1102,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         });
     }
 
-    function startCategoryQuiz(categoryKey) {
+        function startCategoryQuiz(categoryKey) {
         activeQuizCategory = categoryKey;
         currentScore = 0;
         currentQuestionIndex = 0;
@@ -1122,7 +1122,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         scene11QuitBtn.addEventListener("click", () => {
             const isEn = selectedLang === "en";
             showModal(
-                "🚪",
+                "ðª",
                 isEn ? "Quit Quiz?" : "Keluar Kuiz?",
                 isEn ? "Returning to Quiz Selection menu." : "Kembali ke menu pilihan kuiz.",
                 () => {
@@ -1141,7 +1141,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
+            showModal("ð¡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
         });
     }
 
