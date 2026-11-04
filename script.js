@@ -175,9 +175,9 @@ const scene10SettingsBtn = document.getElementById("scene10-settings-btn");
 const scene10HomeBtn = document.getElementById("scene10-home-btn");
 const quizTitle = document.getElementById("quiz-title");
 
-const btnQuizAsas = document.getElementById("btn-quiz-asas");
-const btnQuizPenjagaan = document.getElementById("btn-quiz-penjagaan");
-const btnQuizKesihatan = document.getElementById("btn-quiz-kesihatan");
+const labelQuizAsas = document.getElementById("label-quiz-asas");
+const labelQuizPenjagaan = document.getElementById("label-quiz-penjagaan");
+const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     
     const quizQuestionText = document.getElementById("quiz-question-text");
     const optA = document.getElementById("opt-a");
@@ -1258,11 +1258,11 @@ function updateLocalizationUI() {
 
 
     // Quiz category labels use the same label elements
-    if (labelAsas) labelAsas.textContent = isEn ? "Basic" : "Asas";
-    if (labelPenjagaan) labelPenjagaan.textContent = isEn ? "Care" : "Penjagaan";
+    if (labelQuizAsas) labelQuizAsas.textContent = isEn ? "Basic" : "Asas";
+    if (labelQuizPenjagaan) labelQuizPenjagaan.textContent = isEn ? "Care" : "Penjagaan";
 
-    if (labelKesihatan) {
-        labelKesihatan.innerHTML = isEn
+    if (labelQuizKesihatan) {
+        labelQuizKesihatan.innerHTML = isEn
             ? "Health &amp;<br>Awareness"
             : "Kesihatan &amp;<br>Kesedaran";
     }
