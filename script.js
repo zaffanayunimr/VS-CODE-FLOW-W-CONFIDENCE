@@ -1093,9 +1093,12 @@ function showModal(icon, title, message, onComplete, showXBtn = false, onRetry =
     pendingNextQuestionCall = onComplete || null;
     pendingRetryQuestionCall = onRetry || null;
 
-    // Show X only when showXBtn is true
+    // Control visibility directly so older CSS rules cannot override it.
+    const modalBox = quizModalOverlay.querySelector(".modal-box");
+    if (modalBox) modalBox.classList.toggle("exit-quiz-popup", showXBtn);
     if (modalXBtn) {
-        modalXBtn.style.display = showXBtn ? "block" : "none";
+        modalXBtn.style.setProperty("display", showXBtn ? "block" : "none", "important");
+        modalXBtn.style.setProperty("color", "#E70B90", "important");
     }
 
     if (modalRetryBtn) {
@@ -1144,7 +1147,7 @@ function showModal(icon, title, message, onComplete, showXBtn = false, onRetry =
             pendingRetryQuestionCall = null;
         });
 
-        modalXBtn.style.display = "none";
+        modalXBtn.style.setProperty("display", "none", "important");
     }
 
 if (scene11QuitBtn) {
