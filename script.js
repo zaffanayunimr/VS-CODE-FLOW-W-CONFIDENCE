@@ -1300,12 +1300,23 @@ function updateLocalizationUI() {
     // ==========================================
     const scoreLabel = document.getElementById("label-score");
     if (scoreLabel) scoreLabel.textContent = isEn ? "Score" : "Skor";
+    // Keep the SVG icons inside these buttons.
+    // Use aria-label for the language-dependent accessible name instead of
+    // textContent, because textContent would remove the SVG icon.
     if (scene11QuitBtn) {
-        scene11QuitBtn.textContent = isEn ? "Quit" : "Keluar";
+        scene11QuitBtn.setAttribute(
+            "aria-label",
+            isEn ? "Quit Quiz" : "Keluar Kuiz"
+        );
+        scene11QuitBtn.setAttribute("title", isEn ? "Quit Quiz" : "Keluar Kuiz");
     }
 
     if (scene11HintBtn) {
-        scene11HintBtn.textContent = isEn ? "Hint" : "Petunjuk";
+        scene11HintBtn.setAttribute(
+            "aria-label",
+            isEn ? "Hint" : "Petunjuk"
+        );
+        scene11HintBtn.setAttribute("title", isEn ? "Hint" : "Petunjuk");
     }
 
     // ==========================================
