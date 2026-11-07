@@ -1004,7 +1004,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             // the answer is displayed separately below in the wrong-answer popup.
             const rawExplanation = q.explanation ? q.explanation[lang] : "";
             const explanation = rawExplanation.replace(
-                /^(Jawapan betul ialah|The correct answer is)\\s*\\([A-D]\\)\\.\\s*/i,
+                /^(Jawapan betul ialah|The correct answer is)\s*\([A-D]\)\.\s*/i,
                 ""
             );
 
@@ -1023,8 +1023,8 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
                 // Use real newline characters so CSS white-space: pre-line
                 // displays separate paragraphs instead of showing literal \\n.
                 const message = isEn
-                    ? `Oops! That's not quite right.\\n\\n${explanation}\\n\\nCorrect answer: ${correctLetter}) ${correctAnswer}`
-                    : `Opss! Jawapan itu kurang tepat.\\n\\n${explanation}\\n\\nJawapan yang betul: ${correctLetter}) ${correctAnswer}`;
+                    ? `Oops! That's not quite right.\n\n${explanation}\n\nCorrect answer: ${correctAnswer}`
+                    : `Opss! Jawapan itu kurang tepat.\n\n${explanation}\n\nJawapan yang betul: ${correctAnswer}`;
 
                 showModal(
                     "💡",
