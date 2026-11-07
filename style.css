@@ -1845,3 +1845,49 @@ html, body {
     transform: scale(1.15);
     color: #990184;
 }
+
+
+/* FINAL FIX: X is visible only on Exit Quiz popup and never turns grey. */
+#quiz-modal-overlay .modal-box.exit-quiz-popup #modal-x-btn {
+    display: block !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    color: #E70B90 !important;
+    opacity: 1 !important;
+}
+
+#quiz-modal-overlay #modal-x-btn:hover,
+#quiz-modal-overlay #modal-x-btn:focus,
+#quiz-modal-overlay #modal-x-btn:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #E70B90 !important;
+    opacity: 1 !important;
+    outline: none !important;
+}
+
+
+/* FINAL OVERRIDE: modal X visibility is controlled by showModal() in script.js. */
+#quiz-modal-overlay #modal-x-btn {
+    color: #E70B90 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+    filter: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+#quiz-modal-overlay #modal-x-btn:hover,
+#quiz-modal-overlay #modal-x-btn:focus,
+#quiz-modal-overlay #modal-x-btn:active {
+    color: #E70B90 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+    filter: none !important;
+    outline: none !important;
+}
