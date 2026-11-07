@@ -1699,3 +1699,40 @@ html, body {
         transform: scale(0.97) !important;
     }
 }
+
+
+/* Quiz feedback: two clear actions on incorrect answers */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+#modal-retry-btn {
+    display: none;
+    min-height: 42px;
+    padding: 8px 28px;
+    background: #E7F7A8;
+    border: 3px solid #CC3399;
+    border-radius: 30px;
+    color: #990184;
+    font: bold 1rem "Arial Rounded MT Bold", Arial, sans-serif;
+    cursor: pointer;
+}
+#modal-msg-elem {
+    white-space: pre-line;
+}
+#modal-x-btn {
+    display: none !important;
+}
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .modal-actions { gap: 8px; }
+    #modal-retry-btn {
+        min-height: 40px;
+        padding: 6px 20px;
+        font-size: clamp(.82rem, 1.8vw, 1rem);
+        border-width: 2.5px;
+    }
+}
