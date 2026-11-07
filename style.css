@@ -1736,3 +1736,47 @@ html, body {
         border-width: 2.5px;
     }
 }
+
+
+/* =========================================================
+   QUIZ POPUP: RETRY & CONTINUE BUTTONS MATCH
+   Both buttons share the same size, colours and hover effect.
+   ========================================================= */
+#modal-retry-btn,
+#modal-close-btn {
+    box-sizing: border-box !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 8px 20px !important;
+    background-color: #CFE1F7 !important;
+    border: 3px solid #CC3399 !important;
+    border-radius: 30px !important;
+    color: #990184 !important;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif !important;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+#modal-retry-btn:hover,
+#modal-close-btn:hover {
+    transform: translateY(-2px) !important;
+    background-color: #FFFFCC !important;
+}
+
+#modal-retry-btn:active,
+#modal-close-btn:active {
+    transform: scale(0.98) !important;
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    #modal-retry-btn,
+    #modal-close-btn {
+        min-height: 40px !important;
+        padding: 6px 14px !important;
+        font-size: clamp(0.85rem, 1.8vw, 1rem) !important;
+        border-width: 2.5px !important;
+    }
+}
