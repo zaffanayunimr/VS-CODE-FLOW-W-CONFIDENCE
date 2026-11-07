@@ -1000,21 +1000,40 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             const correctIndex = q.options.findIndex(option => option.isCorrect);
             const correctLetter = ["A", "B", "C", "D"][correctIndex];
             const correctAnswer = q.options[correctIndex].text[lang];
-            const explanation = q.explanation ? q.explanation[lang] : "";
+            // Remove the correct-answer label from the explanation because
+            // the answer is displayed separately below in the wrong-answer popup.
+            const rawExplanation = q.explanation ? q.explanation[lang] : "";
+            const explanation = rawExplanation.replace(
+                /^(Jawapan betul ialah|The correct answer is)\\s*\\([A-D]\\)\\.\\s*/i,
+                ""
+            );
 
             if (q.options[optionIndex].isCorrect) {
                 currentScore++;
                 updateScoreDisplay();
-                showModal("🎉", isEn ? "Good job!" : "Syabas!",
+                showModal(
+                    "🎉",
+                    isEn ? "Good job!" : "Syabas!",
                     (isEn ? "That's correct! " : "Jawapan anda betul! ") + explanation,
-                    () => { currentQuestionIndex++; loadQuestion(); }, false, null);
+                    () => { currentQuestionIndex++; loadQuestion(); },
+                    false,
+                    null
+                );
             } else {
+                // Use real newline characters so CSS white-space: pre-line
+                // displays separate paragraphs instead of showing literal \\n.
                 const message = isEn
                     ? `Oops! That's not quite right.\\n\\n${explanation}\\n\\nCorrect answer: ${correctLetter}) ${correctAnswer}`
                     : `Opss! Jawapan itu kurang tepat.\\n\\n${explanation}\\n\\nJawapan yang betul: ${correctLetter}) ${correctAnswer}`;
-                showModal("💡", isEn ? "Oops! Try again." : "Opss! Cuba lagi.", message,
-                    () => { currentQuestionIndex++; loadQuestion(); }, false,
-                    () => { loadQuestion(); });
+
+                showModal(
+                    "💡",
+                    isEn ? "Oops! Try again." : "Opss! Cuba lagi.",
+                    message,
+                    () => { currentQuestionIndex++; loadQuestion(); },
+                    false,
+                    () => { loadQuestion(); }
+                );
             }
         });
     });
