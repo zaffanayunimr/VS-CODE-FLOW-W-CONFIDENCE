@@ -25,43 +25,85 @@ document.addEventListener("DOMContentLoaded", () => {
     const reloadOverlay = document.getElementById("phone-reload-overlay");
     const reloadBtn = document.getElementById("phone-reload-btn");
 
-function forceShowReloadOverlay() {
+    // Paparkan session timeout overlay HANYA pada telefon dan tablet.
+    // Termasuk iPhone/iPad, Android phones/tablets dan tablet Windows
+    // yang mempunyai skrin sentuh serta saiz skrin tablet.
+    const isPhoneOrTabletDevice = (() => {
+        const ua = navigator.userAgent || "";
+        const isPhoneOrTabletUA =
+            /Android|iPhone|iPad|iPod|Tablet|Silk/i.test(ua);
+
+        // iPadOS may identify itself as Macintosh, so check touch points.
+        const isIPadOS =
+            /Macintosh/i.test(ua) && navigator.maxTouchPoints > 1;
+
+        // Support Windows/other touch tablets without treating a normal
+        // full-size laptop screen as a phone or tablet.
+        const maxScreenSide = Math.max(
+            window.screen ? window.screen.width : window.innerWidth,
+            window.screen ? window.screen.height : window.innerHeight
+        );
+        const isCompactTouchTablet =
+            navigator.maxTouchPoints > 1 && maxScreenSide <= 1600;
+
+        return isPhoneOrTabletUA || isIPadOS || isCompactTouchTablet;
+    })();
+
+    function forceShowReloadOverlay() {
+        // Jangan tunjukkan timeout overlay pada laptop/desktop.
+        if (!isPhoneOrTabletDevice) return;
+
         if (reloadOverlay) {
-            // Memindahkan reloadOverlay ke luar container aplikasi terus di bawah <body>
-            document.body.appendChild(reloadOverlay);
+            // Letakkan overlay terus di bawah <body> supaya memenuhi skrin.
+            if (reloadOverlay.parentElement !== document.body) {
+                document.body.appendChild(reloadOverlay);
+            }
 
             reloadOverlay.style.setProperty("display", "flex", "important");
             reloadOverlay.style.setProperty("z-index", "9999999999", "important");
         }
     }
 
-    // Mengesan bila pengguna keluar dari skrin/tab
-    document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden") {
-            sessionStorage.setItem("appWasHidden", "true");
-        } else if (document.visibilityState === "visible") {
-            if (sessionStorage.getItem("appWasHidden") === "true") {
-                forceShowReloadOverlay();
+    if (isPhoneOrTabletDevice) {
+        // Telefon/tablet: kesan apabila pengguna meninggalkan aplikasi
+        // atau aplikasi masuk ke latar belakang.
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden") {
+                sessionStorage.setItem("appWasHidden", "true");
+            } else if (document.visibilityState === "visible") {
+                if (sessionStorage.getItem("appWasHidden") === "true") {
+                    forceShowReloadOverlay();
+                }
             }
-        }
-    });
-
-    window.addEventListener("pagehide", () => {
-        sessionStorage.setItem("appWasHidden", "true");
-    });
-
-    // BILA KLIK RELOAD: PADAM REKOD & PAKSA RESET KE SCENE 1
-    if (reloadBtn) {
-        reloadBtn.addEventListener("click", () => {
-            reloadBtn.textContent = "MEMUAT SEMULA...";
-            reloadBtn.style.opacity = "0.7";
-            reloadBtn.style.pointerEvents = "none";
-
-            sessionStorage.removeItem("appWasHidden");
-            sessionStorage.clear();
-
-            window.location.replace(window.location.origin + window.location.pathname);
         });
+
+        window.addEventListener("pagehide", () => {
+            sessionStorage.setItem("appWasHidden", "true");
+        });
+
+        // Butang reload hanya berfungsi pada telefon/tablet.
+        if (reloadBtn) {
+            reloadBtn.addEventListener("click", () => {
+                reloadBtn.textContent = "MEMUAT SEMULA...";
+                reloadBtn.style.opacity = "0.7";
+                reloadBtn.style.pointerEvents = "none";
+
+                sessionStorage.removeItem("appWasHidden");
+                sessionStorage.clear();
+
+                window.location.replace(
+                    window.location.origin + window.location.pathname
+                );
+            });
+        }
+    } else {
+        // Laptop/desktop: pastikan overlay tidak pernah dipaparkan
+        // dan buang flag lama supaya ia tidak muncul kemudian.
+        sessionStorage.removeItem("appWasHidden");
+
+        if (reloadOverlay) {
+            reloadOverlay.style.setProperty("display", "none", "important");
+        }
     }
 
     // ==========================================
