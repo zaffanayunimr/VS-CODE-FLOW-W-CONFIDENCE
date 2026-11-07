@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fullscreenBtn.style.setProperty("display", "flex", "important");
         }
     }
-
     // =========================================================
     // LOGIK AUTO-RELOAD (KEMBALI KE SCENE 1 TANPA ERROR)
     // =========================================================
