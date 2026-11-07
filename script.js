@@ -1134,7 +1134,18 @@ function showModal(icon, title, message, onComplete, showXBtn = false, onRetry =
             if (action) action();
         });
     }
-    if (modalXBtn) modalXBtn.style.display = "none";
+
+    // Butang X hanya dipaparkan pada pop-up Keluar Kuiz.
+    // Apabila X ditekan, tutup pop-up sahaja dan kekalkan pengguna dalam kuiz.
+    if (modalXBtn) {
+        modalXBtn.addEventListener("click", () => {
+            quizModalOverlay.style.setProperty("display", "none", "important");
+            pendingNextQuestionCall = null;
+            pendingRetryQuestionCall = null;
+        });
+
+        modalXBtn.style.display = "none";
+    }
 
 if (scene11QuitBtn) {
     scene11QuitBtn.addEventListener("click", () => {
