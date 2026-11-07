@@ -1891,3 +1891,24 @@ html, body {
     filter: none !important;
     outline: none !important;
 }
+
+/* INCORRECT-ANSWER POPUP: centre RETRY and use soft yellow/pink colours. */
+#quiz-modal-overlay .modal-actions {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+#quiz-modal-overlay #modal-retry-btn {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    background-color: #FFFFCC !important;
+    color: #990184 !important;
+}
+
+#quiz-modal-overlay #modal-retry-btn:hover,
+#quiz-modal-overlay #modal-retry-btn:focus {
+    background-color: #FAD1E8 !important;
+    color: #990184 !important;
+}
