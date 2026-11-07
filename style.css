@@ -1780,3 +1780,68 @@ html, body {
         border-width: 2.5px !important;
     }
 }
+
+
+/* =========================================================
+   MOBILE QUIZ POPUP: KEEP BOTH ACTION BUTTONS CENTRED
+   Prevent the modal padding from making the popup wider than
+   the phone screen, and keep Retry/Continue on one centred row.
+   ========================================================= */
+@media screen and (max-width: 600px) {
+    .modal-box {
+        box-sizing: border-box !important;
+        width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 24px 16px 20px !important;
+    }
+
+    .modal-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    #modal-retry-btn,
+    #modal-close-btn {
+        display: inline-flex !important;
+        flex: 1 1 0 !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        max-width: 50% !important;
+        box-sizing: border-box !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        padding: 8px 4px !important;
+        margin: 0 !important;
+        font-size: clamp(0.78rem, 3.5vw, 1rem) !important;
+    }
+}
+
+/* Hide X button by default */
+.modal-x-btn {
+    display: none;
+}
+
+/* Show X only for Exit Quiz popup */
+.modal-box.exit-quiz-popup .modal-x-btn {
+    display: block;
+}
+
+.modal-box {
+    position: relative;
+}
+
+.modal-x-btn:hover {
+    transform: scale(1.15);
+    color: #990184;
+}
