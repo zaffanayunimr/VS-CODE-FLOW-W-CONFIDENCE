@@ -1080,22 +1080,41 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         });
     });
 
-    // 6. POP-UP MODAL FUNCTIONALITY (FIX HINT & BACK)
-    // ==========================================
-    function showModal(icon, title, message, onComplete, showXBtn = false, onRetry = null) {
-        if (!quizModalOverlay) return;
-        if (modalIconElem) modalIconElem.textContent = icon;
-        if (modalTitleElem) modalTitleElem.textContent = title;
-        if (modalMsgElem) modalMsgElem.textContent = message;
-        pendingNextQuestionCall = onComplete || null;
-        pendingRetryQuestionCall = onRetry || null;
-        if (modalXBtn) modalXBtn.style.display = "none";
-        if (modalRetryBtn) modalRetryBtn.style.display = onRetry ? "inline-flex" : "none";
-        if (modalCloseBtn) modalCloseBtn.textContent = selectedLang === "en" ? "CONTINUE" : "TERUSKAN";
-        quizModalOverlay.style.setProperty("display", "flex", "important");
-        quizModalOverlay.style.setProperty("z-index", "99999999", "important");
-        if (quizModalOverlay.parentNode !== document.body) document.body.appendChild(quizModalOverlay);
+// ==========================================
+// 6. POP-UP MODAL FUNCTIONALITY (FIX HINT & BACK)
+// ==========================================
+function showModal(icon, title, message, onComplete, showXBtn = false, onRetry = null) {
+    if (!quizModalOverlay) return;
+
+    if (modalIconElem) modalIconElem.textContent = icon;
+    if (modalTitleElem) modalTitleElem.textContent = title;
+    if (modalMsgElem) modalMsgElem.textContent = message;
+
+    pendingNextQuestionCall = onComplete || null;
+    pendingRetryQuestionCall = onRetry || null;
+
+    // Show X only when showXBtn is true
+    if (modalXBtn) {
+        modalXBtn.style.display = showXBtn ? "block" : "none";
     }
+
+    if (modalRetryBtn) {
+        modalRetryBtn.style.display = onRetry ? "inline-flex" : "none";
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.textContent =
+            selectedLang === "en" ? "CONTINUE" : "TERUSKAN";
+    }
+
+    // Show popup
+    quizModalOverlay.style.setProperty("display", "flex", "important");
+    quizModalOverlay.style.setProperty("z-index", "99999999", "important");
+
+    if (quizModalOverlay.parentNode !== document.body) {
+        document.body.appendChild(quizModalOverlay);
+    }
+}
 
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener("click", () => {
@@ -1117,21 +1136,24 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     }
     if (modalXBtn) modalXBtn.style.display = "none";
 
-    if (scene11QuitBtn) {
-        scene11QuitBtn.addEventListener("click", () => {
-            const isEn = selectedLang === "en";
-            showModal(
-                "🚪",
-                isEn ? "Quit Quiz?" : "Keluar Kuiz?",
-                isEn ? "Returning to Quiz Selection menu." : "Kembali ke menu pilihan kuiz.",
-                () => {
-                    if (scene11Overlay) scene11Overlay.style.display = "none";
-                    if (scene10Overlay) scene10Overlay.style.display = "flex";
-                    updateFullscreenBtnVisibility("scene10");
-                }
-            );
-        });
-    }
+if (scene11QuitBtn) {
+    scene11QuitBtn.addEventListener("click", () => {
+        const isEn = selectedLang === "en";
+
+        showModal(
+            "🚪",
+            isEn ? "Quit Quiz?" : "Keluar Kuiz?",
+            isEn ? "Returning to Quiz Selection menu." : "Kembali ke menu pilihan kuiz.",
+            () => {
+                if (scene11Overlay) scene11Overlay.style.display = "none";
+                if (scene10Overlay) scene10Overlay.style.display = "flex";
+                updateFullscreenBtnVisibility("scene10");
+            },
+            true,  // Show X button
+            null
+        );
+    });
+}
 
     if (scene11HintBtn) {
         scene11HintBtn.addEventListener("click", () => {
