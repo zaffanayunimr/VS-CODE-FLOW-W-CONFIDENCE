@@ -1099,10 +1099,13 @@ function showModal(icon, title, message, onComplete, showXBtn = false, onRetry =
         modalXBtn.style.setProperty("display", showXBtn ? "block" : "none", "important");
         modalXBtn.style.setProperty("color", "#E70B90", "important");
     }
-
-    if (modalRetryBtn) {
-        modalRetryBtn.style.display = onRetry ? "inline-flex" : "none";
-    }
+if (modalRetryBtn) {
+    modalRetryBtn.style.setProperty(
+        "display",
+        onRetry ? "inline-flex" : "none",
+        "important"
+    );
+}
 
     if (modalCloseBtn) {
         modalCloseBtn.textContent =
