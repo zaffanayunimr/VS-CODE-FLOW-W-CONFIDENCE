@@ -208,8 +208,10 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     const modalTitleElem = document.getElementById("modal-title-elem");
     const modalMsgElem = document.getElementById("modal-msg-elem");
     const modalCloseBtn = document.getElementById("modal-close-btn");
+    const modalRetryBtn = document.getElementById("modal-retry-btn");
     const modalXBtn = document.getElementById("modal-x-btn");
     let pendingNextQuestionCall = null;
+    let pendingRetryQuestionCall = null;
 
     updateFullscreenBtnVisibility("scene1");
 
@@ -237,7 +239,8 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             volumeSlider.style.background = `linear-gradient(to right, #E70B90 ${clampedVal}%, #FFCCE5 ${clampedVal}%)`;
         }
         if (volumePercentage) volumePercentage.textContent = clampedVal + "%";
-        if (bgMusic) bgMusic.volume = clampedVal / 100;
+        // The original BGM is loud, so 100% in Settings maps to a gentle 25% output.
+        if (bgMusic) bgMusic.volume = (clampedVal / 100) * 0.25;
     }
 
     if (volumeSlider) {
@@ -421,12 +424,15 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
         if (normalLawanSource.getAttribute("src") === newSrc) return;
 
         const savedTime = normalLawanVideo.currentTime;
+        const wasPlaying = !normalLawanVideo.paused && !normalLawanVideo.ended;
         normalLawanSource.src = newSrc;
         normalLawanVideo.load();
         normalLawanVideo.addEventListener("loadedmetadata", () => {
-            normalLawanVideo.currentTime = savedTime;
+            const safeTime = Math.min(savedTime, Math.max(0, normalLawanVideo.duration || savedTime));
+            normalLawanVideo.currentTime = safeTime;
             applyVideoSpeed();
-            normalLawanVideo.play().catch(err => console.log(err));
+            if (wasPlaying) normalLawanVideo.play().catch(err => console.log(err));
+            else normalLawanVideo.pause();
         }, { once: true });
     }
 
@@ -488,8 +494,14 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     if (scene9HomeBtn) scene9HomeBtn.addEventListener("click", () => { scene9Overlay.style.display = "none"; scene4Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene4"); });
     if (scene9SettingsBtn) scene9SettingsBtn.addEventListener("click", () => { previousScene = "scene9"; scene9Overlay.style.display = "none"; settingsOverlay.style.display = "flex"; updateFullscreenBtnVisibility("settings"); });
 
-    if (btnSetBm) btnSetBm.addEventListener("click", () => { selectedLang = "ms"; updateLocalizationUI(); });
-    if (btnSetEn) btnSetEn.addEventListener("click", () => { selectedLang = "en"; updateLocalizationUI(); });
+    if (btnSetBm) btnSetBm.addEventListener("click", () => {
+        selectedLang = "ms"; updateLocalizationUI();
+        if (previousScene === "normal-lawan") reloadCurrentVideoForLanguage();
+    });
+    if (btnSetEn) btnSetEn.addEventListener("click", () => {
+        selectedLang = "en"; updateLocalizationUI();
+        if (previousScene === "normal-lawan") reloadCurrentVideoForLanguage();
+    });
 
     if (btnQuiz) btnQuiz.addEventListener("click", () => { scene4Overlay.style.display = "none"; scene10Overlay.style.display = "flex"; updateFullscreenBtnVisibility("scene10"); });
     
@@ -522,42 +534,6 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             overlays.forEach(ov => { if (ov) ov.style.display = "none"; });
             if (scene4Overlay) scene4Overlay.style.display = "flex";
             updateFullscreenBtnVisibility("scene4");
-        });
-    }
-
-    // ==========================================
-    // 6. POP-UP MODAL FUNCTIONALITY
-    // ==========================================
-    function showModal(icon, title, message, onComplete, showXBtn = true) {
-        if (!quizModalOverlay) return;
-        if (modalIconElem) modalIconElem.textContent = icon;
-        if (modalTitleElem) modalTitleElem.textContent = title;
-        if (modalMsgElem) modalMsgElem.textContent = message;
-
-        pendingNextQuestionCall = onComplete || null;
-
-        if (modalXBtn) {
-            modalXBtn.style.display = showXBtn ? "block" : "none";
-        }
-
-        quizModalOverlay.style.display = "flex";
-    }
-
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener("click", () => {
-            if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            if (pendingNextQuestionCall) {
-                const action = pendingNextQuestionCall;
-                pendingNextQuestionCall = null;
-                action();
-            }
-        });
-    }
-
-    if (modalXBtn) {
-        modalXBtn.addEventListener("click", () => {
-            if (quizModalOverlay) quizModalOverlay.style.display = "none";
-            pendingNextQuestionCall = null;
         });
     }
 
@@ -1016,87 +992,71 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
     [optA, optB, optC, optD].forEach((btn, optionIndex) => {
         if (!btn) return;
         btn.addEventListener("click", () => {
-            const currentCategoryQuestions = quizCategories[activeQuizCategory] || quizCategories["asas"];
-            const currentQ = currentCategoryQuestions[currentQuestionIndex];
-            const isEn = selectedLang === "en";
+            const questions = quizCategories[activeQuizCategory] || quizCategories.asas;
+            const q = questions[currentQuestionIndex];
+            if (!q) return;
+            const lang = selectedLang || "ms";
+            const isEn = lang === "en";
+            const correctIndex = q.options.findIndex(option => option.isCorrect);
+            const correctLetter = ["A", "B", "C", "D"][correctIndex];
+            const correctAnswer = q.options[correctIndex].text[lang];
+            const explanation = q.explanation ? q.explanation[lang] : "";
 
-            if (currentQ.options[optionIndex].isCorrect) {
-                currentScore += 1;
+            if (q.options[optionIndex].isCorrect) {
+                currentScore++;
                 updateScoreDisplay();
-
-                showModal(
-                    "🎉",
-                    isEn ? "Correct!" : "Jawapan Betul!",
-                    isEn ? "Great job! That is the right answer." : "Syabas! Jawapan anda sangat tepat.",
-                    () => {
-                        currentQuestionIndex++;
-                        loadQuestion();
-                    }
-                );
+                showModal("🎉", isEn ? "Good job!" : "Syabas!",
+                    (isEn ? "That's correct! " : "Jawapan anda betul! ") + explanation,
+                    () => { currentQuestionIndex++; loadQuestion(); }, false, null);
             } else {
-                updateScoreDisplay();
-                const reasonText = currentQ.explanation ? currentQ.explanation[selectedLang || "ms"] : "";
-                const wrongMsg = isEn 
-                    ? `Oops, that was incorrect!\n\n${reasonText}` 
-                    : `Alamak, jawapan anda tidak tepat!\n\n${reasonText}`;
-
-                showModal(
-                    "❌",
-                    isEn ? "Incorrect!" : "Jawapan Salah!",
-                    wrongMsg,
-                    () => {
-                        currentQuestionIndex++;
-                        loadQuestion();
-                    }
-                );
+                const message = isEn
+                    ? `Oops! That's not quite right.\\n\\n${explanation}\\n\\nCorrect answer: ${correctLetter}) ${correctAnswer}`
+                    : `Opss! Jawapan itu kurang tepat.\\n\\n${explanation}\\n\\nJawapan yang betul: ${correctLetter}) ${correctAnswer}`;
+                showModal("💡", isEn ? "Oops! Try again." : "Opss! Cuba lagi.", message,
+                    () => { currentQuestionIndex++; loadQuestion(); }, false,
+                    () => { loadQuestion(); });
             }
         });
     });
 
-    // ==========================================
     // 6. POP-UP MODAL FUNCTIONALITY (FIX HINT & BACK)
     // ==========================================
-    function showModal(icon, title, message, onComplete, showXBtn = true) {
+    function showModal(icon, title, message, onComplete, showXBtn = false, onRetry = null) {
         if (!quizModalOverlay) return;
         if (modalIconElem) modalIconElem.textContent = icon;
         if (modalTitleElem) modalTitleElem.textContent = title;
         if (modalMsgElem) modalMsgElem.textContent = message;
-
         pendingNextQuestionCall = onComplete || null;
-
-        if (modalXBtn) {
-            modalXBtn.style.display = showXBtn ? "block" : "none";
-        }
-
-        // Paksa paparan flex & z-index tinggi
+        pendingRetryQuestionCall = onRetry || null;
+        if (modalXBtn) modalXBtn.style.display = "none";
+        if (modalRetryBtn) modalRetryBtn.style.display = onRetry ? "inline-flex" : "none";
+        if (modalCloseBtn) modalCloseBtn.textContent = selectedLang === "en" ? "CONTINUE" : "TERUSKAN";
         quizModalOverlay.style.setProperty("display", "flex", "important");
         quizModalOverlay.style.setProperty("z-index", "99999999", "important");
-        
-        // Pindahkan ke body jika terlindung
-        if (quizModalOverlay.parentNode !== document.body) {
-            document.body.appendChild(quizModalOverlay);
-        }
+        if (quizModalOverlay.parentNode !== document.body) document.body.appendChild(quizModalOverlay);
     }
 
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener("click", () => {
-            if (quizModalOverlay) quizModalOverlay.style.setProperty("display", "none", "important");
-            if (pendingNextQuestionCall) {
-                const action = pendingNextQuestionCall;
-                pendingNextQuestionCall = null;
-                action();
-            }
-        });
-    }
-
-    if (modalXBtn) {
-        modalXBtn.addEventListener("click", () => {
-            if (quizModalOverlay) quizModalOverlay.style.setProperty("display", "none", "important");
+            quizModalOverlay.style.setProperty("display", "none", "important");
+            const action = pendingNextQuestionCall;
             pendingNextQuestionCall = null;
+            pendingRetryQuestionCall = null;
+            if (action) action();
         });
     }
+    if (modalRetryBtn) {
+        modalRetryBtn.addEventListener("click", () => {
+            quizModalOverlay.style.setProperty("display", "none", "important");
+            const action = pendingRetryQuestionCall;
+            pendingRetryQuestionCall = null;
+            pendingNextQuestionCall = null;
+            if (action) action();
+        });
+    }
+    if (modalXBtn) modalXBtn.style.display = "none";
 
-      if (scene11QuitBtn) {
+    if (scene11QuitBtn) {
         scene11QuitBtn.addEventListener("click", () => {
             const isEn = selectedLang === "en";
             showModal(
@@ -1119,7 +1079,7 @@ const labelQuizKesihatan = document.getElementById("label-quiz-kesihatan");
             const isEn = selectedLang === "en";
             const hintText = currentQ && currentQ.hint ? currentQ.hint[selectedLang || "ms"] : (isEn ? "Read carefully!" : "Baca soalan dengan teliti!");
 
-            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false);
+            showModal("💡", isEn ? "Hint" : "Petunjuk", hintText, null, false, null);
         });
     }
 
@@ -1338,6 +1298,8 @@ function updateLocalizationUI() {
     // ==========================================
     // SCENE 11 - QUIZ QUESTIONS
     // ==========================================
+    const scoreLabel = document.getElementById("label-score");
+    if (scoreLabel) scoreLabel.textContent = isEn ? "Score" : "Skor";
     if (scene11QuitBtn) {
         scene11QuitBtn.textContent = isEn ? "Quit" : "Keluar";
     }
@@ -1353,7 +1315,7 @@ function updateLocalizationUI() {
         resultScoreLabel.textContent = isEn ? "Your score:" : "Skor anda:";
     }
 
-    if (currentScore <= 3) {
+    if (currentScore <= 4) {
         if (resultCongrats) {
             resultCongrats.textContent = isEn ? "Oh no!" : "Ohh tidak!";
         }
@@ -1378,9 +1340,8 @@ function updateLocalizationUI() {
     // ==========================================
     // QUIZ MODAL BUTTON
     // ==========================================
-    if (modalCloseBtn) {
-        modalCloseBtn.textContent = isEn ? "CONTINUE" : "TERUSKAN";
-    }
+    if (modalCloseBtn) modalCloseBtn.textContent = isEn ? "CONTINUE" : "TERUSKAN";
+    if (modalRetryBtn) modalRetryBtn.textContent = isEn ? "RETRY" : "CUBA LAGI";
 
     // Reload button
     if (reloadBtn) {
